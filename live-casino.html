@@ -9,7 +9,6 @@
 </head>
 
 <body>
-    <!-- Header -->
     <header class="header">
         <div class="container nav">
             <div class="logo">MrSpinny</div>
@@ -27,66 +26,187 @@
         </div>
     </header>
 
-    <!-- Hero -->
     <section class="hero live-hero">
         <div class="hero-content">
             <h1>Premium <span>Live Casino</span> Tables</h1>
-            <p>Blackjack, Roulette, Baccarat, and Game Shows—streamed in HD.</p>
+            <p>Blackjack, Roulette, Baccarat, Poker, and Game Shows in HD.</p>
             <a href="#" class="btn btn-primary">Enter Live Casino</a>
         </div>
     </section>
 
-    <!-- Table Types -->
-    <section class="categories container">
-        <div class="cat">Blackjack</div>
-        <div class="cat">Roulette</div>
-        <div class="cat">Baccarat</div>
-        <div class="cat">Poker</div>
-        <div class="cat">Game Shows</div>
-    </section>
+    <section class="container live-toolbar">
+        <div class="live-search">
+            <input id="liveSearch" type="search" placeholder="Search live tables…">
+            <svg viewBox="0 0 24 24" aria-hidden="true">
+                <path
+                    d="M15.5 14h-.79l-.28-.27a6.471 6.471 0 0 0 1.57-4.23 6.5 6.5 0 1 0-6.5 6.5c1.61 0 3.09-.59 4.23-1.57l.27.28v.79L20 20.49 21.49 19 15.5 14zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z" />
+            </svg>
+        </div>
 
-    <!-- Live Tiles -->
-    <section class="games container">
-        <h2>🎥 Popular Live Tables</h2>
-        <div class="games-grid">
-            <div class="game-card">
-                <img src="assets/images/live1.jpg" alt="Live Blackjack A">
-                <p>Live Blackjack A</p>
-            </div>
-            <div class="game-card">
-                <img src="assets/images/live2.jpg" alt="Lightning Roulette">
-                <p>Lightning Roulette</p>
-            </div>
-            <div class="game-card">
-                <img src="assets/images/live3.jpg" alt="Live Baccarat">
-                <p>Live Baccarat</p>
-            </div>
-            <div class="game-card">
-                <img src="assets/images/live4.jpg" alt="Crazy Time">
-                <p>Crazy Time</p>
-            </div>
+        <div class="live-cats">
+            <button class="cat is-active" data-filter="all">All</button>
+            <button class="cat" data-filter="blackjack">Blackjack</button>
+            <button class="cat" data-filter="roulette">Roulette</button>
+            <button class="cat" data-filter="baccarat">Baccarat</button>
+            <button class="cat" data-filter="poker">Poker</button>
+            <button class="cat" data-filter="game-show">Game Shows</button>
         </div>
     </section>
 
-    <!-- USPs -->
-    <section class="container usp">
-        <div class="games">
-            <h2>Why Play Live at MrSpinny?</h2>
-            <ul class="usp-list">
-                <li>HD streams & professional dealers</li>
-                <li>Low to VIP table limits</li>
-                <li>Fast payouts & secure banking</li>
-                <li>24/7 support</li>
-            </ul>
+    <section class="container games">
+        <h2 class="section-title">🎥 Popular Live Tables</h2>
+
+        <div id="liveGrid" class="live-grid">
+            <a class="live-card" href="#" data-type="blackjack" data-title="Live Blackjack A">
+                <figure class="live-media">
+                    <img src="assets/images/live1.jpg" alt="Live Blackjack A" loading="lazy">
+                </figure>
+                <span class="live-badge">Blackjack</span>
+                <span class="live-title">Live Blackjack A</span>
+            </a>
+
+            <a class="live-card" href="#" data-type="roulette" data-title="Lightning Roulette">
+                <figure class="live-media">
+                    <img src="assets/images/live2.jpg" alt="Lightning Roulette" loading="lazy">
+                </figure>
+                <span class="live-badge">Roulette</span>
+                <span class="live-title">Lightning Roulette</span>
+            </a>
+
+            <a class="live-card" href="#" data-type="baccarat" data-title="Live Baccarat">
+                <figure class="live-media">
+                    <img src="assets/images/live3.jpg" alt="Live Baccarat" loading="lazy">
+                </figure>
+                <span class="live-badge">Baccarat</span>
+                <span class="live-title">Live Baccarat</span>
+            </a>
+
+            <a class="live-card" href="#" data-type="game-show" data-title="Crazy Time">
+                <figure class="live-media">
+                    <img src="assets/images/live4.jpg" alt="Crazy Time" loading="lazy">
+                </figure>
+                <span class="live-badge">Game Show</span>
+                <span class="live-title">Crazy Time</span>
+            </a>
+
+            <a class="live-card" href="#" data-type="poker" data-title="Casino Hold'em">
+                <figure class="live-media">
+                    <img src="assets/images/live3.jpg" alt="Casino Hold'em" loading="lazy">
+                </figure>
+                <span class="live-badge">Poker</span>
+                <span class="live-title">Casino Hold’em</span>
+            </a>
+
+            <a class="live-card" href="#" data-type="roulette" data-title="Auto Roulette">
+                <figure class="live-media">
+                    <img src="assets/images/live2.jpg" alt="Auto Roulette" loading="lazy">
+                </figure>
+                <span class="live-badge">Roulette</span>
+                <span class="live-title">Auto Roulette</span>
+            </a>
         </div>
+
+        <p id="liveEmpty" class="live-empty" hidden>No tables found. Try a different search.</p>
     </section>
 
-    <!-- Footer -->
-    <footer class="footer">
-        <div class="container">
-            <p>&copy; 2025 MrSpinny. All rights reserved.</p>
+    <footer class="site-footer">
+        <div class="container footer-top">
+            <a class="footer-brand" href="index.html" aria-label="MrSpinny home">
+                <span class="brand-mark">Mr<span>Spinny</span></span><small>.com</small>
+            </a>
+            <nav class="footer-links">
+                <div class="footer-col">
+                    <h4>Games</h4>
+                    <ul>
+                        <li><a href="slots.html">Slots</a></li>
+                        <li><a href="live-casino.html">Live Casino</a></li>
+                        <li><a href="#">Poker</a></li>
+                        <li><a href="#">Lottery</a></li>
+                        <li><a href="#">Roulette</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h4>Info</h4>
+                    <ul>
+                        <li><a href="#">Privacy Policy</a></li>
+                        <li><a href="#">Terms of Service</a></li>
+                        <li><a href="#">Responsible Gaming</a></li>
+                        <li><a href="#">Support</a></li>
+                    </ul>
+                </div>
+            </nav>
+            <div class="footer-badges">
+                <div class="age-badge">18+</div>
+                <div class="safe-badge">GambleAware</div>
+                <div class="safe-badge">Responsible Gaming</div>
+            </div>
+        </div>
+
+        <div class="container footer-brands">
+            <div class="brand-badge">VISA</div>
+            <div class="brand-badge">Mastercard</div>
+            <div class="brand-badge">Bitcoin</div>
+            <div class="brand-badge">Litecoin</div>
+            <div class="brand-badge">Ethereum</div>
+            <div class="brand-badge">Tether</div>
+            <div class="brand-badge">Dogecoin</div>
+            <div class="brand-badge">Interac</div>
+            <div class="brand-badge">Ripple</div>
+            <div class="brand-badge">Solana</div>
+            <div class="brand-badge">USDC</div>
+            <div class="brand-badge">TON</div>
+            <div class="brand-badge">Bank Transfer</div>
+            <div class="brand-badge">UPI</div>
+            <div class="brand-badge">Pay</div>
+        </div>
+
+        <div class="container footer-legal">
+            <p class="legal-copy">
+                MrSpinny.com is operated by Decordetails OÜ, Harju maakond, Tallinn, Kesklinna linnaosa, Tornimäe tn 5,
+                10145, reg. no. 17011692.
+                Gaming is offered in accordance with applicable laws and age restrictions. For help, contact
+                <a href="mailto:support@mrspinny.com">support@mrspinny.com</a>.
+            </p>
+            <p class="copyright">© MrSpinny. All rights reserved | 2025.</p>
         </div>
     </footer>
+
+    <script>
+        const searchEl = document.getElementById('liveSearch');
+        const grid = document.getElementById('liveGrid');
+        const cards = Array.from(grid.querySelectorAll('.live-card'));
+        const empty = document.getElementById('liveEmpty');
+        const catBtns = Array.from(document.querySelectorAll('.live-cats .cat'));
+
+        let activeFilter = 'all';
+
+        function applyFilters() {
+            const q = searchEl.value.trim().toLowerCase();
+            let visible = 0;
+            cards.forEach(c => {
+                const type = c.getAttribute('data-type');
+                const title = (c.getAttribute('data-title') || '').toLowerCase();
+                const matchCat = activeFilter === 'all' || activeFilter === type;
+                const matchText = !q || title.includes(q);
+                const show = matchCat && matchText;
+                c.style.display = show ? '' : 'none';
+                if (show) visible++;
+            });
+            empty.hidden = visible !== 0;
+        }
+
+        searchEl.addEventListener('input', applyFilters);
+        catBtns.forEach(btn => {
+            btn.addEventListener('click', () => {
+                catBtns.forEach(b => b.classList.remove('is-active'));
+                btn.classList.add('is-active');
+                activeFilter = btn.getAttribute('data-filter');
+                applyFilters();
+            });
+        });
+
+        applyFilters();
+    </script>
 </body>
 
 </html>

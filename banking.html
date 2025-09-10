@@ -6,40 +6,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Banking – MrSpinny</title>
     <link rel="stylesheet" href="css/style.css" />
-    <style>
-        /* small helper styles for the table */
-        .banking-table {
-            width: 100%;
-            border-collapse: separate;
-            border-spacing: 0 10px
-        }
-
-        .banking-table tr {
-            background: #16233b
-        }
-
-        .banking-table td,
-        .banking-table th {
-            padding: 14px 16px
-        }
-
-        .banking-table th {
-            text-align: left;
-            opacity: .9
-        }
-
-        .pill {
-            background: #0b1424;
-            border: 1px solid #2b3b5c;
-            border-radius: 999px;
-            padding: 4px 10px;
-            font-size: 12px
-        }
-    </style>
 </head>
 
 <body>
-    <!-- Header -->
     <header class="header">
         <div class="container nav">
             <div class="logo">MrSpinny</div>
@@ -57,20 +26,44 @@
         </div>
     </header>
 
-    <!-- Hero -->
-    <section class="hero" style="background-image:url('assets/images/banner-banking.jpg')">
+    <section class="hero bank-hero">
         <div class="hero-content">
             <h1>Fast & Secure <span>Banking</span></h1>
-            <p>Multiple payment methods, instant deposits, swift withdrawals.</p>
+            <p>Instant deposits, swift withdrawals, and trusted payment options.</p>
             <a href="#" class="btn btn-primary">Create Account</a>
         </div>
     </section>
 
-    <!-- Methods -->
-    <section class="container" style="margin:40px auto">
-        <div class="games">
-            <h2>Payment Methods</h2>
-            <table class="banking-table">
+    <section class="container bank-intro">
+        <div class="bank-usp">
+            <div class="bank-usp-item">
+                <div class="bank-usp-icon">⚡</div>
+                <div>
+                    <h3>Instant Deposits</h3>
+                    <p>Top up instantly with cards, e-wallets, and crypto.</p>
+                </div>
+            </div>
+            <div class="bank-usp-item">
+                <div class="bank-usp-icon">🔒</div>
+                <div>
+                    <h3>Secure</h3>
+                    <p>Encrypted payments and account-level protections.</p>
+                </div>
+            </div>
+            <div class="bank-usp-item">
+                <div class="bank-usp-icon">💸</div>
+                <div>
+                    <h3>Fast Payouts</h3>
+                    <p>Same-day processing on supported methods.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="container bank-methods">
+        <h2>Payment Methods</h2>
+        <div class="bank-table-wrap">
+            <table class="bank-table">
                 <thead>
                     <tr>
                         <th>Method</th>
@@ -82,39 +75,174 @@
                 </thead>
                 <tbody>
                     <tr>
-                        <td>Visa / MasterCard</td>
+                        <td>
+                            <div class="method-cell">
+                                <span class="method-badge">VISA</span>
+                                <span class="method-badge">Mastercard</span>
+                            </div>
+                        </td>
                         <td><span class="pill">Card</span></td>
                         <td>Instant</td>
                         <td>1–3 business days</td>
                         <td>No fees from us</td>
                     </tr>
                     <tr>
-                        <td>Skrill</td>
+                        <td>
+                            <div class="method-cell">
+                                <span class="method-badge">Skrill</span>
+                            </div>
+                        </td>
                         <td><span class="pill">E-wallet</span></td>
                         <td>Instant</td>
                         <td>Up to 24 hours</td>
                         <td>No fees from us</td>
                     </tr>
                     <tr>
-                        <td>Neteller</td>
+                        <td>
+                            <div class="method-cell">
+                                <span class="method-badge">Neteller</span>
+                            </div>
+                        </td>
                         <td><span class="pill">E-wallet</span></td>
                         <td>Instant</td>
                         <td>Up to 24 hours</td>
                         <td>No fees from us</td>
                     </tr>
                     <tr>
-                        <td>Bank Transfer</td>
+                        <td>
+                            <div class="method-cell">
+                                <span class="method-badge">Bank Transfer</span>
+                            </div>
+                        </td>
                         <td><span class="pill">Bank</span></td>
                         <td>1–2 business days</td>
                         <td>2–4 business days</td>
                         <td>Bank fees may apply</td>
                     </tr>
+                    <tr>
+                        <td>
+                            <div class="method-cell">
+                                <span class="method-badge">Bitcoin</span>
+                                <span class="method-badge">USDT</span>
+                            </div>
+                        </td>
+                        <td><span class="pill">Crypto</span></td>
+                        <td>~10–20 min</td>
+                        <td>~10–60 min</td>
+                        <td>Network fees apply</td>
+                    </tr>
                 </tbody>
             </table>
-            <p style="opacity:.85;margin-top:16px">Processing times may vary by provider and verification status. Limits
-                apply.</p>
+        </div>
+        <p class="bank-note">Times and availability vary by provider, currency, and verification status. Limits apply.
+        </p>
+    </section>
+
+    <section class="container bank-panels">
+        <article class="bank-card">
+            <h3>Deposit Steps</h3>
+            <ol class="bank-steps">
+                <li>Sign in to your account.</li>
+                <li>Open Cashier → Deposit.</li>
+                <li>Select a method and amount.</li>
+                <li>Confirm and complete payment.</li>
+            </ol>
+        </article>
+        <article class="bank-card">
+            <h3>Withdrawal Steps</h3>
+            <ol class="bank-steps">
+                <li>Verify your profile if prompted.</li>
+                <li>Open Cashier → Withdraw.</li>
+                <li>Choose a payout method.</li>
+                <li>Submit request and track status.</li>
+            </ol>
+        </article>
+        <article class="bank-card">
+            <h3>Limits</h3>
+            <ul class="bank-limits">
+                <li>Minimum deposit: <b>$10</b></li>
+                <li>Minimum withdrawal: <b>$20</b></li>
+                <li>Daily withdrawal cap: <b>$5,000</b></li>
+                <li>Higher limits available for VIPs</li>
+            </ul>
+        </article>
+    </section>
+
+    <section class="container bank-help">
+        <div class="bank-help-card">
+            <div>
+                <h3>Need help with a payment?</h3>
+                <p>Our team is here 24/7 to assist with deposits, withdrawals, or verification.</p>
+            </div>
+            <div class="bank-help-actions">
+                <a href="#" class="btn btn-outline">Live Chat</a>
+                <a href="mailto:support@mrspinny.com" class="btn btn-primary">Email Support</a>
+            </div>
         </div>
     </section>
 
-    <!-- Safety -->
-    <section class="container" style="m
+    <footer class="site-footer">
+        <div class="container footer-top">
+            <a class="footer-brand" href="index.html" aria-label="MrSpinny home">
+                <span class="brand-mark">Mr<span>Spinny</span></span>
+                <small>.com</small>
+            </a>
+            <nav class="footer-links">
+                <div class="footer-col">
+                    <h4>Games</h4>
+                    <ul>
+                        <li><a href="slots.html">Slots</a></li>
+                        <li><a href="live-casino.html">Live Casino</a></li>
+                        <li><a href="#">Poker</a></li>
+                        <li><a href="#">Lottery</a></li>
+                        <li><a href="#">Roulette</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h4>Info</h4>
+                    <ul>
+                        <li><a href="#">Privacy Policy</a></li>
+                        <li><a href="#">Terms of Service</a></li>
+                        <li><a href="#">Responsible Gaming</a></li>
+                        <li><a href="#">Support</a></li>
+                    </ul>
+                </div>
+            </nav>
+            <div class="footer-badges">
+                <div class="age-badge">18+</div>
+                <div class="safe-badge">GambleAware</div>
+                <div class="safe-badge">Responsible Gaming</div>
+            </div>
+        </div>
+
+        <div class="container footer-brands">
+            <div class="brand-badge">VISA</div>
+            <div class="brand-badge">Mastercard</div>
+            <div class="brand-badge">Bitcoin</div>
+            <div class="brand-badge">Litecoin</div>
+            <div class="brand-badge">Ethereum</div>
+            <div class="brand-badge">Tether</div>
+            <div class="brand-badge">Dogecoin</div>
+            <div class="brand-badge">Interac</div>
+            <div class="brand-badge">Ripple</div>
+            <div class="brand-badge">Solana</div>
+            <div class="brand-badge">USDC</div>
+            <div class="brand-badge">TON</div>
+            <div class="brand-badge">Bank Transfer</div>
+            <div class="brand-badge">UPI</div>
+            <div class="brand-badge">Pay</div>
+        </div>
+
+        <div class="container footer-legal">
+            <p class="legal-copy">
+                MrSpinny.com is operated by Decordetails OÜ, Harju maakond, Tallinn, Kesklinna linnaosa, Tornimäe tn 5,
+                10145, reg. no. 17011692.
+                Gaming is offered in accordance with applicable laws and age restrictions. For help, contact
+                <a href="mailto:support@mrspinny.com">support@mrspinny.com</a>.
+            </p>
+            <p class="copyright">© MrSpinny. All rights reserved | 2025.</p>
+        </div>
+    </footer>
+</body>
+
+</html>

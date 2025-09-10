@@ -9,7 +9,6 @@
 </head>
 
 <body>
-    <!-- Header -->
     <header class="header">
         <div class="container nav">
             <div class="logo">MrSpinny</div>
@@ -27,85 +26,147 @@
         </div>
     </header>
 
-    <!-- Hero -->
     <section class="promo-hero">
         <div class="container">
             <h1>Claim Exciting <span>Promotions</span></h1>
             <p>Welcome offers, reloads, free spins & cashback — updated regularly.</p>
             <div class="promo-cta">
                 <a href="index.html#wheel" class="btn btn-outline">Spin the Wheel</a>
-                <a href="#offers" class="btn btn-primary">Play Now</a>
+                <a href="https://mrspinny.com/promotions" class="btn btn-primary">View All Promotions</a>
             </div>
         </div>
     </section>
 
-    <!-- Offers -->
+    <section class="container promo-toolbar">
+        <div class="promo-search">
+            <input id="promoSearch" type="search" placeholder="Search promotions…">
+            <svg viewBox="0 0 24 24" aria-hidden="true">
+                <path
+                    d="M15.5 14h-.79l-.28-.27a6.471 6.471 0 0 0 1.57-4.23 6.5 6.5 0 1 0-6.5 6.5c1.61 0 3.09-.59 4.23-1.57l.27.28v.79L20 20.49 21.49 19 15.5 14zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z" />
+            </svg>
+        </div>
+        <div class="promo-pillbar">
+            <button class="pill is-active" data-filter="all">All</button>
+            <button class="pill" data-filter="welcome">Welcome</button>
+            <button class="pill" data-filter="reload">Reload</button>
+            <button class="pill" data-filter="spins">Free Spins</button>
+            <button class="pill" data-filter="cashback">Cashback</button>
+            <button class="pill" data-filter="live">Live Casino</button>
+        </div>
+    </section>
+
     <section id="offers" class="promos container">
-        <h2>🎁 Current Offers</h2>
-        <div class="promo-grid">
-            <article class="promo-card">
+        <h2 class="section-title">🎁 Current Offers</h2>
+
+        <div id="promoGrid" class="promo-grid">
+            <article class="promo-card" data-title="Up to 400% Welcome Bonus" data-tags="welcome popular">
+                <span class="promo-ribbon">New Players</span>
                 <img src="assets/images/promo1.jpg" alt="Welcome Bonus">
                 <div class="promo-body">
                     <h3>Up to 400% Welcome Bonus</h3>
                     <p>Boost your first deposit and start strong.</p>
+
+                    <div class="promo-tags">
+                        <span class="tag">Match Bonus</span>
+                        <span class="tag">Slots</span>
+                    </div>
+
+                    <div class="promo-inline">
+                        <span class="code-chip" data-code="WELCOME400">WELCOME400</span>
+                        <span class="ends-in" data-deadline="+3d">Ends in: <b class="clock">--:--:--</b></span>
+                    </div>
+
                     <div class="promo-actions">
-                        <a href="#" class="btn btn-primary">Claim</a>
+                        <a href="https://mrspinny.com/promotions" class="btn btn-primary">Claim</a>
                         <a href="#tnc" class="btn btn-outline btn-small">T&Cs</a>
                     </div>
                 </div>
             </article>
 
-            <article class="promo-card">
+            <article class="promo-card" data-title="Weekly Reload Bonus" data-tags="reload">
+                <span class="promo-ribbon alt">Weekly</span>
                 <img src="assets/images/promo2.jpg" alt="Weekly Reload">
                 <div class="promo-body">
                     <h3>Weekly Reload Bonus</h3>
                     <p>Get extra funds every week when you top up.</p>
+
+                    <div class="promo-tags">
+                        <span class="tag">Reload</span>
+                        <span class="tag">Bonus</span>
+                    </div>
+
+                    <div class="promo-inline">
+                        <span class="code-chip" data-code="RELOAD25">RELOAD25</span>
+                        <span class="ends-in" data-deadline="+5d">Ends in: <b class="clock">--:--:--</b></span>
+                    </div>
+
                     <div class="promo-actions">
-                        <a href="#" class="btn btn-primary">Claim</a>
+                        <a href="https://mrspinny.com/promotions" class="btn btn-primary">Claim</a>
                         <a href="#tnc" class="btn btn-outline btn-small">T&Cs</a>
                     </div>
                 </div>
             </article>
 
-            <article class="promo-card">
+            <article class="promo-card" data-title="Free Spins Friday" data-tags="spins slots">
                 <img src="assets/images/promo3.jpg" alt="Free Spins Friday">
                 <div class="promo-body">
                     <h3>Free Spins Friday</h3>
                     <p>Grab spins on top slots — every Friday.</p>
+
+                    <div class="promo-tags">
+                        <span class="tag">Free Spins</span>
+                        <span class="tag">Friday</span>
+                    </div>
+
+                    <div class="promo-inline">
+                        <span class="code-chip" data-code="FRIDAYSPINS">FRIDAYSPINS</span>
+                        <span class="ends-in" data-deadline="+2d">Ends in: <b class="clock">--:--:--</b></span>
+                    </div>
+
                     <div class="promo-actions">
-                        <a href="#" class="btn btn-primary">Claim</a>
+                        <a href="https://mrspinny.com/promotions" class="btn btn-primary">Claim</a>
                         <a href="#tnc" class="btn btn-outline btn-small">T&Cs</a>
                     </div>
                 </div>
             </article>
 
-            <article class="promo-card">
+            <article class="promo-card" data-title="Live Casino Cashback" data-tags="cashback live">
                 <img src="assets/images/promo4.jpg" alt="Live Casino Cashback">
                 <div class="promo-body">
                     <h3>Live Casino Cashback</h3>
                     <p>Cashback on qualifying net losses in live tables.</p>
+
+                    <div class="promo-tags">
+                        <span class="tag">Cashback</span>
+                        <span class="tag">Live</span>
+                    </div>
+
+                    <div class="promo-inline">
+                        <span class="code-chip" data-code="LIVEBACK10">LIVEBACK10</span>
+                        <span class="ends-in" data-deadline="+4d">Ends in: <b class="clock">--:--:--</b></span>
+                    </div>
+
                     <div class="promo-actions">
-                        <a href="#" class="btn btn-primary">Claim</a>
+                        <a href="https://mrspinny.com/promotions" class="btn btn-primary">Claim</a>
                         <a href="#tnc" class="btn btn-outline btn-small">T&Cs</a>
                     </div>
                 </div>
             </article>
         </div>
+
+        <p id="promoEmpty" class="live-empty" hidden>No promotions match your filters.</p>
     </section>
 
-    <!-- How it works -->
     <section class="how container">
         <h2>🔄 How to Redeem Promotions</h2>
         <div class="steps">
-            <div class="step"><b>1. Spin the wheel</b><br />On the homepage, spin to get a coupon or bonus.</div>
-            <div class="step"><b>2. Sign up</b><br />Create your MrSpinny account and enter your coupon if prompted.
-            </div>
-            <div class="step"><b>3. Make a deposit</b><br />Deposit the qualifying amount to activate the reward.</div>
-            <div class="step"><b>4. Play now</b><br />Head back to Promotions to use your bonus or free spins.</div>
+            <div class="step"><b>1. Spin the wheel</b><br>On the homepage, spin to get a coupon or bonus.</div>
+            <div class="step"><b>2. Sign up</b><br>Create your MrSpinny account and enter your coupon if prompted.</div>
+            <div class="step"><b>3. Make a deposit</b><br>Deposit the qualifying amount to activate the reward.</div>
+            <div class="step"><b>4. Play now</b><br>Use your bonus or free spins and enjoy!</div>
         </div>
     </section>
 
-    <!-- T&Cs -->
     <section id="tnc" class="tnc container">
         <h2>📜 Key Terms</h2>
         <ul>
@@ -116,12 +177,139 @@
         </ul>
     </section>
 
-    <!-- Footer -->
-    <footer class="footer">
-        <div class="container">
-            <p>&copy; 2025 MrSpinny. All rights reserved.</p>
+    <footer class="site-footer">
+        <div class="container footer-top">
+            <a class="footer-brand" href="index.html" aria-label="MrSpinny home">
+                <span class="brand-mark">Mr<span>Spinny</span></span><small>.com</small>
+            </a>
+            <nav class="footer-links">
+                <div class="footer-col">
+                    <h4>Games</h4>
+                    <ul>
+                        <li><a href="slots.html">Slots</a></li>
+                        <li><a href="live-casino.html">Live Casino</a></li>
+                        <li><a href="#">Poker</a></li>
+                        <li><a href="#">Lottery</a></li>
+                        <li><a href="#">Roulette</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h4>Info</h4>
+                    <ul>
+                        <li><a href="#">Privacy Policy</a></li>
+                        <li><a href="#">Terms of Service</a></li>
+                        <li><a href="#">Responsible Gaming</a></li>
+                        <li><a href="#">Support</a></li>
+                    </ul>
+                </div>
+            </nav>
+            <div class="footer-badges">
+                <div class="age-badge">18+</div>
+                <div class="safe-badge">GambleAware</div>
+                <div class="safe-badge">Responsible Gaming</div>
+            </div>
+        </div>
+
+        <div class="container footer-brands">
+            <div class="brand-badge">VISA</div>
+            <div class="brand-badge">Mastercard</div>
+            <div class="brand-badge">Bitcoin</div>
+            <div class="brand-badge">Litecoin</div>
+            <div class="brand-badge">Ethereum</div>
+            <div class="brand-badge">Tether</div>
+            <div class="brand-badge">Dogecoin</div>
+            <div class="brand-badge">Interac</div>
+            <div class="brand-badge">Ripple</div>
+            <div class="brand-badge">Solana</div>
+            <div class="brand-badge">USDC</div>
+            <div class="brand-badge">TON</div>
+            <div class="brand-badge">Bank Transfer</div>
+            <div class="brand-badge">UPI</div>
+            <div class="brand-badge">Pay</div>
+        </div>
+
+        <div class="container footer-legal">
+            <p class="legal-copy">
+                MrSpinny.com is operated by Decordetails OÜ, Harju maakond, Tallinn, Kesklinna linnaosa, Tornimäe tn 5,
+                10145, reg. no. 17011692.
+                Gaming is offered in accordance with applicable laws and age restrictions. For help, contact
+                <a href="mailto:support@mrspinny.com">support@mrspinny.com</a>.
+            </p>
+            <p class="copyright">© MrSpinny. All rights reserved | 2025.</p>
         </div>
     </footer>
+
+    <script>
+        const search = document.getElementById('promoSearch');
+        const pills = Array.from(document.querySelectorAll('.promo-pillbar .pill'));
+        const grid = document.getElementById('promoGrid');
+        const cards = Array.from(grid.querySelectorAll('.promo-card'));
+        const empty = document.getElementById('promoEmpty');
+        let active = 'all';
+
+        function applyFilter() {
+            const txt = (search.value || '').trim().toLowerCase();
+            let visible = 0;
+            cards.forEach(card => {
+                const title = card.dataset.title.toLowerCase();
+                const tags = card.dataset.tags || '';
+                const matchTxt = !txt || title.includes(txt);
+                const matchTag = active === 'all' ? true : tags.split(/\s+/).includes(active);
+                const show = matchTxt && matchTag;
+                card.style.display = show ? '' : 'none';
+                if (show) visible++;
+            });
+            empty.hidden = visible !== 0;
+        }
+
+        search.addEventListener('input', applyFilter);
+        pills.forEach(p => p.addEventListener('click', () => {
+            pills.forEach(x => x.classList.remove('is-active'));
+            p.classList.add('is-active');
+            active = p.dataset.filter;
+            applyFilter();
+        }));
+        applyFilter();
+
+        document.querySelectorAll('.code-chip').forEach(chip => {
+            chip.addEventListener('click', async () => {
+                try {
+                    await navigator.clipboard.writeText(chip.dataset.code);
+                    chip.classList.add('copied');
+                    chip.textContent = 'Copied!';
+                    setTimeout(() => { chip.classList.remove('copied'); chip.textContent = chip.dataset.code; }, 1200);
+                } catch { }
+            });
+        });
+
+        function parseDeadline(s) {
+            if (!s) return null;
+            if (s.startsWith('+')) {
+                const m = s.match(/\+(\d+)d/);
+                const d = new Date();
+                if (m) d.setDate(d.getDate() + parseInt(m[1], 10));
+                return d;
+            }
+            return new Date(s);
+        }
+
+        function tick() {
+            document.querySelectorAll('.ends-in').forEach(el => {
+                const dl = el.dataset.deadline;
+                const end = parseDeadline(dl);
+                if (!end) return;
+                const now = new Date();
+                let diff = Math.max(0, end - now);
+                const h = String(Math.floor(diff / 3.6e6)).padStart(2, '0');
+                diff %= 3.6e6;
+                const m = String(Math.floor(diff / 6e4)).padStart(2, '0');
+                diff %= 6e4;
+                const s = String(Math.floor(diff / 1e3)).padStart(2, '0');
+                el.querySelector('.clock').textContent = `${h}:${m}:${s}`;
+            });
+        }
+        tick(); setInterval(tick, 1000);
+    </script>
 </body>
 
 </html>

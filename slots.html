@@ -9,7 +9,6 @@
 </head>
 
 <body>
-    <!-- Header -->
     <header class="header">
         <div class="container nav">
             <div class="logo">MrSpinny</div>
@@ -27,59 +26,308 @@
         </div>
     </header>
 
-    <!-- Hero -->
     <section class="hero" style="background-image:url('assets/images/banner-slots.jpg')">
         <div class="hero-content">
             <h1>Spin & Win on Top <span>Slot Games</span></h1>
-            <p>Explore popular titles with bonuses and daily drops.</p>
-            <a href="#" class="btn btn-primary">Play Now</a>
+            <p>Explore popular titles with bonuses, megaways, and daily drops.</p>
+            <a href="https://mrspinny.com/games" class="btn btn-primary">Play Now</a>
+        </div>
+    </section>
+ 
+    <section class="container slots-toolbar">
+        <div class="slots-search">
+            <input id="slotSearch" type="search" placeholder="Search slots…">
+            <svg viewBox="0 0 24 24" aria-hidden="true">
+                <path
+                    d="M15.5 14h-.79l-.28-.27a6.471 6.471 0 0 0 1.57-4.23 6.5 6.5 0 1 0-6.5 6.5c1.61 0 3.09-.59 4.23-1.57l.27.28v.79L20 20.49 21.49 19 15.5 14zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z" />
+            </svg>
+        </div>
+
+        <div class="slots-pillbar">
+            <button class="pill is-active" data-filter="all">All</button>
+            <button class="pill" data-filter="megaways">Megaways</button>
+            <button class="pill" data-filter="classic">Classic</button>
+            <button class="pill" data-filter="jackpot">Jackpots</button>
+            <button class="pill" data-filter="new">New</button>
+            <button class="pill" data-filter="popular">Popular</button>
+            <button class="pill" data-filter="fave">★ Favorites</button>
+        </div>
+
+        <div class="slots-sort">
+            <label for="slotSort">Sort</label>
+            <select id="slotSort">
+                <option value="az">A → Z</option>
+                <option value="za">Z → A</option>
+                <option value="vol">Volatility</option>
+            </select>
         </div>
     </section>
 
-    <!-- Filters -->
-    <section class="container" style="margin-top:30px">
-        <div class="categories">
-            <div class="cat">All</div>
-            <div class="cat">Megaways</div>
-            <div class="cat">Classic</div>
-            <div class="cat">Jackpots</div>
-            <div class="cat">New</div>
-            <div class="cat">Popular</div>
+    <section class="container">
+        <h2 class="section-title">🎰 Featured Slots</h2>
+
+        <div id="slotsGrid" class="slots-grid">
+            <!-- Sweet Bonanza -->
+            <article class="slot-card" data-title="Sweet Bonanza" data-tags="popular classic" data-vol="2">
+                <button class="slot-fav" aria-label="Toggle favorite">★</button>
+                <span class="slot-ribbon">Daily Drops</span>
+                <a class="slot-link" href="https://mrspinny.com/games" aria-label="Play Sweet Bonanza">
+                    <figure class="slot-media">
+                        <img src="assets/images/games/sweet-bonanza.jpg" alt="Sweet Bonanza" loading="lazy">
+                    </figure>
+                    <div class="slot-info">
+                        <h3 class="slot-title">Sweet Bonanza</h3>
+                        <div class="slot-meta">
+                            <span class="vol-label">Volatility</span>
+                            <span class="vol-dots" data-lev="2"></span>
+                        </div>
+                    </div>
+                    <div class="slot-cta">
+                        <span class="btn btn-primary">Play</span>
+                        <span class="btn btn-outline">Demo</span>
+                    </div>
+                </a>
+            </article>
+
+            <!-- Gates of Olympus -->
+            <article class="slot-card" data-title="Gates of Olympus" data-tags="popular megaways" data-vol="3">
+                <button class="slot-fav" aria-label="Toggle favorite">★</button>
+                <a class="slot-link" href="https://mrspinny.com/games" aria-label="Play Gates of Olympus">
+                    <figure class="slot-media">
+                        <img src="assets/images/games/gates-of-olympus.jpg" alt="Gates of Olympus" loading="lazy">
+                    </figure>
+                    <div class="slot-info">
+                        <h3 class="slot-title">Gates of Olympus</h3>
+                        <div class="slot-meta">
+                            <span class="vol-label">Volatility</span>
+                            <span class="vol-dots" data-lev="3"></span>
+                        </div>
+                    </div>
+                    <div class="slot-cta">
+                        <span class="btn btn-primary">Play</span>
+                        <span class="btn btn-outline">Demo</span>
+                    </div>
+                </a>
+            </article>
+
+            <!-- 5 Lions Megaways -->
+            <article class="slot-card" data-title="5 Lions Megaways" data-tags="megaways new" data-vol="3">
+                <button class="slot-fav" aria-label="Toggle favorite">★</button>
+                <span class="slot-ribbon alt">Hot</span>
+                <a class="slot-link" href="https://mrspinny.com/games" aria-label="Play 5 Lions Megaways">
+                    <figure class="slot-media">
+                        <img src="assets/images/games/5-lions-of-megaways.jpg" alt="5 Lions Megaways" loading="lazy">
+                    </figure>
+                    <div class="slot-info">
+                        <h3 class="slot-title">5 Lions Megaways</h3>
+                        <div class="slot-meta">
+                            <span class="vol-label">Volatility</span>
+                            <span class="vol-dots" data-lev="3"></span>
+                        </div>
+                    </div>
+                    <div class="slot-cta">
+                        <span class="btn btn-primary">Play</span>
+                        <span class="btn btn-outline">Demo</span>
+                    </div>
+                </a>
+            </article>
+
+            <!-- Zeus the Thunderer -->
+            <article class="slot-card" data-title="Zeus the Thunderer" data-tags="jackpot popular" data-vol="2">
+                <button class="slot-fav" aria-label="Toggle favorite">★</button>
+                <a class="slot-link" href="https://mrspinny.com/games" aria-label="Play Zeus the Thunderer">
+                    <figure class="slot-media">
+                        <img src="assets/images/games/thunder-olympus.jpg" alt="Zeus the Thunderer" loading="lazy">
+                    </figure>
+                    <div class="slot-info">
+                        <h3 class="slot-title">Zeus the Thunderer</h3>
+                        <div class="slot-meta">
+                            <span class="vol-label">Volatility</span>
+                            <span class="vol-dots" data-lev="2"></span>
+                        </div>
+                    </div>
+                    <div class="slot-cta">
+                        <span class="btn btn-primary">Play</span>
+                        <span class="btn btn-outline">Demo</span>
+                    </div>
+                </a>
+            </article>
+
+            <!-- Big Bass Bonanza -->
+            <article class="slot-card" data-title="Big Bass Bonanza" data-tags="classic popular" data-vol="1">
+                <button class="slot-fav" aria-label="Toggle favorite">★</button>
+                <a class="slot-link" href="https://mrspinny.com/games" aria-label="Play Big Bass Bonanza">
+                    <figure class="slot-media">
+                        <img src="assets/images/game5.jpg" alt="Big Bass Bonanza" loading="lazy">
+                    </figure>
+                    <div class="slot-info">
+                        <h3 class="slot-title">Big Bass Bonanza</h3>
+                        <div class="slot-meta">
+                            <span class="vol-label">Volatility</span>
+                            <span class="vol-dots" data-lev="1"></span>
+                        </div>
+                    </div>
+                    <div class="slot-cta">
+                        <span class="btn btn-primary">Play</span>
+                        <span class="btn btn-outline">Demo</span>
+                    </div>
+                </a>
+            </article>
+
+            <!-- Book of Gold -->
+            <article class="slot-card" data-title="Book of Gold" data-tags="classic new" data-vol="1">
+                <button class="slot-fav" aria-label="Toggle favorite">★</button>
+                <a class="slot-link" href="https://mrspinny.com/games" aria-label="Play Book of Gold">
+                    <figure class="slot-media">
+                        <img src="assets/images/game6.jpg" alt="Book of Gold" loading="lazy">
+                    </figure>
+                    <div class="slot-info">
+                        <h3 class="slot-title">Book of Gold</h3>
+                        <div class="slot-meta">
+                            <span class="vol-label">Volatility</span>
+                            <span class="vol-dots" data-lev="1"></span>
+                        </div>
+                    </div>
+                    <div class="slot-cta">
+                        <span class="btn btn-primary">Play</span>
+                        <span class="btn btn-outline">Demo</span>
+                    </div>
+                </a>
+            </article>
         </div>
+
+        <p id="slotsEmpty" class="live-empty" hidden>No slots match your filters.</p>
     </section>
 
-    <!-- Slots Grid -->
-    <section class="games container">
-        <h2>🎰 Featured Slots</h2>
-        <div class="games-grid">
-            <!-- Repeat/replace with your assets -->
-            <div class="game-card"><img src="assets/images/game1.jpg" alt="">
-                <p>Sweet Bonanza</p>
-            </div>
-            <div class="game-card"><img src="assets/images/game2.jpg" alt="">
-                <p>Gates of Olympus</p>
-            </div>
-            <div class="game-card"><img src="assets/images/game3.jpg" alt="">
-                <p>5 Lions Megaways</p>
-            </div>
-            <div class="game-card"><img src="assets/images/game4.jpg" alt="">
-                <p>Zeus the Thunderer</p>
-            </div>
-            <div class="game-card"><img src="assets/images/game5.jpg" alt="">
-                <p>Big Bass Bonanza</p>
-            </div>
-            <div class="game-card"><img src="assets/images/game6.jpg" alt="">
-                <p>Book of Gold</p>
+    <footer class="site-footer">
+        <div class="container footer-top">
+            <a class="footer-brand" href="index.html" aria-label="MrSpinny home">
+                <span class="brand-mark">Mr<span>Spinny</span></span><small>.com</small>
+            </a>
+            <nav class="footer-links">
+                <div class="footer-col">
+                    <h4>Games</h4>
+                    <ul>
+                        <li><a href="slots.html">Slots</a></li>
+                        <li><a href="live-casino.html">Live Casino</a></li>
+                        <li><a href="#">Poker</a></li>
+                        <li><a href="#">Lottery</a></li>
+                        <li><a href="#">Roulette</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h4>Info</h4>
+                    <ul>
+                        <li><a href="#">Privacy Policy</a></li>
+                        <li><a href="#">Terms of Service</a></li>
+                        <li><a href="#">Responsible Gaming</a></li>
+                        <li><a href="#">Support</a></li>
+                    </ul>
+                </div>
+            </nav>
+            <div class="footer-badges">
+                <div class="age-badge">18+</div>
+                <div class="safe-badge">GambleAware</div>
+                <div class="safe-badge">Responsible Gaming</div>
             </div>
         </div>
-    </section>
 
-    <!-- Footer -->
-    <footer class="footer">
-        <div class="container">
-            <p>&copy; 2025 MrSpinny. All rights reserved.</p>
+        <div class="container footer-brands">
+            <div class="brand-badge">VISA</div>
+            <div class="brand-badge">Mastercard</div>
+            <div class="brand-badge">Bitcoin</div>
+            <div class="brand-badge">Litecoin</div>
+            <div class="brand-badge">Ethereum</div>
+            <div class="brand-badge">Tether</div>
+            <div class="brand-badge">Dogecoin</div>
+            <div class="brand-badge">Interac</div>
+            <div class="brand-badge">Ripple</div>
+            <div class="brand-badge">Solana</div>
+            <div class="brand-badge">USDC</div>
+            <div class="brand-badge">TON</div>
+            <div class="brand-badge">Bank Transfer</div>
+            <div class="brand-badge">UPI</div>
+            <div class="brand-badge">Pay</div>
+        </div>
+
+        <div class="container footer-legal">
+            <p class="legal-copy">
+                MrSpinny.com is operated by Decordetails OÜ, Harju maakond, Tallinn, Kesklinna linnaosa, Tornimäe tn 5,
+                10145, reg. no. 17011692.
+                Gaming is offered in accordance with applicable laws and age restrictions. For help, contact
+                <a href="mailto:support@mrspinny.com">support@mrspinny.com</a>.
+            </p>
+            <p class="copyright">© MrSpinny. All rights reserved | 2025.</p>
         </div>
     </footer>
+
+    <script>
+        const q = document.getElementById('slotSearch');
+        const sortSel = document.getElementById('slotSort');
+        const pills = Array.from(document.querySelectorAll('.slots-pillbar .pill'));
+        const grid = document.getElementById('slotsGrid');
+        const cards = Array.from(grid.querySelectorAll('.slot-card'));
+        const empty = document.getElementById('slotsEmpty');
+        const FAV_KEY = 'mrspinny_faves';
+
+        let activeFilter = 'all';
+        let faves = new Set(JSON.parse(localStorage.getItem(FAV_KEY) || '[]'));
+
+        cards.forEach(c => {
+            const favBtn = c.querySelector('.slot-fav');
+            const id = c.dataset.title;
+            if (faves.has(id)) favBtn.classList.add('is-fav');
+            favBtn.addEventListener('click', (e) => {
+                e.preventDefault(); e.stopPropagation();
+                favBtn.classList.toggle('is-fav');
+                if (favBtn.classList.contains('is-fav')) faves.add(id); else faves.delete(id);
+                localStorage.setItem(FAV_KEY, JSON.stringify([...faves]));
+                apply();
+            });
+        });
+
+        function apply() {
+            const txt = (q.value || '').trim().toLowerCase();
+            const sort = sortSel.value;
+            let visible = [];
+
+            cards.forEach(card => {
+                const title = card.dataset.title.toLowerCase();
+                const tags = card.dataset.tags.split(/\s+/);
+                const matchText = !txt || title.includes(txt);
+                const matchCat =
+                    activeFilter === 'all' ? true :
+                        activeFilter === 'fave' ? faves.has(card.dataset.title) :
+                            tags.includes(activeFilter);
+
+                const show = matchText && matchCat;
+                card.style.display = show ? '' : 'none';
+                if (show) visible.push(card);
+            });
+
+            visible.sort((a, b) => {
+                if (sort === 'vol') return (+b.dataset.vol) - (+a.dataset.vol);
+                const ta = a.dataset.title.toLowerCase();
+                const tb = b.dataset.title.toLowerCase();
+                return sort === 'za' ? tb.localeCompare(ta) : ta.localeCompare(tb);
+            });
+            visible.forEach(n => grid.appendChild(n));
+
+            empty.hidden = visible.length !== 0;
+        }
+
+        q.addEventListener('input', apply);
+        sortSel.addEventListener('change', apply);
+        pills.forEach(p => {
+            p.addEventListener('click', () => {
+                pills.forEach(x => x.classList.remove('is-active'));
+                p.classList.add('is-active');
+                activeFilter = p.dataset.filter;
+                apply();
+            });
+        });
+        apply();
+    </script>
 </body>
 
 </html>

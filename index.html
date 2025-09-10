@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>MrSpinny Marketing</title>
+    <link rel="stylesheet" href="css/style.css" />
+</head>
+
+<body>
+    <header class="header">
+        <div class="container nav">
+            <div class="logo">MrSpinny</div>
+            <nav class="menu">
+                <a class="active" href="index.html">Home</a>
+                <a href="slots.html">Slots</a>
+                <a href="live-casino.html">Live Casino</a>
+                <a href="promotions.html">Promotions</a>
+                <a href="banking.html">Banking</a>
+            </nav>
+            <div class="auth-buttons">
+                <a href="#" class="btn btn-outline">Sign In</a>
+                <a href="#" class="btn btn-primary">Sign Up</a>
+            </div>
+        </div>
+    </header>
+
+    <section class="hero">
+        <div class="hero-content">
+            <h1>Join & Get <span>Up to 400%</span> Welcome Bonus</h1>
+            <p>Spin the wheel for a special coupon, then sign up & deposit to claim.</p>
+            <div class="hero-cta">
+                <a href="#wheel" class="btn btn-primary">Spin the Wheel</a>
+                <a href="promotions.html" class="btn btn-outline">Play Now</a>
+            </div>
+        </div>
+    </section>
+
+    <section id="wheel" class="container wheel-section">
+        <h2 class="wheel-title">🎡 Wheel of Fortune</h2>
+        <p class="wheel-subtitle">Tap to spin. Win a bonus or free spins. Sign up & deposit to redeem.</p>
+
+        <div class="wheel-wrap">
+            <div class="wheel-pointer"></div>
+            <div id="wheel-svg" class="wheel"></div>
+            <button id="spinBtn" class="btn btn-primary wheel-btn" aria-live="polite">Spin Now</button>
+            <div id="confettiLayer" aria-hidden="true"></div>
+            <div id="coinLayer" aria-hidden="true"></div>
+        </div>
+
+        <p class="wheel-note">One spin per visitor. Rewards require signup & first deposit to activate.</p>
+    </section>
+
+    <section class="categories container">
+        <div class="cat">Slots</div>
+        <div class="cat">Poker</div>
+        <div class="cat">Baccarat</div>
+        <div class="cat">Blackjack</div>
+        <div class="cat">Roulette</div>
+        <div class="cat">Live Casino</div>
+    </section>
+
+    <section class="games container">
+        <h2>🔥 Top Games</h2>
+        <div class="games-grid">
+            <div class="game-card">
+                <img src="assets/images/game1.jpg" alt="Sweet Bonanza">
+                <p>Sweet Bonanza</p>
+            </div>
+            <div class="game-card">
+                <img src="assets/images/game2.jpg" alt="Gates of Olympus">
+                <p>Gates of Olympus</p>
+            </div>
+            <div class="game-card">
+                <img src="assets/images/game3.jpg" alt="5 Lions Megaways">
+                <p>5 Lions Megaways</p>
+            </div>
+            <div class="game-card">
+                <img src="assets/images/game4.jpg" alt="Zeus the Thunderer">
+                <p>Zeus the Thunderer</p>
+            </div>
+        </div>
+    </section>
+
+    <div id="resultModal" class="modal" role="dialog" aria-modal="true" aria-labelledby="resultTitle"
+        aria-describedby="resultDesc" hidden>
+        <div class="modal-content">
+            <button class="modal-close" id="modalClose" aria-label="Close">×</button>
+            <h3 id="resultTitle">You won!</h3>
+            <p id="resultDesc" class="result-desc"></p>
+            <div class="coupon-box">
+                <span class="coupon-label">Your coupon:</span>
+                <code id="couponCode">—</code>
+                <button id="copyCoupon" class="btn btn-outline btn-small">Copy</button>
+            </div>
+            <p class="redeem-note">Sign up and make a deposit to activate this reward.</p>
+            <div class="modal-actions">
+                <a href="#" class="btn btn-primary">Sign Up</a>
+                <a href="promotions.html" class="btn btn-outline">Play Now</a>
+            </div>
+        </div>
+    </div>
+
+    <footer class="footer">
+        <div class="container">
+            <p>&copy; 2025 MrSpinny. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script src="js/script.js"></script>
+</body>
+
+</html>

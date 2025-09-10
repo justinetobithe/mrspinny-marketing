@@ -1,0 +1,485 @@
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    background-color: #0b1424;
+    color: #fff;
+}
+
+.container {
+    width: 90%;
+    max-width: 1200px;
+    margin: auto;
+}
+
+.header {
+    background: #081021;
+    padding: 15px 0;
+}
+
+.nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.logo {
+    font-size: 24px;
+    font-weight: bold;
+    color: #f1c40f;
+}
+
+.menu a {
+    margin: 0 15px;
+    color: #fff;
+    text-decoration: none;
+    font-weight: 500;
+}
+
+.menu a:hover {
+    color: #f1c40f;
+}
+
+.auth-buttons .btn {
+    margin-left: 10px;
+}
+
+.btn {
+    padding: 10px 20px;
+    border-radius: 5px;
+    text-decoration: none;
+    font-weight: bold;
+    display: inline-block;
+}
+
+.btn-primary {
+    background: #f1c40f;
+    color: #000;
+}
+
+.btn-outline {
+    border: 2px solid #f1c40f;
+    color: #f1c40f;
+    background: transparent;
+}
+
+.btn-small {
+    padding: 6px 10px;
+    font-size: 12px;
+}
+
+.hero {
+    background: url("../assets/images/banner.jpg") no-repeat center center/cover;
+    text-align: center;
+    padding: 100px 20px;
+}
+
+.hero h1 {
+    font-size: 40px;
+}
+
+.hero h1 span {
+    color: #f1c40f;
+}
+
+.hero p {
+    margin: 15px 0 25px;
+    font-size: 18px;
+}
+
+.hero-cta {
+    display: flex;
+    gap: 12px;
+    justify-content: center;
+    flex-wrap: wrap;
+    margin-top: 14px;
+}
+
+.categories {
+    display: flex;
+    justify-content: space-around;
+    margin: 40px 0;
+}
+
+.cat {
+    background: #16233b;
+    padding: 15px 25px;
+    border-radius: 8px;
+    text-align: center;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.cat:hover {
+    background: #f1c40f;
+    color: #000;
+}
+
+.games h2 {
+    margin-bottom: 20px;
+}
+
+.games-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 20px;
+}
+
+.game-card {
+    background: #16233b;
+    border-radius: 8px;
+    padding: 15px;
+    text-align: center;
+    transition: 0.3s;
+}
+
+.game-card img {
+    width: 100%;
+    border-radius: 8px;
+}
+
+.game-card:hover {
+    background: #f1c40f;
+    color: #000;
+}
+
+.footer {
+    background: #081021;
+    text-align: center;
+    padding: 20px;
+    margin-top: 40px;
+    font-size: 14px;
+}
+
+.wheel-section {
+    margin: 60px auto 30px;
+    text-align: center;
+}
+
+.wheel-title {
+    margin-bottom: 6px;
+}
+
+.wheel-subtitle {
+    opacity: .9;
+    margin-top: 0;
+}
+
+.wheel-note {
+    opacity: .7;
+    font-size: 14px;
+    margin-top: 10px;
+}
+
+.wheel-wrap {
+    position: relative;
+    width: min(520px, 90vw);
+    margin: 24px auto;
+    aspect-ratio: 1/1;
+}
+
+.wheel {
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    overflow: visible;
+    background: radial-gradient(ellipse at center, #182743 0%, #0e1730 70%);
+    box-shadow: 0 12px 35px rgba(0, 0, 0, .45), inset 0 0 0 6px #25365d, inset 0 0 0 12px #0b1424;
+    transform: rotate(0deg);
+    transition: transform 5s cubic-bezier(.15, .54, .09, 1);
+    user-select: none;
+}
+
+.wheel svg text {
+    fill: #fff;
+    font-size: 22px;
+    font-family: Arial, sans-serif;
+    font-weight: 600;
+    pointer-events: none;
+}
+
+.wheel-pointer {
+    position: absolute;
+    top: -14px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 0;
+    height: 0;
+    border-left: 16px solid transparent;
+    border-right: 16px solid transparent;
+    border-bottom: 24px solid #f1c40f;
+    filter: drop-shadow(0 4px 6px rgba(0, 0, 0, .4));
+    z-index: 3;
+}
+
+.wheel-btn {
+    position: absolute;
+    z-index: 1;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    min-width: 140px;
+}
+
+.wheel-btn[disabled] {
+    opacity: .6;
+    cursor: not-allowed;
+}
+
+#confettiLayer,
+#coinLayer {
+    pointer-events: none;
+    position: absolute;
+    inset: 0;
+    overflow: hidden;
+    z-index: 2;
+}
+
+.confetti {
+    position: absolute;
+    width: 8px;
+    height: 14px;
+    background: linear-gradient(#ffd54a, #ff9f1a);
+    animation: fall 1200ms linear forwards, spin 1200ms linear forwards;
+    opacity: .95;
+}
+
+@keyframes fall {
+    from {
+        transform: translateY(-20%) translateX(0) rotate(0deg);
+        opacity: 0;
+    }
+
+    to {
+        transform: translateY(120%) translateX(var(--dx, 0px)) rotate(360deg);
+        opacity: 1;
+    }
+}
+
+@keyframes spin {
+    to {
+        transform: rotate(720deg);
+    }
+}
+
+.coin {
+    position: absolute;
+    width: 14px;
+    height: 14px;
+    border-radius: 50%;
+    background: radial-gradient(circle at 30% 30%, #fff59d, #f1c40f 40%, #b37d00 70%);
+    box-shadow: 0 0 12px rgba(241, 196, 15, .6);
+    animation: coin-pop 900ms ease-out forwards;
+}
+
+@keyframes coin-pop {
+    0% {
+        transform: translate(var(--x, 0), var(--y, 0)) scale(0);
+        opacity: 0;
+    }
+
+    60% {
+        transform: translate(calc(var(--x, 0)*1.2), calc(var(--y, 0)*1.2)) scale(1.1);
+        opacity: 1;
+    }
+
+    100% {
+        transform: translate(calc(var(--x, 0)*1.6), calc(var(--y, 0)*1.6)) scale(.95);
+        opacity: 0;
+    }
+}
+
+.modal {
+    position: fixed;
+    inset: 0;
+    display: grid;
+    place-items: center;
+    background: rgba(0, 0, 0, .6);
+    padding: 20px;
+    z-index: 9999;
+}
+
+.modal[hidden] {
+    display: none;
+}
+
+.modal-content {
+    background: #101a31;
+    border: 1px solid #2b3b5c;
+    border-radius: 14px;
+    width: min(560px, 95vw);
+    padding: 24px;
+    box-shadow: 0 20px 60px rgba(0, 0, 0, .55);
+    position: relative;
+    z-index: 2;
+}
+
+.modal-close {
+    position: absolute;
+    right: 14px;
+    top: 10px;
+    background: transparent;
+    border: 0;
+    color: #fff;
+    font-size: 24px;
+    cursor: pointer;
+}
+
+.result-desc {
+    margin: 10px 0 18px;
+}
+
+.coupon-box {
+    display: inline-flex;
+    gap: 10px;
+    align-items: center;
+    background: #0b1424;
+    border: 1px dashed #2b3b5c;
+    padding: 10px 12px;
+    border-radius: 10px;
+}
+
+.coupon-label {
+    opacity: .85;
+}
+
+.modal-actions {
+    display: flex;
+    gap: 12px;
+    flex-wrap: wrap;
+    margin-top: 16px;
+    justify-content: center;
+}
+
+.menu a.active {
+    color: #f1c40f;
+}
+
+.promo-hero {
+    text-align: center;
+    padding: 70px 20px;
+    background: url('../assets/images/banner-promos.jpg') no-repeat center/cover;
+}
+
+.promo-hero h1 {
+    font-size: 40px;
+    margin: 0 0 10px;
+}
+
+.promo-hero h1 span {
+    color: #f1c40f;
+}
+
+.promo-hero p {
+    opacity: .9;
+    margin: 0 0 18px;
+}
+
+.promo-cta {
+    display: flex;
+    gap: 12px;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+.promos.container {
+    margin: 40px auto;
+}
+
+.promo-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: 20px;
+}
+
+.promo-card {
+    background: #16233b;
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: 0 10px 24px rgba(0, 0, 0, .25);
+    transition: .25s;
+}
+
+.promo-card:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 16px 36px rgba(0, 0, 0, .35);
+}
+
+.promo-card img {
+    width: 100%;
+    height: 180px;
+    object-fit: cover;
+    display: block;
+}
+
+.promo-body {
+    padding: 16px;
+}
+
+.promo-body h3 {
+    margin: 0 0 6px;
+}
+
+.promo-body p {
+    margin: 0 0 10px;
+    opacity: .9;
+}
+
+.promo-actions {
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+}
+
+.how.container {
+    margin: 20px auto 10px;
+}
+
+.steps {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 16px;
+    margin-top: 14px;
+}
+
+.step {
+    background: #16233b;
+    border-radius: 10px;
+    padding: 16px;
+}
+
+.step b {
+    color: #f1c40f;
+}
+
+.tnc.container {
+    margin: 30px auto 50px;
+}
+
+.tnc ul {
+    line-height: 1.8;
+    margin: 8px 0 0 18px;
+}
+
+.live-hero {
+    background: url('../assets/images/banner-live.jpg') no-repeat center/cover;
+}
+
+.usp {
+    margin: 40px auto;
+}
+
+.usp-list {
+    line-height: 1.9;
+}
+
+@media (max-width: 640px) {
+
+    .hero h1,
+    .promo-hero h1 {
+        font-size: 32px;
+    }
+
+    .promo-card img {
+        height: 160px;
+    }
+}

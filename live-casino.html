@@ -11,22 +11,134 @@
 <body>
     <header class="header">
         <div class="container nav">
-            <div class="logo">MrSpinny</div>
-            <nav class="menu">
-                <a href="index.html">Home</a>
-                <a href="slots.html">Slots</a>
-                <a class="active" href="live-casino.html">Live Casino</a>
-                <a href="promotions.html">Promotions</a>
-                <a href="banking.html">Banking</a>
+            <a class="logo" href="index.html" aria-label="MrSpinny home">MrSpinny</a>
+
+            <nav class="menu" aria-label="Primary">
+                <a href="index.html">
+                    <svg class="ico" viewBox="0 0 24 24" aria-hidden="true">
+                        <path d="M12 3l9 8h-2v8h-5v-5H10v5H5v-8H3l9-8z" />
+                    </svg>
+                    Home
+                </a>
+
+                <a href="slots.html">
+                    <svg class="ico" viewBox="0 0 24 24" aria-hidden="true">
+                        <path d="M3 7h18v10H3zM5 5h14v2H5zM7 9h2v2H7zm4 0h2v2h-2zm4 0h2v2h-2z" />
+                    </svg>
+                    Slots
+                </a>
+
+                <a class="active" href="live-casino.html">
+                    <svg class="ico" viewBox="0 0 24 24" aria-hidden="true">
+                        <path d="M4 6h16v10H4zM2 18h20v2H2zM8 8h2v6H8zM14 8h2v6h-2z" />
+                    </svg>
+                    Live Casino
+                </a>
+
+                <a href="promotions.html">
+                    <svg class="ico" viewBox="0 0 24 24" aria-hidden="true">
+                        <path d="M12 2l2.4 4.9L20 8l-4 3.9.9 5.6L12 15.8 7.1 17.5 8 11.9 4 8l5.6-1.1L12 2z" />
+                    </svg>
+                    Promotions
+                </a>
+
+                <a href="banking.html">
+                    <svg class="ico" viewBox="0 0 24 24" aria-hidden="true">
+                        <path d="M3 10h18v2H3zm2 3h2v5H5zm4 0h2v5H9zm4 0h2v5h-2zm4 0h2v5h-2zM3 8l9-5 9 5H3z" />
+                    </svg>
+                    Banking
+                </a>
             </nav>
+
             <div class="auth-buttons">
                 <a href="#" class="btn btn-outline">Sign In</a>
                 <a href="#" class="btn btn-primary">Sign Up</a>
             </div>
+
+            <button id="navToggle" class="nav-toggle" aria-controls="mobileMenu" aria-expanded="false"
+                aria-label="Open Menu">
+                <svg class="burger" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+                    <line class="burger-line top" x1="3" y1="6" x2="21" y2="6"></line>
+                    <line class="burger-line middle" x1="3" y1="12" x2="21" y2="12"></line>
+                    <line class="burger-line bottom" x1="3" y1="18" x2="21" y2="18"></line>
+                </svg>
+            </button>
+
+        </div>
+
+        <div id="mobileMenu" class="mobile-menu" hidden>
+            <div class="mobile-menu-backdrop" data-close-menu></div>
+            <div class="mobile-menu-panel" role="dialog" aria-modal="true" aria-label="Main Menu">
+                <button class="mobile-close" id="mobileClose" aria-label="Close Menu">×</button>
+
+                <nav class="mobile-links" aria-label="Mobile">
+                    <a href="index.html">
+                        <svg class="ico" viewBox="0 0 24 24">
+                            <path d="M12 3l9 8h-2v8h-5v-5H10v5H5v-8H3l9-8z" />
+                        </svg>
+                        Home
+                    </a>
+
+                    <a href="slots.html">
+                        <svg class="ico" viewBox="0 0 24 24">
+                            <path d="M3 7h18v10H3zM5 5h14v2H5zM7 9h2v2H7zm4 0h2v2h-2zm4 0h2v2h-2z" />
+                        </svg>
+                        Slots
+                    </a>
+
+                    <a href="live-casino.html">
+                        <svg class="ico" viewBox="0 0 24 24">
+                            <path d="M4 6h16v10H4zM2 18h20v2H2zM8 8h2v6H8zM14 8h2v6h-2z" />
+                        </svg>
+                        Live Casino
+                    </a>
+
+                    <a href="promotions.html">
+                        <svg class="ico" viewBox="0 0 24 24">
+                            <path d="M12 2l2.4 4.9L20 8l-4 3.9.9 5.6L12 15.8 7.1 17.5 8 11.9 4 8l5.6-1.1L12 2z" />
+                        </svg>
+                        Promotions
+                    </a>
+
+                    <a href="banking.html">
+                        <svg class="ico" viewBox="0 0 24 24">
+                            <path d="M3 10h18v2H3zm2 3h2v5H5zm4 0h2v5H9zm4 0h2v5h-2zm4 0h2v5h-2zM3 8l9-5 9 5H3z" />
+                        </svg>
+                        Banking
+                    </a>
+                </nav>
+
+                <hr class="mobile-divider" />
+
+                <div class="mobile-lang">
+                    <button class="lang-select">
+                        <img src="https://flagcdn.com/w20/gb.png" alt="" /> English
+                        <svg viewBox="0 0 24 24" class="chev">
+                            <path d="M7 10l5 5 5-5" />
+                        </svg>
+                    </button>
+                </div>
+
+                <ul class="mobile-secondary">
+                    <li><a href="#">Support</a></li>
+                    <li><a href="#">Privacy Policy</a></li>
+                    <li><a href="#">Terms of Service</a></li>
+                    <li><a href="#">Responsible Gaming</a></li>
+                </ul>
+
+                <div class="mobile-age">18+</div>
+
+                <!-- bottom buttons -->
+                <div class="mobile-cta">
+                    <a href="#" class="btn btn-outline">Sign In</a>
+                    <a href="#" class="btn btn-primary">Sign Up</a>
+                </div>
+
+            </div>
         </div>
     </header>
 
-    <section class="hero live-hero">
+    <section class="hero" style="background-image:url('assets/images/banner-3.png'); background-position: top;">
         <div class="hero-content">
             <h1>Premium <span>Live Casino</span> Tables</h1>
             <p>Blackjack, Roulette, Baccarat, Poker, and Game Shows in HD.</p>
@@ -170,7 +282,8 @@
             <p class="copyright">© MrSpinny. All rights reserved | 2025.</p>
         </div>
     </footer>
-
+ 
+    <script src="js/script.js"></script>
     <script>
         const searchEl = document.getElementById('liveSearch');
         const grid = document.getElementById('liveGrid');

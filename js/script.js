@@ -319,21 +319,21 @@ function burstFireworksFullScreen() {
     setTimeout(() => { pageFX.innerHTML = ""; }, 3500);
 }
 
-/* ===== Premium Wheel SVG (reduced white gloss & ring) ===== */
 function buildWheelSVG() {
     const mount = document.getElementById("wheel-svg");
     if (!mount) return;
 
     const size = 1000;
     const r = size / 2;
-    const segAngle = (2 * Math.PI) / SEGMENTS.length;
     const svgNS = "http://www.w3.org/2000/svg";
+    const segAngle = (2 * Math.PI) / SEGMENTS.length;
 
     const svg = document.createElementNS(svgNS, "svg");
     svg.setAttribute("viewBox", `0 0 ${size} ${size}`);
     svg.setAttribute("width", "100%");
     svg.setAttribute("height", "100%");
 
+    /* ======= DEFS ======= */
     const defs = document.createElementNS(svgNS, "defs");
     defs.innerHTML = `
     <radialGradient id="bg-grad" cx="50%" cy="50%" r="60%">
@@ -342,6 +342,7 @@ function buildWheelSVG() {
       <stop offset="100%" stop-color="#0b1429"/>
     </radialGradient>
 
+    <!-- jeweled rim -->
     <linearGradient id="rim-metal" x1="0%" y1="0%" x2="100%" y2="0%">
       <stop offset="0%" stop-color="#b38f26"/>
       <stop offset="20%" stop-color="#ffe07a"/>
@@ -350,36 +351,55 @@ function buildWheelSVG() {
       <stop offset="100%" stop-color="#b38f26"/>
     </linearGradient>
 
+    <!-- gem looks -->
+    <radialGradient id="gem-ruby" cx="35%" cy="35%" r="65%">
+      <stop offset="0%" stop-color="#fff"/>
+      <stop offset="40%" stop-color="#ff7a8a"/>
+      <stop offset="100%" stop-color="#c4002b"/>
+    </radialGradient>
+    <radialGradient id="gem-emerald" cx="35%" cy="35%" r="65%">
+      <stop offset="0%" stop-color="#fff"/>
+      <stop offset="40%" stop-color="#7ef9c2"/>
+      <stop offset="100%" stop-color="#008c5a"/>
+    </radialGradient>
+    <radialGradient id="gem-sapphire" cx="35%" cy="35%" r="65%">
+      <stop offset="0%" stop-color="#fff"/>
+      <stop offset="40%" stop-color="#6fb7ff"/>
+      <stop offset="100%" stop-color="#0047a3"/>
+    </radialGradient>
+
+    <!-- center cap jewel -->
     <radialGradient id="center-jewel" cx="50%" cy="40%" r="60%">
       <stop offset="0%" stop-color="#fff7d1"/>
       <stop offset="45%" stop-color="#ffd54a"/>
       <stop offset="100%" stop-color="#c78900"/>
     </radialGradient>
 
+    <!-- gloss (soft) -->
     <linearGradient id="gloss" x1="0%" y1="0%" x2="0%" y2="100%">
-      <stop offset="0%" stop-color="rgba(255,255,255,.55)"/>
+      <stop offset="0%" stop-color="rgba(255,255,255,.45)"/>
       <stop offset="70%" stop-color="rgba(255,255,255,.05)"/>
       <stop offset="100%" stop-color="rgba(255,255,255,0)"/>
     </linearGradient>
 
+    <!-- filters -->
     <filter id="softGlow" x="-50%" y="-50%" width="200%" height="200%">
-      <feGaussianBlur stdDeviation="6" result="blur"/>
-      <feMerge>
-        <feMergeNode in="blur"/>
-        <feMergeNode in="SourceGraphic"/>
-      </feMerge>
+      <feGaussianBlur stdDeviation="5" result="b"/>
+      <feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge>
     </filter>
 
     <filter id="innerShadow" x="-50%" y="-50%" width="200%" height="200%">
       <feOffset dx="0" dy="2"/>
       <feGaussianBlur stdDeviation="3" result="shadow"/>
       <feComposite in="shadow" in2="SourceAlpha" operator="out"/>
-      <feColorMatrix type="matrix" values="0 0 0 0 0  0 0 0 0 0  0 0 0 0 0  0 0 0 .5 0"/>
+      <feColorMatrix type="matrix"
+        values="0 0 0 0 0  0 0 0 0 0  0 0 0 0 0  0 0 0 .5 0"/>
       <feBlend in="SourceGraphic" mode="normal"/>
     </filter>
   `;
     svg.appendChild(defs);
 
+    /* background disk */
     const disk = document.createElementNS(svgNS, "circle");
     disk.setAttribute("cx", r);
     disk.setAttribute("cy", r);
@@ -388,12 +408,14 @@ function buildWheelSVG() {
     disk.setAttribute("filter", "url(#innerShadow)");
     svg.appendChild(disk);
 
+    /* segment palette */
     const PALETTE = [
         ["#ff4d6d", "#ff8fa3"], ["#ffd166", "#fca311"], ["#22d3ee", "#60a5fa"],
         ["#7ef9c2", "#34d399"], ["#ff9dff", "#a78bfa"], ["#ffb86b", "#ff6b6b"],
         ["#5af7b0", "#00e676"], ["#cbb2ff", "#7c4dff"]
     ];
 
+    /* segments + labels */
     for (let i = 0; i < SEGMENTS.length; i++) {
         const start = i * segAngle - Math.PI / 2;
         const end = start + segAngle;
@@ -422,6 +444,7 @@ function buildWheelSVG() {
         path.setAttribute("filter", "url(#softGlow)");
         svg.appendChild(path);
 
+        /* labels (bigger text – CSS handles size) */
         const mid = start + segAngle / 2;
         const labelRadius = r - 150;
         const tx = r + labelRadius * Math.cos(mid);
@@ -439,37 +462,100 @@ function buildWheelSVG() {
         svg.appendChild(text);
     }
 
-    /* Subtle gloss — reduced opacity to avoid bright white */
+    /* subtle top gloss */
     const gloss = document.createElementNS(svgNS, "ellipse");
-    gloss.setAttribute("id", "wheelGloss");
     gloss.setAttribute("cx", r);
     gloss.setAttribute("cy", r - 180);
     gloss.setAttribute("rx", r - 80);
     gloss.setAttribute("ry", 180);
     gloss.setAttribute("fill", "url(#gloss)");
-    gloss.setAttribute("opacity", "0.12"); // was 0.6
+    gloss.setAttribute("opacity", "0.14");
     svg.appendChild(gloss);
 
+    /* JEWELED RIM */
     const rim = document.createElementNS(svgNS, "circle");
     rim.setAttribute("cx", r);
     rim.setAttribute("cy", r);
     rim.setAttribute("r", r - 12);
     rim.setAttribute("fill", "transparent");
     rim.setAttribute("stroke", "url(#rim-metal)");
-    rim.setAttribute("stroke-width", "14");
+    rim.setAttribute("stroke-width", "16");
     rim.setAttribute("filter", "url(#softGlow)");
     svg.appendChild(rim);
 
-    /* Inner ring — softened to avoid white glare */
+    /* soft inner ring */
     const rim2 = document.createElementNS(svgNS, "circle");
     rim2.setAttribute("cx", r);
     rim2.setAttribute("cy", r);
     rim2.setAttribute("r", r - 4);
     rim2.setAttribute("fill", "transparent");
-    rim2.setAttribute("stroke", "rgba(255,255,255,.08)"); // was .2
+    rim2.setAttribute("stroke", "rgba(255,255,255,.10)");
     rim2.setAttribute("stroke-width", "2");
     svg.appendChild(rim2);
 
+    const gemGroup = document.createElementNS(svgNS, "g");
+    const rayGroup = document.createElementNS(svgNS, "g");
+    rayGroup.setAttribute("class", "ray-group");
+
+    const gemCount = 36;
+    const gemRadius = r - 20;
+    const rayInner = r - 60;
+    const rayOuter = r - 10;
+
+    for (let i = 0; i < gemCount; i++) {
+        const a = (i / gemCount) * Math.PI * 2 - Math.PI / 2;
+        const gx = r + gemRadius * Math.cos(a);
+        const gy = r + gemRadius * Math.sin(a);
+
+        const which = i % 3 === 0 ? "gem-ruby" : (i % 3 === 1 ? "gem-emerald" : "gem-sapphire");
+
+        const gem = document.createElementNS(svgNS, "circle");
+        gem.setAttribute("class", "gem");
+        gem.setAttribute("cx", gx);
+        gem.setAttribute("cy", gy);
+        gem.setAttribute("r", 10);
+        gem.setAttribute("fill", `url(#${which})`);
+        gem.setAttribute("stroke", "rgba(255,255,255,.35)");
+        gem.setAttribute("stroke-width", "1");
+        gemGroup.appendChild(gem);
+
+        if (i % 3 === 0) {
+            const rx1 = r + rayInner * Math.cos(a);
+            const ry1 = r + rayInner * Math.sin(a);
+            const rx2 = r + rayOuter * Math.cos(a);
+            const ry2 = r + rayOuter * Math.sin(a);
+            const ray = document.createElementNS(svgNS, "line");
+            ray.setAttribute("x1", rx1); ray.setAttribute("y1", ry1);
+            ray.setAttribute("x2", rx2); ray.setAttribute("y2", ry2);
+            ray.setAttribute("stroke", "#fff8d6");
+            ray.setAttribute("stroke-width", "2");
+            ray.setAttribute("class", "ray");
+            rayGroup.appendChild(ray);
+        }
+    }
+    svg.appendChild(rayGroup);
+    svg.appendChild(gemGroup);
+
+    const shineRing = document.createElementNS(svgNS, "g");
+    shineRing.setAttribute("id", "shineRing");
+    const stars = 14;
+    const sr = r - 95;
+    for (let i = 0; i < stars; i++) {
+        const a = (i / stars) * Math.PI * 2 - Math.PI / 2;
+        const sx = r + sr * Math.cos(a);
+        const sy = r + sr * Math.sin(a);
+        const s = document.createElementNS(svgNS, "circle");
+        s.setAttribute("cx", sx);
+        s.setAttribute("cy", sy);
+        s.setAttribute("r", 3.2);
+        s.setAttribute("fill", "#fff9c4");
+        s.setAttribute("opacity", "0.9");
+        s.setAttribute("filter", "url(#softGlow)");
+        shineRing.appendChild(s);
+    }
+    svg.appendChild(shineRing);
+
+    /* center cap */
     const cap = document.createElementNS(svgNS, "circle");
     cap.setAttribute("cx", r);
     cap.setAttribute("cy", r);
@@ -480,3 +566,4 @@ function buildWheelSVG() {
 
     mount.appendChild(svg);
 }
+

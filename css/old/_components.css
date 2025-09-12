@@ -1,0 +1,53 @@
+/* Navigation menu */
+.menu {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+}
+
+.menu a {
+    margin: 0 14px;
+    color: #fff;
+    text-decoration: none;
+    font-weight: 700;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.menu .ico {
+    width: 18px;
+    height: 18px;
+    fill: #cfe2ff;
+    transition: fill .2s ease;
+}
+
+.menu a:hover,
+.menu a.active {
+    color: var(--color-accent);
+}
+
+.menu a:hover .ico,
+.menu a.active .ico {
+    fill: var(--color-accent);
+}
+
+/* Mobile Menu */
+.mobile-menu {
+    /* ... all your .mobile-* styles here ... */
+}
+
+/* Cards */
+.game-card,
+.slot-card,
+.live-card,
+.promo-card {
+    position: relative;
+    border-radius: 14px;
+    overflow: hidden;
+    background: #16233b;
+    border: 1px solid #223456;
+    box-shadow: 0 10px 24px rgba(0, 0, 0, .25);
+    transition: transform .25s ease, box-shadow .25s ease;
+}

@@ -1,0 +1,67 @@
+.container {
+    width: 90%;
+    max-width: 1200px;
+    margin: auto;
+}
+
+/* Buttons */
+.btn {
+    padding: 10px 20px;
+    border-radius: 10px;
+    text-decoration: none;
+    font-weight: 800;
+    display: inline-block;
+    transition: transform .15s ease, box-shadow .15s ease, opacity .15s ease;
+}
+
+.btn-primary {
+    background: linear-gradient(180deg, #ffe169, var(--color-accent));
+    color: #000;
+    box-shadow: 0 6px 16px rgba(241, 196, 15, .35);
+}
+
+.btn-outline {
+    border: 2px solid var(--color-accent);
+    color: var(--color-accent);
+    background: transparent;
+}
+
+.btn-small {
+    padding: 6px 10px;
+    font-size: 12px;
+}
+
+/* Accessibility / motion */
+@media (prefers-reduced-motion: reduce) {
+    * {
+        animation: none !important;
+        transition: none !important;
+    }
+}
+
+/* Chips / tags */
+.tag {
+    background: #0b1424;
+    border: 1px solid #2b3b5c;
+    border-radius: 999px;
+    padding: 4px 10px;
+    font-size: 12px;
+    opacity: .95;
+}
+
+.code-chip {
+    background: #0f1b33;
+    border: 1px solid #2b3b5c;
+    border-radius: 10px;
+    padding: 6px 10px;
+    font-weight: 800;
+    letter-spacing: .3px;
+    cursor: pointer;
+    user-select: none;
+}
+
+.code-chip.copied {
+    background: #ffd54a;
+    color: #000;
+    border-color: #ffd54a;
+}

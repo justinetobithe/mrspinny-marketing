@@ -1,0 +1,32 @@
+/* Header */
+.header {
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+    background: var(--color-bg-dark);
+    padding: 12px 0;
+    border-bottom: 1px solid rgba(255, 255, 255, .06);
+}
+
+.nav {
+    display: grid;
+    grid-template-columns: auto 1fr auto;
+    align-items: center;
+    gap: 12px;
+}
+
+/* Footer */
+.site-footer {
+    background: #0e1627;
+    border-top: 1px solid rgba(255, 255, 255, .06);
+    color: #c9d4ea;
+}
+
+.site-footer a {
+    color: #cfe2ff;
+    text-decoration: none;
+}
+
+.site-footer a:hover {
+    color: var(--color-accent);
+}

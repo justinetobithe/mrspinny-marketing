@@ -1,0 +1,41 @@
+.hero {
+    position: relative;
+    min-height: clamp(340px, 48vw, 520px);
+    display: grid;
+    place-items: center;
+    padding: 60px 20px;
+    color: #fff;
+    overflow: hidden;
+    background-position: center;
+    background-size: cover;
+    background-repeat: no-repeat;
+}
+
+.hero::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: inherit;
+    background-position: center;
+    background-size: cover;
+    background-repeat: no-repeat;
+    filter: blur(6px);
+    transform: scale(1.1);
+    opacity: 0.35;
+    z-index: -1;
+}
+
+.hero::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: rgba(8, 16, 33, 0.6);
+    z-index: -1;
+}
+
+.hero-content {
+    position: relative;
+    z-index: 1;
+    text-align: center;
+    max-width: 800px;
+}

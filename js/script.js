@@ -57,7 +57,17 @@ const SEGMENTS = [
 function rand(min, max) { return Math.floor(Math.random() * (max - min + 1)) + min; }
 
 const SPIN_KEY = "mrspinny_wheel_spin";
-const PROMO_URL = "promotions.html"; // change to absolute URL if needed
+const PROMO_URL = "promotions.html";
+
+function todayStr() {
+    const d = new Date();
+    const mm = String(d.getMonth() + 1).padStart(2, "0");
+    const dd = String(d.getDate()).padStart(2, "0");
+    return `${d.getFullYear()}-${mm}-${dd}`;
+}
+function hasSpunToday() {
+    return localStorage.getItem(SPIN_KEY) === todayStr();
+}
 
 const wheelWrap = document.getElementById("wheelWrap");
 const wheelEl = document.querySelector(".wheel");
@@ -79,12 +89,13 @@ initWheel();
 
 function initWheel() {
     if (!spinBtn) return;
-    if (localStorage.getItem(SPIN_KEY) === "1") {
-        spinBtn.textContent = "Already Spun";
+    if (hasSpunToday()) {
+        spinBtn.textContent = "Come back tomorrow";
         spinBtn.disabled = true;
     }
     spinBtn.addEventListener("click", onSpin);
 }
+
 
 function pickSegment(segments = SEGMENTS) {
     const total = segments.reduce((s, seg) => s + seg.weight, 0);
@@ -98,7 +109,8 @@ let sparkTimer = null;
 
 function onSpin() {
     if (isSpinning || !wheelEl || !wheelWrap || !spinBtn) return;
-    if (localStorage.getItem(SPIN_KEY) === "1") { window.location.href = PROMO_URL; return; }
+
+    if (hasSpunToday()) { window.location.href = PROMO_URL; return; }
 
     isSpinning = true;
     spinBtn.disabled = true;
@@ -125,19 +137,18 @@ function onSpin() {
     wheelEl.addEventListener("transitionend", function handler() {
         wheelEl.removeEventListener("transitionend", handler);
 
-        localStorage.setItem(SPIN_KEY, "1");
+        localStorage.setItem(SPIN_KEY, todayStr());
+
         stopSparkles();
         wheelWrap.classList.remove("spinning");
         wheelEl.classList.remove("is-spinning");
 
-        /* Premium celebration */
         burstFireworks();
         burstCoins();
         burstConfetti();
         megaSparkler();
         burstFireworksFullScreen();
 
-        /* settle + little bounce */
         const current = finalDeg % 360;
         wheelEl.style.transition = "none";
         wheelEl.style.transform = `rotate(${current}deg)`;
@@ -147,12 +158,12 @@ function onSpin() {
         wheelEl.classList.add("hit");
         setTimeout(() => wheelEl.classList.remove("hit"), 800);
 
-        /* redirect after the show */
         setTimeout(() => { window.location.href = PROMO_URL; }, 2200);
 
         isSpinning = false;
     }, { once: true });
 }
+
 
 /* ===== FX ===== */
 function burstConfetti() {

@@ -47,12 +47,12 @@
         try {
             spinSnd = new Audio('/assets/sounds/wheel-spin.mp3');
             spinSnd.preload = 'auto';
-            spinSnd.volume = 0.9;
+            spinSnd.volume = 0.9;   // tweak if needed
             spinSnd.loop = false;
 
             winSnd = new Audio('/assets/sounds/magical-coin-win.wav');
             winSnd.preload = 'auto';
-            winSnd.volume = 1.0;
+            winSnd.volume = 1.0;    // tweak if needed
             winSnd.loop = false;
         } catch { /* no-op */ }
     }
@@ -120,21 +120,6 @@
     }
     function idleBGKick() { const t = setTimeout(() => pulseRingsBurst(2, 220), 600); fx.addTimer(t); }
 
-    function currentAngle(el) {
-        const st = getComputedStyle(el).transform;
-        if (st && st !== 'none') {
-            const m = st.match(/matrix\(([-0-9.,\s]+)\)/);
-            if (m) {
-                const p = m[1].split(',').map(v => parseFloat(v.trim()));
-                const a = Math.atan2(p[1], p[0]) * (180 / Math.PI);
-                return (a + 360) % 360;
-            }
-        }
-        const v = el.style.getPropertyValue('--final');
-        if (v && v.endsWith('deg')) return (parseFloat(v) + 360) % 360;
-        return 0;
-    }
-
     async function onSpin() {
         if (isSpinning || !wheelEl || !wheelWrap || !spinBtn) return;
         const allowed = await checkSpinAllowed();
@@ -146,47 +131,29 @@
         if (claimBtn) { claimBtn.hidden = true; claimBtn.classList.remove('show'); }
         wheelWrap.classList.add('spinning');
         wheelEl.classList.add('is-spinning');
-
-        wheelEl.style.willChange = 'transform';
-
-        const isMobile = window.matchMedia?.('(max-width: 640px)').matches;
-        const durationMs = isMobile ? 850 : 1200;
-        wheelEl.style.transitionProperty = 'transform';
-        wheelEl.style.transitionDuration = durationMs + 'ms';
-        wheelEl.style.transitionTimingFunction = 'cubic-bezier(.17,.67,.3,1)';
-        wheelEl.style.transitionDelay = '0ms';
-
         pulseRingsBurst(4, 130);
+
+        // 🔊 start spin sound on user gesture (click) — passes autoplay policies
         playSpinSound();
 
         const chosen = pickSegment();
         const segmentCount = SEGMENTS.length;
         const index = SEGMENTS.findIndex((s) => s.label === chosen.label);
         const segmentAngle = 360 / segmentCount;
-        const from = currentAngle(wheelEl);
-
-        const baseTurns = isMobile ? 5 : 6;
+        const baseTurns = 6;
         const base = 360 * baseTurns;
-
         const offset = segmentAngle * index + segmentAngle / 2;
         const jitter = rand(-6, 6);
-        const finalDeg = from + base + (360 - offset) + jitter;
-
-        requestAnimationFrame(() => { wheelEl.style.transform = `translateZ(0) rotate(${finalDeg}deg)`; });
+        const finalDeg = base + (360 - offset) + jitter;
+        requestAnimationFrame(() => { wheelEl.style.transform = `rotate(${finalDeg}deg)`; });
 
         const handler = () => {
             wheelEl.removeEventListener('transitionend', handler);
-            wheelEl.style.willChange = '';
-            wheelEl.style.transitionProperty = '';
-            wheelEl.style.transitionDuration = '';
-            wheelEl.style.transitionTimingFunction = '';
-            wheelEl.style.transitionDelay = '';
             onSpinEnd(finalDeg, chosen);
             isSpinning = false;
         };
         on(wheelEl, 'transitionend', handler, { once: true });
     }
-
 
     function onSpinEnd(finalDeg, chosen) {
         markSpun();
@@ -565,9 +532,11 @@
         wheelEl = document.querySelector('.wheel');
         spinBtn = document.getElementById('spinBtn');
         claimBtn = document.getElementById('claimBtn');
+        // confettiLayer = document.getElementById('confettiLayer');
         coinLayer = document.getElementById('coinLayer');
         fireworkLayer = document.getElementById('fireworkLayer');
 
+        // 🔊 prepare audio
         setupSounds();
 
         injectHeatFilter();

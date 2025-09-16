@@ -935,7 +935,6 @@ wheel-lights {
   .wheel-pointer {
     border-left-width: 12px;
     border-right-width: 12px;
-    border-bottom-width: 18px;
     top: -10px;
   }
 }

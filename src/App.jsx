@@ -24,14 +24,18 @@ export default function App() {
     <>
       <Header />
       <Routes>
-        <Route path="/" element={
-          <CloakRoute
-            landing={<Landing />}
-            site={<Home />}
-            blocked={<Blocked />}
-            showDebug
-          />
-        } />
+        <Route
+          path="/"
+          element={
+            <CloakRoute
+              landing={<Landing />}
+              site={<Home />}
+              blocked={<Blocked />}
+              blockedCountries={["US", "IR"]}
+              showDebug
+            />
+          }
+        />
         <Route path="/landing" element={<Landing />} />
         <Route path="/slots" element={<Slots />} />
         <Route path="/live-casino" element={<LiveCasino />} />

@@ -15,17 +15,12 @@
     let inited = false;
     let navToggle, mobileMenu, mobilePanel, backdrop, closeBtn;
     let wheelWrap, wheelEl, spinBtn, claimBtn, confettiLayer, coinLayer, fireworkLayer, pageFX;
-
-    // 🔊 sound handles
     let spinSnd, winSnd;
-
     let isSpinning = false;
     const listeners = [];
     const fx = { timers: new Set(), addTimer(id) { this.timers.add(id) }, clearTimers() { this.timers.forEach(clearTimeout); this.timers.clear() } };
-
     const on = (el, type, fn, opt) => { if (!el) return; el.addEventListener(type, fn, opt); listeners.push([el, type, fn, opt]); };
     const offAll = () => { listeners.forEach(([el, t, f, o]) => { try { el.removeEventListener(t, f, o) } catch { } }); listeners.length = 0; };
-
     const reduceMotion = () => window.matchMedia?.('(prefers-reduced-motion: reduce)').matches;
     const rand = (min, max) => Math.floor(Math.random() * (max - min + 1)) + min;
 
@@ -42,32 +37,21 @@
     const checkSpinAllowed = async () => true;
     const markSpun = () => { };
 
-    // 🔊 sounds
     function setupSounds() {
         try {
             spinSnd = new Audio('/assets/sounds/wheel-spin.mp3');
             spinSnd.preload = 'auto';
             spinSnd.volume = 0.9;
             spinSnd.loop = false;
-
             winSnd = new Audio('/assets/sounds/magical-coin-win.wav');
             winSnd.preload = 'auto';
             winSnd.volume = 1.0;
             winSnd.loop = false;
-        } catch { /* no-op */ }
+        } catch { }
     }
-    function playSpinSound() {
-        if (!spinSnd) return;
-        try { spinSnd.currentTime = 0; spinSnd.play().catch(() => { }); } catch { }
-    }
-    function stopSpinSound() {
-        if (!spinSnd) return;
-        try { spinSnd.pause(); spinSnd.currentTime = 0; } catch { }
-    }
-    function playWinSound() {
-        if (!winSnd) return;
-        try { winSnd.currentTime = 0; winSnd.play().catch(() => { }); } catch { }
-    }
+    function playSpinSound() { if (!spinSnd) return; try { spinSnd.currentTime = 0; spinSnd.play().catch(() => { }); } catch { } }
+    function stopSpinSound() { if (!spinSnd) return; try { spinSnd.pause(); spinSnd.currentTime = 0; } catch { } }
+    function playWinSound() { if (!winSnd) return; try { winSnd.currentTime = 0; winSnd.play().catch(() => { }); } catch { } }
 
     function isMenuOpen() { return !!mobileMenu && !mobileMenu.hidden && mobileMenu.classList.contains('open'); }
     function openMenu() {
@@ -100,8 +84,6 @@
         document.querySelectorAll('.flame-coin,.coin,.spark,.fw,.sparkler,.sparkler-xl,.fw-xl,.shockwave').forEach(n => n.remove());
         wheelWrap?.classList.remove('do-shake', 'spinning');
         wheelEl?.classList.remove('is-spinning', 'hit');
-
-        // 🔊 ensure no lingering sound
         stopSpinSound();
     }
 
@@ -120,6 +102,21 @@
     }
     function idleBGKick() { const t = setTimeout(() => pulseRingsBurst(2, 220), 600); fx.addTimer(t); }
 
+    function currentAngle(el) {
+        const st = getComputedStyle(el).transform;
+        if (st && st !== 'none') {
+            const m = st.match(/matrix\(([-0-9.,\s]+)\)/);
+            if (m) {
+                const p = m[1].split(',').map(v => parseFloat(v.trim()));
+                const a = Math.atan2(p[1], p[0]) * (180 / Math.PI);
+                return (a + 360) % 360;
+            }
+        }
+        const v = el.style.getPropertyValue('--final');
+        if (v && v.endsWith('deg')) return (parseFloat(v) + 360) % 360;
+        return 0;
+    }
+
     async function onSpin() {
         if (isSpinning || !wheelEl || !wheelWrap || !spinBtn) return;
         const allowed = await checkSpinAllowed();
@@ -132,24 +129,30 @@
         wheelWrap.classList.add('spinning');
         wheelEl.classList.add('is-spinning');
         pulseRingsBurst(4, 130);
-
-        // 🔊 start spin sound on user gesture (click) — passes autoplay policies
         playSpinSound();
 
         const chosen = pickSegment();
         const segmentCount = SEGMENTS.length;
         const index = SEGMENTS.findIndex((s) => s.label === chosen.label);
         const segmentAngle = 360 / segmentCount;
-        const baseTurns = 6;
-        const base = 360 * baseTurns;
+        const baseTurns = reduceMotion() ? 4 : 8;
         const offset = segmentAngle * index + segmentAngle / 2;
-        const jitter = rand(-6, 6);
-        const finalDeg = base + (360 - offset) + jitter;
-        requestAnimationFrame(() => { wheelEl.style.transform = `rotate(${finalDeg}deg)`; });
+        const jitter = rand(-3, 3);
+        const from = currentAngle(wheelEl);
+        const to = from + baseTurns * 360 + (360 - offset) + jitter;
+
+        wheelEl.style.transition = 'none';
+        wheelEl.style.willChange = 'transform';
+        wheelEl.style.transform = `rotate(${from}deg)`;
+        void wheelEl.offsetHeight;
+        const dur = reduceMotion() ? 3600 : 5600;
+        wheelEl.style.transition = `transform ${dur}ms cubic-bezier(0.08, 0.72, 0.0, 1)`;
+        requestAnimationFrame(() => { wheelEl.style.transform = `rotate(${to}deg)`; });
 
         const handler = () => {
             wheelEl.removeEventListener('transitionend', handler);
-            onSpinEnd(finalDeg, chosen);
+            wheelEl.style.willChange = '';
+            onSpinEnd(to, chosen, dur);
             isSpinning = false;
         };
         on(wheelEl, 'transitionend', handler, { once: true });
@@ -168,11 +171,8 @@
         shockwave(2);
         burstFlamingCoins({ count: reduceMotion() ? 24 : 70, embers: true, trails: true });
         burstFireworks();
-        // burstConfetti();
         burstFireworksFullScreen();
         pulseRingsBurst(3, 160);
-
-        // 🔊 stop spin & play win jingle
         stopSpinSound();
         playWinSound();
 
@@ -378,15 +378,12 @@
         const disk = document.createElementNS(svgNS, 'circle'); disk.setAttribute('cx', r); disk.setAttribute('cy', r); disk.setAttribute('r', r - 18); disk.setAttribute('fill', 'url(#bg-grad)'); disk.setAttribute('filter', 'url(#innerShadow)'); svg.appendChild(disk);
 
         const PALETTE = [['#b81507', '#b81507'], ['#ff9c00', '#ff9c00']];
-
         const measureWidth = (text, fontSize = 26) => {
             const t = document.createElementNS(svgNS, 'text'); t.setAttribute('visibility', 'hidden'); t.setAttribute('font-size', fontSize);
             t.setAttribute('font-family', 'Arial, sans-serif'); t.setAttribute('font-weight', '900'); t.textContent = text; svg.appendChild(t);
             const w = t.getBBox().width; t.remove(); return w;
         };
-
         const MIN_FONT = 18;
-
         const wrapToLines = (label, font, arcLen, maxLines = 3) => {
             if (label.includes('+')) {
                 const [a, b] = label.split('+');
@@ -422,7 +419,7 @@
         const addCurvedLabel = (segIndex, label, midAngleRad, baseFont = 36, grand = false) => {
             const wheelPx = (wheelWrap?.getBoundingClientRect?.().width) || 520;
             let font = Math.max(MIN_FONT, Math.round(baseFont * Math.min(1, wheelPx / 520)));
-            const spread = segAngle * 0.74;
+            const spread = (2 * Math.PI) / SEGMENTS.length * 0.74;
             const arcLen = (r - 156) * spread;
             let lines = wrapToLines(label, font, arcLen, grand ? 3 : 2);
             const fits = () => Math.max(...lines.map(l => measureWidth(l, font))) <= arcLen;
@@ -433,7 +430,7 @@
             const startOffset = -((n - 1) * gap) / 2;
             const radii = Array.from({ length: n }, (_, i) => baseRadius + startOffset + i * gap);
             const ids = lines.map((_, i) => {
-                const radius = radii[i]; const start = midAngleRad - spread / 2; const end = start + spread;
+                const radius = radii[i]; const spread2 = (2 * Math.PI) / SEGMENTS.length * 0.74; const start = midAngleRad - spread2 / 2; const end = start + spread2;
                 const ax1 = r + radius * Math.cos(start); const ay1 = r + radius * Math.sin(start);
                 const ax2 = r + radius * Math.cos(end); const ay2 = r + radius * Math.sin(end);
                 const id = `arc-${segIndex}-${i}`;
@@ -528,27 +525,20 @@
         wheelEl = document.querySelector('.wheel');
         spinBtn = document.getElementById('spinBtn');
         claimBtn = document.getElementById('claimBtn');
-        // confettiLayer = document.getElementById('confettiLayer');
         coinLayer = document.getElementById('coinLayer');
         fireworkLayer = document.getElementById('fireworkLayer');
-
-        // 🔊 prepare audio
         setupSounds();
-
         injectHeatFilter();
         injectHeatStyles();
         ensureFlameRing();
         ensureBulbsLayer();
         ensurePageFX();
         buildWheelSVG();
-
         if (wheelWrap) wheelWrap.style.marginBottom = '64px';
         if (claimBtn) { claimBtn.style.bottom = 'auto'; claimBtn.style.top = 'calc(100% + 18px)'; }
-
         const resizeFn = () => sizeAndCenterFlameRing();
         sizeAndCenterFlameRing();
         on(window, 'resize', resizeFn);
-
         initWheel();
     }
 
@@ -566,7 +556,6 @@
         const openBtn = document.getElementById('openWelcome');
         const openModal = () => { if (!modal) return; modal.hidden = false; requestAnimationFrame(() => modal.classList.add('open')); document.body.classList.add('no-scroll'); };
         const closeModal = () => { if (!modal) return; modal.classList.remove('open'); document.body.classList.remove('no-scroll'); setTimeout(() => (modal.hidden = true), 180); endCelebration(); };
-
         if (modal && !localStorage.getItem(MODAL_KEY)) {
             const t = setTimeout(openModal, 500); fx.addTimer(t);
             try { localStorage.setItem(MODAL_KEY, '1'); } catch { }
@@ -588,11 +577,8 @@
         fx.clearTimers();
         offAll();
         endCelebration();
-
-        // 🔊 cleanup audio
         try { spinSnd && (spinSnd.pause(), spinSnd.src = '', spinSnd = null); } catch { }
         try { winSnd && (winSnd.pause(), winSnd.src = '', winSnd = null); } catch { }
-
         inited = false;
     };
-})(); 
+})();

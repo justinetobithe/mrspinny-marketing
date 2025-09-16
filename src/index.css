@@ -1,0 +1,23 @@
+@import "tailwindcss";
+
+:root {
+  color-scheme: dark;
+  --bp-md: 960px;
+  --bp-sm: 640px;
+  --bp-xs: 420px;
+
+  --color-bg: #0b1424;
+  --color-bg-dark: #081021;
+  --color-bg-footer: #0e1627;
+  --color-accent: #f1c40f;
+  --color-text: #fff;
+  --color-muted: #cfe2ff;
+  --color-border: rgba(255, 255, 255, 0.06);
+  --color-border-2: rgba(255, 255, 255, 0.12);
+
+  --pointer-tilt: 0deg;
+}
+
+body {
+  @apply bg-slate-900 text-slate-100;
+}

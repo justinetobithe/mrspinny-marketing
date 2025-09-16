@@ -1,0 +1,92 @@
+:where(.wheel-wrap) .wheel {
+  background: radial-gradient(
+    ellipse at center,
+    #3a0006 0%,
+    #1c0003 70%
+  ) !important;
+}
+
+:where(.wheel-wrap) .bg-aura {
+  background: conic-gradient(
+    from 0deg,
+    rgba(255, 80, 0, 0.22),
+    rgba(255, 0, 0, 0.22),
+    rgba(255, 120, 0, 0.22),
+    rgba(255, 0, 0, 0.22),
+    rgba(255, 80, 0, 0.22)
+  ) !important;
+  filter: blur(18px) saturate(1.05);
+}
+:where(.wheel-wrap) .bg-aurora {
+  --c1: rgba(255, 120, 0, 0.2);
+  --c2: rgba(255, 0, 0, 0.18);
+  --c3: rgba(255, 170, 0, 0.16);
+  background: radial-gradient(40% 28% at 65% 35%, var(--c1) 0 60%, #0000 62%),
+    radial-gradient(36% 26% at 32% 65%, var(--c2) 0 60%, #0000 62%),
+    radial-gradient(34% 24% at 70% 72%, var(--c3) 0 60%, #0000 62%) !important;
+}
+:where(.wheel-wrap) .wheel-lights {
+  background: radial-gradient(circle at center, transparent 66%, #0000 66%),
+    conic-gradient(
+      from 0deg,
+      #fff7d6 0 8deg,
+      #e8b400 8deg 16deg,
+      transparent 16deg 20deg,
+      #fff7d6 20deg 28deg,
+      #e8b400 28deg 36deg,
+      transparent 36deg 40deg,
+      #fff7d6 40deg 48deg,
+      #e8b400 48deg 56deg,
+      transparent 56deg 60deg,
+      #fff7d6 60deg 68deg,
+      #e8b400 68deg 76deg,
+      transparent 76deg 80deg,
+      #fff7d6 80deg 88deg,
+      #e8b400 88deg 96deg,
+      transparent 96deg 100deg,
+      #fff7d6 100deg 108deg,
+      #e8b400 108deg 116deg,
+      transparent 116deg 120deg,
+      #fff7d6 120deg 128deg,
+      #e8b400 128deg 136deg,
+      transparent 136deg 140deg,
+      #fff7d6 140deg 148deg,
+      #e8b400 148deg 156deg,
+      transparent 156deg 160deg,
+      #fff7d6 160deg 168deg,
+      #e8b400 168deg 176deg,
+      transparent 176deg 180deg,
+      #fff7d6 180deg 188deg,
+      #e8b400 188deg 196deg,
+      transparent 196deg 200deg,
+      #fff7d6 200deg 208deg,
+      #e8b400 208deg 216deg,
+      transparent 216deg 220deg,
+      #fff7d6 220deg 228deg,
+      #e8b400 228deg 236deg,
+      transparent 236deg 240deg,
+      #fff7d6 240deg 248deg,
+      #e8b400 248deg 256deg,
+      transparent 256deg 260deg,
+      #fff7d6 260deg 268deg,
+      #e8b400 268deg 276deg,
+      transparent 276deg 280deg,
+      #fff7d6 280deg 288deg,
+      #e8b400 288deg 296deg,
+      transparent 296deg 300deg,
+      #fff7d6 300deg 308deg,
+      #e8b400 308deg 316deg,
+      transparent 316deg 320deg,
+      #fff7d6 320deg 328deg,
+      #e8b400 328deg 336deg,
+      transparent 336deg 340deg,
+      #fff7d6 340deg 348deg,
+      #e8b400 348deg 356deg,
+      transparent 356deg 360deg
+    ) !important;
+  filter: drop-shadow(0 0 14px rgba(255, 170, 0, 0.45));
+}
+
+:where(.wheel) svg .seg-label {
+  stroke: rgba(40, 0, 0, 0.7) !important;
+}

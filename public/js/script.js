@@ -14,12 +14,15 @@
 
     let inited = false;
     let navToggle, mobileMenu, mobilePanel, backdrop, closeBtn;
-    let wheelWrap, wheelEl, spinBtn, claimBtn, fireworkLayer, pageFX;
+    let wheelWrap, wheelEl, spinBtn, claimBtn, confettiLayer, coinLayer, fireworkLayer, pageFX;
+
+    // 🔊 sound handles
     let spinSnd, winSnd;
 
     let isSpinning = false;
     const listeners = [];
     const fx = { timers: new Set(), addTimer(id) { this.timers.add(id) }, clearTimers() { this.timers.forEach(clearTimeout); this.timers.clear() } };
+
     const on = (el, type, fn, opt) => { if (!el) return; el.addEventListener(type, fn, opt); listeners.push([el, type, fn, opt]); };
     const offAll = () => { listeners.forEach(([el, t, f, o]) => { try { el.removeEventListener(t, f, o) } catch { } }); listeners.length = 0; };
 
@@ -39,15 +42,32 @@
     const checkSpinAllowed = async () => true;
     const markSpun = () => { };
 
+    // 🔊 sounds
     function setupSounds() {
         try {
-            spinSnd = new Audio('/assets/sounds/wheel-spin.mp3'); spinSnd.preload = 'auto'; spinSnd.volume = 0.9; spinSnd.loop = false;
-            winSnd = new Audio('/assets/sounds/magical-coin-win.wav'); winSnd.preload = 'auto'; winSnd.volume = 1.0; winSnd.loop = false;
-        } catch { }
+            spinSnd = new Audio('/assets/sounds/wheel-spin.mp3');
+            spinSnd.preload = 'auto';
+            spinSnd.volume = 0.9;
+            spinSnd.loop = false;
+
+            winSnd = new Audio('/assets/sounds/magical-coin-win.wav');
+            winSnd.preload = 'auto';
+            winSnd.volume = 1.0;
+            winSnd.loop = false;
+        } catch { /* no-op */ }
     }
-    function playSpinSound() { if (!spinSnd) return; try { spinSnd.currentTime = 0; spinSnd.play().catch(() => { }); } catch { } }
-    function stopSpinSound() { if (!spinSnd) return; try { spinSnd.pause(); spinSnd.currentTime = 0; } catch { } }
-    function playWinSound() { if (!winSnd) return; try { winSnd.currentTime = 0; winSnd.play().catch(() => { }); } catch { } }
+    function playSpinSound() {
+        if (!spinSnd) return;
+        try { spinSnd.currentTime = 0; spinSnd.play().catch(() => { }); } catch { }
+    }
+    function stopSpinSound() {
+        if (!spinSnd) return;
+        try { spinSnd.pause(); spinSnd.currentTime = 0; } catch { }
+    }
+    function playWinSound() {
+        if (!winSnd) return;
+        try { winSnd.currentTime = 0; winSnd.play().catch(() => { }); } catch { }
+    }
 
     function isMenuOpen() { return !!mobileMenu && !mobileMenu.hidden && mobileMenu.classList.contains('open'); }
     function openMenu() {
@@ -70,14 +90,18 @@
     function endCelebration() {
         fx.clearTimers();
         try {
-            if (fireworkLayer) fireworkLayer.textContent = '';
-            if (pageFX) pageFX.textContent = '';
+            if (confettiLayer) confettiLayer.innerHTML = '';
+            if (coinLayer) coinLayer.innerHTML = '';
+            if (fireworkLayer) fireworkLayer.innerHTML = '';
+            if (pageFX) pageFX.innerHTML = '';
             const ring = document.getElementById('flameRing');
-            if (ring) { ring.classList.remove('heatwave'); ring.textContent = ''; }
+            if (ring) { ring.classList.remove('heatwave'); ring.innerHTML = ''; }
         } catch { }
-        document.querySelectorAll('.fw,.fw-xl,.shockwave').forEach(n => n.remove());
+        document.querySelectorAll('.flame-coin,.coin,.spark,.fw,.sparkler,.sparkler-xl,.fw-xl,.shockwave').forEach(n => n.remove());
         wheelWrap?.classList.remove('do-shake', 'spinning');
         wheelEl?.classList.remove('is-spinning', 'hit');
+
+        // 🔊 ensure no lingering sound
         stopSpinSound();
     }
 
@@ -122,7 +146,16 @@
         if (claimBtn) { claimBtn.hidden = true; claimBtn.classList.remove('show'); }
         wheelWrap.classList.add('spinning');
         wheelEl.classList.add('is-spinning');
+
         wheelEl.style.willChange = 'transform';
+
+        const isMobile = window.matchMedia?.('(max-width: 640px)').matches;
+        const durationMs = isMobile ? 850 : 1200;
+        wheelEl.style.transitionProperty = 'transform';
+        wheelEl.style.transitionDuration = durationMs + 'ms';
+        wheelEl.style.transitionTimingFunction = 'cubic-bezier(.17,.67,.3,1)';
+        wheelEl.style.transitionDelay = '0ms';
+
         pulseRingsBurst(4, 130);
         playSpinSound();
 
@@ -131,8 +164,10 @@
         const index = SEGMENTS.findIndex((s) => s.label === chosen.label);
         const segmentAngle = 360 / segmentCount;
         const from = currentAngle(wheelEl);
-        const baseTurns = 6;
+
+        const baseTurns = isMobile ? 5 : 6;
         const base = 360 * baseTurns;
+
         const offset = segmentAngle * index + segmentAngle / 2;
         const jitter = rand(-6, 6);
         const finalDeg = from + base + (360 - offset) + jitter;
@@ -142,11 +177,16 @@
         const handler = () => {
             wheelEl.removeEventListener('transitionend', handler);
             wheelEl.style.willChange = '';
+            wheelEl.style.transitionProperty = '';
+            wheelEl.style.transitionDuration = '';
+            wheelEl.style.transitionTimingFunction = '';
+            wheelEl.style.transitionDelay = '';
             onSpinEnd(finalDeg, chosen);
             isSpinning = false;
         };
         on(wheelEl, 'transitionend', handler, { once: true });
     }
+
 
     function onSpinEnd(finalDeg, chosen) {
         markSpun();
@@ -159,15 +199,19 @@
         igniteFlameRing(reduceMotion() ? 1600 : 2600, 32);
         heatWave(reduceMotion() ? 1200 : 2000);
         shockwave(2);
+        burstFlamingCoins({ count: reduceMotion() ? 24 : 70, embers: true, trails: true });
         burstFireworks();
+        // burstConfetti();
         burstFireworksFullScreen();
         pulseRingsBurst(3, 160);
+
+        // 🔊 stop spin & play win jingle
         stopSpinSound();
         playWinSound();
 
         const current = finalDeg % 360;
         wheelEl.style.transition = 'none';
-        wheelEl.style.transform = `translateZ(0) rotate(${current}deg)`;
+        wheelEl.style.transform = `rotate(${current}deg)`;
         wheelEl.style.setProperty('--final', `${current}deg`);
         void wheelEl.offsetHeight;
         wheelEl.style.transition = '';
@@ -225,7 +269,7 @@
     }
     function igniteFlameRing(duration = 2800, jets = 40) {
         const ring = ensureFlameRing(); if (!ring) return;
-        ring.textContent = '';
+        ring.innerHTML = '';
         const frag = document.createDocumentFragment();
         for (let i = 0; i < jets; i++) {
             const jet = document.createElement('div');
@@ -238,15 +282,11 @@
             frag.appendChild(jet);
         }
         ring.appendChild(frag);
-        const tid = setTimeout(() => { ring.textContent = ''; }, duration); fx.addTimer(tid);
+        const tid = setTimeout(() => { ring.innerHTML = ''; }, duration); fx.addTimer(tid);
     }
-    function heatWave(duration = 1800) {
-        const ring = document.getElementById('flameRing'); if (!ring) return;
-        ring.classList.add('heatwave');
-        const tid = setTimeout(() => ring.classList.remove('heatwave'), duration); fx.addTimer(tid);
-    }
+    function heatWave(duration = 1800) { const ring = document.getElementById('flameRing'); if (!ring) return; ring.classList.add('heatwave'); const tid = setTimeout(() => ring.classList.remove('heatwave'), duration); fx.addTimer(tid); }
     function shockwave(count = 1) {
-        const container = fireworkLayer || pageFX; if (!container) return;
+        const container = coinLayer || fireworkLayer || pageFX;
         const n = Math.max(1, count);
         for (let i = 0; i < n; i++) {
             const sw = document.createElement('div');
@@ -261,13 +301,13 @@
         el.classList.add('do-shake');
         const tid = setTimeout(() => el.classList.remove('do-shake'), duration + 60); fx.addTimer(tid);
     }
-
     function burstFireworks() {
         if (!fireworkLayer || !wheelEl) return;
         const { x: cx, y: cy } = centerOf(wheelEl, fireworkLayer);
-        const bursts = reduceMotion() ? 3 : 5;
+        const COLORS = ['#ffd54a', '#f59e0b', '#ffcc33', '#b71c1c', '#8e0e0e', '#fff1a8'];
+        const totalBursts = reduceMotion() ? 3 : 5;
         const frag = document.createDocumentFragment();
-        for (let b = 0; b < bursts; b++) {
+        for (let b = 0; b < totalBursts; b++) {
             const particles = 34 + Math.floor(Math.random() * 10);
             const spread = 170 + Math.random() * 70;
             for (let i = 0; i < particles; i++) {
@@ -277,6 +317,7 @@
                 const fw = document.createElement('div'); fw.className = 'fw';
                 fw.style.left = cx + 'px'; fw.style.top = cy + 'px';
                 fw.style.setProperty('--x', `${x}px`); fw.style.setProperty('--y', `${y}px`);
+                fw.style.setProperty('--c', COLORS[(i + b) % COLORS.length]);
                 fw.style.animationDelay = `${b * 120}ms`;
                 frag.appendChild(fw);
                 const tid = setTimeout(() => fw.remove(), 1800 + b * 120); fx.addTimer(tid);
@@ -303,16 +344,58 @@
     function burstFireworksFullScreen() {
         const W = window.innerWidth; const H = window.innerHeight;
         if (!pageFX) return;
-        pageFX.textContent = '';
+        pageFX.innerHTML = '';
         if (reduceMotion()) return;
         const centers = [[W * 0.2, H * 0.35], [W * 0.5, H * 0.25], [W * 0.8, H * 0.42], [W * 0.3, H * 0.72], [W * 0.7, H * 0.76]];
         centers.forEach((c, idx) => { const [cx, cy] = c; const delay = idx * 160; fireworkBurstAt(pageFX, cx, cy, 280 + Math.random() * 90, 48 + Math.floor(Math.random() * 12), delay); });
-        const tid = setTimeout(() => { pageFX.textContent = ''; }, 3600); fx.addTimer(tid);
+        const tid = setTimeout(() => { pageFX.innerHTML = ''; }, 3600); fx.addTimer(tid);
+    }
+    function burstFlamingCoins({ count = 80, embers = true, trails = true } = {}) {
+        if (!coinLayer || !wheelEl) return;
+        const { x: cx, y: cy } = centerOf(wheelEl, coinLayer);
+        const frag = document.createDocumentFragment();
+        for (let i = 0; i < count; i++) {
+            const base = -Math.PI / 2; const spread = Math.PI * 0.9;
+            const theta = base + (Math.random() - 0.5) * spread;
+            const power = 170 + Math.random() * 220;
+            const dx = Math.cos(theta) * power; const dy = Math.sin(theta) * power;
+            const angleDeg = (Math.atan2(dy, dx) * 180) / Math.PI;
+            const wrap = document.createElement('div');
+            wrap.className = 'flame-coin'; wrap.style.left = cx - 8 + 'px'; wrap.style.top = cy - 8 + 'px';
+            wrap.style.setProperty('--x', dx + 'px'); wrap.style.setProperty('--y', dy + 'px'); wrap.style.setProperty('--angle', angleDeg + 'deg');
+            wrap.style.transformOrigin = 'center'; wrap.style.animationDuration = `${900 + Math.random() * 520}ms`; wrap.style.filter = `blur(${Math.random() * 0.6}px)`;
+            const flame = document.createElement('div'); flame.className = 'flame';
+            const coin = document.createElement('div'); coin.className = 'coin';
+            wrap.appendChild(flame); wrap.appendChild(coin);
+            if (trails) { const trail = document.createElement('div'); trail.className = 'coin-trail'; trail.style.setProperty('--angle', angleDeg + 'deg'); trail.style.animationDuration = `${700 + Math.random() * 420}ms`; wrap.appendChild(trail); }
+            frag.appendChild(wrap);
+            if (embers) {
+                const emberCount = 2 + Math.floor(Math.random() * 3);
+                for (let e = 0; e < emberCount; e++) {
+                    const sp = document.createElement('div'); sp.className = 'spark'; sp.style.left = cx + 'px'; sp.style.top = cy + 'px';
+                    const jitter = 60 + Math.random() * 110;
+                    const ex = Math.cos(theta + (Math.random() * 0.25 - 0.125)) * jitter;
+                    const ey = Math.sin(theta + (Math.random() * 0.25 - 0.125)) * jitter;
+                    sp.style.setProperty('--sx', ex + 'px'); sp.style.setProperty('--sy', ey + 'px'); sp.style.animationDuration = `${520 + Math.random() * 480}ms`;
+                    frag.appendChild(sp);
+                    const t2 = setTimeout(() => sp.remove(), 1100); fx.addTimer(t2);
+                }
+            }
+            const t1 = setTimeout(() => wrap.remove(), 1600); fx.addTimer(t1);
+        }
+        coinLayer.appendChild(frag);
+    }
+    function ensureBulbsLayer() {
+        const wrap = wheelWrap; if (!wrap) return;
+        let bulbs = wrap.querySelector('.wheel-lights'); if (bulbs) return;
+        bulbs = document.createElement('div'); bulbs.className = 'wheel-lights';
+        const flame = document.getElementById('flameRing') || wrap.querySelector('#flameRing');
+        if (flame) wrap.insertBefore(bulbs, flame); else wrap.insertBefore(bulbs, wrap.querySelector('.wheel-pointer') || wrap.firstChild);
     }
 
     function buildWheelSVG() {
         const mount = document.getElementById('wheel-svg'); if (!mount) return;
-        mount.textContent = '';
+        mount.innerHTML = '';
         const size = 1000; const r = size / 2; const svgNS = 'http://www.w3.org/2000/svg'; const segAngle = (2 * Math.PI) / SEGMENTS.length;
         const svg = document.createElementNS(svgNS, 'svg'); svg.setAttribute('viewBox', `0 0 ${size} ${size}`); svg.setAttribute('width', '100%'); svg.setAttribute('height', '100%');
         const defs = document.createElementNS(svgNS, 'defs');
@@ -462,8 +545,11 @@
     }
 
     function bindMenu() {
-        navToggle = document.getElementById('navToggle');
         mobileMenu = document.getElementById('mobileMenu');
+        if (mobileMenu?.dataset.reactMenu === '1') {
+            return;
+        }
+        navToggle = document.getElementById('navToggle');
         mobilePanel = document.querySelector('#mobileMenu .mobile-menu-panel');
         backdrop = mobileMenu ? mobileMenu.querySelector('.mobile-menu-backdrop') : null;
         closeBtn = document.getElementById('mobileClose');
@@ -473,28 +559,28 @@
         bindGlobalKeys();
     }
 
+
     function bindWheel() {
         wheelWrap = document.getElementById('wheelWrap');
         wheelEl = document.querySelector('.wheel');
         spinBtn = document.getElementById('spinBtn');
         claimBtn = document.getElementById('claimBtn');
+        coinLayer = document.getElementById('coinLayer');
         fireworkLayer = document.getElementById('fireworkLayer');
 
         setupSounds();
+
         injectHeatFilter();
         injectHeatStyles();
         ensureFlameRing();
+        ensureBulbsLayer();
         ensurePageFX();
         buildWheelSVG();
 
         if (wheelWrap) wheelWrap.style.marginBottom = '64px';
         if (claimBtn) { claimBtn.style.bottom = 'auto'; claimBtn.style.top = 'calc(100% + 18px)'; }
 
-        let resizeRAF;
-        const resizeFn = () => {
-            if (resizeRAF) cancelAnimationFrame(resizeRAF);
-            resizeRAF = requestAnimationFrame(sizeAndCenterFlameRing);
-        };
+        const resizeFn = () => sizeAndCenterFlameRing();
         sizeAndCenterFlameRing();
         on(window, 'resize', resizeFn);
 
@@ -537,8 +623,10 @@
         fx.clearTimers();
         offAll();
         endCelebration();
+        document.body.classList.remove('no-scroll');
         try { spinSnd && (spinSnd.pause(), spinSnd.src = '', spinSnd = null); } catch { }
         try { winSnd && (winSnd.pause(), winSnd.src = '', winSnd = null); } catch { }
         inited = false;
     };
-})();
+
+})(); 

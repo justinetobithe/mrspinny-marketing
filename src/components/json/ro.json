@@ -1,0 +1,61 @@
+{
+    "header": {
+        "aria": {
+            "brandHome": "Pagina de pornire MrSpinny",
+            "openMenu": "Deschide meniul",
+            "closeMenu": "Închide meniul",
+            "mainMenu": "Meniu principal"
+        },
+        "nav": {
+            "home": "Acasă",
+            "slots": "Sloturi",
+            "liveCasino": "Cazinou Live",
+            "banking": "Plăți",
+            "contact": "Contact"
+        },
+        "cta": {
+            "playNow": "Joacă acum"
+        },
+        "mobile": {
+            "menuTitle": "Meniu"
+        },
+        "legal": {
+            "support": "Asistență",
+            "privacyPolicy": "Politica de confidențialitate",
+            "termsOfService": "Termeni de utilizare",
+            "responsibleGaming": "Joc responsabil"
+        },
+        "language": {
+            "english": "Engleză"
+        },
+        "ageBadge": "18+"
+    },
+    "footer": {
+        "aria": {
+            "brandHome": "Pagina de pornire MrSpinny"
+        },
+        "columns": {
+            "games": "Jocuri",
+            "info": "Informații"
+        },
+        "links": {
+            "slots": "Sloturi",
+            "liveCasino": "Cazinou Live",
+            "poker": "Poker",
+            "lottery": "Loterie",
+            "roulette": "Ruletă",
+            "privacyPolicy": "Politica de confidențialitate",
+            "termsOfService": "Termeni de utilizare",
+            "responsibleGaming": "Joc responsabil",
+            "support": "Asistență"
+        },
+        "badges": {
+            "gambleAware": "GambleAware",
+            "responsibleGaming": "Joc responsabil"
+        },
+        "legal": {
+            "operatorLine": "MrSpinny.com este operat de Decordetails OÜ, Harju maakond, Tallinn, Kesklinna linnaosa, Tornimäe tn 5, 10145, nr. înreg. 17011692. Jocurile sunt oferite în conformitate cu legislația și restricțiile de vârstă aplicabile. Pentru ajutor, contactați {{email}}.",
+            "copyright": "© MrSpinny. Toate drepturile rezervate | {{year}}."
+        }
+    }
+}

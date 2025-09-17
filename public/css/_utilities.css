@@ -3,8 +3,7 @@
     max-width: 1200px;
     margin: auto;
 }
-
-/* Buttons */
+ 
 .btn {
     padding: 10px 20px;
     border-radius: 10px;
@@ -30,16 +29,14 @@
     padding: 6px 10px;
     font-size: 12px;
 }
-
-/* Accessibility / motion */
+ 
 @media (prefers-reduced-motion: reduce) {
     * {
         animation: none !important;
         transition: none !important;
     }
 }
-
-/* Chips / tags */
+ 
 .tag {
     background: #0b1424;
     border: 1px solid #2b3b5c;

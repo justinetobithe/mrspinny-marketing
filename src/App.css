@@ -5,24 +5,149 @@
 @tailwind utilities;
 
 @layer base {
-  body {
-    margin: 0;
-    padding: 0;
-    font-family: "Montserrat", sans-serif;
-    background-color: #fff;
+  :root {
+    --bp-md: 960px;
+    --bp-sm: 640px;
+    --bp-xs: 420px;
+
+    --color-bg: #0b1424;
+    --color-bg-dark: #081021;
+    --color-bg-footer: #0e1627;
+    --color-accent: #f1c40f;
+    --color-text: #fff;
+    --color-muted: #cfe2ff;
+    --color-border: rgba(255, 255, 255, 0.06);
+    --color-border-2: rgba(255, 255, 255, 0.12);
+
+    --pointer-tilt: 0deg;
   }
 
-  ::-webkit-scrollbar-thumb {
-    cursor: pointer;
-    background-color: #0b1424;
+  body {
+    margin: 0;
+    font-family: "Montserrat", sans-serif;
+    background: var(--color-bg);
+    color: var(--color-text);
+  }
+
+  *,
+  *::before,
+  *::after {
+    box-sizing: border-box;
   }
 
   ::-webkit-scrollbar {
     width: 8px;
     height: 8px;
   }
-}
+  ::-webkit-scrollbar-thumb {
+    cursor: pointer;
+    background-color: #0b1424;
+  }
 
-* {
-  box-sizing: border-box;
+  .no-scroll {
+    overflow: hidden;
+  }
+
+  .container {
+    width: 90%;
+    max-width: 1200px;
+    margin: auto;
+  }
+
+  .btn {
+    padding: 10px 20px;
+    border-radius: 10px;
+    text-decoration: none;
+    font-weight: 800;
+    display: inline-block;
+    transition: transform 0.15s ease, box-shadow 0.15s ease, opacity 0.15s ease;
+  }
+
+  .btn-primary {
+    background: linear-gradient(180deg, #ffe169, var(--color-accent));
+    color: #000;
+    box-shadow: 0 6px 16px rgba(241, 196, 15, 0.35);
+  }
+
+  .btn-outline {
+    border: 2px solid var(--color-accent);
+    color: var(--color-accent);
+    background: transparent;
+  }
+
+  .btn-small {
+    padding: 6px 10px;
+    font-size: 12px;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    * {
+      animation: none !important;
+      transition: none !important;
+    }
+  }
+
+  .tag {
+    background: #0b1424;
+    border: 1px solid #2b3b5c;
+    border-radius: 999px;
+    padding: 4px 10px;
+    font-size: 12px;
+    opacity: 0.95;
+  }
+
+  .code-chip {
+    background: #0f1b33;
+    border: 1px solid #2b3b5c;
+    border-radius: 10px;
+    padding: 6px 10px;
+    font-weight: 800;
+    letter-spacing: 0.3px;
+    cursor: pointer;
+    user-select: none;
+  }
+  .code-chip.copied {
+    background: #ffd54a;
+    color: #000;
+    border-color: #ffd54a;
+  }
+
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    margin: 0;
+    font-weight: 800;
+  }
+  p {
+    margin: 0 0 1em;
+    line-height: 1.6;
+  }
+
+  .hero h1 {
+    font-size: 40px;
+    margin: 0 0 8px;
+  }
+  .hero h1 span {
+    color: var(--color-accent);
+  }
+  .hero p {
+    margin: 10px 0 22px;
+    font-size: 18px;
+    opacity: 0.95;
+  }
+
+  @media (max-width: 640px) {
+    .hero {
+      padding: 70px 16px 80px;
+    }
+    .hero h1 {
+      font-size: 30px;
+    }
+    .hero p {
+      font-size: 16px;
+    }
+  }
 }

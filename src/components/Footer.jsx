@@ -1,10 +1,15 @@
 import { NavLink } from "react-router-dom";
+import { useTranslation } from "react-i18next";
 
 export default function Footer() {
+    const { t } = useTranslation();
+    const year = new Date().getFullYear();
+    const supportEmail = "support@mrspinny.com";
+
     return (
         <footer className="site-footer">
             <div className="container footer-top">
-                <NavLink className="footer-brand" to="/" aria-label="MrSpinny home">
+                <NavLink className="footer-brand" to="/" aria-label={t("footer.aria.brandHome")}>
                     <img
                         src="/assets/images/logo.png"
                         alt="MrSpinny logo"
@@ -15,32 +20,32 @@ export default function Footer() {
 
                 <nav className="footer-links" aria-label="Footer">
                     <div className="footer-col">
-                        <h4>Games</h4>
+                        <h4>{t("footer.columns.games")}</h4>
                         <ul>
-                            <li><NavLink to="/slots">Slots</NavLink></li>
-                            <li><NavLink to="/live-casino">Live Casino</NavLink></li>
-                            <li><a href="#">Poker</a></li>
-                            <li><a href="#">Lottery</a></li>
-                            <li><a href="#">Roulette</a></li>
-                            <li><NavLink to="/live-casino">Live Casino</NavLink></li>
+                            <li><NavLink to="/slots">{t("footer.links.slots")}</NavLink></li>
+                            <li><NavLink to="/live-casino">{t("footer.links.liveCasino")}</NavLink></li>
+                            <li><a href="#">{t("footer.links.poker")}</a></li>
+                            <li><a href="#">{t("footer.links.lottery")}</a></li>
+                            <li><a href="#">{t("footer.links.roulette")}</a></li>
+                            <li><NavLink to="/live-casino">{t("footer.links.liveCasino")}</NavLink></li>
                         </ul>
                     </div>
 
                     <div className="footer-col">
-                        <h4>Info</h4>
+                        <h4>{t("footer.columns.info")}</h4>
                         <ul>
-                            <li><a href="#">Privacy Policy</a></li>
-                            <li><a href="#">Terms of Service</a></li>
-                            <li><a href="#">Responsible Gaming</a></li>
-                            <li><a href="#">Support</a></li>
+                            <li><a href="#">{t("footer.links.privacyPolicy")}</a></li>
+                            <li><a href="#">{t("footer.links.termsOfService")}</a></li>
+                            <li><a href="#">{t("footer.links.responsibleGaming")}</a></li>
+                            <li><a href="#">{t("footer.links.support")}</a></li>
                         </ul>
                     </div>
                 </nav>
 
                 <div className="footer-badges">
-                    <div className="age-badge">18+</div>
-                    <div className="safe-badge">GambleAware</div>
-                    <div className="safe-badge">Responsible Gaming</div>
+                    <div className="age-badge">{t("header.ageBadge")}</div>
+                    <div className="safe-badge">{t("footer.badges.gambleAware")}</div>
+                    <div className="safe-badge">{t("footer.badges.responsibleGaming")}</div>
                 </div>
             </div>
 
@@ -64,12 +69,12 @@ export default function Footer() {
 
             <div className="container footer-legal">
                 <p className="legal-copy">
-                    MrSpinny.com is operated by Decordetails OÜ, Harju maakond, Tallinn, Kesklinna linnaosa,
-                    Tornimäe tn 5, 10145, reg. no. 17011692. Gaming is offered in accordance with applicable laws
-                    and age restrictions. For help, contact{" "}
-                    <a href="mailto:support@mrspinny.com">support@mrspinny.com</a>.
+                    {t("footer.legal.operatorLine", { email: supportEmail })}{" "}
+                    <a href={`mailto:${supportEmail}`}>{supportEmail}</a>.
                 </p>
-                <p className="copyright">© MrSpinny. All rights reserved | 2025.</p>
+                <p className="copyright">
+                    {t("footer.legal.copyright", { year })}
+                </p>
             </div>
         </footer>
     );

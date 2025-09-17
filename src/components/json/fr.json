@@ -1,0 +1,61 @@
+{
+    "header": {
+        "aria": {
+            "brandHome": "Accueil de MrSpinny",
+            "openMenu": "Ouvrir le menu",
+            "closeMenu": "Fermer le menu",
+            "mainMenu": "Menu principal"
+        },
+        "nav": {
+            "home": "Accueil",
+            "slots": "Machines à sous",
+            "liveCasino": "Casino en direct",
+            "banking": "Banque",
+            "contact": "Contact"
+        },
+        "cta": {
+            "playNow": "Jouer maintenant"
+        },
+        "mobile": {
+            "menuTitle": "Menu"
+        },
+        "legal": {
+            "support": "Support",
+            "privacyPolicy": "Politique de confidentialité",
+            "termsOfService": "Conditions d'utilisation",
+            "responsibleGaming": "Jeu responsable"
+        },
+        "language": {
+            "english": "Anglais"
+        },
+        "ageBadge": "18+"
+    },
+    "footer": {
+        "aria": {
+            "brandHome": "Accueil de MrSpinny"
+        },
+        "columns": {
+            "games": "Jeux",
+            "info": "Infos"
+        },
+        "links": {
+            "slots": "Machines à sous",
+            "liveCasino": "Casino en direct",
+            "poker": "Poker",
+            "lottery": "Loterie",
+            "roulette": "Roulette",
+            "privacyPolicy": "Politique de confidentialité",
+            "termsOfService": "Conditions d'utilisation",
+            "responsibleGaming": "Jeu responsable",
+            "support": "Support"
+        },
+        "badges": {
+            "gambleAware": "GambleAware",
+            "responsibleGaming": "Jeu responsable"
+        },
+        "legal": {
+            "operatorLine": "MrSpinny.com est exploité par Decordetails OÜ, Harju maakond, Tallinn, Kesklinna linnaosa, Tornimäe tn 5, 10145, n° d’enreg. 17011692. Les jeux sont proposés conformément aux lois et aux restrictions d’âge en vigueur. Pour obtenir de l’aide, contactez {{email}}.",
+            "copyright": "© MrSpinny. Tous droits réservés | {{year}}."
+        }
+    }
+}

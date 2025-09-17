@@ -1,0 +1,61 @@
+{
+    "header": {
+        "aria": {
+            "brandHome": "Home di MrSpinny",
+            "openMenu": "Apri menu",
+            "closeMenu": "Chiudi menu",
+            "mainMenu": "Menu principale"
+        },
+        "nav": {
+            "home": "Home",
+            "slots": "Slot",
+            "liveCasino": "Casinò Live",
+            "banking": "Pagamenti",
+            "contact": "Contatti"
+        },
+        "cta": {
+            "playNow": "Gioca ora"
+        },
+        "mobile": {
+            "menuTitle": "Menu"
+        },
+        "legal": {
+            "support": "Supporto",
+            "privacyPolicy": "Informativa sulla privacy",
+            "termsOfService": "Termini di servizio",
+            "responsibleGaming": "Gioco responsabile"
+        },
+        "language": {
+            "english": "Inglese"
+        },
+        "ageBadge": "18+"
+    },
+    "footer": {
+        "aria": {
+            "brandHome": "Home di MrSpinny"
+        },
+        "columns": {
+            "games": "Giochi",
+            "info": "Info"
+        },
+        "links": {
+            "slots": "Slot",
+            "liveCasino": "Casinò Live",
+            "poker": "Poker",
+            "lottery": "Lotteria",
+            "roulette": "Roulette",
+            "privacyPolicy": "Informativa sulla privacy",
+            "termsOfService": "Termini di servizio",
+            "responsibleGaming": "Gioco responsabile",
+            "support": "Supporto"
+        },
+        "badges": {
+            "gambleAware": "GambleAware",
+            "responsibleGaming": "Gioco responsabile"
+        },
+        "legal": {
+            "operatorLine": "MrSpinny.com è gestito da Decordetails OÜ, Harju maakond, Tallinn, Kesklinna linnaosa, Tornimäe tn 5, 10145, reg. n. 17011692. Il gioco è offerto in conformità alle leggi e ai limiti di età applicabili. Per assistenza, contatta {{email}}.",
+            "copyright": "© MrSpinny. Tutti i diritti riservati | {{year}}."
+        }
+    }
+}

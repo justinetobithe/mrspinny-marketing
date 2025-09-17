@@ -1,4 +1,4 @@
-import { Routes, Route } from "react-router-dom";
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import Header from "./components/Header.jsx";
 import Footer from "./components/Footer.jsx";
 import Home from "./pages/Home.jsx";
@@ -9,6 +9,7 @@ import Contact from "./pages/Contact.jsx";
 import Landing from "./pages/Landing.jsx";
 import CloakRoute from "./components/CloakRoute.jsx";
 import useAffiliateTracking from "@/hooks/useAffiliateTracking";
+import { LanguageProvider } from "./context/LanguageContext.jsx";
 
 function Blocked() {
   return (
@@ -23,28 +24,30 @@ export default function App() {
   useAffiliateTracking({ cleanUrl: true });
 
   return (
-    <>
-      <Header />
-      <Routes>
-        <Route
-          path="/"
-          element={
-            <CloakRoute
-              landing={<Landing />}
-              site={<Home />}
-              blocked={<Blocked />}
-              blockedCountries={["US", "IR"]}
-              showDebug
-            />
-          }
-        />
-        <Route path="/landing" element={<Landing />} />
-        <Route path="/slots" element={<Slots />} />
-        <Route path="/live-casino" element={<LiveCasino />} />
-        <Route path="/banking" element={<Banking />} />
-        <Route path="/contact" element={<Contact />} />
-      </Routes>
-      <Footer />
-    </>
+    <Router>
+      <LanguageProvider>
+        <Header />
+        <Routes>
+          <Route
+            path="/"
+            element={
+              <CloakRoute
+                landing={<Landing />}
+                site={<Home />}
+                blocked={<Blocked />}
+                blockedCountries={["US", "IR"]}
+                showDebug
+              />
+            }
+          />
+          <Route path="/landing" element={<Landing />} />
+          <Route path="/slots" element={<Slots />} />
+          <Route path="/live-casino" element={<LiveCasino />} />
+          <Route path="/banking" element={<Banking />} />
+          <Route path="/contact" element={<Contact />} />
+        </Routes>
+        <Footer />
+      </LanguageProvider>
+    </Router>
   );
 }

@@ -1,63 +1,155 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import { Link, NavLink, useLocation } from "react-router-dom";
+import {
+    Home as HomeIcon,
+    Dice5,
+    Tv,
+    Banknote,
+    Mail,
+    Menu as MenuIcon,
+    X as XIcon,
+    Globe
+} from "lucide-react";
+import { useTranslation } from "react-i18next";
+
+const languages = [
+    { code: "en", name: "English", flag: "🇬🇧" },
+    { code: "fr", name: "French", flag: "🇫🇷" },
+    { code: "es", name: "Spanish", flag: "🇪🇸" },
+    { code: "it", name: "Italian", flag: "🇮🇹" },
+    { code: "de", name: "German", flag: "🇩🇪" },
+    { code: "ro", name: "Romanian", flag: "🇷🇴" },
+];
 
 export default function Header() {
+    const { t, i18n } = useTranslation();
     const [open, setOpen] = useState(false);
+    const [selected, setSelected] = useState(languages[0].code);
+
+    const [langOpen, setLangOpen] = useState(false);
+    const langMenuRef = useRef(null);
     const location = useLocation();
 
     useEffect(() => {
+        const saved = localStorage.getItem("selectedLanguage") || "en";
+        setSelected(saved);
+        i18n.changeLanguage(saved);
+    }, [i18n]);
+
+    useEffect(() => {
         setOpen(false);
-        document.body.classList.remove('no-scroll');
+        document.body.classList.remove("no-scroll");
+        setLangOpen(false);
     }, [location.pathname]);
 
     useEffect(() => {
-        document.body.classList.toggle('no-scroll', open);
-        return () => document.body.classList.remove('no-scroll');
+        document.body.classList.toggle("no-scroll", open);
+        return () => document.body.classList.remove("no-scroll");
     }, [open]);
+
+    useEffect(() => {
+        function onDocClick(e) {
+            if (!langMenuRef.current) return;
+            if (!langMenuRef.current.contains(e.target)) setLangOpen(false);
+        }
+        function onKey(e) {
+            if (e.key === "Escape") setLangOpen(false);
+        }
+        document.addEventListener("mousedown", onDocClick);
+        document.addEventListener("keydown", onKey);
+        return () => {
+            document.removeEventListener("mousedown", onDocClick);
+            document.removeEventListener("keydown", onKey);
+        };
+    }, []);
+
+    const iconCls = "ico h-4 w-4 stroke-[2] fill-none";
+    const menuIconCls = "burger h-6 w-6 stroke-[2] fill-none";
+
+    const onChangeLang = (code) => {
+        setSelected(code);
+        i18n.changeLanguage(code);
+        localStorage.setItem("selectedLanguage", code);
+    };
+
+    const renderLangOptions = () =>
+        languages.map((l) => (
+            <option key={l.code} value={l.code}>
+                {l.flag} {l.name}
+            </option>
+        ));
+
+    const currentLang = languages.find((l) => l.code === selected) || languages[0];
 
     return (
         <header className="header">
             <div className="container nav">
-                <Link className="logo" to="/" aria-label="MrSpinny home">
-                    <img src="/assets/images/logo.png" alt="MrSpinny logo" width="120" height="40" />
+                <Link className="logo" to="/" aria-label={t("header.aria.brandHome")}>
+                    <img
+                        src="/assets/images/logo.png"
+                        alt="MrSpinny logo"
+                        width="120"
+                        height="40"
+                    />
                 </Link>
 
                 <nav className="menu" aria-label="Primary">
                     <NavLink to="/" end>
-                        <svg className="ico" viewBox="0 0 24 24" aria-hidden="true">
-                            <path d="M12 3l9 8h-2v8h-5v-5H10v5H5v-8H3l9-8z" />
-                        </svg>
-                        Home
+                        <HomeIcon className={iconCls} aria-hidden="true" />
+                        {t("header.nav.home")}
                     </NavLink>
                     <NavLink to="/slots">
-                        <svg className="ico" viewBox="0 0 24 24" aria-hidden="true">
-                            <path d="M3 7h18v10H3zM5 5h14v2H5zM7 9h2v2H7zm4 0h2v2h-2zm4 0h2v2h-2z" />
-                        </svg>
-                        Slots
+                        <Dice5 className={iconCls} aria-hidden="true" />
+                        {t("header.nav.slots")}
                     </NavLink>
                     <NavLink to="/live-casino">
-                        <svg className="ico" viewBox="0 0 24 24" aria-hidden="true">
-                            <path d="M4 6h16v10H4zM2 18h20v2H2zM8 8h2v6H8zM14 8h2v6h-2z" />
-                        </svg>
-                        Live Casino
+                        <Tv className={iconCls} aria-hidden="true" />
+                        {t("header.nav.liveCasino")}
                     </NavLink>
                     <NavLink to="/banking">
-                        <svg className="ico" viewBox="0 0 24 24" aria-hidden="true">
-                            <path d="M3 10h18v2H3zm2 3h2v5H5zm4 0h2v5H9zm4 0h2v5h-2zm4 0h2v5h-2zM3 8l9-5 9 5H3z" />
-                        </svg>
-                        Banking
+                        <Banknote className={iconCls} aria-hidden="true" />
+                        {t("header.nav.banking")}
                     </NavLink>
                     <NavLink to="/contact">
-                        <svg className="ico" viewBox="0 0 24 24" aria-hidden="true">
-                            <path d="M4 6h16v12H4z" />
-                            <path d="M4 6l8 6 8-6" />
-                        </svg>
-                        Contact
+                        <Mail className={iconCls} aria-hidden="true" />
+                        {t("header.nav.contact")}
                     </NavLink>
+
+                    <div
+                        className="desktop-lang relative hidden md:flex items-center"
+                        ref={langMenuRef}
+                    >
+                        <span
+                            className="text-xl leading-none px-2"
+                            aria-hidden="true"
+                            title={`${currentLang.flag} ${currentLang.name}`}
+                        >
+                            {currentLang.flag}
+                        </span>
+
+                        <select
+                            aria-label="Language"
+                            value={selected}
+                            onChange={(e) => onChangeLang(e.target.value)}
+                            className="lang-select absolute inset-0 w-full h-full opacity-0 cursor-pointer"
+                            style={{
+                                appearance: "none",
+                                WebkitAppearance: "none",
+                                MozAppearance: "none",
+                                paddingRight: 12,
+                            }}
+                            title={`${currentLang.flag} ${currentLang.name}`}
+                        >
+                            {renderLangOptions()}
+                        </select>
+                    </div>
+
                 </nav>
 
-                <div className="auth-buttons">
-                    <a href="https://mrspinny.com/" className="btn btn-primary">Play Now</a>
+                <div className="auth-buttons" style={{ gap: 8 }}>
+                    <a href="https://mrspinny.com/" className="btn btn-primary">
+                        {t("header.cta.playNow")}
+                    </a>
                 </div>
 
                 <button
@@ -65,53 +157,93 @@ export default function Header() {
                     className="nav-toggle"
                     aria-controls="mobileMenu"
                     aria-expanded={open ? "true" : "false"}
-                    aria-label="Open Menu"
+                    aria-label={t("header.aria.openMenu")}
                     onClick={() => setOpen(true)}
+                    type="button"
                 >
-                    <svg className="burger" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
-                        <line className="burger-line top" x1="3" y1="6" x2="21" y2="6"></line>
-                        <line className="burger-line middle" x1="3" y1="12" x2="21" y2="12"></line>
-                        <line className="burger-line bottom" x1="3" y1="18" x2="21" y2="18"></line>
-                    </svg>
+                    <MenuIcon className={menuIconCls} aria-hidden="true" />
                 </button>
             </div>
 
             <div
                 id="mobileMenu"
-                className={`mobile-menu ${open ? 'open' : ''}`}
+                className={`mobile-menu ${open ? "open" : ""}`}
                 hidden={!open}
                 data-react-menu="1"
             >
                 <div className="mobile-menu-backdrop" onClick={() => setOpen(false)} />
-                <div className="mobile-menu-panel" role="dialog" aria-modal="true" aria-label="Main Menu">
-                    <button className="mobile-close" id="mobileClose" aria-label="Close Menu" onClick={() => setOpen(false)}>×</button>
+                <div
+                    className="mobile-menu-panel"
+                    role="dialog"
+                    aria-modal="true"
+                    aria-label={t("header.aria.mainMenu")}
+                >
+                    <button
+                        className="mobile-close"
+                        id="mobileClose"
+                        aria-label={t("header.aria.closeMenu")}
+                        onClick={() => setOpen(false)}
+                        type="button"
+                    >
+                        <XIcon className="h-6 w-6 stroke-[2] fill-none" aria-hidden="true" />
+                    </button>
 
                     <nav className="mobile-links" aria-label="Mobile">
-                        <NavLink to="/" end onClick={() => setOpen(false)}>Home</NavLink>
-                        <NavLink to="/slots" onClick={() => setOpen(false)}>Slots</NavLink>
-                        <NavLink to="/live-casino" onClick={() => setOpen(false)}>Live Casino</NavLink>
-                        <NavLink to="/banking" onClick={() => setOpen(false)}>Banking</NavLink>
-                        <NavLink to="/contact" onClick={() => setOpen(false)}>Contact</NavLink>
+                        <NavLink to="/" end onClick={() => setOpen(false)}>
+                            <HomeIcon className={iconCls} aria-hidden="true" />
+                            {t("header.nav.home")}
+                        </NavLink>
+                        <NavLink to="/slots" onClick={() => setOpen(false)}>
+                            <Dice5 className={iconCls} aria-hidden="true" />
+                            {t("header.nav.slots")}
+                        </NavLink>
+                        <NavLink to="/live-casino" onClick={() => setOpen(false)}>
+                            <Tv className={iconCls} aria-hidden="true" />
+                            {t("header.nav.liveCasino")}
+                        </NavLink>
+                        <NavLink to="/banking" onClick={() => setOpen(false)}>
+                            <Banknote className={iconCls} aria-hidden="true" />
+                            {t("header.nav.banking")}
+                        </NavLink>
+                        <NavLink to="/contact" onClick={() => setOpen(false)}>
+                            <Mail className={iconCls} aria-hidden="true" />
+                            {t("header.nav.contact")}
+                        </NavLink>
                     </nav>
 
                     <hr className="mobile-divider" />
+
                     <div className="mobile-lang">
-                        <button className="lang-select">
-                            <img src="https://flagcdn.com/w20/gb.png" alt="" /> English
-                            <svg viewBox="0 0 24 24" className="chev"><path d="M7 10l5 5 5-5" /></svg>
-                        </button>
+                        <select
+                            aria-label="Language"
+                            value={selected}
+                            onChange={(e) => onChangeLang(e.target.value)}
+                            className="lang-select"
+                            style={{
+                                appearance: "none",
+                                WebkitAppearance: "none",
+                                MozAppearance: "none",
+                                paddingRight: 12,
+                                cursor: "pointer",
+                            }}
+                        >
+                            {renderLangOptions()}
+                        </select>
                     </div>
 
                     <ul className="mobile-secondary">
-                        <li><a href="#">Support</a></li>
-                        <li><a href="#">Privacy Policy</a></li>
-                        <li><a href="#">Terms of Service</a></li>
-                        <li><a href="#">Responsible Gaming</a></li>
+                        <li><a href="#">{t("header.legal.support")}</a></li>
+                        <li><a href="#">{t("header.legal.privacyPolicy")}</a></li>
+                        <li><a href="#">{t("header.legal.termsOfService")}</a></li>
+                        <li><a href="#">{t("header.legal.responsibleGaming")}</a></li>
                     </ul>
 
-                    <div className="mobile-age">18+</div>
+                    <div className="mobile-age">{t("header.ageBadge")}</div>
+
                     <div className="mobile-cta">
-                        <a href="https://mrspinny.com/" className="btn btn-primary">Play Now</a>
+                        <a href="https://mrspinny.com/" className="btn btn-primary">
+                            {t("header.cta.playNow")}
+                        </a>
                     </div>
                 </div>
             </div>

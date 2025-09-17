@@ -9,7 +9,7 @@
         { label: '25 Free Spins', value: 25, weight: 20 },
         { label: '10 Free Spins', value: 10, weight: 28 }
     ];
-    const PROMO_URL = 'https://mrspinny.com/promotions';
+    const PROMO_URL = 'https://mrspinny.com';
     const REWARD_KEY = 'mrspinny_wheel_reward';
 
     let inited = false;

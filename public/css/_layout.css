@@ -29,6 +29,17 @@
   flex-wrap: wrap;
 }
 
+/* Lucide icon reset for desktop/nav */
+.menu .ico,
+.nav .ico {
+  stroke: currentColor;
+  fill: none;
+}
+.menu .ico *,
+.nav .ico * {
+  fill: none;
+}
+
 .auth-buttons {
   display: flex;
   align-items: center;
@@ -161,16 +172,22 @@
   color: #ffd54a;
 }
 
+/* Lucide icons in the mobile list */
 .mobile-links .ico {
   width: 22px;
   height: 22px;
-  fill: #e9f1ff;
-  opacity: 0.9;
   flex: 0 0 22px;
+  opacity: 0.9;
+  stroke: currentColor;
+  fill: none;
+}
+.mobile-links .ico * {
+  fill: none;
 }
 
 .mobile-links a:hover .ico {
-  fill: #ffd54a;
+  stroke: #ffd54a;
+  fill: none;
 }
 
 .mobile-divider {
@@ -205,10 +222,15 @@
   border-radius: 2px;
 }
 
+/* Lucide chevron in language button */
 .lang-select .chev {
   width: 18px;
   height: 18px;
-  fill: #cfe2ff;
+  stroke: currentColor;
+  fill: none;
+}
+.lang-select .chev * {
+  fill: none;
 }
 
 .mobile-secondary {

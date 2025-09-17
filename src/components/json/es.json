@@ -1,0 +1,61 @@
+{
+    "header": {
+        "aria": {
+            "brandHome": "Inicio de MrSpinny",
+            "openMenu": "Abrir menú",
+            "closeMenu": "Cerrar menú",
+            "mainMenu": "Menú principal"
+        },
+        "nav": {
+            "home": "Inicio",
+            "slots": "Tragamonedas",
+            "liveCasino": "Casino en Vivo",
+            "banking": "Banca",
+            "contact": "Contacto"
+        },
+        "cta": {
+            "playNow": "Jugar ahora"
+        },
+        "mobile": {
+            "menuTitle": "Menú"
+        },
+        "legal": {
+            "support": "Soporte",
+            "privacyPolicy": "Política de Privacidad",
+            "termsOfService": "Términos del Servicio",
+            "responsibleGaming": "Juego Responsable"
+        },
+        "language": {
+            "english": "Inglés"
+        },
+        "ageBadge": "18+"
+    },
+    "footer": {
+        "aria": {
+            "brandHome": "Inicio de MrSpinny"
+        },
+        "columns": {
+            "games": "Juegos",
+            "info": "Información"
+        },
+        "links": {
+            "slots": "Tragamonedas",
+            "liveCasino": "Casino en Vivo",
+            "poker": "Póker",
+            "lottery": "Lotería",
+            "roulette": "Ruleta",
+            "privacyPolicy": "Política de Privacidad",
+            "termsOfService": "Términos del Servicio",
+            "responsibleGaming": "Juego Responsable",
+            "support": "Soporte"
+        },
+        "badges": {
+            "gambleAware": "GambleAware",
+            "responsibleGaming": "Juego Responsable"
+        },
+        "legal": {
+            "operatorLine": "MrSpinny.com es operado por Decordetails OÜ, Harju maakond, Tallinn, Kesklinna linnaosa, Tornimäe tn 5, 10145, reg. nº 17011692. El juego se ofrece conforme a las leyes y restricciones de edad aplicables. Para ayuda, contacte a {{email}}.",
+            "copyright": "© MrSpinny. Todos los derechos reservados | {{year}}."
+        }
+    }
+}

@@ -1,0 +1,61 @@
+{
+    "header": {
+        "aria": {
+            "brandHome": "Startseite von MrSpinny",
+            "openMenu": "Menü öffnen",
+            "closeMenu": "Menü schließen",
+            "mainMenu": "Hauptmenü"
+        },
+        "nav": {
+            "home": "Startseite",
+            "slots": "Slots",
+            "liveCasino": "Live-Casino",
+            "banking": "Banking",
+            "contact": "Kontakt"
+        },
+        "cta": {
+            "playNow": "Jetzt spielen"
+        },
+        "mobile": {
+            "menuTitle": "Menü"
+        },
+        "legal": {
+            "support": "Support",
+            "privacyPolicy": "Datenschutzrichtlinie",
+            "termsOfService": "Nutzungsbedingungen",
+            "responsibleGaming": "Verantwortungsvolles Spielen"
+        },
+        "language": {
+            "english": "Englisch"
+        },
+        "ageBadge": "18+"
+    },
+    "footer": {
+        "aria": {
+            "brandHome": "Startseite von MrSpinny"
+        },
+        "columns": {
+            "games": "Spiele",
+            "info": "Info"
+        },
+        "links": {
+            "slots": "Slots",
+            "liveCasino": "Live-Casino",
+            "poker": "Poker",
+            "lottery": "Lotterie",
+            "roulette": "Roulette",
+            "privacyPolicy": "Datenschutzrichtlinie",
+            "termsOfService": "Nutzungsbedingungen",
+            "responsibleGaming": "Verantwortungsvolles Spielen",
+            "support": "Support"
+        },
+        "badges": {
+            "gambleAware": "GambleAware",
+            "responsibleGaming": "Verantwortungsvolles Spielen"
+        },
+        "legal": {
+            "operatorLine": "MrSpinny.com wird von Decordetails OÜ, Harju maakond, Tallinn, Kesklinna linnaosa, Tornimäe tn 5, 10145, Reg.-Nr. 17011692, betrieben. Das Spielangebot erfolgt gemäß den geltenden Gesetzen und Altersbeschränkungen. Bei Bedarf kontaktieren Sie {{email}}.",
+            "copyright": "© MrSpinny. Alle Rechte vorbehalten | {{year}}."
+        }
+    }
+}

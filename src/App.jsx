@@ -1,3 +1,4 @@
+// src/App.jsx
 import { Routes, Route } from "react-router-dom";
 import Header from "./components/Header.jsx";
 import Footer from "./components/Footer.jsx";
@@ -8,7 +9,7 @@ import Banking from "./pages/Banking.jsx";
 import Contact from "./pages/Contact.jsx";
 import Landing from "./pages/Landing.jsx";
 import CloakRoute from "./components/CloakRoute.jsx";
-
+import useAffiliateTracking from "@/hooks/useAffiliateTracking";
 
 function Blocked() {
   return (
@@ -20,6 +21,8 @@ function Blocked() {
 }
 
 export default function App() {
+  useAffiliateTracking({ cleanUrl: true });
+
   return (
     <>
       <Header />

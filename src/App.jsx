@@ -8,7 +8,7 @@ import Banking from "./pages/Banking.jsx";
 import Contact from "./pages/Contact.jsx";
 import Landing from "./pages/Landing.jsx";
 import CloakRoute from "./components/CloakRoute.jsx";
-import useAffiliateTracking from "./hooks/useAffiliateTracking.js";
+import useAffiliateTracking from "@/hooks/useAffiliateTracking";
 
 function Blocked() {
   return (

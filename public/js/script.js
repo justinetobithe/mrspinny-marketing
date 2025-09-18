@@ -11,6 +11,7 @@
     ];
     const PROMO_URL = "https://mrspinny.com";
     const REWARD_KEY = "mrspinny_wheel_reward";
+    const MODAL_KEY = "mrspinny_welcome_seen";
 
     const isIOS =
         /iPad|iPhone|iPod/.test(navigator.userAgent) ||
@@ -18,7 +19,7 @@
 
     let inited = false;
     let navToggle, mobileMenu, mobilePanel, backdrop, closeBtn;
-    let wheelWrap, wheelEl, spinBtn, claimBtn, fireworkLayer, pageFX;
+    let wheelWrap, wheelEl, spinBtn, claimBtn, fireworkLayer, pageFX, modal, openBtn;
     let spinSnd, winSnd;
     let audioCtx, audioUnlocked = false;
     let isSpinning = false;
@@ -29,6 +30,7 @@
     const offAll = () => { listeners.forEach(([el, t, f, o]) => { try { el.removeEventListener(t, f, o) } catch { } }); listeners.length = 0; };
     const reduceMotion = () => window.matchMedia?.("(prefers-reduced-motion: reduce)").matches;
     const rand = (min, max) => Math.floor(Math.random() * (max - min + 1)) + min;
+    const isModalOpen = () => modal && !modal.hidden && modal.classList.contains("open");
 
     function todayStr() {
         try {
@@ -48,6 +50,7 @@
         a.preload = "auto";
         a.volume = volume;
         a.crossOrigin = "anonymous";
+        a.muted = false;
         return a;
     }
 
@@ -63,18 +66,9 @@
         audioUnlocked = true;
         const ctx = ensureAudioContext();
         if (ctx && ctx.state === "suspended") ctx.resume().catch(() => { });
-        const silentBeep = () => {
-            if (!ctx) return;
-            const o = ctx.createOscillator();
-            const g = ctx.createGain();
-            g.gain.value = 0.0001;
-            o.connect(g).connect(ctx.destination);
-            o.start(0);
-            o.stop(ctx.currentTime + 0.02);
-        };
-        try { silentBeep(); } catch { }
-        try { spinSnd && spinSnd.play().then(() => { spinSnd.pause(); spinSnd.currentTime = 0; }).catch(() => { }); } catch { }
-        try { winSnd && winSnd.play().then(() => { winSnd.pause(); winSnd.currentTime = 0; }).catch(() => { }); } catch { }
+        const o = ctx && ctx.createOscillator ? ctx.createOscillator() : null;
+        const g = ctx && ctx.createGain ? ctx.createGain() : null;
+        if (o && g) { g.gain.value = 0.0001; o.connect(g).connect(ctx.destination); o.start(0); o.stop(ctx.currentTime + 0.02); }
     }
 
     function bindAudioUnlock() {
@@ -85,24 +79,34 @@
     }
 
     function setupSounds() {
-        try {
-            spinSnd = createAudio("/assets/sounds/wheel-spin.mp3", 0.9);
-            winSnd = createAudio("/assets/sounds/magical-coin-win.wav", 1.0);
-            bindAudioUnlock();
-        } catch { }
+        if (spinSnd || winSnd) return;
+        spinSnd = createAudio("/assets/sounds/wheel-spin.mp3", 0.9);
+        winSnd = createAudio("/assets/sounds/magical-coin-win.wav", 1.0);
+        bindAudioUnlock();
+    }
+
+    function teardownSounds() {
+        try { if (spinSnd) { spinSnd.pause(); spinSnd.src = ""; spinSnd.load(); } } catch { }
+        try { if (winSnd) { winSnd.pause(); winSnd.src = ""; winSnd.load(); } } catch { }
+        spinSnd = null; winSnd = null;
     }
 
     function playSpinSound() {
-        if (!spinSnd) return;
+        if (!isModalOpen() || !spinSnd) return;
         try { spinSnd.currentTime = 0; spinSnd.play().catch(() => { }); } catch { }
     }
     function stopSpinSound() {
         if (!spinSnd) return;
         try { spinSnd.pause(); spinSnd.currentTime = 0; } catch { }
     }
-    function playWinSound() {
-        if (!winSnd) return;
-        try { winSnd.currentTime = 0; winSnd.play().catch(() => { }); } catch { }
+    function playWinSound(onEnded) {
+        if (!isModalOpen() || !winSnd) { if (onEnded) onEnded(); return; }
+        try {
+            winSnd.currentTime = 0;
+            const done = () => { winSnd.removeEventListener("ended", done); onEnded && onEnded(); };
+            winSnd.addEventListener("ended", done, { once: true });
+            winSnd.play().catch(() => done());
+        } catch { onEnded && onEnded(); }
     }
 
     function isMenuOpen() { return !!mobileMenu && !mobileMenu.hidden && mobileMenu.classList.contains("open"); }
@@ -154,6 +158,7 @@
 
     async function onSpin() {
         if (isSpinning || !wheelEl || !wheelWrap || !spinBtn) return;
+        if (!isModalOpen()) return;
         const allowed = await checkSpinAllowed();
         if (!allowed) { window.location.href = PROMO_URL; return; }
         endCelebration();
@@ -185,6 +190,10 @@
         on(wheelEl, "transitionend", handler, { once: true });
     }
 
+    function clearSpinCaches() {
+        try { localStorage.removeItem(REWARD_KEY); } catch { }
+    }
+
     function onSpinEnd(finalDeg, chosen) {
         markSpun();
         try { localStorage.setItem(REWARD_KEY, JSON.stringify({ label: chosen.label, value: chosen.value ?? null, date: todayStr() })); } catch { }
@@ -204,7 +213,6 @@
         burstFireworksFullScreen();
         pulseRingsBurst(lightFX ? 1 : 3, 160);
         stopSpinSound();
-        playWinSound();
 
         const current = finalDeg % 360;
         wheelEl.style.transition = "none";
@@ -221,6 +229,11 @@
             claimBtn.hidden = false;
             const tClaim = setTimeout(() => claimBtn.classList.add("show"), 200); fx.addTimer(tClaim);
         }
+
+        playWinSound(() => {
+            clearSpinCaches();
+            teardownSounds();
+        });
     }
 
     function pickSegment(segments = SEGMENTS) {
@@ -563,7 +576,6 @@
         claimBtn = document.getElementById("claimBtn");
         fireworkLayer = document.getElementById("fireworkLayer");
 
-        setupSounds();
         injectHeatFilter();
         if (!isIOS) injectHeatStyles();
         ensureFlameRing();
@@ -590,11 +602,24 @@
     }
 
     function initWelcomeModal() {
-        const MODAL_KEY = "mrspinny_welcome_seen";
-        const modal = document.getElementById("welcomeModal");
-        const openBtn = document.getElementById("openWelcome");
-        const openModal = () => { if (!modal) return; modal.hidden = false; requestAnimationFrame(() => modal.classList.add("open")); document.body.classList.add("no-scroll"); };
-        const closeModal = () => { if (!modal) return; modal.classList.remove("open"); document.body.classList.remove("no-scroll"); setTimeout(() => (modal.hidden = true), 180); endCelebration(); };
+        modal = document.getElementById("welcomeModal");
+        openBtn = document.getElementById("openWelcome");
+        const openModal = () => {
+            if (!modal) return;
+            modal.hidden = false;
+            requestAnimationFrame(() => modal.classList.add("open"));
+            document.body.classList.add("no-scroll");
+            setupSounds();
+        };
+        const closeModal = () => {
+            if (!modal) return;
+            modal.classList.remove("open");
+            document.body.classList.remove("no-scroll");
+            setTimeout(() => (modal.hidden = true), 180);
+            endCelebration();
+            teardownSounds();
+            try { localStorage.removeItem(REWARD_KEY); } catch { }
+        };
 
         if (modal && !localStorage.getItem(MODAL_KEY)) {
             const t = setTimeout(openModal, 500); fx.addTimer(t);
@@ -618,8 +643,7 @@
         offAll();
         endCelebration();
         document.body.classList.remove("no-scroll");
-        try { spinSnd && (spinSnd.pause(), spinSnd.src = "", spinSnd = null); } catch { }
-        try { winSnd && (winSnd.pause(), winSnd.src = "", winSnd = null); } catch { }
+        teardownSounds();
         try { audioCtx && audioCtx.close && audioCtx.close(); } catch { }
         inited = false;
     };

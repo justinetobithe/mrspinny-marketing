@@ -1,7 +1,7 @@
 {
     "header": {
         "aria": {
-            "brandHome": "Home di MrSpinny",
+            "brandHome": "Home MrSpinny",
             "openMenu": "Apri menu",
             "closeMenu": "Chiudi menu",
             "mainMenu": "Menu principale"
@@ -32,7 +32,7 @@
     },
     "footer": {
         "aria": {
-            "brandHome": "Home di MrSpinny"
+            "brandHome": "Home MrSpinny"
         },
         "columns": {
             "games": "Giochi",
@@ -54,8 +54,133 @@
             "responsibleGaming": "Gioco responsabile"
         },
         "legal": {
-            "operatorLine": "MrSpinny.com è gestito da Decordetails OÜ, Harju maakond, Tallinn, Kesklinna linnaosa, Tornimäe tn 5, 10145, reg. n. 17011692. Il gioco è offerto in conformità alle leggi e ai limiti di età applicabili. Per assistenza, contatta {{email}}.",
+            "operatorLine": "MrSpinny.com è gestito da Decordetails OÜ, Harju maakond, Tallinn, Kesklinna linnaosa, Tornimäe tn 5, 10145, n. reg. 17011692. Il gioco è offerto in conformità con le leggi e restrizioni di età vigenti. Per assistenza, contatta {{email}}.",
             "copyright": "© MrSpinny. Tutti i diritti riservati | {{year}}."
+        }
+    },
+    "home": {
+        "hero": {
+            "titleA": "Scopri il tuo",
+            "titleB": "Bonus di benvenuto",
+            "subtitle": "Gira per vedere la tua ricompensa. Crea un account e deposita per reclamarla.",
+            "cta": {
+                "spin": "Gira la ruota"
+            }
+        },
+        "cards": {
+            "slots": {
+                "badge": "Caldo",
+                "title": "Slot migliori",
+                "desc": "Gira i rulli di tendenza con bonus giornalieri.",
+                "cta": "Esplora"
+            },
+            "live": {
+                "badge": "Live",
+                "title": "Casinò Live",
+                "desc": "Croupier reali, adrenalina immediata, sempre.",
+                "cta": "Entra"
+            },
+            "promos": {
+                "badge": "Bonus",
+                "title": "Promozioni giornaliere",
+                "desc": "Ricariche, giri gratis e premi a sorpresa.",
+                "cta": "Vedi tutto"
+            }
+        },
+        "about": {
+            "title": "Chi è MrSpinny",
+            "alt": "Giocatori che si divertono con i giochi MrSpinny",
+            "body": "MrSpinny unisce gioco equo, pagamenti veloci e ricompense generose in un’esperienza di casinò fluida. Goditi centinaia di giochi premium, limiti trasparenti e supporto cordiale 24/7.",
+            "points": {
+                "p1": "Pagamenti lampo su carte, banca e crypto.",
+                "p2": "Strumenti responsabili: limiti, pause e avvisi di realtà.",
+                "p3": "Promozioni giornaliere con giri gratis e ricariche.",
+                "p4": "Piattaforma sicura con crittografia moderna."
+            },
+            "cta": {
+                "how": "Come funziona"
+            }
+        },
+        "why": {
+            "title": "Perché sceglierci",
+            "items": {
+                "fast": {
+                    "title": "Pagamenti rapidi",
+                    "desc": "Preleva rapidamente con il tuo metodo preferito."
+                },
+                "secure": {
+                    "title": "Sicuro e corretto",
+                    "desc": "Sicurezza avanzata e strumenti per gioco responsabile."
+                },
+                "selection": {
+                    "title": "Ampia selezione",
+                    "desc": "Slot, tavoli e giochi live dei migliori studi."
+                },
+                "support": {
+                    "title": "Supporto 24/7",
+                    "desc": "Persone reali pronte ad aiutarti, sempre."
+                }
+            }
+        },
+        "how": {
+            "title": "Come giocare",
+            "steps": {
+                "create": {
+                    "title": "Crea",
+                    "desc": "Apri il tuo account gratuito in meno di un minuto.",
+                    "alt": "Crea il tuo account MrSpinny"
+                },
+                "deposit": {
+                    "title": "Deposita",
+                    "desc": "Scegli carte, banca o crypto e ricarica il saldo.",
+                    "alt": "Deposita con carte, banca o crypto"
+                },
+                "play": {
+                    "title": "Gioca",
+                    "desc": "Scopri slot, tavoli e casinò live con promo.",
+                    "alt": "Gioca a slot, tavoli e casinò live"
+                },
+                "withdraw": {
+                    "title": "Preleva",
+                    "desc": "Goditi prelievi rapidi e trasparenti quando vinci.",
+                    "alt": "Preleva rapidamente e in sicurezza"
+                }
+            }
+        },
+        "gallery": {
+            "roulette": "Roulette",
+            "blackjack": "Blackjack",
+            "slots": "Slot",
+            "liveTables": "Tavoli live"
+        },
+        "faq": {
+            "title": "Domande frequenti",
+            "q1": {
+                "q": "È gioco con denaro reale?",
+                "a": "Questa è un’anteprima marketing. Il gioco reale avviene su {{domain}} ed è solo per 18+, soggetto alle leggi locali."
+            },
+            "q2": {
+                "q": "Come reclamo il mio bonus?",
+                "a": "Gira la ruota, crea un account, fai il tuo primo deposito e segui le istruzioni nella pagina promozioni."
+            },
+            "q3": {
+                "q": "Quali metodi di pagamento sono supportati?",
+                "a": "Carte, bonifico bancario e principali crypto come BTC, ETH, USDT e altri. Vedi la pagina Pagamenti per i dettagli."
+            },
+            "q4": {
+                "q": "Offrite supporto?",
+                "a": "Sì. Il nostro team è disponibile 24/7 via email e chat live."
+            }
+        },
+        "modal": {
+            "title": "Gira per un bonus di benvenuto",
+            "sub": "Questa è un’anteprima marketing (IP). Il gioco reale avviene su {{domain}}. Solo 18+.",
+            "spin": "Gira ora",
+            "claim": "Richiedi il tuo bonus"
+        },
+        "noscript": {
+            "text": "JavaScript è necessario per girare la ruota. Puoi comunque",
+            "link": "vedere le promozioni qui"
         }
     }
 }

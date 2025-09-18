@@ -1,7 +1,7 @@
 {
     "header": {
         "aria": {
-            "brandHome": "Startseite von MrSpinny",
+            "brandHome": "MrSpinny Startseite",
             "openMenu": "Menü öffnen",
             "closeMenu": "Menü schließen",
             "mainMenu": "Hauptmenü"
@@ -10,7 +10,7 @@
             "home": "Startseite",
             "slots": "Slots",
             "liveCasino": "Live-Casino",
-            "banking": "Banking",
+            "banking": "Bankwesen",
             "contact": "Kontakt"
         },
         "cta": {
@@ -32,7 +32,7 @@
     },
     "footer": {
         "aria": {
-            "brandHome": "Startseite von MrSpinny"
+            "brandHome": "MrSpinny Startseite"
         },
         "columns": {
             "games": "Spiele",
@@ -54,8 +54,133 @@
             "responsibleGaming": "Verantwortungsvolles Spielen"
         },
         "legal": {
-            "operatorLine": "MrSpinny.com wird von Decordetails OÜ, Harju maakond, Tallinn, Kesklinna linnaosa, Tornimäe tn 5, 10145, Reg.-Nr. 17011692, betrieben. Das Spielangebot erfolgt gemäß den geltenden Gesetzen und Altersbeschränkungen. Bei Bedarf kontaktieren Sie {{email}}.",
+            "operatorLine": "MrSpinny.com wird betrieben von Decordetails OÜ, Harju maakond, Tallinn, Kesklinna linnaosa, Tornimäe tn 5, 10145, Reg.-Nr. 17011692. Glücksspiel wird gemäß den geltenden Gesetzen und Altersbeschränkungen angeboten. Für Hilfe kontaktieren Sie {{email}}.",
             "copyright": "© MrSpinny. Alle Rechte vorbehalten | {{year}}."
+        }
+    },
+    "home": {
+        "hero": {
+            "titleA": "Entdecke deinen",
+            "titleB": "Willkommensbonus",
+            "subtitle": "Drehe das Rad, um deine Belohnung zu sehen. Konto erstellen und einzahlen, um sie zu beanspruchen.",
+            "cta": {
+                "spin": "Rad drehen"
+            }
+        },
+        "cards": {
+            "slots": {
+                "badge": "Heiß",
+                "title": "Top Slots",
+                "desc": "Drehe angesagte Walzen mit täglichen Boosts.",
+                "cta": "Entdecken"
+            },
+            "live": {
+                "badge": "Live",
+                "title": "Live-Casino",
+                "desc": "Echte Dealer, sofortiger Nervenkitzel, jederzeit.",
+                "cta": "Betreten"
+            },
+            "promos": {
+                "badge": "Bonus",
+                "title": "Tägliche Aktionen",
+                "desc": "Reloads, Freispiele und Überraschungsgewinne.",
+                "cta": "Alle ansehen"
+            }
+        },
+        "about": {
+            "title": "Über MrSpinny",
+            "alt": "Spieler genießen MrSpinny-Spiele",
+            "body": "MrSpinny kombiniert faires Spiel, schnelle Auszahlungen und großzügige Belohnungen zu einem reibungslosen Casino-Erlebnis. Genieße hunderte Premium-Spiele, transparente Limits und freundlichen 24/7 Support.",
+            "points": {
+                "p1": "Blitzschnelle Auszahlungen auf Karten, Bank und Krypto.",
+                "p2": "Verantwortungs-Tools: Limits, Pausen und Reality Checks.",
+                "p3": "Tägliche Aktionen mit Freispielen und Reloads.",
+                "p4": "Sichere Plattform mit moderner Verschlüsselung."
+            },
+            "cta": {
+                "how": "So funktioniert’s"
+            }
+        },
+        "why": {
+            "title": "Warum wir?",
+            "items": {
+                "fast": {
+                    "title": "Schnelle Auszahlungen",
+                    "desc": "Schnell auf deine bevorzugte Methode auszahlen."
+                },
+                "secure": {
+                    "title": "Fair & Sicher",
+                    "desc": "Top-Sicherheit und verantwortungsvolles Spielen."
+                },
+                "selection": {
+                    "title": "Große Auswahl",
+                    "desc": "Slots, Tische und Live-Titel von führenden Studios."
+                },
+                "support": {
+                    "title": "24/7 Support",
+                    "desc": "Echte Menschen helfen jederzeit."
+                }
+            }
+        },
+        "how": {
+            "title": "So spielst du",
+            "steps": {
+                "create": {
+                    "title": "Erstellen",
+                    "desc": "Erstelle in weniger als einer Minute dein kostenloses Konto.",
+                    "alt": "Erstelle dein MrSpinny-Konto"
+                },
+                "deposit": {
+                    "title": "Einzahlen",
+                    "desc": "Wähle Karten, Bank oder Krypto und lade dein Guthaben auf.",
+                    "alt": "Einzahlen mit Karten, Bank oder Krypto"
+                },
+                "play": {
+                    "title": "Spielen",
+                    "desc": "Entdecke Slots, Tische und Live-Casino mit Aktionen.",
+                    "alt": "Spiele Slots, Tische und Live-Casino"
+                },
+                "withdraw": {
+                    "title": "Auszahlen",
+                    "desc": "Genieße schnelle, transparente Auszahlungen bei Gewinn.",
+                    "alt": "Schnell und sicher auszahlen"
+                }
+            }
+        },
+        "gallery": {
+            "roulette": "Roulette",
+            "blackjack": "Blackjack",
+            "slots": "Slots",
+            "liveTables": "Live-Tische"
+        },
+        "faq": {
+            "title": "Häufige Fragen",
+            "q1": {
+                "q": "Ist das Echtgeldspiel?",
+                "a": "Dies ist eine Marketingvorschau. Echtgeldspiel findet auf {{domain}} statt und ist nur für 18+ nach geltendem Recht."
+            },
+            "q2": {
+                "q": "Wie erhalte ich meinen Bonus?",
+                "a": "Drehe das Rad, erstelle ein Konto, tätige deine erste Einzahlung und folge den Anweisungen auf der Aktionsseite."
+            },
+            "q3": {
+                "q": "Welche Zahlungsmethoden gibt es?",
+                "a": "Karten, Banküberweisung und große Kryptooptionen wie BTC, ETH, USDT und mehr. Siehe die Seite Bankwesen für Details."
+            },
+            "q4": {
+                "q": "Gibt es Support?",
+                "a": "Ja. Unser Team ist 24/7 per E-Mail und Live-Chat erreichbar."
+            }
+        },
+        "modal": {
+            "title": "Drehe für einen Willkommensbonus",
+            "sub": "Dies ist eine Marketingvorschau (IP). Echtgeldspiel findet auf {{domain}} statt. Nur 18+.",
+            "spin": "Jetzt drehen",
+            "claim": "Bonus sichern"
+        },
+        "noscript": {
+            "text": "JavaScript ist erforderlich, um das Rad zu drehen. Du kannst trotzdem",
+            "link": "hier Aktionen ansehen"
         }
     }
 }

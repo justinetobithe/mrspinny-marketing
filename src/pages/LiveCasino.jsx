@@ -1,55 +1,17 @@
-// src/pages/LiveCasino.jsx
 import { useMemo, useState } from "react";
+import { useTranslation } from "react-i18next";
 
 const LIVE_GAMES = [
-    {
-        title: "Live Blackjack A",
-        type: "blackjack",
-        imgVar: "/assets/images/gal-2.jpg",
-        href: "#",
-    },
-    {
-        title: "Lightning Roulette",
-        type: "roulette",
-        imgVar: "/assets/images/gal-1.jpg",
-        href: "#",
-    },
-    {
-        title: "Live Baccarat",
-        type: "baccarat",
-        imgVar: "/assets/images/banner-live.png",
-        href: "#",
-    },
-    {
-        title: "Crazy Time",
-        type: "game-show",
-        imgVar: "/assets/images/banner-live.png",
-        href: "#",
-    },
-    {
-        title: "Casino Hold’em",
-        type: "poker",
-        imgVar: "/assets/images/gal-4.jpg",
-        href: "#",
-    },
-    {
-        title: "Auto Roulette",
-        type: "roulette",
-        imgVar: "/assets/images/gal-1.jpg",
-        href: "#",
-    },
-];
-
-const CATS = [
-    ["all", "All"],
-    ["blackjack", "Blackjack"],
-    ["roulette", "Roulette"],
-    ["baccarat", "Baccarat"],
-    ["poker", "Poker"],
-    ["game-show", "Game Shows"],
+    { title: "Live Blackjack A", type: "blackjack", imgVar: "/assets/images/gallery/live_blackjack.png", href: "#" },
+    { title: "Lightning Roulette", type: "roulette", imgVar: "/assets/images/gallery/lightning_roulette.png", href: "#" },
+    { title: "Live Baccarat", type: "baccarat", imgVar: "/assets/images/gallery/live_baccarat.png", href: "#" },
+    { title: "Crazy Time", type: "game-show", imgVar: "/assets/images/gallery/crazy_time.png", href: "#" },
+    { title: "Casino Hold’em", type: "poker", imgVar: "/assets/images/gallery/casino_holdem.png", href: "#" },
+    { title: "Auto Roulette", type: "roulette", imgVar: "/assets/images/gallery/auto_roulette.png", href: "#" }
 ];
 
 export default function LiveCasino() {
+    const { t } = useTranslation();
     const [query, setQuery] = useState("");
     const [cat, setCat] = useState("all");
 
@@ -62,35 +24,33 @@ export default function LiveCasino() {
         });
     }, [query, cat]);
 
+    const cats = ["all", "blackjack", "roulette", "baccarat", "poker", "game-show"];
+
     return (
         <>
-            {/* HERO */}
             <section
                 className="hero"
-                style={{
-                    backgroundImage: "url('/assets/images/banner-3.png')",
-                    backgroundPosition: "top",
-                }}
+                style={{ backgroundImage: "url('/assets/images/banner-3.png')", backgroundPosition: "top" }}
             >
                 <div className="hero-blur" aria-hidden="true" />
                 <div className="hero-content">
                     <h1>
-                        Premium <span>Live Casino</span> Tables
+                        {t("live.hero.titleA")} <span>{t("live.hero.titleB")}</span> {t("live.hero.titleC")}
                     </h1>
-                    <p>Blackjack, Roulette, Baccarat, Poker, and Game Shows in HD.</p>
+                    <p>{t("live.hero.subtitle")}</p>
                     <a href="#" className="btn btn-primary">
-                        Enter Live Casino
+                        {t("live.hero.cta")}
                     </a>
                 </div>
             </section>
 
-            {/* FILTERS */}
-            <section className="container live-toolbar">
+            <section className="container live-toolbar" aria-label={t("live.toolbar.ariaLabel")}>
                 <div className="live-search">
                     <input
                         id="liveSearch"
                         type="search"
-                        placeholder="Search live tables…"
+                        placeholder={t("live.toolbar.searchPlaceholder")}
+                        aria-label={t("live.toolbar.searchAria")}
                         value={query}
                         onChange={(e) => setQuery(e.target.value)}
                     />
@@ -99,47 +59,46 @@ export default function LiveCasino() {
                     </svg>
                 </div>
 
-                <div className="live-cats">
-                    {CATS.map(([value, label]) => (
+                <div className="live-cats" role="tablist" aria-label={t("live.toolbar.categoriesAria")}>
+                    {cats.map((value) => (
                         <button
                             key={value}
                             className={`cat${cat === value ? " is-active" : ""}`}
                             data-filter={value}
+                            role="tab"
+                            aria-selected={cat === value}
                             onClick={() => setCat(value)}
                         >
-                            {label}
+                            {t(`live.cats.${value}`)}
                         </button>
                     ))}
                 </div>
             </section>
 
-            {/* GRID */}
             <section className="container games">
-                <h2 className="section-title">🎥 Popular Live Tables</h2>
+                <h2 className="section-title">{t("live.sectionTitle")}</h2>
 
-                <div id="liveGrid" className="live-grid">
-                    {filtered.map((g) => (
-                        <a
-                            key={g.title}
-                            className="live-card"
-                            href={g.href}
-                            data-type={g.type}
-                            data-title={g.title}
-                            aria-label={g.title}
-                            style={{ "--img": `url('${g.imgVar}')` }}
-                        >
-                            <span className="live-badge">
-                                {g.type === "game-show"
-                                    ? "Game Show"
-                                    : g.type.charAt(0).toUpperCase() + g.type.slice(1)}
-                            </span>
-                            <span className="live-title">{g.title}</span>
-                        </a>
-                    ))}
+                <div className="live-grid-wrap">
+                    <div id="liveGrid" className="live-grid">
+                        {filtered.map((g) => (
+                            <a
+                                key={g.title}
+                                className="live-card"
+                                href={g.href}
+                                data-type={g.type}
+                                data-title={g.title}
+                                aria-label={g.title}
+                                style={{ "--img": `url('${g.imgVar}')` }}
+                            >
+                                <span className="live-badge">{t(`live.badge.${g.type}`)}</span>
+                                <span className="live-title">{g.title}</span>
+                            </a>
+                        ))}
+                    </div>
                 </div>
 
                 <p id="liveEmpty" className="live-empty" hidden={filtered.length !== 0}>
-                    No tables found. Try a different search.
+                    {t("live.empty")}
                 </p>
             </section>
         </>

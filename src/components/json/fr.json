@@ -1,7 +1,7 @@
 {
     "header": {
         "aria": {
-            "brandHome": "Accueil de MrSpinny",
+            "brandHome": "Accueil MrSpinny",
             "openMenu": "Ouvrir le menu",
             "closeMenu": "Fermer le menu",
             "mainMenu": "Menu principal"
@@ -22,7 +22,7 @@
         "legal": {
             "support": "Support",
             "privacyPolicy": "Politique de confidentialité",
-            "termsOfService": "Conditions d'utilisation",
+            "termsOfService": "Conditions d’utilisation",
             "responsibleGaming": "Jeu responsable"
         },
         "language": {
@@ -32,7 +32,7 @@
     },
     "footer": {
         "aria": {
-            "brandHome": "Accueil de MrSpinny"
+            "brandHome": "Accueil MrSpinny"
         },
         "columns": {
             "games": "Jeux",
@@ -45,7 +45,7 @@
             "lottery": "Loterie",
             "roulette": "Roulette",
             "privacyPolicy": "Politique de confidentialité",
-            "termsOfService": "Conditions d'utilisation",
+            "termsOfService": "Conditions d’utilisation",
             "responsibleGaming": "Jeu responsable",
             "support": "Support"
         },
@@ -54,8 +54,133 @@
             "responsibleGaming": "Jeu responsable"
         },
         "legal": {
-            "operatorLine": "MrSpinny.com est exploité par Decordetails OÜ, Harju maakond, Tallinn, Kesklinna linnaosa, Tornimäe tn 5, 10145, n° d’enreg. 17011692. Les jeux sont proposés conformément aux lois et aux restrictions d’âge en vigueur. Pour obtenir de l’aide, contactez {{email}}.",
+            "operatorLine": "MrSpinny.com est exploité par Decordetails OÜ, Harju maakond, Tallinn, Kesklinna linnaosa, Tornimäe tn 5, 10145, n° d’enregistrement 17011692. Les jeux sont proposés conformément aux lois et restrictions d’âge en vigueur. Pour obtenir de l’aide, contactez {{email}}.",
             "copyright": "© MrSpinny. Tous droits réservés | {{year}}."
+        }
+    },
+    "home": {
+        "hero": {
+            "titleA": "Révélez votre",
+            "titleB": "Bonus de bienvenue",
+            "subtitle": "Faites tourner la roue pour découvrir votre récompense. Créez un compte et déposez pour la réclamer.",
+            "cta": {
+                "spin": "Faire tourner la roue"
+            }
+        },
+        "cards": {
+            "slots": {
+                "badge": "Chaud",
+                "title": "Meilleures machines",
+                "desc": "Faites tourner les rouleaux tendance avec des bonus quotidiens.",
+                "cta": "Explorer"
+            },
+            "live": {
+                "badge": "En direct",
+                "title": "Casino en direct",
+                "desc": "De vrais croupiers, des sensations instantanées, à tout moment.",
+                "cta": "Entrer"
+            },
+            "promos": {
+                "badge": "Bonus",
+                "title": "Promos quotidiennes",
+                "desc": "Recharges, tours gratuits et surprises.",
+                "cta": "Voir tout"
+            }
+        },
+        "about": {
+            "title": "À propos de MrSpinny",
+            "alt": "Des joueurs profitant des jeux MrSpinny",
+            "body": "MrSpinny combine jeu équitable, paiements rapides et récompenses généreuses dans une expérience de casino fluide. Profitez de centaines de jeux premium, de limites transparentes et d’un support amical 24/7.",
+            "points": {
+                "p1": "Paiements ultra-rapides vers cartes, banque et crypto.",
+                "p2": "Outils responsables : limites, pauses et rappels.",
+                "p3": "Promos quotidiennes avec tours gratuits et recharges.",
+                "p4": "Plateforme sécurisée avec chiffrement moderne."
+            },
+            "cta": {
+                "how": "Comment ça marche"
+            }
+        },
+        "why": {
+            "title": "Pourquoi nous choisir",
+            "items": {
+                "fast": {
+                    "title": "Paiements rapides",
+                    "desc": "Encaissez rapidement sur votre méthode préférée."
+                },
+                "secure": {
+                    "title": "Fiable et sécurisé",
+                    "desc": "Sécurité de haut niveau et outils de jeu responsable."
+                },
+                "selection": {
+                    "title": "Large sélection",
+                    "desc": "Machines, tables et jeux en direct des meilleurs studios."
+                },
+                "support": {
+                    "title": "Support 24/7",
+                    "desc": "De vraies personnes prêtes à vous aider à tout moment."
+                }
+            }
+        },
+        "how": {
+            "title": "Comment jouer",
+            "steps": {
+                "create": {
+                    "title": "Créer",
+                    "desc": "Ouvrez votre compte gratuit en moins d’une minute.",
+                    "alt": "Créer votre compte MrSpinny"
+                },
+                "deposit": {
+                    "title": "Déposer",
+                    "desc": "Choisissez cartes, banque ou crypto et alimentez votre solde.",
+                    "alt": "Déposez avec cartes, banque ou crypto"
+                },
+                "play": {
+                    "title": "Jouer",
+                    "desc": "Explorez les machines, tables et jeux en direct avec promos.",
+                    "alt": "Jouez aux machines, tables et casino en direct"
+                },
+                "withdraw": {
+                    "title": "Retirer",
+                    "desc": "Profitez de retraits rapides et transparents lorsque vous gagnez.",
+                    "alt": "Retirez rapidement et en toute sécurité"
+                }
+            }
+        },
+        "gallery": {
+            "roulette": "Roulette",
+            "blackjack": "Blackjack",
+            "slots": "Machines à sous",
+            "liveTables": "Tables en direct"
+        },
+        "faq": {
+            "title": "Questions fréquentes",
+            "q1": {
+                "q": "Est-ce avec de l’argent réel ?",
+                "a": "Cette page est un aperçu marketing. Le jeu réel a lieu sur {{domain}} et est réservé aux 18+, sous réserve des lois locales."
+            },
+            "q2": {
+                "q": "Comment obtenir mon bonus ?",
+                "a": "Faites tourner la roue, créez un compte, faites votre premier dépôt et suivez les instructions sur la page des promotions."
+            },
+            "q3": {
+                "q": "Quels moyens de paiement sont acceptés ?",
+                "a": "Cartes, virements bancaires et principales cryptos comme BTC, ETH, USDT et plus. Voir la page Banque pour plus de détails."
+            },
+            "q4": {
+                "q": "Proposez-vous un support ?",
+                "a": "Oui. Notre équipe est disponible 24/7 par email et chat en direct."
+            }
+        },
+        "modal": {
+            "title": "Tournez pour un bonus de bienvenue",
+            "sub": "Ceci est un aperçu marketing (IP). Le jeu réel a lieu sur {{domain}}. 18+ uniquement.",
+            "spin": "Tourner maintenant",
+            "claim": "Réclamer votre bonus"
+        },
+        "noscript": {
+            "text": "JavaScript est requis pour faire tourner la roue. Vous pouvez quand même",
+            "link": "voir les promotions ici"
         }
     }
 }

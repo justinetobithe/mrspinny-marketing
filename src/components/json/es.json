@@ -21,9 +21,9 @@
         },
         "legal": {
             "support": "Soporte",
-            "privacyPolicy": "Política de Privacidad",
-            "termsOfService": "Términos del Servicio",
-            "responsibleGaming": "Juego Responsable"
+            "privacyPolicy": "Política de privacidad",
+            "termsOfService": "Términos de servicio",
+            "responsibleGaming": "Juego responsable"
         },
         "language": {
             "english": "Inglés"
@@ -44,18 +44,143 @@
             "poker": "Póker",
             "lottery": "Lotería",
             "roulette": "Ruleta",
-            "privacyPolicy": "Política de Privacidad",
-            "termsOfService": "Términos del Servicio",
-            "responsibleGaming": "Juego Responsable",
+            "privacyPolicy": "Política de privacidad",
+            "termsOfService": "Términos de servicio",
+            "responsibleGaming": "Juego responsable",
             "support": "Soporte"
         },
         "badges": {
             "gambleAware": "GambleAware",
-            "responsibleGaming": "Juego Responsable"
+            "responsibleGaming": "Juego responsable"
         },
         "legal": {
-            "operatorLine": "MrSpinny.com es operado por Decordetails OÜ, Harju maakond, Tallinn, Kesklinna linnaosa, Tornimäe tn 5, 10145, reg. nº 17011692. El juego se ofrece conforme a las leyes y restricciones de edad aplicables. Para ayuda, contacte a {{email}}.",
+            "operatorLine": "MrSpinny.com es operado por Decordetails OÜ, Harju maakond, Tallin, Kesklinna linnaosa, Tornimäe tn 5, 10145, reg. nº 17011692. El juego se ofrece de acuerdo con las leyes y restricciones de edad aplicables. Para obtener ayuda, contacte a {{email}}.",
             "copyright": "© MrSpinny. Todos los derechos reservados | {{year}}."
+        }
+    },
+    "home": {
+        "hero": {
+            "titleA": "Revela tu",
+            "titleB": "Bono de bienvenida",
+            "subtitle": "Gira para ver tu premio. Crea una cuenta y deposita para reclamarlo.",
+            "cta": {
+                "spin": "Girar la ruleta"
+            }
+        },
+        "cards": {
+            "slots": {
+                "badge": "Caliente",
+                "title": "Tragamonedas destacadas",
+                "desc": "Gira carretes populares con bonificaciones diarias.",
+                "cta": "Explorar"
+            },
+            "live": {
+                "badge": "En vivo",
+                "title": "Casino en Vivo",
+                "desc": "Crupieres reales, emoción instantánea, en cualquier momento.",
+                "cta": "Entrar"
+            },
+            "promos": {
+                "badge": "Bono",
+                "title": "Promos diarias",
+                "desc": "Recargas, giros gratis y premios sorpresa.",
+                "cta": "Ver todo"
+            }
+        },
+        "about": {
+            "title": "Sobre MrSpinny",
+            "alt": "Jugadores disfrutando juegos de MrSpinny",
+            "body": "MrSpinny combina juego justo, pagos rápidos y grandes recompensas en una experiencia de casino fluida. Disfruta de cientos de juegos premium, límites transparentes y soporte amigable 24/7.",
+            "points": {
+                "p1": "Pagos ultrarrápidos a tarjetas, banco y cripto.",
+                "p2": "Herramientas responsables: límites, pausas y recordatorios.",
+                "p3": "Promos diarias con giros gratis y recargas.",
+                "p4": "Plataforma segura con cifrado moderno."
+            },
+            "cta": {
+                "how": "Cómo funciona"
+            }
+        },
+        "why": {
+            "title": "Por qué elegirnos",
+            "items": {
+                "fast": {
+                    "title": "Pagos rápidos",
+                    "desc": "Retira rápidamente a tu método preferido."
+                },
+                "secure": {
+                    "title": "Justo y seguro",
+                    "desc": "Máxima seguridad y herramientas de juego responsable."
+                },
+                "selection": {
+                    "title": "Gran selección",
+                    "desc": "Tragamonedas, mesas y juegos en vivo de estudios líderes."
+                },
+                "support": {
+                    "title": "Soporte 24/7",
+                    "desc": "Personas reales listas para ayudarte en cualquier momento."
+                }
+            }
+        },
+        "how": {
+            "title": "Cómo jugar",
+            "steps": {
+                "create": {
+                    "title": "Crear",
+                    "desc": "Abre tu cuenta gratuita en menos de un minuto.",
+                    "alt": "Crea tu cuenta en MrSpinny"
+                },
+                "deposit": {
+                    "title": "Depositar",
+                    "desc": "Elige tarjetas, banco o cripto y recarga tu saldo.",
+                    "alt": "Deposita con tarjetas, banco o cripto"
+                },
+                "play": {
+                    "title": "Jugar",
+                    "desc": "Explora tragamonedas, mesas y casino en vivo con promos.",
+                    "alt": "Juega tragamonedas, mesas y casino en vivo"
+                },
+                "withdraw": {
+                    "title": "Retirar",
+                    "desc": "Disfruta retiros rápidos y transparentes cuando ganes.",
+                    "alt": "Retira de forma rápida y segura"
+                }
+            }
+        },
+        "gallery": {
+            "roulette": "Ruleta",
+            "blackjack": "Blackjack",
+            "slots": "Tragamonedas",
+            "liveTables": "Mesas en vivo"
+        },
+        "faq": {
+            "title": "Preguntas frecuentes",
+            "q1": {
+                "q": "¿Es con dinero real?",
+                "a": "Esta página es una vista previa de marketing. El juego real se realiza en {{domain}} y es solo para mayores de 18, sujeto a las leyes locales."
+            },
+            "q2": {
+                "q": "¿Cómo reclamo mi bono?",
+                "a": "Gira la ruleta, crea una cuenta, haz tu primer depósito y sigue las instrucciones en la página de promociones."
+            },
+            "q3": {
+                "q": "¿Qué métodos de pago aceptan?",
+                "a": "Tarjetas, transferencias bancarias y principales criptos como BTC, ETH, USDT y más. Consulta la página de Banca para más detalles."
+            },
+            "q4": {
+                "q": "¿Ofrecen soporte?",
+                "a": "Sí. Nuestro equipo está disponible 24/7 por correo y chat en vivo."
+            }
+        },
+        "modal": {
+            "title": "Gira para obtener un bono de bienvenida",
+            "sub": "Esta es una vista previa de marketing (IP). El juego real se realiza en {{domain}}. Solo mayores de 18.",
+            "spin": "Girar ahora",
+            "claim": "Reclama tu bono"
+        },
+        "noscript": {
+            "text": "Se requiere JavaScript para girar la ruleta. Aún puedes",
+            "link": "ver promociones aquí"
         }
     }
 }

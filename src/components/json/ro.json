@@ -1,14 +1,14 @@
 {
     "header": {
         "aria": {
-            "brandHome": "Pagina de pornire MrSpinny",
+            "brandHome": "Acasă MrSpinny",
             "openMenu": "Deschide meniul",
             "closeMenu": "Închide meniul",
             "mainMenu": "Meniu principal"
         },
         "nav": {
             "home": "Acasă",
-            "slots": "Sloturi",
+            "slots": "Păcănele",
             "liveCasino": "Cazinou Live",
             "banking": "Plăți",
             "contact": "Contact"
@@ -22,7 +22,7 @@
         "legal": {
             "support": "Asistență",
             "privacyPolicy": "Politica de confidențialitate",
-            "termsOfService": "Termeni de utilizare",
+            "termsOfService": "Termeni și condiții",
             "responsibleGaming": "Joc responsabil"
         },
         "language": {
@@ -32,20 +32,20 @@
     },
     "footer": {
         "aria": {
-            "brandHome": "Pagina de pornire MrSpinny"
+            "brandHome": "Acasă MrSpinny"
         },
         "columns": {
             "games": "Jocuri",
             "info": "Informații"
         },
         "links": {
-            "slots": "Sloturi",
+            "slots": "Păcănele",
             "liveCasino": "Cazinou Live",
             "poker": "Poker",
             "lottery": "Loterie",
             "roulette": "Ruletă",
             "privacyPolicy": "Politica de confidențialitate",
-            "termsOfService": "Termeni de utilizare",
+            "termsOfService": "Termeni și condiții",
             "responsibleGaming": "Joc responsabil",
             "support": "Asistență"
         },
@@ -54,8 +54,133 @@
             "responsibleGaming": "Joc responsabil"
         },
         "legal": {
-            "operatorLine": "MrSpinny.com este operat de Decordetails OÜ, Harju maakond, Tallinn, Kesklinna linnaosa, Tornimäe tn 5, 10145, nr. înreg. 17011692. Jocurile sunt oferite în conformitate cu legislația și restricțiile de vârstă aplicabile. Pentru ajutor, contactați {{email}}.",
+            "operatorLine": "MrSpinny.com este operat de Decordetails OÜ, Harju maakond, Tallinn, Kesklinna linnaosa, Tornimäe tn 5, 10145, nr. înreg. 17011692. Jocurile sunt oferite conform legislației și restricțiilor de vârstă aplicabile. Pentru ajutor, contactați {{email}}.",
             "copyright": "© MrSpinny. Toate drepturile rezervate | {{year}}."
+        }
+    },
+    "home": {
+        "hero": {
+            "titleA": "Descoperă-ți",
+            "titleB": "Bonusul de bun venit",
+            "subtitle": "Învarte roata pentru a-ți vedea recompensa. Creează un cont și depune pentru a o revendica.",
+            "cta": {
+                "spin": "Învarte roata"
+            }
+        },
+        "cards": {
+            "slots": {
+                "badge": "Fierbinte",
+                "title": "Top Păcănele",
+                "desc": "Învarte rolele populare cu bonusuri zilnice.",
+                "cta": "Explorează"
+            },
+            "live": {
+                "badge": "Live",
+                "title": "Cazinou Live",
+                "desc": "Dealeri reali, emoții instantanee, oricând.",
+                "cta": "Intră"
+            },
+            "promos": {
+                "badge": "Bonus",
+                "title": "Promoții zilnice",
+                "desc": "Reîncărcări, rotiri gratuite și surprize.",
+                "cta": "Vezi tot"
+            }
+        },
+        "about": {
+            "title": "Despre MrSpinny",
+            "alt": "Jucători care se bucură de jocurile MrSpinny",
+            "body": "MrSpinny combină jocul corect, plățile rapide și recompensele generoase într-o experiență de cazinou lină. Bucură-te de sute de jocuri premium, limite transparente și suport prietenos 24/7.",
+            "points": {
+                "p1": "Plăți ultra-rapide pe card, bancă și cripto.",
+                "p2": "Instrumente responsabile: limite, pauze și memento-uri.",
+                "p3": "Promoții zilnice cu rotiri gratuite și reîncărcări.",
+                "p4": "Platformă sigură cu criptare modernă."
+            },
+            "cta": {
+                "how": "Cum funcționează"
+            }
+        },
+        "why": {
+            "title": "De ce să ne alegi",
+            "items": {
+                "fast": {
+                    "title": "Plăți rapide",
+                    "desc": "Retrage rapid pe metoda ta preferată."
+                },
+                "secure": {
+                    "title": "Corect și sigur",
+                    "desc": "Securitate de top și instrumente de joc responsabil."
+                },
+                "selection": {
+                    "title": "Selecție uriașă",
+                    "desc": "Păcănele, mese și jocuri live de la studiouri de top."
+                },
+                "support": {
+                    "title": "Asistență 24/7",
+                    "desc": "Oameni reali gata să te ajute, oricând."
+                }
+            }
+        },
+        "how": {
+            "title": "Cum să joci",
+            "steps": {
+                "create": {
+                    "title": "Creează",
+                    "desc": "Deschide-ți contul gratuit în mai puțin de un minut.",
+                    "alt": "Creează contul tău MrSpinny"
+                },
+                "deposit": {
+                    "title": "Depune",
+                    "desc": "Alege carduri, bancă sau cripto și alimentează-ți soldul.",
+                    "alt": "Depune cu carduri, bancă sau cripto"
+                },
+                "play": {
+                    "title": "Joacă",
+                    "desc": "Explorează păcănele, mese și cazinou live cu promoții.",
+                    "alt": "Joacă păcănele, mese și cazinou live"
+                },
+                "withdraw": {
+                    "title": "Retrage",
+                    "desc": "Bucură-te de retrageri rapide și transparente când câștigi.",
+                    "alt": "Retrage rapid și în siguranță"
+                }
+            }
+        },
+        "gallery": {
+            "roulette": "Ruletă",
+            "blackjack": "Blackjack",
+            "slots": "Păcănele",
+            "liveTables": "Mese live"
+        },
+        "faq": {
+            "title": "Întrebări frecvente",
+            "q1": {
+                "q": "Este joc pe bani reali?",
+                "a": "Aceasta este o previzualizare de marketing. Jocul real are loc pe {{domain}} și este doar pentru 18+, sub rezerva legilor locale."
+            },
+            "q2": {
+                "q": "Cum îmi revendic bonusul?",
+                "a": "Învarte roata, creează un cont, fă primul depozit și urmează instrucțiunile de pe pagina promoțiilor."
+            },
+            "q3": {
+                "q": "Ce metode de plată sunt acceptate?",
+                "a": "Carduri, transfer bancar și principalele criptomonede precum BTC, ETH, USDT și altele. Vezi pagina Plăți pentru detalii."
+            },
+            "q4": {
+                "q": "Oferiți asistență?",
+                "a": "Da. Echipa noastră este disponibilă 24/7 prin email și chat live."
+            }
+        },
+        "modal": {
+            "title": "Învarte pentru un bonus de bun venit",
+            "sub": "Aceasta este o previzualizare de marketing (IP). Jocul real are loc pe {{domain}}. Doar 18+.",
+            "spin": "Învarte acum",
+            "claim": "Revendică bonusul"
+        },
+        "noscript": {
+            "text": "JavaScript este necesar pentru a învârti roata. Poți totuși",
+            "link": "vedea promoțiile aici"
         }
     }
 }

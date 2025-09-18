@@ -1,10 +1,13 @@
-// src/pages/Contact.jsx
 import { useRef, useState } from "react";
+import { useTranslation } from "react-i18next";
 
 export default function Contact() {
+    const { t } = useTranslation();
     const formRef = useRef(null);
     const [sending, setSending] = useState(false);
     const [noteVisible, setNoteVisible] = useState(false);
+
+    const SUPPORT_EMAIL = "support@mrspinny.com";
 
     const onSubmit = (e) => {
         e.preventDefault();
@@ -26,21 +29,19 @@ export default function Contact() {
         <main>
             <section className="container contact-head">
                 <h1>
-                    Contact <span>Support</span>
+                    {t("contact.hero.titleA")} <span>{t("contact.hero.titleB")}</span>
                 </h1>
-                <p className="contact-sub">
-                    We’re here 24/7. Reach out and we’ll get back to you fast.
-                </p>
+                <p className="contact-sub">{t("contact.hero.subtitle")}</p>
             </section>
 
             <section className="container contact-cards">
                 <article className="contact-card">
                     <div className="contact-ico">✉️</div>
                     <div>
-                        <h3>Email Support</h3>
-                        <p>For account, payments, or technical questions.</p>
-                        <a className="btn btn-primary" href="mailto:support@mrspinny.com">
-                            support@mrspinny.com
+                        <h3>{t("contact.cards.email.title")}</h3>
+                        <p>{t("contact.cards.email.desc")}</p>
+                        <a className="btn btn-primary" href={`mailto:${SUPPORT_EMAIL}`}>
+                            {t("contact.cards.email.cta", { email: SUPPORT_EMAIL })}
                         </a>
                     </div>
                 </article>
@@ -48,10 +49,10 @@ export default function Contact() {
                 <article className="contact-card">
                     <div className="contact-ico">💬</div>
                     <div>
-                        <h3>Live Chat</h3>
-                        <p>Get real-time help from our team.</p>
+                        <h3>{t("contact.cards.chat.title")}</h3>
+                        <p>{t("contact.cards.chat.desc")}</p>
                         <a className="btn btn-outline" href="#">
-                            Open Chat
+                            {t("contact.cards.chat.cta")}
                         </a>
                     </div>
                 </article>
@@ -59,10 +60,10 @@ export default function Contact() {
                 <article className="contact-card">
                     <div className="contact-ico">🛡️</div>
                     <div>
-                        <h3>Responsible Gaming</h3>
-                        <p>Need a break, limits, or advice? We can help.</p>
+                        <h3>{t("contact.cards.rg.title")}</h3>
+                        <p>{t("contact.cards.rg.desc")}</p>
                         <a className="btn btn-outline" href="#">
-                            Learn More
+                            {t("contact.cards.rg.cta")}
                         </a>
                     </div>
                 </article>
@@ -76,63 +77,76 @@ export default function Contact() {
                     noValidate
                     onSubmit={onSubmit}
                 >
-                    <h2 className="section-title">📨 Send us a message</h2>
+                    <h2 className="section-title">{t("contact.form.title")}</h2>
 
                     <div className="form-field">
-                        <label htmlFor="name">Full name</label>
+                        <label htmlFor="name">{t("contact.form.name.label")}</label>
                         <input
                             id="name"
                             name="name"
                             type="text"
                             className="form-input"
-                            placeholder="Jane Doe"
+                            placeholder={t("contact.form.name.ph")}
                             required
                         />
                     </div>
 
                     <div className="form-row">
                         <div className="form-field">
-                            <label htmlFor="email">Email</label>
+                            <label htmlFor="email">{t("contact.form.email.label")}</label>
                             <input
                                 id="email"
                                 name="email"
                                 type="email"
                                 className="form-input"
-                                placeholder="you@email.com"
+                                placeholder={t("contact.form.email.ph")}
                                 required
                             />
                         </div>
                         <div className="form-field">
-                            <label htmlFor="topic">Topic</label>
-                            <select id="topic" name="topic" className="form-input" defaultValue="General">
-                                <option value="General">General</option>
-                                <option value="Payments">Payments</option>
-                                <option value="Account">Account &amp; Verification</option>
-                                <option value="Technical">Technical</option>
+                            <label htmlFor="topic">{t("contact.form.topic.label")}</label>
+                            <select
+                                id="topic"
+                                name="topic"
+                                className="form-input"
+                                defaultValue="general"
+                            >
+                                <option value="general">
+                                    {t("contact.form.topic.options.general")}
+                                </option>
+                                <option value="payments">
+                                    {t("contact.form.topic.options.payments")}
+                                </option>
+                                <option value="account">
+                                    {t("contact.form.topic.options.account")}
+                                </option>
+                                <option value="technical">
+                                    {t("contact.form.topic.options.technical")}
+                                </option>
                             </select>
                         </div>
                     </div>
 
                     <div className="form-field">
-                        <label htmlFor="msg">Message</label>
+                        <label htmlFor="msg">{t("contact.form.message.label")}</label>
                         <textarea
                             id="msg"
                             name="message"
                             className="form-input"
                             rows={6}
-                            placeholder="How can we help?"
+                            placeholder={t("contact.form.message.ph")}
                             required
                         />
                     </div>
 
                     <label className="consent">
-                        <input type="checkbox" id="agree" required /> I agree to the processing of my
-                        message for support purposes.
+                        <input type="checkbox" id="agree" required />{" "}
+                        {t("contact.form.consent")}
                     </label>
 
                     <div className="form-actions">
                         <button type="submit" className="btn btn-primary" id="sendBtn" disabled={sending}>
-                            {sending ? "Sending…" : "Send Message"}
+                            {sending ? t("contact.form.sending") : t("contact.form.send")}
                         </button>
                         <p
                             id="formNote"
@@ -140,53 +154,59 @@ export default function Contact() {
                             aria-live="polite"
                             hidden={!noteVisible}
                         >
-                            Thanks! Your message has been sent.
+                            {t("contact.form.note")}
                         </p>
                     </div>
 
                     <small className="contact-note">
-                        We’ll never ask for your password or 2FA codes.
+                        {t("contact.form.securityNote")}
                     </small>
                 </form>
 
                 <aside className="contact-aside">
-                    <h3>Company details</h3>
+                    <h3>{t("contact.aside.company.title")}</h3>
                     <ul className="contact-list">
                         <li>
-                            <b>Operator:</b> Decordetails OÜ
+                            <b>{t("contact.aside.company.operator")}</b>{" "}
+                            {t("contact.aside.company.operatorName")}
                         </li>
                         <li>
-                            <b>Reg. no:</b> 17011692
+                            <b>{t("contact.aside.company.reg")}</b>{" "}
+                            {t("contact.aside.company.regNo")}
                         </li>
                         <li>
-                            <b>Address:</b> Tornimäe tn 5, Kesklinna linnaosa, Tallinn, 10145, Harju maakond
+                            <b>{t("contact.aside.company.addressLabel")}</b>{" "}
+                            {t("contact.aside.company.address")}
                         </li>
                         <li>
-                            <b>Email:</b>{" "}
-                            <a href="mailto:support@mrspinny.com">support@mrspinny.com</a>
+                            <b>{t("contact.aside.company.emailLabel")}</b>{" "}
+                            <a href={`mailto:${SUPPORT_EMAIL}`}>
+                                {t("contact.cards.email.cta", { email: SUPPORT_EMAIL })}
+                            </a>
                         </li>
                         <li>
-                            <b>Hours:</b> 24/7
+                            <b>{t("contact.aside.company.hours")}</b>{" "}
+                            {t("contact.aside.company.hoursValue")}
                         </li>
                     </ul>
 
-                    <h3>Response times</h3>
+                    <h3>{t("contact.aside.response.title")}</h3>
                     <ul className="contact-list">
-                        <li>Email: within 6–12 hours</li>
-                        <li>Chat: instant (queue-based)</li>
-                        <li>Payments: same day on supported methods</li>
+                        <li>{t("contact.aside.response.email")}</li>
+                        <li>{t("contact.aside.response.chat")}</li>
+                        <li>{t("contact.aside.response.payments")}</li>
                     </ul>
 
-                    <h3>Quick links</h3>
+                    <h3>{t("contact.aside.links.title")}</h3>
                     <div className="contact-links">
                         <a className="pill" href="/banking">
-                            Banking
+                            {t("header.nav.banking")}
                         </a>
                         <a className="pill" href="/live-casino">
-                            Live Casino
+                            {t("header.nav.liveCasino")}
                         </a>
                         <a className="pill" href="/slots">
-                            Slots
+                            {t("header.nav.slots")}
                         </a>
                     </div>
                 </aside>

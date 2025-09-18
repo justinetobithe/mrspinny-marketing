@@ -1,26 +1,54 @@
-import { useEffect } from "react";
+import { useEffect, useCallback } from "react";
 
 export default function Landing() {
-    useEffect(() => {
-        const boot = () => window.initMrSpinny && window.initMrSpinny();
+    const boot = useCallback(() => {
+        if (typeof window.initMrSpinny === "function") {
+            try {
+                window.initMrSpinny();
+            } catch (e) {
+                console.error("initMrSpinny failed:", e);
+            }
+        }
+    }, []);
 
+    useEffect(() => {
+        let removeOnLoad;
         const existing = document.querySelector('script[data-mrspinny="1"]');
-        if (!window.initMrSpinny && !existing) {
+        const hasInit = typeof window.initMrSpinny === "function";
+
+        if (!hasInit && !existing) {
             const s = document.createElement("script");
             s.src = "/js/script.js";
-            s.async = false;
+            s.defer = true;
             s.dataset.mrspinny = "1";
             s.onload = boot;
+            s.onerror = () => console.error("Failed to load /js/script.js");
             document.body.appendChild(s);
-        } else if (!window.initMrSpinny && existing) {
+        } else if (!hasInit && existing) {
             const onLoad = () => boot();
             existing.addEventListener("load", onLoad, { once: true });
-            return () => existing.removeEventListener("load", onLoad);
+            removeOnLoad = () => existing.removeEventListener("load", onLoad);
         } else {
             boot();
         }
 
-        return () => window.destroyMrSpinny && window.destroyMrSpinny();
+        return () => {
+            if (typeof window.destroyMrSpinny === "function") {
+                try {
+                    window.destroyMrSpinny();
+                } catch (e) {
+                    console.warn("destroyMrSpinny failed:", e);
+                }
+            }
+            if (removeOnLoad) removeOnLoad();
+        };
+    }, [boot]);
+
+    const handleSpinClick = useCallback((e) => {
+        if (typeof window.initMrSpinny !== "function") {
+            e.preventDefault();
+            window.location.assign("https://mrspinny.com/promotions");
+        }
     }, []);
 
     return (
@@ -35,8 +63,18 @@ export default function Landing() {
                     </h1>
                     <p>New players only. Reveal your offer, register, and deposit to claim.</p>
                     <div className="promo-cta">
-                        <a id="openWelcome" href="#welcome" className="btn btn-primary">Spin the Wheel</a>
-                        <a href="https://mrspinny.com/" className="btn btn-outline">Play Now</a>
+                        <a
+                            id="openWelcome"
+                            href="#welcome"
+                            className="btn btn-primary"
+                            aria-controls="welcomeModal"
+                            onClick={handleSpinClick}
+                        >
+                            Spin the Wheel
+                        </a>
+                        <a href="https://mrspinny.com/" className="btn btn-outline">
+                            Play Now
+                        </a>
                     </div>
                 </div>
             </section>
@@ -45,22 +83,22 @@ export default function Landing() {
                 <h2 className="section-title">Why MrSpinny</h2>
                 <div className="why-cards">
                     <div className="why-card">
-                        <img src="/assets/images/icon-fast-payouts.png" alt="" width="64" height="64" loading="lazy" />
+                        <img src="/assets/images/icon-fast-payouts.png" alt="" width="64" height="64" loading="lazy" decoding="async" />
                         <h3>Fast Payouts</h3>
                         <p>Quick withdrawals to cards, bank, and crypto.</p>
                     </div>
                     <div className="why-card">
-                        <img src="/assets/images/icon-fair-secure.png" alt="" width="64" height="64" loading="lazy" />
+                        <img src="/assets/images/icon-fair-secure.png" alt="" width="64" height="64" loading="lazy" decoding="async" />
                         <h3>Fair &amp; Secure</h3>
                         <p>Modern security and responsible tools.</p>
                     </div>
                     <div className="why-card">
-                        <img src="/assets/images/icon-huge-selection.png" alt="" width="64" height="64" loading="lazy" />
+                        <img src="/assets/images/icon-huge-selection.png" alt="" width="64" height="64" loading="lazy" decoding="async" />
                         <h3>Hundreds of Games</h3>
                         <p>Top slots, tables, and live titles.</p>
                     </div>
                     <div className="why-card">
-                        <img src="/assets/images/icon-247-support.png" alt="" width="64" height="64" loading="lazy" />
+                        <img src="/assets/images/icon-247-support.png" alt="" width="64" height="64" loading="lazy" decoding="async" />
                         <h3>24/7 Support</h3>
                         <p>Real people, always on.</p>
                     </div>
@@ -71,25 +109,25 @@ export default function Landing() {
                 <h2 className="section-title">How It Works</h2>
                 <div className="steps-grid">
                     <div className="step-card">
-                        <img src="/assets/images/how-create.png" alt="" loading="lazy" />
+                        <img src="/assets/images/how-create.png" alt="" loading="lazy" decoding="async" />
                         <div className="step-num">1</div>
                         <h3>Spin</h3>
                         <p>Open the wheel to reveal your bonus.</p>
                     </div>
                     <div className="step-card">
-                        <img src="/assets/images/how-deposit.png" alt="" loading="lazy" />
+                        <img src="/assets/images/how-deposit.png" alt="" loading="lazy" decoding="async" />
                         <div className="step-num">2</div>
                         <h3>Register</h3>
                         <p>Create your MrSpinny account.</p>
                     </div>
                     <div className="step-card">
-                        <img src="/assets/images/how-play.png" alt="" loading="lazy" />
+                        <img src="/assets/images/how-play.png" alt="" loading="lazy" decoding="async" />
                         <div className="step-num">3</div>
                         <h3>Deposit</h3>
                         <p>Choose cards, bank, or crypto.</p>
                     </div>
                     <div className="step-card">
-                        <img src="/assets/images/how-withdraw.png" alt="" loading="lazy" />
+                        <img src="/assets/images/how-withdraw.png" alt="" loading="lazy" decoding="async" />
                         <div className="step-num">4</div>
                         <h3>Claim &amp; Play</h3>
                         <p>Activate your offer and start playing.</p>
@@ -168,6 +206,13 @@ export default function Landing() {
                     </div>
                 </div>
             </div>
+
+            <noscript>
+                <p style={{ textAlign: "center", margin: "16px 0" }}>
+                    JavaScript is required to spin the wheel. You can still{" "}
+                    <a href="https://mrspinny.com/promotions">view promotions here</a>.
+                </p>
+            </noscript>
         </main>
     );
 }

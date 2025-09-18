@@ -57,5 +57,390 @@
             "operatorLine": "MrSpinny.com is operated by Decordetails OÜ, Harju maakond, Tallinn, Kesklinna linnaosa, Tornimäe tn 5, 10145, reg. no. 17011692. Gaming is offered in accordance with applicable laws and age restrictions. For help, contact {{email}}.",
             "copyright": "© MrSpinny. All rights reserved | {{year}}."
         }
+    },
+    "home": {
+        "hero": {
+            "titleA": "Reveal Your",
+            "titleB": "Welcome Bonus",
+            "subtitle": "Spin to see your reward. Create an account and deposit to claim.",
+            "cta": {
+                "spin": "Spin the Wheel"
+            }
+        },
+        "cards": {
+            "slots": {
+                "badge": "Hot",
+                "title": "Top Slots",
+                "desc": "Spin trending reels with daily boosts.",
+                "cta": "Explore"
+            },
+            "live": {
+                "badge": "Live",
+                "title": "Live Casino",
+                "desc": "Real dealers, instant thrills, anytime.",
+                "cta": "Enter"
+            },
+            "promos": {
+                "badge": "Bonus",
+                "title": "Daily Promos",
+                "desc": "Reloads, free spins, and surprise drops.",
+                "cta": "View All"
+            }
+        },
+        "about": {
+            "title": "About MrSpinny",
+            "alt": "Players enjoying MrSpinny games",
+            "body": "MrSpinny blends fair play, fast payouts, and generous rewards into a smooth casino experience. Enjoy hundreds of premium games, transparent limits, and friendly 24/7 support.",
+            "points": {
+                "p1": "Lightning-fast payouts to cards, bank, and crypto.",
+                "p2": "Responsible tools: limits, cooldowns, and reality checks.",
+                "p3": "Daily promos with free spins and reloads.",
+                "p4": "Secure platform with modern encryption."
+            },
+            "cta": {
+                "how": "How It Works"
+            }
+        },
+        "why": {
+            "title": "Why Choose Us",
+            "items": {
+                "fast": {
+                    "title": "Fast Payouts",
+                    "desc": "Cash out quickly to your preferred method."
+                },
+                "secure": {
+                    "title": "Fair & Secure",
+                    "desc": "Top-tier security and responsible gaming tools."
+                },
+                "selection": {
+                    "title": "Huge Selection",
+                    "desc": "Slots, tables, and live titles from leading studios."
+                },
+                "support": {
+                    "title": "24/7 Support",
+                    "desc": "Real people ready to help, day or night."
+                }
+            }
+        },
+        "how": {
+            "title": "How to Play",
+            "steps": {
+                "create": {
+                    "title": "Create",
+                    "desc": "Open your free account in under a minute.",
+                    "alt": "Create your MrSpinny account"
+                },
+                "deposit": {
+                    "title": "Deposit",
+                    "desc": "Choose cards, bank, or crypto and fund your wallet.",
+                    "alt": "Deposit with cards, bank, or crypto"
+                },
+                "play": {
+                    "title": "Play",
+                    "desc": "Explore slots, tables, and live casino with promos.",
+                    "alt": "Play slots, tables, and live casino"
+                },
+                "withdraw": {
+                    "title": "Withdraw",
+                    "desc": "Enjoy fast, transparent cashouts when you win.",
+                    "alt": "Withdraw quickly and securely"
+                }
+            }
+        },
+        "gallery": {
+            "roulette": "Roulette",
+            "blackjack": "Blackjack",
+            "slots": "Slots",
+            "liveTables": "Live Tables"
+        },
+        "faq": {
+            "title": "Frequently Asked Questions",
+            "q1": {
+                "q": "Is this real money play?",
+                "a": "This page is a marketing preview. Real play takes place at {{domain}} and is for 18+ only, subject to local laws."
+            },
+            "q2": {
+                "q": "How do I claim my bonus?",
+                "a": "Spin the wheel, create an account, make your first deposit, and follow the instructions on the promotions page."
+            },
+            "q3": {
+                "q": "What payment methods are supported?",
+                "a": "Cards, bank transfer, and major crypto options like BTC, ETH, USDT and more. See the Banking page for details."
+            },
+            "q4": {
+                "q": "Do you offer support?",
+                "a": "Yes. Our team is available 24/7 via email and live chat."
+            }
+        },
+        "modal": {
+            "title": "Spin for a Welcome Bonus",
+            "sub": "This is a marketing preview (IP). Real play happens at {{domain}}. 18+ only.",
+            "spin": "Spin Now",
+            "claim": "Claim Your Bonus"
+        },
+        "noscript": {
+            "text": "JavaScript is required to spin the wheel. You can still",
+            "link": "view promotions here"
+        }
+    },
+    "slots": {
+        "hero": {
+            "titleA": "Spin & Win on Top",
+            "titleB": "Slot Games",
+            "subtitle": "Explore popular titles with bonuses, megaways, and daily drops."
+        },
+        "toolbar": {
+            "ariaLabel": "Slots filters",
+            "searchPlaceholder": "Search slots…",
+            "searchAria": "Search slots",
+            "sortLabel": "Sort",
+            "sortAria": "Sort slots",
+            "sortOptions": {
+                "az": "A → Z",
+                "za": "Z → A",
+                "vol": "Volatility"
+            },
+            "categoriesAria": "Categories"
+        },
+        "pills": {
+            "all": "All",
+            "megaways": "Megaways",
+            "classic": "Classic",
+            "jackpot": "Jackpots",
+            "new": "New",
+            "popular": "Popular",
+            "fave": "★ Favorites"
+        },
+        "sectionTitle": "🎰 Featured Slots",
+        "cta": {
+            "play": "Play",
+            "demo": "Demo"
+        },
+        "empty": "No slots match your filters.",
+        "alt": {
+            "game": "Game"
+        },
+        "aria": {
+            "playGame": "Play {{title}}",
+            "addFav": "Add to favorites",
+            "removeFav": "Remove from favorites"
+        },
+        "hints": {
+            "toggleFav": "Press F to toggle favorite"
+        },
+        "vol": {
+            "labelShort": "Vol",
+            "labelFull": "Volatility"
+        },
+        "tags": {
+            "popular": "Popular",
+            "classic": "Classic",
+            "megaways": "Megaways",
+            "new": "New",
+            "jackpot": "Jackpot"
+        },
+        "ribbon": {
+            "dailyDrops": "Daily Drops",
+            "hot": "Hot"
+        }
+    },
+    "live": {
+        "hero": {
+            "titleA": "Premium",
+            "titleB": "Live Casino",
+            "titleC": "Tables",
+            "subtitle": "Blackjack, Roulette, Baccarat, Poker, and Game Shows in HD.",
+            "cta": "Enter Live Casino"
+        },
+        "toolbar": {
+            "ariaLabel": "Live casino filters",
+            "searchPlaceholder": "Search live tables…",
+            "searchAria": "Search live tables",
+            "categoriesAria": "Categories"
+        },
+        "cats": {
+            "all": "All",
+            "blackjack": "Blackjack",
+            "roulette": "Roulette",
+            "baccarat": "Baccarat",
+            "poker": "Poker",
+            "game-show": "Game Shows"
+        },
+        "sectionTitle": "🎥 Popular Live Tables",
+        "badge": {
+            "blackjack": "Blackjack",
+            "roulette": "Roulette",
+            "baccarat": "Baccarat",
+            "poker": "Poker",
+            "game-show": "Game Show"
+        },
+        "empty": "No tables found. Try a different search."
+    },
+    "banking": {
+        "hero": {
+            "titleA": "Fast & Secure",
+            "titleB": "Banking",
+            "subtitle": "Instant deposits, swift withdrawals, and trusted payment options.",
+            "cta": "Create Account"
+        },
+        "usp": {
+            "instant": {
+                "title": "Instant Deposits",
+                "desc": "Top up instantly with cards, e-wallets, and crypto."
+            },
+            "secure": {
+                "title": "Secure",
+                "desc": "Encrypted payments and account-level protections."
+            },
+            "payouts": {
+                "title": "Fast Payouts",
+                "desc": "Same-day processing on supported methods."
+            }
+        },
+        "methods": {
+            "title": "Payment Methods",
+            "names": {
+                "bankTransfer": "Bank Transfer"
+            },
+            "table": {
+                "headers": {
+                    "method": "Method",
+                    "type": "Type",
+                    "deposit": "Deposit",
+                    "withdrawal": "Withdrawal",
+                    "processing": "Processing"
+                },
+                "types": {
+                    "card": "Card",
+                    "ewallet": "E-wallet",
+                    "bank": "Bank",
+                    "crypto": "Crypto"
+                },
+                "speed": {
+                    "instant": "Instant",
+                    "h24": "Up to 24 hours",
+                    "d1_2_business_days": "1–2 business days",
+                    "d2_4_business_days": "2–4 business days",
+                    "d1_3_business_days": "1–3 business days",
+                    "m10_20": "~10–20 min",
+                    "m10_60": "~10–60 min"
+                },
+                "fees": {
+                    "noFees": "No fees from us",
+                    "bankFees": "Bank fees may apply",
+                    "networkFees": "Network fees apply"
+                }
+            },
+            "note": "Times and availability vary by provider, currency, and verification status. Limits apply."
+        },
+        "steps": {
+            "deposit": {
+                "title": "Deposit Steps",
+                "items": [
+                    "Sign in to your account.",
+                    "Open Cashier → Deposit.",
+                    "Select a method and amount.",
+                    "Confirm and complete payment."
+                ]
+            },
+            "withdrawal": {
+                "title": "Withdrawal Steps",
+                "items": [
+                    "Verify your profile if prompted.",
+                    "Open Cashier → Withdraw.",
+                    "Choose a payout method.",
+                    "Submit request and track status."
+                ]
+            }
+        },
+        "limits": {
+            "title": "Limits",
+            "minDeposit": "Minimum deposit:",
+            "minWithdrawal": "Minimum withdrawal:",
+            "dailyCap": "Daily withdrawal cap:",
+            "vip": "Higher limits available for VIPs"
+        },
+        "help": {
+            "title": "Need help with a payment?",
+            "desc": "Our team is here 24/7 to assist with deposits, withdrawals, or verification.",
+            "chat": "Live Chat",
+            "email": "Email Support"
+        }
+    },
+    "contact": {
+        "hero": {
+            "titleA": "Contact",
+            "titleB": "Support",
+            "subtitle": "We’re here 24/7. Reach out and we’ll get back to you fast."
+        },
+        "cards": {
+            "email": {
+                "title": "Email Support",
+                "desc": "For account, payments, or technical questions.",
+                "cta": "{{email}}"
+            },
+            "chat": {
+                "title": "Live Chat",
+                "desc": "Get real-time help from our team.",
+                "cta": "Open Chat"
+            },
+            "rg": {
+                "title": "Responsible Gaming",
+                "desc": "Need a break, limits, or advice? We can help.",
+                "cta": "Learn More"
+            }
+        },
+        "form": {
+            "title": "📨 Send us a message",
+            "name": {
+                "label": "Full name",
+                "ph": "Jane Doe"
+            },
+            "email": {
+                "label": "Email",
+                "ph": "you@email.com"
+            },
+            "topic": {
+                "label": "Topic",
+                "options": {
+                    "general": "General",
+                    "payments": "Payments",
+                    "account": "Account & Verification",
+                    "technical": "Technical"
+                }
+            },
+            "message": {
+                "label": "Message",
+                "ph": "How can we help?"
+            },
+            "consent": "I agree to the processing of my message for support purposes.",
+            "send": "Send Message",
+            "sending": "Sending…",
+            "note": "Thanks! Your message has been sent.",
+            "securityNote": "We’ll never ask for your password or 2FA codes."
+        },
+        "aside": {
+            "company": {
+                "title": "Company details",
+                "operator": "Operator:",
+                "operatorName": "Decordetails OÜ",
+                "reg": "Reg. no:",
+                "regNo": "17011692",
+                "addressLabel": "Address:",
+                "address": "Tornimäe tn 5, Kesklinna linnaosa, Tallinn, 10145, Harju maakond",
+                "emailLabel": "Email:",
+                "hours": "Hours:",
+                "hoursValue": "24/7"
+            },
+            "response": {
+                "title": "Response times",
+                "email": "Email: within 6–12 hours",
+                "chat": "Chat: instant (queue-based)",
+                "payments": "Payments: same day on supported methods"
+            },
+            "links": {
+                "title": "Quick links"
+            }
+        }
     }
 }

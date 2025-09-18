@@ -4,8 +4,8 @@ import { Link } from "react-router-dom";
 export default function Home() {
     useEffect(() => {
         const boot = () => window.initMrSpinny && window.initMrSpinny();
-
         const existing = document.querySelector('script[data-mrspinny="1"]');
+
         if (!window.initMrSpinny && !existing) {
             const s = document.createElement("script");
             s.src = "/js/script.js";
@@ -229,20 +229,12 @@ export default function Home() {
                         </p>
                     </header>
                     <div className="wheel-wrap" id="wheelWrap">
-                        <div className="wheel-bg" aria-hidden="true">
-                            {/* <div className="bg-aura" />
-                            <div className="bg-aurora" />
-                            <div className="bg-stars" />
-                            <div className="bg-spot" /> */}
-                        </div>
-                        {/* <div className="wheel-lights" aria-hidden="true" /> */}
+                        <div className="wheel-bg" aria-hidden="true" />
                         <div id="flameRing" className="flame-ring" aria-hidden="true" />
                         <div className="wheel-pointer" aria-hidden="true" />
                         <div id="wheel-svg" className="wheel" aria-live="polite" />
                         <button id="spinBtn" className="btn btn-primary wheel-btn">Spin Now</button>
                         <a id="claimBtn" className="btn btn-claim" href="https://mrspinny.com/promotions" hidden aria-live="polite">Claim Your Bonus</a>
-                        {/* <div id="confettiLayer" aria-hidden="true" /> */}
-                        {/* <div id="coinLayer" aria-hidden="true" /> */}
                         <div id="fireworkLayer" aria-hidden="true" />
                     </div>
                 </div>

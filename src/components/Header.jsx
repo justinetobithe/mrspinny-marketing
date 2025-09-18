@@ -1,40 +1,21 @@
 import { useState, useEffect, useRef } from "react";
 import { Link, NavLink, useLocation } from "react-router-dom";
-import {
-    Home as HomeIcon,
-    Dice5,
-    Tv,
-    Banknote,
-    Mail,
-    Menu as MenuIcon,
-    X as XIcon,
-    Globe
-} from "lucide-react";
+import { Home as HomeIcon, Dice5, Tv, Banknote, Mail, Menu as MenuIcon, X as XIcon } from "lucide-react";
 import { useTranslation } from "react-i18next";
-
-const languages = [
-    { code: "en", name: "English", flag: "🇬🇧" },
-    { code: "fr", name: "French", flag: "🇫🇷" },
-    { code: "es", name: "Spanish", flag: "🇪🇸" },
-    { code: "it", name: "Italian", flag: "🇮🇹" },
-    { code: "de", name: "German", flag: "🇩🇪" },
-    { code: "ro", name: "Romanian", flag: "🇷🇴" },
-];
+import { useLanguage } from "@/context/LanguageContext";
 
 export default function Header() {
-    const { t, i18n } = useTranslation();
+    const { t } = useTranslation();
+    const { languages, selectedLanguage, setLanguage } = useLanguage();
+
     const [open, setOpen] = useState(false);
-    const [selected, setSelected] = useState(languages[0].code);
+    const [selected, setSelected] = useState(selectedLanguage.code);
 
     const [langOpen, setLangOpen] = useState(false);
     const langMenuRef = useRef(null);
     const location = useLocation();
 
-    useEffect(() => {
-        const saved = localStorage.getItem("selectedLanguage") || "en";
-        setSelected(saved);
-        i18n.changeLanguage(saved);
-    }, [i18n]);
+    useEffect(() => setSelected(selectedLanguage.code), [selectedLanguage]);
 
     useEffect(() => {
         setOpen(false);
@@ -68,8 +49,7 @@ export default function Header() {
 
     const onChangeLang = (code) => {
         setSelected(code);
-        i18n.changeLanguage(code);
-        localStorage.setItem("selectedLanguage", code);
+        setLanguage(code); // <- context updates i18n + localStorage
     };
 
     const renderLangOptions = () =>
@@ -85,12 +65,7 @@ export default function Header() {
         <header className="header">
             <div className="container nav">
                 <Link className="logo" to="/" aria-label={t("header.aria.brandHome")}>
-                    <img
-                        src="/assets/images/logo.png"
-                        alt="MrSpinny logo"
-                        width="120"
-                        height="40"
-                    />
+                    <img src="/assets/images/logo.png" alt="MrSpinny logo" width="120" height="40" />
                 </Link>
 
                 <nav className="menu" aria-label="Primary">
@@ -115,35 +90,21 @@ export default function Header() {
                         {t("header.nav.contact")}
                     </NavLink>
 
-                    <div
-                        className="desktop-lang relative hidden md:flex items-center"
-                        ref={langMenuRef}
-                    >
-                        <span
-                            className="text-xl leading-none px-2"
-                            aria-hidden="true"
-                            title={`${currentLang.flag} ${currentLang.name}`}
-                        >
+                    <div className="desktop-lang relative hidden md:flex items-center" ref={langMenuRef}>
+                        <span className="text-xl leading-none px-2" aria-hidden="true" title={`${currentLang.flag} ${currentLang.name}`}>
                             {currentLang.flag}
                         </span>
-
                         <select
                             aria-label="Language"
                             value={selected}
                             onChange={(e) => onChangeLang(e.target.value)}
                             className="lang-select absolute inset-0 w-full h-full opacity-0 cursor-pointer"
-                            style={{
-                                appearance: "none",
-                                WebkitAppearance: "none",
-                                MozAppearance: "none",
-                                paddingRight: 12,
-                            }}
+                            style={{ appearance: "none", WebkitAppearance: "none", MozAppearance: "none", paddingRight: 12 }}
                             title={`${currentLang.flag} ${currentLang.name}`}
                         >
                             {renderLangOptions()}
                         </select>
                     </div>
-
                 </nav>
 
                 <div className="auth-buttons" style={{ gap: 8 }}>
@@ -165,26 +126,10 @@ export default function Header() {
                 </button>
             </div>
 
-            <div
-                id="mobileMenu"
-                className={`mobile-menu ${open ? "open" : ""}`}
-                hidden={!open}
-                data-react-menu="1"
-            >
+            <div id="mobileMenu" className={`mobile-menu ${open ? "open" : ""}`} hidden={!open} data-react-menu="1">
                 <div className="mobile-menu-backdrop" onClick={() => setOpen(false)} />
-                <div
-                    className="mobile-menu-panel"
-                    role="dialog"
-                    aria-modal="true"
-                    aria-label={t("header.aria.mainMenu")}
-                >
-                    <button
-                        className="mobile-close"
-                        id="mobileClose"
-                        aria-label={t("header.aria.closeMenu")}
-                        onClick={() => setOpen(false)}
-                        type="button"
-                    >
+                <div className="mobile-menu-panel" role="dialog" aria-modal="true" aria-label={t("header.aria.mainMenu")}>
+                    <button className="mobile-close" id="mobileClose" aria-label={t("header.aria.closeMenu")} onClick={() => setOpen(false)} type="button">
                         <XIcon className="h-6 w-6 stroke-[2] fill-none" aria-hidden="true" />
                     </button>
 
@@ -219,13 +164,7 @@ export default function Header() {
                             value={selected}
                             onChange={(e) => onChangeLang(e.target.value)}
                             className="lang-select"
-                            style={{
-                                appearance: "none",
-                                WebkitAppearance: "none",
-                                MozAppearance: "none",
-                                paddingRight: 12,
-                                cursor: "pointer",
-                            }}
+                            style={{ appearance: "none", WebkitAppearance: "none", MozAppearance: "none", paddingRight: 12, cursor: "pointer" }}
                         >
                             {renderLangOptions()}
                         </select>

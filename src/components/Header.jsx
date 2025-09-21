@@ -49,7 +49,7 @@ export default function Header() {
 
     const onChangeLang = (code) => {
         setSelected(code);
-        setLanguage(code); // <- context updates i18n + localStorage
+        setLanguage(code);
     };
 
     const renderLangOptions = () =>

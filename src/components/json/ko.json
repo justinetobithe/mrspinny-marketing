@@ -1,0 +1,446 @@
+{
+    "header": {
+        "aria": {
+            "brandHome": "MrSpinny 홈",
+            "openMenu": "메뉴 열기",
+            "closeMenu": "메뉴 닫기",
+            "mainMenu": "메인 메뉴"
+        },
+        "nav": {
+            "home": "홈",
+            "slots": "슬롯",
+            "liveCasino": "라이브 카지노",
+            "banking": "입출금",
+            "contact": "문의"
+        },
+        "cta": {
+            "playNow": "지금 플레이"
+        },
+        "mobile": {
+            "menuTitle": "메뉴"
+        },
+        "legal": {
+            "support": "지원",
+            "privacyPolicy": "개인정보 처리방침",
+            "termsOfService": "이용약관",
+            "responsibleGaming": "책임감 있는 게임"
+        },
+        "language": {
+            "english": "영어"
+        },
+        "ageBadge": "18+"
+    },
+    "footer": {
+        "aria": {
+            "brandHome": "MrSpinny 홈"
+        },
+        "columns": {
+            "games": "게임",
+            "info": "정보"
+        },
+        "links": {
+            "slots": "슬롯",
+            "liveCasino": "라이브 카지노",
+            "poker": "포커",
+            "lottery": "복권",
+            "roulette": "룰렛",
+            "privacyPolicy": "개인정보 처리방침",
+            "termsOfService": "이용약관",
+            "responsibleGaming": "책임감 있는 게임",
+            "support": "지원"
+        },
+        "badges": {
+            "gambleAware": "도박중독예방",
+            "responsibleGaming": "책임감 있는 게임"
+        },
+        "legal": {
+            "operatorLine": "MrSpinny.com은 Decordetails OÜ가 운영하며, Harju maakond, Tallinn, Kesklinna linnaosa, Tornimäe tn 5, 10145, 등록번호 17011692에 등록되어 있습니다. 게임은 관련 법률과 연령 제한을 준수하여 제공됩니다. 도움이 필요하면 {{email}}으로 문의하세요.",
+            "copyright": "© MrSpinny. All rights reserved | {{year}}."
+        }
+    },
+    "home": {
+        "hero": {
+            "titleA": "당신의",
+            "titleB": "웰컴 보너스를 공개하세요",
+            "subtitle": "휠을 돌려 보상을 확인하세요. 계정을 만들고 입금하여 받으세요.",
+            "cta": {
+                "spin": "휠 돌리기"
+            }
+        },
+        "cards": {
+            "slots": {
+                "badge": "인기",
+                "title": "최고의 슬롯",
+                "desc": "매일 보너스가 있는 인기 슬롯을 플레이하세요.",
+                "cta": "탐색하기"
+            },
+            "live": {
+                "badge": "라이브",
+                "title": "라이브 카지노",
+                "desc": "실시간 딜러와 함께하는 스릴 넘치는 게임.",
+                "cta": "입장하기"
+            },
+            "promos": {
+                "badge": "보너스",
+                "title": "매일 프로모션",
+                "desc": "충전, 무료 스핀, 깜짝 보상.",
+                "cta": "전체 보기"
+            }
+        },
+        "about": {
+            "title": "MrSpinny 소개",
+            "alt": "MrSpinny 게임을 즐기는 플레이어들",
+            "body": "MrSpinny는 공정한 플레이, 빠른 출금, 그리고 풍성한 보상을 매끄러운 카지노 경험에 담았습니다. 수백 개의 프리미엄 게임, 투명한 한도, 친절한 24/7 지원을 즐기세요.",
+            "points": {
+                "p1": "카드, 은행, 암호화폐로 번개처럼 빠른 출금.",
+                "p2": "책임도구: 한도, 쿨다운, 현실 확인 기능.",
+                "p3": "매일 무료 스핀과 충전 보너스 제공.",
+                "p4": "최신 암호화를 사용하는 안전한 플랫폼."
+            },
+            "cta": {
+                "how": "이용 방법"
+            }
+        },
+        "why": {
+            "title": "왜 우리를 선택하나요",
+            "items": {
+                "fast": {
+                    "title": "빠른 출금",
+                    "desc": "원하는 방식으로 신속하게 출금하세요."
+                },
+                "secure": {
+                    "title": "공정하고 안전함",
+                    "desc": "최고 수준의 보안과 책임 도박 도구 제공."
+                },
+                "selection": {
+                    "title": "방대한 선택",
+                    "desc": "유명 스튜디오의 슬롯, 테이블, 라이브 게임 제공."
+                },
+                "support": {
+                    "title": "24/7 지원",
+                    "desc": "언제든지 도와줄 준비가 된 실제 상담원."
+                }
+            }
+        },
+        "how": {
+            "title": "플레이 방법",
+            "steps": {
+                "create": {
+                    "title": "가입",
+                    "desc": "1분 이내에 무료 계정을 개설하세요.",
+                    "alt": "MrSpinny 계정 만들기"
+                },
+                "deposit": {
+                    "title": "입금",
+                    "desc": "카드, 은행, 암호화폐로 지갑을 충전하세요.",
+                    "alt": "카드, 은행, 암호화폐 입금"
+                },
+                "play": {
+                    "title": "플레이",
+                    "desc": "프로모션과 함께 슬롯, 테이블, 라이브 카지노를 즐기세요.",
+                    "alt": "슬롯, 테이블, 라이브 카지노 플레이"
+                },
+                "withdraw": {
+                    "title": "출금",
+                    "desc": "이겼다면 빠르고 투명하게 출금하세요.",
+                    "alt": "빠르고 안전한 출금"
+                }
+            }
+        },
+        "gallery": {
+            "roulette": "룰렛",
+            "blackjack": "블랙잭",
+            "slots": "슬롯",
+            "liveTables": "라이브 테이블"
+        },
+        "faq": {
+            "title": "자주 묻는 질문",
+            "q1": {
+                "q": "실제 돈으로 플레이하나요?",
+                "a": "이 페이지는 마케팅 미리보기입니다. 실제 게임은 {{domain}}에서 진행되며, 18세 이상만 이용할 수 있고 현지법이 적용됩니다."
+            },
+            "q2": {
+                "q": "보너스는 어떻게 받나요?",
+                "a": "휠을 돌리고 계정을 만든 후 첫 입금을 하면 프로모션 페이지의 안내를 따르세요."
+            },
+            "q3": {
+                "q": "지원되는 결제 방법은 무엇인가요?",
+                "a": "카드, 은행 송금, BTC, ETH, USDT 등 주요 암호화폐가 지원됩니다. 자세한 내용은 입출금 페이지에서 확인하세요."
+            },
+            "q4": {
+                "q": "지원 서비스를 제공하나요?",
+                "a": "네, 이메일과 라이브 채팅으로 24/7 지원합니다."
+            }
+        },
+        "modal": {
+            "title": "웰컴 보너스를 위한 휠 돌리기",
+            "sub": "이 페이지는 마케팅 미리보기입니다. 실제 게임은 {{domain}}에서 진행됩니다. 18세 이상만 이용 가능합니다.",
+            "spin": "지금 돌리기",
+            "claim": "보너스 받기"
+        },
+        "noscript": {
+            "text": "휠을 돌리려면 JavaScript가 필요합니다. 또는",
+            "link": "여기서 프로모션 보기"
+        }
+    },
+    "slots": {
+        "hero": {
+            "titleA": "돌리고 승리하세요",
+            "titleB": "슬롯 게임",
+            "subtitle": "보너스, 메가웨이, 데일리 드롭이 있는 인기 게임 탐색"
+        },
+        "toolbar": {
+            "ariaLabel": "슬롯 필터",
+            "searchPlaceholder": "슬롯 검색…",
+            "searchAria": "슬롯 검색",
+            "sortLabel": "정렬",
+            "sortAria": "슬롯 정렬",
+            "sortOptions": {
+                "az": "A → Z",
+                "za": "Z → A",
+                "vol": "변동성"
+            },
+            "categoriesAria": "카테고리"
+        },
+        "pills": {
+            "all": "전체",
+            "megaways": "메가웨이",
+            "classic": "클래식",
+            "jackpot": "잭팟",
+            "new": "신규",
+            "popular": "인기",
+            "fave": "★ 즐겨찾기"
+        },
+        "sectionTitle": "🎰 추천 슬롯",
+        "cta": {
+            "play": "플레이",
+            "demo": "데모"
+        },
+        "empty": "필터에 맞는 슬롯이 없습니다.",
+        "alt": {
+            "game": "게임"
+        },
+        "aria": {
+            "playGame": "{{title}} 플레이",
+            "addFav": "즐겨찾기에 추가",
+            "removeFav": "즐겨찾기에서 제거"
+        },
+        "hints": {
+            "toggleFav": "F 키로 즐겨찾기 전환"
+        },
+        "vol": {
+            "labelShort": "변동",
+            "labelFull": "변동성"
+        },
+        "tags": {
+            "popular": "인기",
+            "classic": "클래식",
+            "megaways": "메가웨이",
+            "new": "신규",
+            "jackpot": "잭팟"
+        },
+        "ribbon": {
+            "dailyDrops": "데일리 드롭",
+            "hot": "인기"
+        }
+    },
+    "live": {
+        "hero": {
+            "titleA": "프리미엄",
+            "titleB": "라이브 카지노",
+            "titleC": "테이블",
+            "subtitle": "HD로 즐기는 블랙잭, 룰렛, 바카라, 포커, 게임쇼.",
+            "cta": "라이브 카지노 입장"
+        },
+        "toolbar": {
+            "ariaLabel": "라이브 카지노 필터",
+            "searchPlaceholder": "라이브 테이블 검색…",
+            "searchAria": "라이브 테이블 검색",
+            "categoriesAria": "카테고리"
+        },
+        "cats": {
+            "all": "전체",
+            "blackjack": "블랙잭",
+            "roulette": "룰렛",
+            "baccarat": "바카라",
+            "poker": "포커",
+            "game-show": "게임쇼"
+        },
+        "sectionTitle": "🎥 인기 라이브 테이블",
+        "badge": {
+            "blackjack": "블랙잭",
+            "roulette": "룰렛",
+            "baccarat": "바카라",
+            "poker": "포커",
+            "game-show": "게임쇼"
+        },
+        "empty": "테이블을 찾을 수 없습니다. 다른 검색어를 시도하세요."
+    },
+    "banking": {
+        "hero": {
+            "titleA": "빠르고 안전한",
+            "titleB": "입출금",
+            "subtitle": "즉시 입금, 빠른 출금, 신뢰할 수 있는 결제 옵션",
+            "cta": "계정 만들기"
+        },
+        "usp": {
+            "instant": {
+                "title": "즉시 입금",
+                "desc": "카드, 전자지갑, 암호화폐로 즉시 충전하세요."
+            },
+            "secure": {
+                "title": "보안",
+                "desc": "암호화 결제 및 계정 보호 기능."
+            },
+            "payouts": {
+                "title": "빠른 출금",
+                "desc": "지원되는 방식으로 당일 처리."
+            }
+        },
+        "methods": {
+            "title": "결제 수단",
+            "names": {
+                "bankTransfer": "은행 송금"
+            },
+            "table": {
+                "headers": {
+                    "method": "방법",
+                    "type": "유형",
+                    "deposit": "입금",
+                    "withdrawal": "출금",
+                    "processing": "처리시간"
+                },
+                "types": {
+                    "card": "카드",
+                    "ewallet": "전자지갑",
+                    "bank": "은행",
+                    "crypto": "암호화폐"
+                },
+                "speed": {
+                    "instant": "즉시",
+                    "h24": "최대 24시간",
+                    "d1_2_business_days": "1–2 영업일",
+                    "d2_4_business_days": "2–4 영업일",
+                    "d1_3_business_days": "1–3 영업일",
+                    "m10_20": "~10–20분",
+                    "m10_60": "~10–60분"
+                },
+                "fees": {
+                    "noFees": "수수료 없음",
+                    "bankFees": "은행 수수료 적용 가능",
+                    "networkFees": "네트워크 수수료 적용"
+                }
+            },
+            "note": "처리 시간과 가능 여부는 제공업체, 통화, 인증 상태에 따라 다를 수 있습니다. 한도가 적용됩니다."
+        },
+        "steps": {
+            "deposit": {
+                "title": "입금 절차",
+                "items": [
+                    "계정에 로그인하세요.",
+                    "캐셔 → 입금을 여세요.",
+                    "방법과 금액을 선택하세요.",
+                    "확인하고 결제를 완료하세요."
+                ]
+            },
+            "withdrawal": {
+                "title": "출금 절차",
+                "items": [
+                    "요청 시 프로필을 인증하세요.",
+                    "캐셔 → 출금을 여세요.",
+                    "출금 방식을 선택하세요.",
+                    "요청을 제출하고 상태를 확인하세요."
+                ]
+            }
+        },
+        "limits": {
+            "title": "한도",
+            "minDeposit": "최소 입금:",
+            "minWithdrawal": "최소 출금:",
+            "dailyCap": "일일 출금 한도:",
+            "vip": "VIP는 더 높은 한도 이용 가능"
+        },
+        "help": {
+            "title": "결제 관련 도움이 필요하신가요?",
+            "desc": "저희 팀이 24/7 입금, 출금, 인증을 도와드립니다.",
+            "chat": "라이브 채팅",
+            "email": "이메일 지원"
+        }
+    },
+    "contact": {
+        "hero": {
+            "titleA": "문의",
+            "titleB": "지원",
+            "subtitle": "저희는 24/7 대기 중입니다. 빠르게 답변드리겠습니다."
+        },
+        "cards": {
+            "email": {
+                "title": "이메일 지원",
+                "desc": "계정, 결제, 기술 문제 관련 문의",
+                "cta": "{{email}}"
+            },
+            "chat": {
+                "title": "라이브 채팅",
+                "desc": "실시간으로 상담원과 연결하세요.",
+                "cta": "채팅 열기"
+            },
+            "rg": {
+                "title": "책임감 있는 게임",
+                "desc": "휴식, 한도 설정, 조언이 필요하신가요? 저희가 도와드릴게요.",
+                "cta": "자세히 보기"
+            }
+        },
+        "form": {
+            "title": "📨 메시지 보내기",
+            "name": {
+                "label": "성함",
+                "ph": "홍길동"
+            },
+            "email": {
+                "label": "이메일",
+                "ph": "you@email.com"
+            },
+            "topic": {
+                "label": "주제",
+                "options": {
+                    "general": "일반",
+                    "payments": "결제",
+                    "account": "계정 및 인증",
+                    "technical": "기술"
+                }
+            },
+            "message": {
+                "label": "메시지",
+                "ph": "어떻게 도와드릴까요?"
+            },
+            "consent": "지원 목적을 위해 메시지 처리를 동의합니다.",
+            "send": "메시지 보내기",
+            "sending": "보내는 중…",
+            "note": "감사합니다! 메시지가 전송되었습니다.",
+            "securityNote": "비밀번호 또는 2FA 코드를 요청하지 않습니다."
+        },
+        "aside": {
+            "company": {
+                "title": "회사 정보",
+                "operator": "운영사:",
+                "operatorName": "Decordetails OÜ",
+                "reg": "등록번호:",
+                "regNo": "17011692",
+                "addressLabel": "주소:",
+                "address": "Tornimäe tn 5, Kesklinna linnaosa, Tallinn, 10145, Harju maakond",
+                "emailLabel": "이메일:",
+                "hours": "운영 시간:",
+                "hoursValue": "24/7"
+            },
+            "response": {
+                "title": "응답 시간",
+                "email": "이메일: 6–12시간 이내",
+                "chat": "채팅: 즉시 (대기열 기반)",
+                "payments": "결제: 지원되는 방식은 당일 처리"
+            },
+            "links": {
+                "title": "바로가기"
+            }
+        }
+    }
+}

@@ -1,0 +1,446 @@
+{
+    "header": {
+        "aria": {
+            "brandHome": "MrSpinny ana sayfa",
+            "openMenu": "Menüyü Aç",
+            "closeMenu": "Menüyü Kapat",
+            "mainMenu": "Ana Menü"
+        },
+        "nav": {
+            "home": "Ana Sayfa",
+            "slots": "Slotlar",
+            "liveCasino": "Canlı Casino",
+            "banking": "Ödemeler",
+            "contact": "İletişim"
+        },
+        "cta": {
+            "playNow": "Hemen Oyna"
+        },
+        "mobile": {
+            "menuTitle": "Menü"
+        },
+        "legal": {
+            "support": "Destek",
+            "privacyPolicy": "Gizlilik Politikası",
+            "termsOfService": "Hizmet Şartları",
+            "responsibleGaming": "Sorumlu Oyun"
+        },
+        "language": {
+            "english": "İngilizce"
+        },
+        "ageBadge": "18+"
+    },
+    "footer": {
+        "aria": {
+            "brandHome": "MrSpinny ana sayfa"
+        },
+        "columns": {
+            "games": "Oyunlar",
+            "info": "Bilgi"
+        },
+        "links": {
+            "slots": "Slotlar",
+            "liveCasino": "Canlı Casino",
+            "poker": "Poker",
+            "lottery": "Piyango",
+            "roulette": "Rulet",
+            "privacyPolicy": "Gizlilik Politikası",
+            "termsOfService": "Hizmet Şartları",
+            "responsibleGaming": "Sorumlu Oyun",
+            "support": "Destek"
+        },
+        "badges": {
+            "gambleAware": "GambleAware",
+            "responsibleGaming": "Sorumlu Oyun"
+        },
+        "legal": {
+            "operatorLine": "MrSpinny.com, Harju maakond, Tallinn, Kesklinna linnaosa, Tornimäe tn 5, 10145 adresinde kayıtlı, sicil no: 17011692 olan Decordetails OÜ tarafından işletilmektedir. Oyun hizmetleri yürürlükteki yasalara ve yaş sınırlamalarına uygun olarak sunulmaktadır. Yardım için {{email}} adresinden iletişime geçin.",
+            "copyright": "© MrSpinny. Tüm hakları saklıdır | {{year}}."
+        }
+    },
+    "home": {
+        "hero": {
+            "titleA": "Hoş Geldin",
+            "titleB": "Bonusunu Aç",
+            "subtitle": "Çarkı çevir, ödülünü gör. Hesap aç ve yatırımla kazancını al.",
+            "cta": {
+                "spin": "Çarkı Çevir"
+            }
+        },
+        "cards": {
+            "slots": {
+                "badge": "Sıcak",
+                "title": "En Popüler Slotlar",
+                "desc": "Günlük bonuslarla trend makaraları çevir.",
+                "cta": "Keşfet"
+            },
+            "live": {
+                "badge": "Canlı",
+                "title": "Canlı Casino",
+                "desc": "Gerçek krupiyeler, anlık heyecan, 7/24.",
+                "cta": "Giriş Yap"
+            },
+            "promos": {
+                "badge": "Bonus",
+                "title": "Günlük Promosyonlar",
+                "desc": "Yüklemeler, ücretsiz dönüşler, sürpriz ödüller.",
+                "cta": "Tümünü Gör"
+            }
+        },
+        "about": {
+            "title": "MrSpinny Hakkında",
+            "alt": "MrSpinny oyunlarını oynayan oyuncular",
+            "body": "MrSpinny adil oyun, hızlı ödemeler ve cömert ödülleri sorunsuz bir casino deneyimiyle birleştirir. Yüzlerce premium oyun, şeffaf limitler ve 7/24 dost canlısı destekle tanışın.",
+            "points": {
+                "p1": "Kart, banka ve kriptoya yıldırım hızında ödemeler.",
+                "p2": "Sorumlu araçlar: limitler, mola, gerçeklik kontrolü.",
+                "p3": "Her gün ücretsiz dönüş ve yükleme bonusları.",
+                "p4": "Modern şifrelemeyle güvenli platform."
+            },
+            "cta": {
+                "how": "Nasıl Çalışır"
+            }
+        },
+        "why": {
+            "title": "Neden Bizi Seçmelisiniz",
+            "items": {
+                "fast": {
+                    "title": "Hızlı Ödemeler",
+                    "desc": "Kazançlarını hızlıca çek."
+                },
+                "secure": {
+                    "title": "Adil ve Güvenli",
+                    "desc": "Üst düzey güvenlik ve sorumlu oyun araçları."
+                },
+                "selection": {
+                    "title": "Geniş Seçenek",
+                    "desc": "Lider stüdyolardan slotlar, masa ve canlı oyunlar."
+                },
+                "support": {
+                    "title": "7/24 Destek",
+                    "desc": "Günün her saati hazır gerçek destek ekibi."
+                }
+            }
+        },
+        "how": {
+            "title": "Nasıl Oynanır",
+            "steps": {
+                "create": {
+                    "title": "Hesap Aç",
+                    "desc": "Bir dakikadan kısa sürede ücretsiz hesap oluştur.",
+                    "alt": "MrSpinny hesabı oluştur"
+                },
+                "deposit": {
+                    "title": "Para Yatır",
+                    "desc": "Kart, banka veya kriptoyla bakiyeni yükle.",
+                    "alt": "Kart, banka veya kriptoyla yatırım yap"
+                },
+                "play": {
+                    "title": "Oyna",
+                    "desc": "Promosyonlarla slotlar, masalar ve canlı casino keşfet.",
+                    "alt": "Slot, masa ve canlı casino oyna"
+                },
+                "withdraw": {
+                    "title": "Para Çek",
+                    "desc": "Kazandığında hızlı ve şeffaf ödeme al.",
+                    "alt": "Hızlı ve güvenli para çek"
+                }
+            }
+        },
+        "gallery": {
+            "roulette": "Rulet",
+            "blackjack": "Blackjack",
+            "slots": "Slotlar",
+            "liveTables": "Canlı Masalar"
+        },
+        "faq": {
+            "title": "Sıkça Sorulan Sorular",
+            "q1": {
+                "q": "Bu gerçek para oyunu mu?",
+                "a": "Bu sayfa tanıtım önizlemesidir. Gerçek oyun {{domain}} adresinde 18+ kişiler içindir ve yerel yasalara tabidir."
+            },
+            "q2": {
+                "q": "Bonusumu nasıl alırım?",
+                "a": "Çarkı çevir, hesap aç, ilk yatırımı yap ve promosyon sayfasındaki adımları takip et."
+            },
+            "q3": {
+                "q": "Hangi ödeme yöntemleri destekleniyor?",
+                "a": "Kart, banka havalesi ve BTC, ETH, USDT gibi büyük kripto seçenekleri. Ayrıntılar için Ödeme sayfasına bakın."
+            },
+            "q4": {
+                "q": "Destek var mı?",
+                "a": "Evet. Ekibimiz e-posta ve canlı sohbet ile 7/24 hizmet verir."
+            }
+        },
+        "modal": {
+            "title": "Hoşgeldin Bonusu İçin Çarkı Çevir",
+            "sub": "Bu bir pazarlama önizlemesidir (IP). Gerçek oyun {{domain}} adresinde yapılır. 18+.",
+            "spin": "Şimdi Çevir",
+            "claim": "Bonusunu Al"
+        },
+        "noscript": {
+            "text": "Çarkı çevirmek için JavaScript gerekir. Yine de",
+            "link": "buradan promosyonlara bakabilirsiniz"
+        }
+    },
+    "slots": {
+        "hero": {
+            "titleA": "Çevir ve Kazan",
+            "titleB": "Slot Oyunları",
+            "subtitle": "Bonuslar, megaways ve günlük ödüllerle popüler oyunlar keşfet."
+        },
+        "toolbar": {
+            "ariaLabel": "Slot filtreleri",
+            "searchPlaceholder": "Slot ara…",
+            "searchAria": "Slot ara",
+            "sortLabel": "Sırala",
+            "sortAria": "Slot sırala",
+            "sortOptions": {
+                "az": "A → Z",
+                "za": "Z → A",
+                "vol": "Oynaklık"
+            },
+            "categoriesAria": "Kategoriler"
+        },
+        "pills": {
+            "all": "Tümü",
+            "megaways": "Megaways",
+            "classic": "Klasik",
+            "jackpot": "Jackpot",
+            "new": "Yeni",
+            "popular": "Popüler",
+            "fave": "★ Favoriler"
+        },
+        "sectionTitle": "🎰 Öne Çıkan Slotlar",
+        "cta": {
+            "play": "Oyna",
+            "demo": "Demo"
+        },
+        "empty": "Filtrelerinize uyan slot yok.",
+        "alt": {
+            "game": "Oyun"
+        },
+        "aria": {
+            "playGame": "{{title}} oyna",
+            "addFav": "Favorilere ekle",
+            "removeFav": "Favorilerden çıkar"
+        },
+        "hints": {
+            "toggleFav": "F tuşuyla favori yap"
+        },
+        "vol": {
+            "labelShort": "Oyn.",
+            "labelFull": "Oynaklık"
+        },
+        "tags": {
+            "popular": "Popüler",
+            "classic": "Klasik",
+            "megaways": "Megaways",
+            "new": "Yeni",
+            "jackpot": "Jackpot"
+        },
+        "ribbon": {
+            "dailyDrops": "Günlük Ödüller",
+            "hot": "Sıcak"
+        }
+    },
+    "live": {
+        "hero": {
+            "titleA": "Premium",
+            "titleB": "Canlı Casino",
+            "titleC": "Masalar",
+            "subtitle": "HD kalitede Blackjack, Rulet, Baccarat, Poker ve Oyun Şovları.",
+            "cta": "Canlı Casino'ya Gir"
+        },
+        "toolbar": {
+            "ariaLabel": "Canlı casino filtreleri",
+            "searchPlaceholder": "Canlı masa ara…",
+            "searchAria": "Canlı masa ara",
+            "categoriesAria": "Kategoriler"
+        },
+        "cats": {
+            "all": "Tümü",
+            "blackjack": "Blackjack",
+            "roulette": "Rulet",
+            "baccarat": "Baccarat",
+            "poker": "Poker",
+            "game-show": "Oyun Şovları"
+        },
+        "sectionTitle": "🎥 Popüler Canlı Masalar",
+        "badge": {
+            "blackjack": "Blackjack",
+            "roulette": "Rulet",
+            "baccarat": "Baccarat",
+            "poker": "Poker",
+            "game-show": "Oyun Şovu"
+        },
+        "empty": "Masa bulunamadı. Başka bir arama deneyin."
+    },
+    "banking": {
+        "hero": {
+            "titleA": "Hızlı ve Güvenli",
+            "titleB": "Ödemeler",
+            "subtitle": "Anında yatırımlar, hızlı çekimler ve güvenilir yöntemler.",
+            "cta": "Hesap Aç"
+        },
+        "usp": {
+            "instant": {
+                "title": "Anında Yatırım",
+                "desc": "Kart, e-cüzdan ve kripto ile anında yükleme."
+            },
+            "secure": {
+                "title": "Güvenli",
+                "desc": "Şifreli ödemeler ve hesap koruması."
+            },
+            "payouts": {
+                "title": "Hızlı Ödemeler",
+                "desc": "Desteklenen yöntemlerde aynı gün işlem."
+            }
+        },
+        "methods": {
+            "title": "Ödeme Yöntemleri",
+            "names": {
+                "bankTransfer": "Banka Havalesi"
+            },
+            "table": {
+                "headers": {
+                    "method": "Yöntem",
+                    "type": "Tür",
+                    "deposit": "Yatırım",
+                    "withdrawal": "Çekim",
+                    "processing": "Süre"
+                },
+                "types": {
+                    "card": "Kart",
+                    "ewallet": "E-cüzdan",
+                    "bank": "Banka",
+                    "crypto": "Kripto"
+                },
+                "speed": {
+                    "instant": "Anında",
+                    "h24": "24 saate kadar",
+                    "d1_2_business_days": "1–2 iş günü",
+                    "d2_4_business_days": "2–4 iş günü",
+                    "d1_3_business_days": "1–3 iş günü",
+                    "m10_20": "~10–20 dk",
+                    "m10_60": "~10–60 dk"
+                },
+                "fees": {
+                    "noFees": "Komisyon yok",
+                    "bankFees": "Banka masrafı olabilir",
+                    "networkFees": "Ağ ücreti uygulanır"
+                }
+            },
+            "note": "Süre ve uygunluk sağlayıcıya, para birimine ve doğrulamaya göre değişir. Limitler geçerlidir."
+        },
+        "steps": {
+            "deposit": {
+                "title": "Yatırım Adımları",
+                "items": [
+                    "Hesabınıza giriş yapın.",
+                    "Kasiyer → Yatırım'a girin.",
+                    "Yöntem ve miktar seçin.",
+                    "Onaylayıp ödemeyi tamamlayın."
+                ]
+            },
+            "withdrawal": {
+                "title": "Çekim Adımları",
+                "items": [
+                    "İstenirse profilinizi doğrulayın.",
+                    "Kasiyer → Çekim'e girin.",
+                    "Bir ödeme yöntemi seçin.",
+                    "Talebi gönderip durumu takip edin."
+                ]
+            }
+        },
+        "limits": {
+            "title": "Limitler",
+            "minDeposit": "Minimum yatırım:",
+            "minWithdrawal": "Minimum çekim:",
+            "dailyCap": "Günlük çekim limiti:",
+            "vip": "VIP’lere daha yüksek limitler sunulur"
+        },
+        "help": {
+            "title": "Ödeme konusunda yardıma mı ihtiyacınız var?",
+            "desc": "Ekibimiz yatırımlar, çekimler veya doğrulama konusunda 7/24 yardımcı olur.",
+            "chat": "Canlı Sohbet",
+            "email": "E-posta Desteği"
+        }
+    },
+    "contact": {
+        "hero": {
+            "titleA": "İletişim",
+            "titleB": "Destek",
+            "subtitle": "7/24 buradayız. Hemen ulaşın, hızlıca cevap verelim."
+        },
+        "cards": {
+            "email": {
+                "title": "E-posta Desteği",
+                "desc": "Hesap, ödeme veya teknik sorular için.",
+                "cta": "{{email}}"
+            },
+            "chat": {
+                "title": "Canlı Sohbet",
+                "desc": "Ekibimizden gerçek zamanlı yardım alın.",
+                "cta": "Sohbeti Aç"
+            },
+            "rg": {
+                "title": "Sorumlu Oyun",
+                "desc": "Mola, limit veya tavsiye mi lazım? Yardımcı olabiliriz.",
+                "cta": "Daha Fazla Bilgi"
+            }
+        },
+        "form": {
+            "title": "📨 Bize mesaj gönder",
+            "name": {
+                "label": "Ad Soyad",
+                "ph": "Ali Yılmaz"
+            },
+            "email": {
+                "label": "E-posta",
+                "ph": "you@email.com"
+            },
+            "topic": {
+                "label": "Konu",
+                "options": {
+                    "general": "Genel",
+                    "payments": "Ödemeler",
+                    "account": "Hesap & Doğrulama",
+                    "technical": "Teknik"
+                }
+            },
+            "message": {
+                "label": "Mesaj",
+                "ph": "Size nasıl yardımcı olabiliriz?"
+            },
+            "consent": "Mesajımın destek amacıyla işlenmesini kabul ediyorum.",
+            "send": "Mesaj Gönder",
+            "sending": "Gönderiliyor…",
+            "note": "Teşekkürler! Mesajınız gönderildi.",
+            "securityNote": "Şifrenizi veya 2FA kodlarını asla istemeyiz."
+        },
+        "aside": {
+            "company": {
+                "title": "Şirket Bilgileri",
+                "operator": "İşletmeci:",
+                "operatorName": "Decordetails OÜ",
+                "reg": "Sicil No:",
+                "regNo": "17011692",
+                "addressLabel": "Adres:",
+                "address": "Tornimäe tn 5, Kesklinna linnaosa, Tallinn, 10145, Harju maakond",
+                "emailLabel": "E-posta:",
+                "hours": "Çalışma Saatleri:",
+                "hoursValue": "7/24"
+            },
+            "response": {
+                "title": "Yanıt Süreleri",
+                "email": "E-posta: 6–12 saat içinde",
+                "chat": "Sohbet: anlık (sıraya göre)",
+                "payments": "Ödemeler: desteklenen yöntemlerde aynı gün"
+            },
+            "links": {
+                "title": "Hızlı bağlantılar"
+            }
+        }
+    }
+}

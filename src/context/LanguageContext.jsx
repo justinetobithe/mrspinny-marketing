@@ -1,33 +1,12 @@
 import React, { createContext, useState, useContext, useEffect } from "react";
 import i18n from "../i18n";
+import {
+    LANGUAGES,
+    COUNTRY_TO_LANG,
+    DEFAULT_LANG_CODE,
+    SUPPORTED_LNGS,
+} from "./languages";
 
-export const LANGUAGES = [
-    { code: "en", name: "English", flag: "🇬🇧", initial: "EN" },
-    { code: "de", name: "German", flag: "🇩🇪", initial: "DE" },
-    { code: "es", name: "Spanish", flag: "🇪🇸", initial: "ES" },
-    { code: "fr", name: "French", flag: "🇫🇷", initial: "FR" },
-    { code: "it", name: "Italian", flag: "🇮🇹", initial: "IT" },
-    { code: "ro", name: "Romanian", flag: "🇷🇴", initial: "RO" },
-    { code: "ko", name: "Korean", flag: "🇰🇷", initial: "KO" },
-    { code: "th", name: "Thai", flag: "🇹🇭", initial: "TH" },
-    { code: "zh", name: "Chinese", flag: "🇨🇳", initial: "ZH" },
-    { code: "tr", name: "Turkish", flag: "🇹🇷", initial: "TR" },
-    { code: "pt", name: "Portuguese", flag: "🇵🇹", initial: "PT" },
-    { code: "ru", name: "Russian", flag: "🇷🇺", initial: "RU" }
-];
-
-const COUNTRY_TO_LANG = {
-    DE: "de", AT: "de", CH: "de", LI: "de", LU: "de",
-    ES: "es", AR: "es", BO: "es", CL: "es", CO: "es", CR: "es", CU: "es", DO: "es",
-    EC: "es", SV: "es", GQ: "es", GT: "es", HN: "es", MX: "es", NI: "es", PA: "es",
-    PY: "es", PE: "es", PR: "es", UY: "es", VE: "es",
-    FR: "fr", BE: "fr", CH: "fr", CA: "fr", LU: "fr", MC: "fr", HT: "fr", MG: "fr",
-    IT: "it", CH: "it", SM: "it", VA: "it",
-    RO: "ro", MD: "ro",
-    KR: "ko", TH: "th", CN: "zh", TW: "zh", HK: "zh", TR: "tr", PT: "pt", BR: "pt", RU: "ru",
-};
-
-const DEFAULT_LANG_CODE = "en";
 const LanguageContext = createContext();
 
 async function fetchWithTimeout(resource, options = {}) {
@@ -70,19 +49,19 @@ async function detectCountry() {
     return null;
 }
 
-export const LanguageProvider = ({ children }) => {
-    const initialCode = (i18n.language || DEFAULT_LANG_CODE).split("-")[0];
-    const initialLanguage =
-        LANGUAGES.find(l => l.code === initialCode) || LANGUAGES.find(l => l.code === DEFAULT_LANG_CODE);
+const normalize = (code) => (code ? code.split("-")[0] : DEFAULT_LANG_CODE);
+const findLang = (code) =>
+    LANGUAGES.find((l) => l.code === code) ||
+    LANGUAGES.find((l) => l.code === DEFAULT_LANG_CODE);
 
-    const [selectedLanguage, setSelectedLanguage] = useState(initialLanguage);
+export const LanguageProvider = ({ children }) => {
+    const initialCode = normalize(i18n.language || DEFAULT_LANG_CODE);
+    const [selectedLanguage, setSelectedLanguage] = useState(findLang(initialCode));
     const [bootstrapped, setBootstrapped] = useState(false);
 
     useEffect(() => {
         const handleLanguageChanged = (lng) => {
-            const normalized = lng.split("-")[0];
-            const found = LANGUAGES.find(l => l.code === normalized) || LANGUAGES.find(l => l.code === DEFAULT_LANG_CODE);
-            setSelectedLanguage(found);
+            setSelectedLanguage(findLang(normalize(lng)));
         };
         i18n.on("languageChanged", handleLanguageChanged);
         return () => i18n.off("languageChanged", handleLanguageChanged);
@@ -90,13 +69,11 @@ export const LanguageProvider = ({ children }) => {
 
     useEffect(() => {
         (async () => {
-            const stored =
-                localStorage.getItem("selectedLanguage") ||
-                localStorage.getItem("i18nextLng");
+            const stored = localStorage.getItem("selectedLanguage");
+            if (!stored) localStorage.removeItem("i18nextLng");
 
             if (stored) {
-                const code = stored.split("-")[0];
-                const lang = LANGUAGES.find(l => l.code === code) || LANGUAGES.find(l => l.code === DEFAULT_LANG_CODE);
+                const lang = findLang(normalize(stored));
                 i18n.changeLanguage(lang.code);
                 setSelectedLanguage(lang);
                 setBootstrapped(true);
@@ -104,12 +81,22 @@ export const LanguageProvider = ({ children }) => {
             }
 
             const isoCountry = await detectCountry();
-            const suggestedCode = isoCountry ? COUNTRY_TO_LANG[isoCountry] : null;
-            const finalCode = LANGUAGES.some(l => l.code === suggestedCode) ? suggestedCode : DEFAULT_LANG_CODE;
-            const lang = LANGUAGES.find(l => l.code === finalCode) || LANGUAGES.find(l => l.code === DEFAULT_LANG_CODE);
+            let suggestedCode = isoCountry ? COUNTRY_TO_LANG[isoCountry] : null;
 
-            i18n.changeLanguage(lang.code);
-            localStorage.setItem("i18nextLng", lang.code);
+            if (typeof navigator !== "undefined" && navigator.language) {
+                const navCode = normalize(navigator.language);
+                if (SUPPORTED_LNGS.includes(navCode)) {
+                    suggestedCode = suggestedCode || navCode;
+                }
+            }
+
+            const finalCode = SUPPORTED_LNGS.includes(suggestedCode)
+                ? suggestedCode
+                : DEFAULT_LANG_CODE;
+
+            const lang = findLang(finalCode === "tl" ? "fil" : finalCode);
+            i18n.changeLanguage(finalCode);
+            localStorage.setItem("i18nextLng", finalCode);
             setSelectedLanguage(lang);
             setBootstrapped(true);
         })();
@@ -119,14 +106,14 @@ export const LanguageProvider = ({ children }) => {
 
     const setLanguage = (languageOrCode) => {
         const lang =
-            typeof languageOrCode === "string"
-                ? LANGUAGES.find(l => l.code === languageOrCode) || LANGUAGES.find(l => l.code === DEFAULT_LANG_CODE)
-                : languageOrCode;
+            typeof languageOrCode === "string" ? findLang(languageOrCode) : languageOrCode;
+
+        if (!lang || lang.code === selectedLanguage.code) return;
 
         setSelectedLanguage(lang);
         i18n.changeLanguage(lang.code);
-        localStorage.setItem("i18nextLng", lang.code);
         localStorage.setItem("selectedLanguage", lang.code);
+        localStorage.setItem("i18nextLng", lang.code);
     };
 
     return (
@@ -135,7 +122,7 @@ export const LanguageProvider = ({ children }) => {
                 selectedLanguage,
                 setLanguage,
                 languages: LANGUAGES,
-                countryToLang: COUNTRY_TO_LANG
+                countryToLang: COUNTRY_TO_LANG,
             }}
         >
             {children}
@@ -144,4 +131,3 @@ export const LanguageProvider = ({ children }) => {
 };
 
 export const useLanguage = () => useContext(LanguageContext);
-13

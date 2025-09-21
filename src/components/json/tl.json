@@ -1,0 +1,446 @@
+{
+    "header": {
+        "aria": {
+            "brandHome": "MrSpinny home",
+            "openMenu": "Buksan ang Menu",
+            "closeMenu": "Isara ang Menu",
+            "mainMenu": "Pangunahing Menu"
+        },
+        "nav": {
+            "home": "Home",
+            "slots": "Mga Slot",
+            "liveCasino": "Live Casino",
+            "banking": "Pagbabayad",
+            "contact": "Kontak"
+        },
+        "cta": {
+            "playNow": "Maglaro Ngayon"
+        },
+        "mobile": {
+            "menuTitle": "Menu"
+        },
+        "legal": {
+            "support": "Suporta",
+            "privacyPolicy": "Patakaran sa Privacy",
+            "termsOfService": "Mga Tuntunin ng Serbisyo",
+            "responsibleGaming": "Responsableng Paglalaro"
+        },
+        "language": {
+            "english": "Ingles"
+        },
+        "ageBadge": "18+"
+    },
+    "footer": {
+        "aria": {
+            "brandHome": "MrSpinny home"
+        },
+        "columns": {
+            "games": "Mga Laro",
+            "info": "Impormasyon"
+        },
+        "links": {
+            "slots": "Mga Slot",
+            "liveCasino": "Live Casino",
+            "poker": "Poker",
+            "lottery": "Loteriya",
+            "roulette": "Roulette",
+            "privacyPolicy": "Patakaran sa Privacy",
+            "termsOfService": "Mga Tuntunin ng Serbisyo",
+            "responsibleGaming": "Responsableng Paglalaro",
+            "support": "Suporta"
+        },
+        "badges": {
+            "gambleAware": "Maging Mapanuri",
+            "responsibleGaming": "Responsableng Paglalaro"
+        },
+        "legal": {
+            "operatorLine": "Ang MrSpinny.com ay pinapatakbo ng Decordetails OÜ, Harju maakond, Tallinn, Kesklinna linnaosa, Tornimäe tn 5, 10145, reg. no. 17011692. Ang paglalaro ay naaayon sa mga batas at limitasyon sa edad. Para sa tulong, makipag-ugnayan sa {{email}}.",
+            "copyright": "© MrSpinny. Lahat ng karapatan ay nakalaan | {{year}}."
+        }
+    },
+    "home": {
+        "hero": {
+            "titleA": "I-reveal ang Iyong",
+            "titleB": "Welcome Bonus",
+            "subtitle": "Paikutin para makita ang iyong premyo. Gumawa ng account at magdeposito para makuha ito.",
+            "cta": {
+                "spin": "Paikutin ang Roda"
+            }
+        },
+        "cards": {
+            "slots": {
+                "badge": "Mainit",
+                "title": "Top Slots",
+                "desc": "Paikutin ang mga trending reels na may araw-araw na bonus.",
+                "cta": "Tuklasin"
+            },
+            "live": {
+                "badge": "Live",
+                "title": "Live Casino",
+                "desc": "Tunay na dealers, instant na kasiyahan anumang oras.",
+                "cta": "Pumasok"
+            },
+            "promos": {
+                "badge": "Bonus",
+                "title": "Araw-araw na Promos",
+                "desc": "Mga reload, libreng spins, at mga sorpresang premyo.",
+                "cta": "Tingnan Lahat"
+            }
+        },
+        "about": {
+            "title": "Tungkol sa MrSpinny",
+            "alt": "Mga manlalarong nag-eenjoy sa mga laro ng MrSpinny",
+            "body": "Pinagsasama ng MrSpinny ang patas na laro, mabilis na bayad, at malalaking gantimpala para sa isang maayos na karanasan sa casino. Tangkilikin ang daan-daang premium na laro, malinaw na limitasyon, at magiliw na 24/7 na suporta.",
+            "points": {
+                "p1": "Mabilis na bayad gamit ang cards, banko, at crypto.",
+                "p2": "Mga responsableng tool: limitasyon, pahinga, at mga paalala.",
+                "p3": "Araw-araw na promos na may libreng spins at reload.",
+                "p4": "Seguridad gamit ang modernong encryption."
+            },
+            "cta": {
+                "how": "Paano Gumagana"
+            }
+        },
+        "why": {
+            "title": "Bakit Kami Piliin",
+            "items": {
+                "fast": {
+                    "title": "Mabilis na Bayad",
+                    "desc": "Agad na makuha ang iyong panalo sa gusto mong paraan."
+                },
+                "secure": {
+                    "title": "Patas at Ligtas",
+                    "desc": "Top-level na seguridad at mga tool sa responsableng paglalaro."
+                },
+                "selection": {
+                    "title": "Maraming Laro",
+                    "desc": "Slots, tables, at live games mula sa mga kilalang studio."
+                },
+                "support": {
+                    "title": "24/7 na Suporta",
+                    "desc": "Mga totoong tao na handang tumulong anumang oras."
+                }
+            }
+        },
+        "how": {
+            "title": "Paano Maglaro",
+            "steps": {
+                "create": {
+                    "title": "Gumawa ng Account",
+                    "desc": "Mag-sign up ng libre sa loob ng isang minuto.",
+                    "alt": "Gumawa ng MrSpinny account"
+                },
+                "deposit": {
+                    "title": "Magdeposito",
+                    "desc": "Piliin ang cards, banko, o crypto para pondohan ang iyong wallet.",
+                    "alt": "Magdeposito gamit ang cards, banko, o crypto"
+                },
+                "play": {
+                    "title": "Maglaro",
+                    "desc": "I-explore ang mga slots, tables, at live casino na may promos.",
+                    "alt": "Maglaro ng slots, tables, at live casino"
+                },
+                "withdraw": {
+                    "title": "Mag-withdraw",
+                    "desc": "Mabilis at malinaw na withdrawals kapag nanalo ka.",
+                    "alt": "Mabilis at ligtas na withdraw"
+                }
+            }
+        },
+        "gallery": {
+            "roulette": "Roulette",
+            "blackjack": "Blackjack",
+            "slots": "Mga Slot",
+            "liveTables": "Live Tables"
+        },
+        "faq": {
+            "title": "Mga Madalas Itanong",
+            "q1": {
+                "q": "Totoong pera ba ito?",
+                "a": "Ang page na ito ay marketing preview. Totoong laro ay sa {{domain}} para lamang sa 18+ at ayon sa lokal na batas."
+            },
+            "q2": {
+                "q": "Paano makuha ang bonus?",
+                "a": "Paikutin ang roda, gumawa ng account, magdeposito, at sundin ang mga tagubilin sa promos page."
+            },
+            "q3": {
+                "q": "Anong mga payment methods ang suportado?",
+                "a": "Cards, bank transfer, at mga pangunahing crypto gaya ng BTC, ETH, USDT. Tingnan ang Banking page para sa detalye."
+            },
+            "q4": {
+                "q": "May suporta ba kayo?",
+                "a": "Oo. May 24/7 support kami via email at live chat."
+            }
+        },
+        "modal": {
+            "title": "Paikutin para sa Welcome Bonus",
+            "sub": "Ito ay marketing preview (IP). Totoong laro ay sa {{domain}}. 18+ lamang.",
+            "spin": "Paikutin Ngayon",
+            "claim": "Kunin ang Iyong Bonus"
+        },
+        "noscript": {
+            "text": "Kailangan ng JavaScript para paikutin ang roda. Maaari mo pa ring",
+            "link": "tingnan ang mga promos dito"
+        }
+    },
+    "slots": {
+        "hero": {
+            "titleA": "Paikutin at Manalo sa mga",
+            "titleB": "Top Slot Games",
+            "subtitle": "I-explore ang mga popular na slots na may bonus, megaways, at daily drops."
+        },
+        "toolbar": {
+            "ariaLabel": "Mga filter ng slots",
+            "searchPlaceholder": "Maghanap ng slots…",
+            "searchAria": "Maghanap ng slots",
+            "sortLabel": "Ayusin",
+            "sortAria": "Ayusin ang slots",
+            "sortOptions": {
+                "az": "A → Z",
+                "za": "Z → A",
+                "vol": "Volatility"
+            },
+            "categoriesAria": "Mga Kategorya"
+        },
+        "pills": {
+            "all": "Lahat",
+            "megaways": "Megaways",
+            "classic": "Klasiko",
+            "jackpot": "Jackpots",
+            "new": "Bago",
+            "popular": "Sikat",
+            "fave": "★ Paborito"
+        },
+        "sectionTitle": "🎰 Mga Itinatampok na Slot",
+        "cta": {
+            "play": "Maglaro",
+            "demo": "Demo"
+        },
+        "empty": "Walang slots na tugma sa iyong filter.",
+        "alt": {
+            "game": "Laro"
+        },
+        "aria": {
+            "playGame": "Laruin ang {{title}}",
+            "addFav": "Idagdag sa paborito",
+            "removeFav": "Tanggalin sa paborito"
+        },
+        "hints": {
+            "toggleFav": "Pindutin ang F para gawing paborito"
+        },
+        "vol": {
+            "labelShort": "Vol",
+            "labelFull": "Volatility"
+        },
+        "tags": {
+            "popular": "Sikat",
+            "classic": "Klasiko",
+            "megaways": "Megaways",
+            "new": "Bago",
+            "jackpot": "Jackpot"
+        },
+        "ribbon": {
+            "dailyDrops": "Araw-araw na Premyo",
+            "hot": "Mainit"
+        }
+    },
+    "live": {
+        "hero": {
+            "titleA": "Premium",
+            "titleB": "Live Casino",
+            "titleC": "Tables",
+            "subtitle": "Blackjack, Roulette, Baccarat, Poker, at Game Shows sa HD.",
+            "cta": "Pumasok sa Live Casino"
+        },
+        "toolbar": {
+            "ariaLabel": "Live casino filters",
+            "searchPlaceholder": "Maghanap ng live tables…",
+            "searchAria": "Maghanap ng live tables",
+            "categoriesAria": "Mga Kategorya"
+        },
+        "cats": {
+            "all": "Lahat",
+            "blackjack": "Blackjack",
+            "roulette": "Roulette",
+            "baccarat": "Baccarat",
+            "poker": "Poker",
+            "game-show": "Game Shows"
+        },
+        "sectionTitle": "🎥 Mga Sikat na Live Tables",
+        "badge": {
+            "blackjack": "Blackjack",
+            "roulette": "Roulette",
+            "baccarat": "Baccarat",
+            "poker": "Poker",
+            "game-show": "Game Show"
+        },
+        "empty": "Walang nahanap na tables. Subukan ang ibang search."
+    },
+    "banking": {
+        "hero": {
+            "titleA": "Mabilis at Ligtas",
+            "titleB": "Pagbabayad",
+            "subtitle": "Instant na deposito, mabilis na withdrawals, at mapagkakatiwalaang mga paraan.",
+            "cta": "Gumawa ng Account"
+        },
+        "usp": {
+            "instant": {
+                "title": "Instant Deposits",
+                "desc": "Mag-top up agad gamit ang cards, e-wallets, at crypto."
+            },
+            "secure": {
+                "title": "Ligtas",
+                "desc": "Encrypted na pagbabayad at proteksyon sa account."
+            },
+            "payouts": {
+                "title": "Mabilis na Withdrawals",
+                "desc": "Same-day processing sa mga suportadong paraan."
+            }
+        },
+        "methods": {
+            "title": "Mga Paraan ng Pagbabayad",
+            "names": {
+                "bankTransfer": "Bank Transfer"
+            },
+            "table": {
+                "headers": {
+                    "method": "Paraan",
+                    "type": "Uri",
+                    "deposit": "Deposito",
+                    "withdrawal": "Withdrawal",
+                    "processing": "Proseso"
+                },
+                "types": {
+                    "card": "Card",
+                    "ewallet": "E-wallet",
+                    "bank": "Banko",
+                    "crypto": "Crypto"
+                },
+                "speed": {
+                    "instant": "Agad",
+                    "h24": "Hanggang 24 oras",
+                    "d1_2_business_days": "1–2 business days",
+                    "d2_4_business_days": "2–4 business days",
+                    "d1_3_business_days": "1–3 business days",
+                    "m10_20": "~10–20 min",
+                    "m10_60": "~10–60 min"
+                },
+                "fees": {
+                    "noFees": "Walang bayad mula sa amin",
+                    "bankFees": "Maaaring may bank fees",
+                    "networkFees": "May network fees"
+                }
+            },
+            "note": "Ang oras at availability ay depende sa provider, currency, at verification status. May mga limitasyon."
+        },
+        "steps": {
+            "deposit": {
+                "title": "Mga Hakbang sa Deposito",
+                "items": [
+                    "Mag-sign in sa iyong account.",
+                    "Buksan ang Cashier → Deposito.",
+                    "Pumili ng paraan at halaga.",
+                    "Kumpirmahin at tapusin ang bayad."
+                ]
+            },
+            "withdrawal": {
+                "title": "Mga Hakbang sa Withdrawal",
+                "items": [
+                    "I-verify ang profile kung kailangan.",
+                    "Buksan ang Cashier → Withdraw.",
+                    "Pumili ng paraan ng withdrawal.",
+                    "I-submit ang request at i-track ang status."
+                ]
+            }
+        },
+        "limits": {
+            "title": "Mga Limitasyon",
+            "minDeposit": "Minimum na deposito:",
+            "minWithdrawal": "Minimum na withdrawal:",
+            "dailyCap": "Araw-araw na withdrawal limit:",
+            "vip": "Mas mataas na limitasyon para sa mga VIP"
+        },
+        "help": {
+            "title": "Kailangan mo ba ng tulong sa pagbabayad?",
+            "desc": "Available ang aming team 24/7 para tumulong sa deposits, withdrawals, o verification.",
+            "chat": "Live Chat",
+            "email": "Email Support"
+        }
+    },
+    "contact": {
+        "hero": {
+            "titleA": "Kontak",
+            "titleB": "Suporta",
+            "subtitle": "Available kami 24/7. Makipag-ugnayan at sasagot kami agad."
+        },
+        "cards": {
+            "email": {
+                "title": "Email Support",
+                "desc": "Para sa mga tanong sa account, bayad, o teknikal.",
+                "cta": "{{email}}"
+            },
+            "chat": {
+                "title": "Live Chat",
+                "desc": "Makakuha ng real-time na tulong mula sa aming team.",
+                "cta": "Buksan ang Chat"
+            },
+            "rg": {
+                "title": "Responsableng Paglalaro",
+                "desc": "Kailangan mo ba ng pahinga, limitasyon, o payo? Tutulungan ka namin.",
+                "cta": "Alamin Pa"
+            }
+        },
+        "form": {
+            "title": "📨 Magpadala ng mensahe",
+            "name": {
+                "label": "Buong Pangalan",
+                "ph": "Juan Dela Cruz"
+            },
+            "email": {
+                "label": "Email",
+                "ph": "you@email.com"
+            },
+            "topic": {
+                "label": "Paksa",
+                "options": {
+                    "general": "Pangkalahatan",
+                    "payments": "Pagbabayad",
+                    "account": "Account at Verification",
+                    "technical": "Teknikal"
+                }
+            },
+            "message": {
+                "label": "Mensahe",
+                "ph": "Paano kami makakatulong?"
+            },
+            "consent": "Sumasang-ayon akong iproseso ang aking mensahe para sa layunin ng suporta.",
+            "send": "Ipadala ang Mensahe",
+            "sending": "Ipinapadala…",
+            "note": "Salamat! Naipadala na ang iyong mensahe.",
+            "securityNote": "Hinding-hindi kami hihingi ng iyong password o 2FA codes."
+        },
+        "aside": {
+            "company": {
+                "title": "Detalye ng Kumpanya",
+                "operator": "Operator:",
+                "operatorName": "Decordetails OÜ",
+                "reg": "Reg. no:",
+                "regNo": "17011692",
+                "addressLabel": "Address:",
+                "address": "Tornimäe tn 5, Kesklinna linnaosa, Tallinn, 10145, Harju maakond",
+                "emailLabel": "Email:",
+                "hours": "Oras:",
+                "hoursValue": "24/7"
+            },
+            "response": {
+                "title": "Oras ng Pagsagot",
+                "email": "Email: sa loob ng 6–12 oras",
+                "chat": "Chat: agad (depende sa pila)",
+                "payments": "Pagbabayad: same day para sa mga suportadong paraan"
+            },
+            "links": {
+                "title": "Mabilis na mga Link"
+            }
+        }
+    }
+}

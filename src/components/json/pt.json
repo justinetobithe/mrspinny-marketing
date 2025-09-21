@@ -1,0 +1,446 @@
+{
+    "header": {
+        "aria": {
+            "brandHome": "Página inicial da MrSpinny",
+            "openMenu": "Abrir menu",
+            "closeMenu": "Fechar menu",
+            "mainMenu": "Menu principal"
+        },
+        "nav": {
+            "home": "Início",
+            "slots": "Caça-níqueis",
+            "liveCasino": "Cassino ao Vivo",
+            "banking": "Pagamentos",
+            "contact": "Contato"
+        },
+        "cta": {
+            "playNow": "Jogar Agora"
+        },
+        "mobile": {
+            "menuTitle": "Menu"
+        },
+        "legal": {
+            "support": "Suporte",
+            "privacyPolicy": "Política de Privacidade",
+            "termsOfService": "Termos de Serviço",
+            "responsibleGaming": "Jogo Responsável"
+        },
+        "language": {
+            "english": "Inglês"
+        },
+        "ageBadge": "18+"
+    },
+    "footer": {
+        "aria": {
+            "brandHome": "Página inicial da MrSpinny"
+        },
+        "columns": {
+            "games": "Jogos",
+            "info": "Informações"
+        },
+        "links": {
+            "slots": "Caça-níqueis",
+            "liveCasino": "Cassino ao Vivo",
+            "poker": "Poker",
+            "lottery": "Loteria",
+            "roulette": "Roleta",
+            "privacyPolicy": "Política de Privacidade",
+            "termsOfService": "Termos de Serviço",
+            "responsibleGaming": "Jogo Responsável",
+            "support": "Suporte"
+        },
+        "badges": {
+            "gambleAware": "GambleAware",
+            "responsibleGaming": "Jogo Responsável"
+        },
+        "legal": {
+            "operatorLine": "MrSpinny.com é operado por Decordetails OÜ, Harju maakond, Tallinn, Kesklinna linnaosa, Tornimäe tn 5, 10145, reg. nº 17011692. O jogo é oferecido de acordo com as leis e restrições de idade aplicáveis. Para ajuda, entre em contato com {{email}}.",
+            "copyright": "© MrSpinny. Todos os direitos reservados | {{year}}."
+        }
+    },
+    "home": {
+        "hero": {
+            "titleA": "Revele seu",
+            "titleB": "Bônus de Boas-Vindas",
+            "subtitle": "Gire para ver sua recompensa. Crie uma conta e deposite para resgatar.",
+            "cta": {
+                "spin": "Girar a Roda"
+            }
+        },
+        "cards": {
+            "slots": {
+                "badge": "Quente",
+                "title": "Melhores Caça-níqueis",
+                "desc": "Jogue os slots mais populares com bônus diários.",
+                "cta": "Explorar"
+            },
+            "live": {
+                "badge": "Ao Vivo",
+                "title": "Cassino ao Vivo",
+                "desc": "Crupiês reais, emoção instantânea, a qualquer hora.",
+                "cta": "Entrar"
+            },
+            "promos": {
+                "badge": "Bônus",
+                "title": "Promoções Diárias",
+                "desc": "Recargas, giros grátis e prêmios surpresa.",
+                "cta": "Ver Tudo"
+            }
+        },
+        "about": {
+            "title": "Sobre o MrSpinny",
+            "alt": "Jogadores aproveitando os jogos do MrSpinny",
+            "body": "O MrSpinny combina jogo justo, pagamentos rápidos e recompensas generosas em uma experiência de cassino fluida. Desfrute de centenas de jogos premium, limites transparentes e suporte amigável 24/7.",
+            "points": {
+                "p1": "Pagamentos relâmpago para cartões, bancos e criptos.",
+                "p2": "Ferramentas responsáveis: limites, pausas e lembretes de realidade.",
+                "p3": "Promoções diárias com giros grátis e recargas.",
+                "p4": "Plataforma segura com criptografia moderna."
+            },
+            "cta": {
+                "how": "Como Funciona"
+            }
+        },
+        "why": {
+            "title": "Por Que Escolher a Gente",
+            "items": {
+                "fast": {
+                    "title": "Pagamentos Rápidos",
+                    "desc": "Retire seus ganhos rapidamente pelo método que preferir."
+                },
+                "secure": {
+                    "title": "Justo e Seguro",
+                    "desc": "Segurança de ponta e ferramentas de jogo responsável."
+                },
+                "selection": {
+                    "title": "Grande Variedade",
+                    "desc": "Slots, mesas e jogos ao vivo dos principais estúdios."
+                },
+                "support": {
+                    "title": "Suporte 24/7",
+                    "desc": "Equipe real pronta para ajudar, dia e noite."
+                }
+            }
+        },
+        "how": {
+            "title": "Como Jogar",
+            "steps": {
+                "create": {
+                    "title": "Criar Conta",
+                    "desc": "Abra sua conta gratuita em menos de um minuto.",
+                    "alt": "Criar sua conta no MrSpinny"
+                },
+                "deposit": {
+                    "title": "Depositar",
+                    "desc": "Escolha cartões, banco ou cripto para adicionar saldo.",
+                    "alt": "Depositar com cartões, banco ou cripto"
+                },
+                "play": {
+                    "title": "Jogar",
+                    "desc": "Explore slots, mesas e cassino ao vivo com promoções.",
+                    "alt": "Jogue slots, mesas e cassino ao vivo"
+                },
+                "withdraw": {
+                    "title": "Sacar",
+                    "desc": "Aproveite retiradas rápidas e transparentes quando ganhar.",
+                    "alt": "Saque de forma rápida e segura"
+                }
+            }
+        },
+        "gallery": {
+            "roulette": "Roleta",
+            "blackjack": "Blackjack",
+            "slots": "Caça-níqueis",
+            "liveTables": "Mesas ao Vivo"
+        },
+        "faq": {
+            "title": "Perguntas Frequentes",
+            "q1": {
+                "q": "Isto é jogo com dinheiro real?",
+                "a": "Esta página é uma prévia de marketing. O jogo real ocorre em {{domain}} e é apenas para maiores de 18 anos, sujeito às leis locais."
+            },
+            "q2": {
+                "q": "Como recebo meu bônus?",
+                "a": "Gire a roda, crie uma conta, faça seu primeiro depósito e siga as instruções na página de promoções."
+            },
+            "q3": {
+                "q": "Quais métodos de pagamento são aceitos?",
+                "a": "Cartões, transferência bancária e principais criptos como BTC, ETH, USDT e mais. Veja a página de Pagamentos para detalhes."
+            },
+            "q4": {
+                "q": "Vocês oferecem suporte?",
+                "a": "Sim. Nossa equipe está disponível 24/7 por e-mail e chat ao vivo."
+            }
+        },
+        "modal": {
+            "title": "Gire para um Bônus de Boas-Vindas",
+            "sub": "Esta é uma prévia de marketing (IP). O jogo real acontece em {{domain}}. Apenas maiores de 18 anos.",
+            "spin": "Girar Agora",
+            "claim": "Resgatar Bônus"
+        },
+        "noscript": {
+            "text": "É necessário JavaScript para girar a roda. Você ainda pode",
+            "link": "ver promoções aqui"
+        }
+    },
+    "slots": {
+        "hero": {
+            "titleA": "Gire e Ganhe nos Melhores",
+            "titleB": "Jogos de Slots",
+            "subtitle": "Explore títulos populares com bônus, megaways e prêmios diários."
+        },
+        "toolbar": {
+            "ariaLabel": "Filtros de slots",
+            "searchPlaceholder": "Pesquisar slots…",
+            "searchAria": "Pesquisar slots",
+            "sortLabel": "Ordenar",
+            "sortAria": "Ordenar slots",
+            "sortOptions": {
+                "az": "A → Z",
+                "za": "Z → A",
+                "vol": "Volatilidade"
+            },
+            "categoriesAria": "Categorias"
+        },
+        "pills": {
+            "all": "Todos",
+            "megaways": "Megaways",
+            "classic": "Clássico",
+            "jackpot": "Jackpots",
+            "new": "Novos",
+            "popular": "Populares",
+            "fave": "★ Favoritos"
+        },
+        "sectionTitle": "🎰 Slots em Destaque",
+        "cta": {
+            "play": "Jogar",
+            "demo": "Demo"
+        },
+        "empty": "Nenhum slot corresponde aos seus filtros.",
+        "alt": {
+            "game": "Jogo"
+        },
+        "aria": {
+            "playGame": "Jogar {{title}}",
+            "addFav": "Adicionar aos favoritos",
+            "removeFav": "Remover dos favoritos"
+        },
+        "hints": {
+            "toggleFav": "Pressione F para favoritar"
+        },
+        "vol": {
+            "labelShort": "Vol",
+            "labelFull": "Volatilidade"
+        },
+        "tags": {
+            "popular": "Populares",
+            "classic": "Clássico",
+            "megaways": "Megaways",
+            "new": "Novo",
+            "jackpot": "Jackpot"
+        },
+        "ribbon": {
+            "dailyDrops": "Prêmios Diários",
+            "hot": "Quente"
+        }
+    },
+    "live": {
+        "hero": {
+            "titleA": "Premium",
+            "titleB": "Cassino ao Vivo",
+            "titleC": "Mesas",
+            "subtitle": "Blackjack, Roleta, Baccarat, Poker e Game Shows em HD.",
+            "cta": "Entrar no Cassino ao Vivo"
+        },
+        "toolbar": {
+            "ariaLabel": "Filtros de cassino ao vivo",
+            "searchPlaceholder": "Pesquisar mesas ao vivo…",
+            "searchAria": "Pesquisar mesas ao vivo",
+            "categoriesAria": "Categorias"
+        },
+        "cats": {
+            "all": "Todos",
+            "blackjack": "Blackjack",
+            "roulette": "Roleta",
+            "baccarat": "Baccarat",
+            "poker": "Poker",
+            "game-show": "Game Shows"
+        },
+        "sectionTitle": "🎥 Mesas ao Vivo Populares",
+        "badge": {
+            "blackjack": "Blackjack",
+            "roulette": "Roleta",
+            "baccarat": "Baccarat",
+            "poker": "Poker",
+            "game-show": "Game Show"
+        },
+        "empty": "Nenhuma mesa encontrada. Tente outra pesquisa."
+    },
+    "banking": {
+        "hero": {
+            "titleA": "Rápido e Seguro",
+            "titleB": "Pagamentos",
+            "subtitle": "Depósitos instantâneos, retiradas rápidas e métodos confiáveis.",
+            "cta": "Criar Conta"
+        },
+        "usp": {
+            "instant": {
+                "title": "Depósitos Instantâneos",
+                "desc": "Carregue instantaneamente com cartões, e-wallets e cripto."
+            },
+            "secure": {
+                "title": "Seguro",
+                "desc": "Pagamentos criptografados e proteção da conta."
+            },
+            "payouts": {
+                "title": "Saques Rápidos",
+                "desc": "Processamento no mesmo dia em métodos suportados."
+            }
+        },
+        "methods": {
+            "title": "Métodos de Pagamento",
+            "names": {
+                "bankTransfer": "Transferência Bancária"
+            },
+            "table": {
+                "headers": {
+                    "method": "Método",
+                    "type": "Tipo",
+                    "deposit": "Depósito",
+                    "withdrawal": "Retirada",
+                    "processing": "Processamento"
+                },
+                "types": {
+                    "card": "Cartão",
+                    "ewallet": "Carteira Digital",
+                    "bank": "Banco",
+                    "crypto": "Cripto"
+                },
+                "speed": {
+                    "instant": "Instantâneo",
+                    "h24": "Até 24h",
+                    "d1_2_business_days": "1–2 dias úteis",
+                    "d2_4_business_days": "2–4 dias úteis",
+                    "d1_3_business_days": "1–3 dias úteis",
+                    "m10_20": "~10–20 min",
+                    "m10_60": "~10–60 min"
+                },
+                "fees": {
+                    "noFees": "Sem taxas da nossa parte",
+                    "bankFees": "Podem aplicar-se taxas bancárias",
+                    "networkFees": "Podem aplicar-se taxas de rede"
+                }
+            },
+            "note": "Os tempos e a disponibilidade variam conforme o provedor, moeda e status de verificação. Limites se aplicam."
+        },
+        "steps": {
+            "deposit": {
+                "title": "Etapas de Depósito",
+                "items": [
+                    "Entre na sua conta.",
+                    "Abra o Caixa → Depósito.",
+                    "Escolha um método e valor.",
+                    "Confirme e conclua o pagamento."
+                ]
+            },
+            "withdrawal": {
+                "title": "Etapas de Retirada",
+                "items": [
+                    "Verifique seu perfil, se solicitado.",
+                    "Abra o Caixa → Retirada.",
+                    "Escolha um método de saque.",
+                    "Envie a solicitação e acompanhe o status."
+                ]
+            }
+        },
+        "limits": {
+            "title": "Limites",
+            "minDeposit": "Depósito mínimo:",
+            "minWithdrawal": "Retirada mínima:",
+            "dailyCap": "Limite diário de saque:",
+            "vip": "Limites maiores disponíveis para VIPs"
+        },
+        "help": {
+            "title": "Precisa de ajuda com um pagamento?",
+            "desc": "Nossa equipe está disponível 24/7 para ajudar com depósitos, saques ou verificação.",
+            "chat": "Chat ao Vivo",
+            "email": "Suporte por E-mail"
+        }
+    },
+    "contact": {
+        "hero": {
+            "titleA": "Contato",
+            "titleB": "Suporte",
+            "subtitle": "Estamos aqui 24/7. Entre em contato e responderemos rapidamente."
+        },
+        "cards": {
+            "email": {
+                "title": "Suporte por E-mail",
+                "desc": "Para dúvidas sobre conta, pagamentos ou técnicas.",
+                "cta": "{{email}}"
+            },
+            "chat": {
+                "title": "Chat ao Vivo",
+                "desc": "Receba ajuda em tempo real da nossa equipe.",
+                "cta": "Abrir Chat"
+            },
+            "rg": {
+                "title": "Jogo Responsável",
+                "desc": "Precisa de uma pausa, limites ou conselhos? Podemos ajudar.",
+                "cta": "Saiba Mais"
+            }
+        },
+        "form": {
+            "title": "📨 Envie-nos uma mensagem",
+            "name": {
+                "label": "Nome completo",
+                "ph": "João Silva"
+            },
+            "email": {
+                "label": "E-mail",
+                "ph": "you@email.com"
+            },
+            "topic": {
+                "label": "Assunto",
+                "options": {
+                    "general": "Geral",
+                    "payments": "Pagamentos",
+                    "account": "Conta e Verificação",
+                    "technical": "Técnico"
+                }
+            },
+            "message": {
+                "label": "Mensagem",
+                "ph": "Como podemos ajudar?"
+            },
+            "consent": "Concordo com o processamento da minha mensagem para fins de suporte.",
+            "send": "Enviar Mensagem",
+            "sending": "Enviando…",
+            "note": "Obrigado! Sua mensagem foi enviada.",
+            "securityNote": "Nunca pediremos sua senha ou códigos 2FA."
+        },
+        "aside": {
+            "company": {
+                "title": "Detalhes da Empresa",
+                "operator": "Operador:",
+                "operatorName": "Decordetails OÜ",
+                "reg": "Reg. nº:",
+                "regNo": "17011692",
+                "addressLabel": "Endereço:",
+                "address": "Tornimäe tn 5, Kesklinna linnaosa, Tallinn, 10145, Harju maakond",
+                "emailLabel": "E-mail:",
+                "hours": "Horário:",
+                "hoursValue": "24/7"
+            },
+            "response": {
+                "title": "Tempo de Resposta",
+                "email": "E-mail: em até 6–12h",
+                "chat": "Chat: instantâneo (com fila)",
+                "payments": "Pagamentos: mesmo dia para métodos suportados"
+            },
+            "links": {
+                "title": "Links rápidos"
+            }
+        }
+    }
+}

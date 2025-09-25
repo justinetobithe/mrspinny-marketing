@@ -198,6 +198,10 @@
         if (claimBtn) { claimBtn.hidden = true; claimBtn.classList.remove("show"); }
         wheelWrap.classList.add("spinning");
         wheelEl.classList.add("is-spinning");
+
+        wheelEl.style.transition = "transform 3200ms cubic-bezier(0.19, 1, 0.22, 1)";
+        void wheelEl.offsetWidth;
+
         pulseRingsBurst(isIOS ? 2 : Math.max(2, Math.round(4 * perfProfile.fxScale)), 130);
         playSpinSound();
 
@@ -219,7 +223,7 @@
             isSpinning = false;
         };
         on(wheelEl, "transitionend", endOnce, { once: true });
-        const safety = setTimeout(() => { if (isSpinning) endOnce(); }, 6000);
+        const safety = setTimeout(() => { if (isSpinning) endOnce(); }, 6500);
         fx.addTimer(safety);
     }
 
@@ -258,7 +262,15 @@
         if (claimBtn) {
             claimBtn.href = `${PROMO_URL}?reward=${rewardParam}`;
             claimBtn.hidden = false;
-            const tClaim = setTimeout(() => claimBtn.classList.add("show"), 200); fx.addTimer(tClaim);
+            claimBtn.style.zIndex = "10";
+            claimBtn.style.pointerEvents = "auto";
+            const panel = claimBtn.closest(".modal-panel");
+            if (panel) panel.style.overflow = "visible";
+            void claimBtn.offsetWidth;
+            const tClaim = setTimeout(() => claimBtn.classList.add("show"), 50);
+            fx.addTimer(tClaim);
+            const forceVisible = setTimeout(() => { if (claimBtn.hidden) { claimBtn.hidden = false; claimBtn.classList.add("show"); } }, 500);
+            fx.addTimer(forceVisible);
         }
 
         playWinSound(() => { clearSpinCaches(); teardownSounds(); });
@@ -626,8 +638,9 @@
         buildWheelSVG();
 
         if (wheelWrap) { wheelWrap.style.marginBottom = "64px"; wheelWrap.style.willChange = "transform"; wheelWrap.style.contain = "layout paint size style"; }
-        if (wheelEl) { wheelEl.style.willChange = "transform"; wheelEl.style.contain = "layout paint size style"; }
+        if (wheelEl) { wheelEl.style.willChange = "transform"; wheelEl.style.contain = "layout paint size style"; wheelEl.style.transform = "rotate(0deg)"; }
         if (fireworkLayer) { fireworkLayer.style.willChange = "transform, opacity"; fireworkLayer.style.contain = "layout paint size style"; }
+        if (claimBtn) { claimBtn.style.zIndex = "10"; claimBtn.style.pointerEvents = "auto"; const panel = claimBtn.closest(".modal-panel"); if (panel) panel.style.overflow = "visible"; }
 
         const resizeFn = (() => {
             let raf = 0;

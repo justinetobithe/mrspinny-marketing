@@ -1,4 +1,3 @@
-// src/pages/Landing.jsx
 import { useEffect, useCallback } from "react";
 import { affUrl } from "@/helpers/urls";
 
@@ -41,7 +40,7 @@ export default function Landing() {
     const handleSpinClick = useCallback((e) => {
         if (typeof window.initMrSpinny !== "function") {
             e.preventDefault();
-            window.location.assign(affUrl("https://mrspinny.com/promotions"));
+            window.location.assign(affUrl("https://mrspinny.world/promotions"));
         }
     }, []);
 
@@ -66,7 +65,7 @@ export default function Landing() {
                             Spin the Wheel
                         </a>
                         <a
-                            href={affUrl("https://mrspinny.com/")}
+                            href={affUrl("https://mrspinny.world/")}
                             className="btn btn-outline"
                             data-link-id="landing_play"
                         >
@@ -160,7 +159,7 @@ export default function Landing() {
                     <details open>
                         <summary><b>Is this real money?</b></summary>
                         <p className="bank-note">
-                            This page is a marketing preview. Real play is at <a href="https://mrspinny.com/">mrspinny.com</a> for 18+ only.
+                            This page is a marketing preview. Real play is at <a href="https://mrspinny.world/">mrspinny.world</a> for 18+ only.
                         </p>
                     </details>
                     <details>
@@ -181,7 +180,7 @@ export default function Landing() {
                     <header className="modal-head">
                         <h2 id="wmTitle">Spin for a Welcome Bonus</h2>
                         <p className="modal-sub">
-                            This is a marketing preview (IP). Real play happens at <a href="https://mrspinny.com/">mrspinny.com</a>. 18+ only.
+                            This is a marketing preview (IP). Real play happens at <a href="https://mrspinny.world/">mrspinny.world</a>. 18+ only.
                         </p>
                     </header>
                     <div className="wheel-wrap" id="wheelWrap">
@@ -196,7 +195,7 @@ export default function Landing() {
                         <div className="wheel-pointer" aria-hidden="true" />
                         <div id="wheel-svg" className="wheel" aria-live="polite" />
                         <button id="spinBtn" className="btn btn-primary wheel-btn">Spin Now</button>
-                        <a id="claimBtn" className="btn btn-claim" href="https://mrspinny.com/promotions" hidden aria-live="polite">Claim Your Bonus</a>
+                        <a id="claimBtn" className="btn btn-claim" href={affUrl("https://mrspinny.world/promotions")} hidden aria-live="polite">Claim Your Bonus</a>
                         <div id="confettiLayer" aria-hidden="true" />
                         <div id="coinLayer" aria-hidden="true" />
                         <div id="fireworkLayer" aria-hidden="true" />
@@ -207,7 +206,7 @@ export default function Landing() {
             <noscript>
                 <p style={{ textAlign: "center", margin: "16px 0" }}>
                     JavaScript is required to spin the wheel. You can still{" "}
-                    <a href="https://mrspinny.com/promotions">view promotions here</a>.
+                    <a href="https://mrspinny.world/promotions">view promotions here</a>.
                 </p>
             </noscript>
         </main>

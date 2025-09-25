@@ -1,6 +1,8 @@
+// src/pages/Contact.jsx
 import { useRef, useState } from "react";
 import { useTranslation } from "react-i18next";
 import emailjs from "@emailjs/browser";
+import { logLead } from "@/helpers/logging";
 
 export default function Contact() {
     const { t } = useTranslation();
@@ -24,7 +26,7 @@ export default function Contact() {
         if (!SERVICE_ID || !TEMPLATE_ID || !PUBLIC_KEY) {
             setError("Email service is not configured.");
             setNoteVisible(true);
-            setTimeout(() => setNoteVisible(false), 4000);
+            setTimeout(() => setNoteVisible(false), 5000);
             return;
         }
 
@@ -33,15 +35,27 @@ export default function Contact() {
 
         try {
             await emailjs.sendForm(SERVICE_ID, TEMPLATE_ID, f, { publicKey: PUBLIC_KEY });
+
+            const data = new FormData(f);
+            await logLead({
+                status: "contact",
+                extra: {
+                    linkId: "contact_form",
+                    email: data.get("email") || "",
+                    name: data.get("name") || "",
+                    topic: data.get("topic") || ""
+                }
+            });
+
             setSending(false);
             f.reset();
             setNoteVisible(true);
-            setTimeout(() => setNoteVisible(false), 4000);
-        } catch (err) {
+            setTimeout(() => setNoteVisible(false), 5000);
+        } catch {
             setSending(false);
             setError("Failed to send. Please try again.");
             setNoteVisible(true);
-            setTimeout(() => setNoteVisible(false), 4000);
+            setTimeout(() => setNoteVisible(false), 5000);
         }
     };
 
@@ -125,24 +139,11 @@ export default function Contact() {
                         </div>
                         <div className="form-field">
                             <label htmlFor="topic">{t("contact.form.topic.label")}</label>
-                            <select
-                                id="topic"
-                                name="topic"
-                                className="form-input"
-                                defaultValue="general"
-                            >
-                                <option value="general">
-                                    {t("contact.form.topic.options.general")}
-                                </option>
-                                <option value="payments">
-                                    {t("contact.form.topic.options.payments")}
-                                </option>
-                                <option value="account">
-                                    {t("contact.form.topic.options.account")}
-                                </option>
-                                <option value="technical">
-                                    {t("contact.form.topic.options.technical")}
-                                </option>
+                            <select id="topic" name="topic" className="form-input" defaultValue="general">
+                                <option value="general">{t("contact.form.topic.options.general")}</option>
+                                <option value="payments">{t("contact.form.topic.options.payments")}</option>
+                                <option value="account">{t("contact.form.topic.options.account")}</option>
+                                <option value="technical">{t("contact.form.topic.options.technical")}</option>
                             </select>
                         </div>
                     </div>
@@ -169,46 +170,27 @@ export default function Contact() {
                         <button type="submit" className="btn btn-primary" id="sendBtn" disabled={sending}>
                             {sending ? t("contact.form.sending") : t("contact.form.send")}
                         </button>
-                        <p
-                            id="formNote"
-                            className="form-note"
-                            aria-live="polite"
-                            hidden={!noteVisible}
-                        >
+                        <p id="formNote" className="form-note" aria-live="polite" hidden={!noteVisible}>
                             {error ? error : t("contact.form.note")}
                         </p>
                     </div>
 
-                    <small className="contact-note">
-                        {t("contact.form.securityNote")}
-                    </small>
+                    <small className="contact-note">{t("contact.form.securityNote")}</small>
                 </form>
 
                 <aside className="contact-aside">
                     <h3>{t("contact.aside.company.title")}</h3>
                     <ul className="contact-list">
-                        <li>
-                            <b>{t("contact.aside.company.operator")}</b>{" "}
-                            {t("contact.aside.company.operatorName")}
-                        </li>
-                        <li>
-                            <b>{t("contact.aside.company.reg")}</b>{" "}
-                            {t("contact.aside.company.regNo")}
-                        </li>
-                        <li>
-                            <b>{t("contact.aside.company.addressLabel")}</b>{" "}
-                            {t("contact.aside.company.address")}
-                        </li>
+                        <li><b>{t("contact.aside.company.operator")}</b> {t("contact.aside.company.operatorName")}</li>
+                        <li><b>{t("contact.aside.company.reg")}</b> {t("contact.aside.company.regNo")}</li>
+                        <li><b>{t("contact.aside.company.addressLabel")}</b> {t("contact.aside.company.address")}</li>
                         <li>
                             <b>{t("contact.aside.company.emailLabel")}</b>{" "}
                             <a href={`mailto:${SUPPORT_EMAIL}`}>
                                 {t("contact.cards.email.cta", { email: SUPPORT_EMAIL })}
                             </a>
                         </li>
-                        <li>
-                            <b>{t("contact.aside.company.hours")}</b>{" "}
-                            {t("contact.aside.company.hoursValue")}
-                        </li>
+                        <li><b>{t("contact.aside.company.hours")}</b> {t("contact.aside.company.hoursValue")}</li>
                     </ul>
 
                     <h3>{t("contact.aside.response.title")}</h3>
@@ -220,15 +202,9 @@ export default function Contact() {
 
                     <h3>{t("contact.aside.links.title")}</h3>
                     <div className="contact-links">
-                        <a className="pill" href="/banking">
-                            {t("header.nav.banking")}
-                        </a>
-                        <a className="pill" href="/live-casino">
-                            {t("header.nav.liveCasino")}
-                        </a>
-                        <a className="pill" href="/slots">
-                            {t("header.nav.slots")}
-                        </a>
+                        <a className="pill" href="/banking">{t("header.nav.banking")}</a>
+                        <a className="pill" href="/live-casino">{t("header.nav.liveCasino")}</a>
+                        <a className="pill" href="/slots">{t("header.nav.slots")}</a>
                     </div>
                 </aside>
             </section>

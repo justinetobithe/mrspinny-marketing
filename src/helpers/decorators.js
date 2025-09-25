@@ -1,10 +1,10 @@
-import { appendAffiliateParams, ATTR_TARGETS } from './urls';
 import { getAffiliateParams } from './storage';
+import { ATTR_TARGETS, appendAffiliateParams } from './urls';
 
 export function attachLinkDecorator() {
     const handler = (e) => {
-        const a = e.target && e.target.closest ? e.target.closest('a[href]') : null;
-        if (!a || !a.href) return;
+        const a = e.target?.closest?.('a[href]');
+        if (!a) return;
         try {
             const u = new URL(a.href, window.location.origin);
             const sameOrigin = u.origin === window.location.origin;
@@ -28,9 +28,10 @@ export function attachFormDecorator() {
             if (!ATTR_TARGETS.has(u.hostname)) return;
 
             const params = getAffiliateParams();
+            const method = (form.method || '').toUpperCase();
             Object.entries(params).forEach(([k, v]) => {
                 if (!v) return;
-                if ((form.method || '').toUpperCase() === 'GET') {
+                if (method === 'GET') {
                     if (!u.searchParams.has(k)) u.searchParams.set(k, v);
                 } else {
                     if (!form.querySelector(`input[name="${k}"]`)) {
@@ -43,9 +44,7 @@ export function attachFormDecorator() {
                 }
             });
 
-            if ((form.method || '').toUpperCase() === 'GET') {
-                form.setAttribute('action', u.toString());
-            }
+            if (method === 'GET') form.setAttribute('action', u.toString());
         } catch { }
     };
     document.addEventListener('submit', onSubmit, true);

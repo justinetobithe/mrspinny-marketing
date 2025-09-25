@@ -2,7 +2,7 @@ import { useEffect } from 'react';
 import { pickAffiliateParams } from '@/helpers/params';
 import { saveAffiliateParams } from '@/helpers/storage';
 import { attachLinkDecorator, attachFormDecorator } from '@/helpers/decorators';
-import { logClick } from '@/helpers/logging';
+import { logClick, attachOutboundClickLogger } from '@/helpers/logging';
 
 export default function useAffiliateTracking({ cleanUrl = true } = {}) {
     useEffect(() => {
@@ -23,9 +23,11 @@ export default function useAffiliateTracking({ cleanUrl = true } = {}) {
         if (typeof window === 'undefined') return;
         const detachLinks = attachLinkDecorator();
         const detachForms = attachFormDecorator();
+        const detachOutbound = attachOutboundClickLogger();
         return () => {
-            if (detachLinks) detachLinks();
-            if (detachForms) detachForms();
+            detachLinks && detachLinks();
+            detachForms && detachForms();
+            detachOutbound && detachOutbound();
         };
     }, []);
 }

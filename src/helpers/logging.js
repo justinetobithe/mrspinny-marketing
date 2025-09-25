@@ -1,12 +1,12 @@
 import { db } from '@/firebase';
-import { collection, addDoc } from 'firebase/firestore';
+import { collection, addDoc, serverTimestamp } from 'firebase/firestore';
 import { getAffiliateParams } from './storage';
 
 function deviceHint() {
     const ua = navigator.userAgent || '';
-    return /Android|iPhone|iPad|iPod/i.test(ua) ? 'mobile'
-        : /Mac|Win|Linux/i.test(ua) ? 'desktop'
-            : 'unknown';
+    if (/Android|iPhone|iPad|iPod/i.test(ua)) return 'mobile';
+    if (/Mac|Win|Linux/i.test(ua)) return 'desktop';
+    return 'unknown';
 }
 
 function alreadyLoggedClick(key) {
@@ -18,8 +18,7 @@ function markLoggedClick(key) {
 
 export async function logClick({ affParams, linkId = null } = {}) {
     if (!affParams || !affParams.aff) return;
-
-    const dedupKey = `click_${affParams.aff}_${new URL(window.location.href).pathname}`;
+    const dedupKey = `click_${affParams.aff}_${new URL(window.location.href).pathname}${linkId ? '_' + linkId : ''}`;
     if (alreadyLoggedClick(dedupKey)) return;
 
     const doc = {
@@ -35,7 +34,7 @@ export async function logClick({ affParams, linkId = null } = {}) {
         ua: navigator.userAgent || '',
         ref: document.referrer || '',
         device: deviceHint(),
-        ts: new Date()
+        createdAt: serverTimestamp()
     };
     Object.keys(doc).forEach((k) => doc[k] == null && delete doc[k]);
 
@@ -62,10 +61,24 @@ export async function logLead({ status = 'new', extra = {} } = {}) {
         email: extra.email || null,
         name: extra.name || null,
         country: extra.country || null,
+        topic: extra.topic || null,
         status,
-        ts: new Date()
+        createdAt: serverTimestamp()
     };
     Object.keys(doc).forEach((k) => doc[k] == null && delete doc[k]);
 
     try { await addDoc(collection(db, 'leads'), doc); } catch { }
+}
+
+export function attachOutboundClickLogger() {
+    const handler = (e) => {
+        const a = e.target && e.target.closest ? e.target.closest('a[href][data-link-id]') : null;
+        if (!a) return;
+        const params = getAffiliateParams();
+        if (!params.aff) return;
+        const linkId = a.getAttribute('data-link-id') || null;
+        logClick({ affParams: params, linkId });
+    };
+    document.addEventListener('click', handler, true);
+    return () => document.removeEventListener('click', handler, true);
 }

@@ -7,9 +7,9 @@ import { getAffiliateParams } from "@/helpers/storage";
 
 export default function Home() {
     const { t } = useTranslation();
-    const domain = "https://mrspinny.com";
-    const plainDomain = "mrspinny.com";
-
+    const domain = "https://mrspinny.world";
+    const plainDomain = "mrspinny.world";
+    
     const boot = useCallback(() => {
         if (typeof window.initMrSpinny === "function") {
             try { window.initMrSpinny(); } catch (e) { console.error("initMrSpinny failed:", e); }

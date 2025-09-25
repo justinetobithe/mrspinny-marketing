@@ -13,9 +13,7 @@
     const REWARD_KEY = "mrspinny_wheel_reward";
     const MODAL_KEY = "mrspinny_welcome_seen";
 
-    const isIOS =
-        /iPad|iPhone|iPod/.test(navigator.userAgent) ||
-        (navigator.platform === "MacIntel" && navigator.maxTouchPoints > 1);
+    const isIOS = /iPad|iPhone|iPod/.test(navigator.userAgent) || (navigator.platform === "MacIntel" && navigator.maxTouchPoints > 1);
 
     let inited = false;
     let navToggle, mobileMenu, mobilePanel, backdrop, closeBtn;
@@ -31,6 +29,18 @@
     const reduceMotion = () => window.matchMedia?.("(prefers-reduced-motion: reduce)").matches;
     const rand = (min, max) => Math.floor(Math.random() * (max - min + 1)) + min;
     const isModalOpen = () => modal && !modal.hidden && modal.classList.contains("open");
+
+    const perfProfile = (() => {
+        const mem = (navigator.deviceMemory || 4);
+        const cores = (navigator.hardwareConcurrency || 4);
+        const smallScreen = Math.min(window.innerWidth, window.innerHeight) < 480;
+        const rm = reduceMotion();
+        let fxScale = 1;
+        if (rm) fxScale = 0.35;
+        else if (mem <= 2 || cores <= 4 || smallScreen || isIOS) fxScale = 0.6;
+        else if (mem <= 4) fxScale = 0.8;
+        return { fxScale, rm };
+    })();
 
     function todayStr() {
         try {
@@ -126,7 +136,7 @@
         setTimeout(() => (mobileMenu.hidden = true), 200);
     }
 
-    function startCelebrationWindow(ms = 2600) { endCelebration(); const id = setTimeout(endCelebration, ms); fx.addTimer(id); }
+    function startCelebrationWindow(ms = 2600) { endCelebration(); const id = setTimeout(endCelebration, Math.round(ms * (0.65 + 0.35 * perfProfile.fxScale))); fx.addTimer(id); }
     function endCelebration() {
         fx.clearTimers();
         try {
@@ -135,7 +145,7 @@
             const ring = document.getElementById("flameRing");
             if (ring) { ring.classList.remove("heatwave"); ring.innerHTML = ""; }
         } catch { }
-        document.querySelectorAll(".flame-coin,.coin,.spark,.fw,.sparkler,.sparkler-xl,.fw-xl,.shockwave").forEach(n => n.remove());
+        document.querySelectorAll(".flame-coin,.coin,.spark,.fw,.sparkler,.sparkler-xl,.fw-xl,.shockwave,.coin-trail").forEach(n => n.remove());
         wheelWrap?.classList.remove("do-shake", "spinning");
         wheelEl?.classList.remove("is-spinning", "hit");
         stopSpinSound();
@@ -143,18 +153,38 @@
 
     function pulseRingsBurst(times = 5, gap = 140) {
         const wrap = wheelWrap; if (!wrap) return;
+        times = Math.max(1, Math.round(times * (0.6 + 0.4 * perfProfile.fxScale)));
         for (let i = 0; i < times; i++) {
             const tid = setTimeout(() => {
                 const ring = document.createElement("div");
                 ring.className = "bg-ring";
                 wrap.querySelector(".wheel-bg")?.appendChild(ring);
-                const tid2 = setTimeout(() => ring.remove(), 1600);
+                const tid2 = setTimeout(() => ring.remove(), 1200);
                 fx.addTimer(tid2);
             }, i * gap);
             fx.addTimer(tid);
         }
     }
     function idleBGKick() { const t = setTimeout(() => pulseRingsBurst(2, 220), 600); fx.addTimer(t); }
+
+    function pool(createFn, size) {
+        const free = [];
+        for (let i = 0; i < size; i++) free.push(createFn());
+        return {
+            take() { return free.pop() || createFn(); },
+            release(el) { if (!el) return; el.remove(); free.push(el); }
+        }
+    }
+
+    let fwPool, coinPool, sparkPool, shockPool, trailPool;
+
+    function ensurePools() {
+        if (!fwPool) fwPool = pool(() => { const d = document.createElement("div"); d.className = "fw"; d.style.willChange = "transform, opacity"; return d; }, 120);
+        if (!coinPool) coinPool = pool(() => { const wrap = document.createElement("div"); wrap.className = "flame-coin"; wrap.style.willChange = "transform, opacity"; const flame = document.createElement("div"); flame.className = "flame"; const coin = document.createElement("div"); coin.className = "coin"; wrap.appendChild(flame); wrap.appendChild(coin); return wrap; }, 80);
+        if (!sparkPool) sparkPool = pool(() => { const d = document.createElement("div"); d.className = "spark"; d.style.willChange = "transform, opacity"; return d; }, 120);
+        if (!shockPool) shockPool = pool(() => { const d = document.createElement("div"); d.className = "shockwave"; d.style.willChange = "transform, opacity"; return d; }, 6);
+        if (!trailPool) trailPool = pool(() => { const d = document.createElement("div"); d.className = "coin-trail"; d.style.willChange = "transform, opacity"; return d; }, 60);
+    }
 
     async function onSpin() {
         if (isSpinning || !wheelEl || !wheelWrap || !spinBtn) return;
@@ -168,31 +198,32 @@
         if (claimBtn) { claimBtn.hidden = true; claimBtn.classList.remove("show"); }
         wheelWrap.classList.add("spinning");
         wheelEl.classList.add("is-spinning");
-        pulseRingsBurst(isIOS ? 2 : 4, 130);
+        pulseRingsBurst(isIOS ? 2 : Math.max(2, Math.round(4 * perfProfile.fxScale)), 130);
         playSpinSound();
 
         const chosen = pickSegment();
         const segmentCount = SEGMENTS.length;
         const index = SEGMENTS.findIndex((s) => s.label === chosen.label);
         const segmentAngle = 360 / segmentCount;
-        const baseTurns = 6;
+        const baseTurns = perfProfile.rm ? 4 : (perfProfile.fxScale < 0.7 ? 5 : 6);
         const base = 360 * baseTurns;
         const offset = segmentAngle * index + segmentAngle / 2;
         const jitter = rand(-6, 6);
         const finalDeg = base + (360 - offset) + jitter;
+
         requestAnimationFrame(() => { wheelEl.style.transform = `rotate(${finalDeg}deg)`; });
 
-        const handler = () => {
-            wheelEl.removeEventListener("transitionend", handler);
+        const endOnce = () => {
+            wheelEl.removeEventListener("transitionend", endOnce);
             onSpinEnd(finalDeg, chosen);
             isSpinning = false;
         };
-        on(wheelEl, "transitionend", handler, { once: true });
+        on(wheelEl, "transitionend", endOnce, { once: true });
+        const safety = setTimeout(() => { if (isSpinning) endOnce(); }, 6000);
+        fx.addTimer(safety);
     }
 
-    function clearSpinCaches() {
-        try { localStorage.removeItem(REWARD_KEY); } catch { }
-    }
+    function clearSpinCaches() { try { localStorage.removeItem(REWARD_KEY); } catch { } }
 
     function onSpinEnd(finalDeg, chosen) {
         markSpun();
@@ -200,18 +231,18 @@
         wheelWrap.classList.remove("spinning");
         wheelEl.classList.remove("is-spinning");
 
-        const lightFX = reduceMotion() || isIOS;
-        startCelebrationWindow(lightFX ? 1400 : 2600);
-        screenShake(lightFX ? 6 : 10, lightFX ? 360 : 500);
+        const lightFX = perfProfile.rm || isIOS;
+        startCelebrationWindow(lightFX ? 1200 : 2200);
+        screenShake(lightFX ? 6 : 9, lightFX ? 320 : 440);
         if (!lightFX) {
-            igniteFlameRing(2000, isIOS ? 20 : 32);
-            heatWave(1600);
+            igniteFlameRing(1800, isIOS ? 18 : Math.max(22, Math.round(32 * perfProfile.fxScale)));
+            heatWave(1400);
         }
         shockwave(lightFX ? 1 : 2);
-        burstFlamingCoins({ count: lightFX ? 28 : 70, embers: !lightFX, trails: !lightFX });
+        burstFlamingCoins({ count: lightFX ? 24 : 54, embers: !lightFX, trails: !lightFX });
         burstFireworks();
         burstFireworksFullScreen();
-        pulseRingsBurst(lightFX ? 1 : 3, 160);
+        pulseRingsBurst(lightFX ? 1 : 3, 140);
         stopSpinSound();
 
         const current = finalDeg % 360;
@@ -230,10 +261,7 @@
             const tClaim = setTimeout(() => claimBtn.classList.add("show"), 200); fx.addTimer(tClaim);
         }
 
-        playWinSound(() => {
-            clearSpinCaches();
-            teardownSounds();
-        });
+        playWinSound(() => { clearSpinCaches(); teardownSounds(); });
     }
 
     function pickSegment(segments = SEGMENTS) {
@@ -247,8 +275,7 @@
         if (document.getElementById("flameStyles")) return;
         const s = document.createElement("style");
         s.id = "flameStyles";
-        s.textContent =
-            "#wheelWrap{position:relative}#flameRing{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);pointer-events:none;z-index:4;filter:drop-shadow(0 0 10px rgba(255,140,0,.35))}#flameRing .flame-jet{position:absolute;left:50%;top:25%;transform:rotate(var(--a)) translate(var(--d)) translate(-50%,-50%);border-radius:999px;background:radial-gradient(closest-side,rgba(255,220,150,.95),rgba(255,105,40,.82) 60%,rgba(150,15,0,.65) 92%,rgba(150,15,0,0) 100%);mix-blend-mode:screen;filter:url(#heatDistort) blur(.2px) drop-shadow(0 0 6px rgba(255,120,0,.5));animation:flameFlicker 240ms infinite alternate}#flameRing.heatwave{filter:url(#heatDistort) drop-shadow(0 0 10px rgba(255,160,0,.4))}@keyframes flameFlicker{from{transform:rotate(var(--a)) translate(var(--d)) translate(-50%,-50%) scale(1);opacity:.96}to{transform:rotate(var(--a)) translate(calc(var(--d) + 2%)) translate(-50%,-50%) scale(1.06);opacity:1}}";
+        s.textContent = "#wheelWrap{position:relative}#flameRing{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);pointer-events:none;z-index:4;filter:drop-shadow(0 0 10px rgba(255,140,0,.35))}#flameRing .flame-jet{position:absolute;left:50%;top:25%;transform:rotate(var(--a)) translate(var(--d)) translate(-50%,-50%);border-radius:999px;background:radial-gradient(closest-side,rgba(255,220,150,.95),rgba(255,105,40,.82) 60%,rgba(150,15,0,.65) 92%,rgba(150,15,0,0) 100%);mix-blend-mode:screen;filter:url(#heatDistort) blur(.2px) drop-shadow(0 0 6px rgba(255,120,0,.5));animation:flameFlicker 240ms infinite alternate}#flameRing.heatwave{filter:url(#heatDistort) drop-shadow(0 0 10px rgba(255,160,0,.4))}@keyframes flameFlicker{from{transform:rotate(var(--a)) translate(var(--d)) translate(-50%,-50%) scale(1);opacity:.96}to{transform:rotate(var(--a)) translate(calc(var(--d) + 2%)) translate(-50%,-50%) scale(1.06);opacity:1}}";
         document.head.appendChild(s);
     }
     function ensureFlameRing() {
@@ -277,122 +304,137 @@
         const a = el.getBoundingClientRect(); const b = relativeTo.getBoundingClientRect();
         return { x: a.left + a.width / 2 - b.left, y: a.top + a.height / 2 - b.top };
     }
-    function igniteFlameRing(duration = 2800, jets = 40) {
+    function igniteFlameRing(duration = 1800, jets = 40) {
         const ring = ensureFlameRing(); if (!ring) return;
         ring.innerHTML = "";
         const frag = document.createDocumentFragment();
-        for (let i = 0; i < jets; i++) {
+        const j = Math.max(14, Math.round(jets * (0.6 + 0.4 * perfProfile.fxScale)));
+        for (let i = 0; i < j; i++) {
             const jet = document.createElement("div");
             jet.className = "flame-jet";
-            jet.style.setProperty("--a", (i / jets) * 360 + "deg");
+            jet.style.setProperty("--a", (i / j) * 360 + "deg");
             jet.style.setProperty("--d", 58 + Math.random() * 6 + "%");
-            jet.style.height = 130 + Math.random() * 70 + "px";
-            jet.style.width = 22 + Math.random() * 12 + "px";
+            jet.style.height = 110 + Math.random() * 60 + "px";
+            jet.style.width = 20 + Math.random() * 10 + "px";
             jet.style.animationDelay = Math.random() * 160 + "ms";
             frag.appendChild(jet);
         }
         ring.appendChild(frag);
-        const tid = setTimeout(() => { ring.innerHTML = ""; }, duration); fx.addTimer(tid);
+        const tid = setTimeout(() => { ring.innerHTML = ""; }, Math.round(duration * (0.65 + 0.35 * perfProfile.fxScale))); fx.addTimer(tid);
     }
-    function heatWave(duration = 1800) { const ring = document.getElementById("flameRing"); if (!ring) return; ring.classList.add("heatwave"); const tid = setTimeout(() => ring.classList.remove("heatwave"), duration); fx.addTimer(tid); }
+    function heatWave(duration = 1400) { const ring = document.getElementById("flameRing"); if (!ring) return; ring.classList.add("heatwave"); const tid = setTimeout(() => ring.classList.remove("heatwave"), Math.round(duration * (0.65 + 0.35 * perfProfile.fxScale))); fx.addTimer(tid); }
     function shockwave(count = 1) {
+        ensurePools();
         const container = fireworkLayer || pageFX;
         const n = Math.max(1, count);
         for (let i = 0; i < n; i++) {
-            const sw = document.createElement("div");
-            sw.className = "shockwave"; sw.style.left = "50%"; sw.style.top = "50%"; sw.style.animationDelay = `${i * 120}ms`;
+            const sw = shockPool.take();
+            sw.style.left = "50%";
+            sw.style.top = "50%";
+            sw.style.animationDelay = `${i * 100}ms`;
             container && container.appendChild(sw);
-            const tid = setTimeout(() => sw.remove(), 1200 + i * 120); fx.addTimer(tid);
+            const tid = setTimeout(() => shockPool.release(sw), 1000 + i * 100); fx.addTimer(tid);
         }
     }
     function screenShake(intensity = 8, duration = 450) {
         const el = wheelWrap; if (!el) return;
+        intensity = Math.max(3, Math.round(intensity * perfProfile.fxScale));
+        duration = Math.round(duration * (0.65 + 0.35 * perfProfile.fxScale));
         el.style.setProperty("--shake-intensity", intensity + "px");
         el.classList.add("do-shake");
         const tid = setTimeout(() => el.classList.remove("do-shake"), duration + 60); fx.addTimer(tid);
     }
     function burstFireworks() {
+        ensurePools();
         if (!fireworkLayer || !wheelEl) return;
         const { x: cx, y: cy } = centerOf(wheelEl, fireworkLayer);
         const COLORS = ["#ffd54a", "#f59e0b", "#ffcc33", "#b71c1c", "#8e0e0e", "#fff1a8"];
-        const totalBursts = reduceMotion() || isIOS ? 2 : 5;
+        const totalBursts = perfProfile.rm ? 1 : Math.max(2, Math.round(4 * perfProfile.fxScale));
+        const radius = 210;
         const frag = document.createDocumentFragment();
         for (let b = 0; b < totalBursts; b++) {
-            const particles = (reduceMotion() || isIOS) ? 20 : 44;
-            const spread = (reduceMotion() || isIOS) ? 140 : 210;
+            const particles = Math.max(16, Math.round(28 * perfProfile.fxScale));
             for (let i = 0; i < particles; i++) {
                 const theta = (i / particles) * Math.PI * 2 + Math.random() * 0.12;
-                const dist = spread + Math.random() * 60;
+                const dist = radius + Math.random() * 60;
                 const x = Math.cos(theta) * dist; const y = Math.sin(theta) * dist;
-                const fw = document.createElement("div"); fw.className = "fw";
+                const fw = fwPool.take();
                 fw.style.left = cx + "px"; fw.style.top = cy + "px";
                 fw.style.setProperty("--x", `${x}px`); fw.style.setProperty("--y", `${y}px`);
                 fw.style.setProperty("--c", COLORS[(i + b) % COLORS.length]);
-                fw.style.animationDelay = `${b * 120}ms`;
+                fw.style.animationDelay = `${b * 100}ms`;
                 frag.appendChild(fw);
-                const tid = setTimeout(() => fw.remove(), 1400 + b * 120); fx.addTimer(tid);
+                const tid = setTimeout(() => fwPool.release(fw), Math.round(1100 + b * 100)); fx.addTimer(tid);
             }
         }
         fireworkLayer.appendChild(frag);
     }
     function randomColor() { const c = ["#ffd54a", "#f59e0b", "#ffcc33", "#b71c1c", "#8e0e0e", "#fff1a8"]; return c[Math.floor(Math.random() * c.length)]; }
     function fireworkBurstAt(container, cx, cy, radius = 260, particles = 46, delay = 0) {
+        ensurePools();
         const frag = document.createDocumentFragment();
         for (let i = 0; i < particles; i++) {
             const theta = (i / particles) * Math.PI * 2 + Math.random() * 0.1;
             const dist = radius + Math.random() * 80;
             const x = Math.cos(theta) * dist; const y = Math.sin(theta) * dist;
-            const el = document.createElement("div");
-            el.className = "fw"; el.style.left = cx + "px"; el.style.top = cy + "px";
+            const el = fwPool.take();
+            el.style.left = cx + "px"; el.style.top = cy + "px";
             el.style.setProperty("--x", x + "px"); el.style.setProperty("--y", y + "px");
             el.style.setProperty("--c", randomColor()); el.style.animationDelay = delay + "ms";
             frag.appendChild(el);
-            const tid = setTimeout(() => el.remove(), 1400 + delay); fx.addTimer(tid);
+            const tid = setTimeout(() => fwPool.release(el), Math.round(1200 + delay)); fx.addTimer(tid);
         }
         container.appendChild(frag);
     }
     function burstFireworksFullScreen() {
+        ensurePools();
         const W = window.innerWidth; const H = window.innerHeight;
         if (!pageFX) return;
         pageFX.innerHTML = "";
-        if (reduceMotion() || isIOS) return;
-        const centers = [[W * 0.2, H * 0.35], [W * 0.5, H * 0.25], [W * 0.8, H * 0.42]];
-        centers.forEach((c, idx) => { const [cx, cy] = c; const delay = idx * 160; fireworkBurstAt(pageFX, cx, cy, 260 + Math.random() * 60, 36 + Math.floor(Math.random() * 8), delay); });
-        const tid = setTimeout(() => { pageFX.innerHTML = ""; }, 2600); fx.addTimer(tid);
+        if (perfProfile.rm || isIOS) return;
+        const centers = [[W * 0.2, H * 0.35], [W * 0.5, H * 0.25], [W * 0.8, H * 0.42]].slice(0, Math.max(1, Math.round(3 * perfProfile.fxScale)));
+        centers.forEach((c, idx) => { const [cx, cy] = c; const delay = idx * 140; fireworkBurstAt(pageFX, cx, cy, 260 + Math.random() * 60, Math.max(14, Math.round(30 * perfProfile.fxScale)), delay); });
+        const tid = setTimeout(() => { pageFX.innerHTML = ""; }, Math.round(2200 * (0.7 + 0.3 * perfProfile.fxScale))); fx.addTimer(tid);
     }
     function burstFlamingCoins({ count = 80, embers = true, trails = true } = {}) {
+        ensurePools();
         if (!fireworkLayer || !wheelEl) return;
         const { x: cx, y: cy } = centerOf(wheelEl, fireworkLayer);
         const frag = document.createDocumentFragment();
-        const n = count;
-        for (let i = 0; i < n; i++) {
+        count = Math.max(18, Math.round(count * (0.55 + 0.45 * perfProfile.fxScale)));
+        if (perfProfile.rm || isIOS) { embers = false; trails = false; }
+        for (let i = 0; i < count; i++) {
             const base = -Math.PI / 2; const spread = Math.PI * 0.9;
             const theta = base + (Math.random() - 0.5) * spread;
-            const power = 140 + Math.random() * 160;
+            const power = 180 + Math.random() * 180;
             const dx = Math.cos(theta) * power; const dy = Math.sin(theta) * power;
             const angleDeg = (Math.atan2(dy, dx) * 180) / Math.PI;
-            const wrap = document.createElement("div");
-            wrap.className = "flame-coin"; wrap.style.left = cx - 8 + "px"; wrap.style.top = cy - 8 + "px";
+            const wrap = coinPool.take();
+            wrap.style.left = cx - 8 + "px"; wrap.style.top = cy - 8 + "px";
             wrap.style.setProperty("--x", dx + "px"); wrap.style.setProperty("--y", dy + "px"); wrap.style.setProperty("--angle", angleDeg + "deg");
-            wrap.style.transformOrigin = "center"; wrap.style.animationDuration = `${800 + Math.random() * 380}ms`; wrap.style.filter = `blur(${Math.random() * 0.6}px)`;
-            const flame = document.createElement("div"); flame.className = "flame";
-            const coin = document.createElement("div"); coin.className = "coin";
-            wrap.appendChild(flame); wrap.appendChild(coin);
-            if (trails && !isIOS) { const trail = document.createElement("div"); trail.className = "coin-trail"; trail.style.setProperty("--angle", angleDeg + "deg"); trail.style.animationDuration = `${640 + Math.random() * 360}ms`; wrap.appendChild(trail); }
+            wrap.style.transformOrigin = "center"; wrap.style.animationDuration = `${700 + Math.random() * 320}ms`;
+            const hasTrail = trails && !isIOS;
+            if (hasTrail) {
+                const trail = trailPool.take();
+                trail.style.setProperty("--angle", angleDeg + "deg");
+                trail.style.animationDuration = `${560 + Math.random() * 320}ms`;
+                wrap.appendChild(trail);
+                setTimeout(() => trailPool.release(trail), 1000);
+            }
             frag.appendChild(wrap);
             if (embers && !isIOS) {
-                const emberCount = 2 + Math.floor(Math.random() * 3);
+                const emberCount = 1 + Math.floor(Math.random() * 2);
                 for (let e = 0; e < emberCount; e++) {
-                    const sp = document.createElement("div"); sp.className = "spark"; sp.style.left = cx + "px"; sp.style.top = cy + "px";
-                    const jitter = 60 + Math.random() * 110;
+                    const sp = sparkPool.take(); sp.style.left = cx + "px"; sp.style.top = cy + "px";
+                    const jitter = 70 + Math.random() * 110;
                     const ex = Math.cos(theta + (Math.random() * 0.25 - 0.125)) * jitter;
                     const ey = Math.sin(theta + (Math.random() * 0.25 - 0.125)) * jitter;
-                    sp.style.setProperty("--sx", ex + "px"); sp.style.setProperty("--sy", ey + "px"); sp.style.animationDuration = `${520 + Math.random() * 480}ms`;
+                    sp.style.setProperty("--sx", ex + "px"); sp.style.setProperty("--sy", ey + "px"); sp.style.animationDuration = `${520 + Math.random() * 420}ms`;
                     frag.appendChild(sp);
-                    const t2 = setTimeout(() => sp.remove(), 1000); fx.addTimer(t2);
+                    const t2 = setTimeout(() => sparkPool.release(sp), 900); fx.addTimer(t2);
                 }
             }
-            const t1 = setTimeout(() => wrap.remove(), 1400); fx.addTimer(t1);
+            const t1 = setTimeout(() => coinPool.release(wrap), 1200); fx.addTimer(t1);
         }
         fireworkLayer.appendChild(frag);
     }
@@ -539,7 +581,7 @@
 
     function ensurePageFX() {
         pageFX = document.getElementById("pageFX");
-        if (!pageFX) { pageFX = document.createElement("div"); pageFX.id = "pageFX"; pageFX.className = "page-fx"; document.body.appendChild(pageFX); }
+        if (!pageFX) { pageFX = document.createElement("div"); pageFX.id = "pageFX"; pageFX.className = "page-fx"; pageFX.style.willChange = "transform, opacity"; pageFX.style.contain = "layout paint size style"; document.body.appendChild(pageFX); }
     }
 
     function bindGlobalKeys() {
@@ -583,12 +625,19 @@
         ensurePageFX();
         buildWheelSVG();
 
-        if (wheelWrap) wheelWrap.style.marginBottom = "64px";
-        if (claimBtn) { claimBtn.style.bottom = "auto"; claimBtn.style.top = "calc(100% + 18px)"; }
+        if (wheelWrap) { wheelWrap.style.marginBottom = "64px"; wheelWrap.style.willChange = "transform"; wheelWrap.style.contain = "layout paint size style"; }
+        if (wheelEl) { wheelEl.style.willChange = "transform"; wheelEl.style.contain = "layout paint size style"; }
+        if (fireworkLayer) { fireworkLayer.style.willChange = "transform, opacity"; fireworkLayer.style.contain = "layout paint size style"; }
 
-        const resizeFn = () => sizeAndCenterFlameRing();
+        const resizeFn = (() => {
+            let raf = 0;
+            return () => {
+                if (raf) cancelAnimationFrame(raf);
+                raf = requestAnimationFrame(() => { sizeAndCenterFlameRing(); });
+            };
+        })();
         sizeAndCenterFlameRing();
-        on(window, "resize", resizeFn);
+        on(window, "resize", resizeFn, { passive: true });
 
         initWheel();
     }
@@ -599,6 +648,22 @@
         if (!allowed) { spinBtn.remove(); spinBtn = null; return; }
         on(spinBtn, "click", onSpin);
         idleBGKick();
+        ensurePools();
+    }
+
+    function resetWheelUI() {
+        if (!wheelWrap || !wheelEl) return;
+        isSpinning = false;
+        if (spinBtn) { spinBtn.disabled = false; spinBtn.classList.remove("is-hidden"); }
+        if (claimBtn) { claimBtn.hidden = true; claimBtn.classList.remove("show"); }
+        endCelebration();
+        wheelEl.classList.remove("is-spinning", "hit");
+        wheelWrap.classList.remove("spinning");
+        wheelEl.style.transition = "none";
+        wheelEl.style.transform = "rotate(0deg)";
+        wheelEl.style.removeProperty("--final");
+        void wheelEl.offsetHeight;
+        wheelEl.style.transition = "";
     }
 
     function initWelcomeModal() {
@@ -610,13 +675,14 @@
             requestAnimationFrame(() => modal.classList.add("open"));
             document.body.classList.add("no-scroll");
             setupSounds();
+            resetWheelUI();
         };
         const closeModal = () => {
             if (!modal) return;
             modal.classList.remove("open");
             document.body.classList.remove("no-scroll");
             setTimeout(() => (modal.hidden = true), 180);
-            endCelebration();
+            resetWheelUI();
             teardownSounds();
             try { localStorage.removeItem(REWARD_KEY); } catch { }
         };
@@ -628,6 +694,12 @@
         on(openBtn, "click", (e) => { e.preventDefault(); openModal(); });
         on(modal, "click", (e) => { if (e.target.matches("[data-close], .modal-backdrop")) closeModal(); });
         on(document, "keydown", (e) => { if (e.key === "Escape" && modal && !modal.hidden) closeModal(); });
+        if (claimBtn) {
+            on(claimBtn, "click", () => {
+                resetWheelUI();
+                if (modal && !modal.hidden) closeModal();
+            }, { passive: true });
+        }
     }
 
     window.initMrSpinny = function () {

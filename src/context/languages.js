@@ -1,4 +1,3 @@
-
 export const LANGUAGES = [
     { code: "en", name: "English", flag: "🇬🇧", initial: "EN" },
     { code: "de", name: "German", flag: "🇩🇪", initial: "DE" },
@@ -12,7 +11,7 @@ export const LANGUAGES = [
     { code: "tr", name: "Turkish", flag: "🇹🇷", initial: "TR" },
     { code: "pt", name: "Portuguese", flag: "🇵🇹", initial: "PT" },
     { code: "ru", name: "Russian", flag: "🇷🇺", initial: "RU" },
-    { code: "fil", name: "Filipino", flag: "🇵🇭", initial: "FIL" },
+    { code: "tl", name: "Filipino", flag: "🇵🇭", initial: "TL" },
 ];
 
 export const COUNTRY_TO_LANG = {
@@ -28,12 +27,10 @@ export const COUNTRY_TO_LANG = {
     TR: "tr",
     PT: "pt", BR: "pt",
     RU: "ru",
-    PH: "fil",
+    PH: "tl",
     CH: "de",
 };
 
 export const DEFAULT_LANG_CODE = "en";
 
-export const SUPPORTED_LNGS = Array.from(
-    new Set([...LANGUAGES.map(l => l.code), "tl"])
-);
+export const SUPPORTED_LNGS = Array.from(new Set([...LANGUAGES.map(l => l.code)]));

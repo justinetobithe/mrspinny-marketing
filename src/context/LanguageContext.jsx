@@ -1,13 +1,13 @@
 import React, { createContext, useState, useContext, useEffect } from "react";
 import i18n from "../i18n";
-import {
-    LANGUAGES,
-    COUNTRY_TO_LANG,
-    DEFAULT_LANG_CODE,
-    SUPPORTED_LNGS,
-} from "./languages";
+import { LANGUAGES, COUNTRY_TO_LANG, DEFAULT_LANG_CODE, SUPPORTED_LNGS } from "./languages";
 
 const LanguageContext = createContext();
+
+const normalize = (code) => (code ? code.split("-")[0] : DEFAULT_LANG_CODE);
+const findLang = (code) =>
+    LANGUAGES.find((l) => l.code === code) ||
+    LANGUAGES.find((l) => l.code === DEFAULT_LANG_CODE);
 
 async function fetchWithTimeout(resource, options = {}) {
     const { timeout = 2500, ...rest } = options;
@@ -49,11 +49,6 @@ async function detectCountry() {
     return null;
 }
 
-const normalize = (code) => (code ? code.split("-")[0] : DEFAULT_LANG_CODE);
-const findLang = (code) =>
-    LANGUAGES.find((l) => l.code === code) ||
-    LANGUAGES.find((l) => l.code === DEFAULT_LANG_CODE);
-
 export const LanguageProvider = ({ children }) => {
     const initialCode = normalize(i18n.language || DEFAULT_LANG_CODE);
     const [selectedLanguage, setSelectedLanguage] = useState(findLang(initialCode));
@@ -90,11 +85,11 @@ export const LanguageProvider = ({ children }) => {
                 }
             }
 
-            const finalCode = SUPPORTED_LNGS.includes(suggestedCode)
+            const finalCode = SUPPORTED_LNGS.includes(suggestedCode || "")
                 ? suggestedCode
                 : DEFAULT_LANG_CODE;
 
-            const lang = findLang(finalCode === "tl" ? "fil" : finalCode);
+            const lang = findLang(finalCode);
             i18n.changeLanguage(finalCode);
             localStorage.setItem("i18nextLng", finalCode);
             setSelectedLanguage(lang);

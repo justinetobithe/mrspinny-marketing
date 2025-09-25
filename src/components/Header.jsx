@@ -55,7 +55,7 @@ export default function Header() {
     const renderLangOptions = () =>
         languages.map((l) => (
             <option key={l.code} value={l.code}>
-                {l.flag} {l.name}
+                {l.name} ({l.code.toUpperCase()})
             </option>
         ));
 
@@ -91,7 +91,11 @@ export default function Header() {
                     </NavLink>
 
                     <div className="desktop-lang relative hidden md:flex items-center" ref={langMenuRef}>
-                        <span className="text-xl leading-none px-2" aria-hidden="true" title={`${currentLang.flag} ${currentLang.name}`}>
+                        <span
+                            className="text-xl leading-none px-2 emoji"
+                            aria-hidden="true"
+                            title={`${currentLang.flag} ${currentLang.name}`}
+                        >
                             {currentLang.flag}
                         </span>
                         <select
@@ -159,15 +163,20 @@ export default function Header() {
                     <hr className="mobile-divider" />
 
                     <div className="mobile-lang">
-                        <select
-                            aria-label="Language"
-                            value={selected}
-                            onChange={(e) => onChangeLang(e.target.value)}
-                            className="lang-select"
-                            style={{ appearance: "none", WebkitAppearance: "none", MozAppearance: "none", paddingRight: 12, cursor: "pointer" }}
-                        >
-                            {renderLangOptions()}
-                        </select>
+                        <div className="flex items-center gap-2">
+                            <span className="emoji text-lg" aria-hidden="true">
+                                {currentLang.flag}
+                            </span>
+                            <select
+                                aria-label="Language"
+                                value={selected}
+                                onChange={(e) => onChangeLang(e.target.value)}
+                                className="lang-select"
+                                style={{ appearance: "none", WebkitAppearance: "none", MozAppearance: "none", paddingRight: 12, cursor: "pointer" }}
+                            >
+                                {renderLangOptions()}
+                            </select>
+                        </div>
                     </div>
 
                     <ul className="mobile-secondary">

@@ -1,9 +1,6 @@
 import i18n from "i18next";
 import { initReactI18next } from "react-i18next";
 
-// 🚫 Remove i18next-http-backend. We will import JSON directly.
-
-// Import your JSONs from src/components/json
 import de from "./components/json/de.json";
 import en from "./components/json/en.json";
 import es from "./components/json/es.json";
@@ -22,7 +19,6 @@ const resources = {
     de: { translation: de },
     en: { translation: en },
     es: { translation: es },
-    tl: { translation: tl },
     fr: { translation: fr },
     it: { translation: it },
     ko: { translation: ko },
@@ -32,7 +28,6 @@ const resources = {
     th: { translation: th },
     tr: { translation: tr },
     zh: { translation: zh },
-
     tl: { translation: tl },
 };
 
@@ -53,7 +48,11 @@ i18n
     });
 
 i18n.on("loaded", (l) => console.log("[i18n] loaded:", l));
-i18n.on("failedLoading", (lng, ns, msg) => console.error("[i18n] failedLoading", { lng, ns, msg }));
-i18n.on("missingKey", (lngs, ns, key) => console.warn("[i18n] missingKey", { lngs, ns, key }));
+i18n.on("failedLoading", (lng, ns, msg) =>
+    console.error("[i18n] failedLoading", { lng, ns, msg })
+);
+i18n.on("missingKey", (lngs, ns, key) =>
+    console.warn("[i18n] missingKey", { lngs, ns, key })
+);
 
 export default i18n;

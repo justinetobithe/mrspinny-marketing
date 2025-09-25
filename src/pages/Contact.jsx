@@ -1,28 +1,48 @@
 import { useRef, useState } from "react";
 import { useTranslation } from "react-i18next";
+import emailjs from "@emailjs/browser";
 
 export default function Contact() {
     const { t } = useTranslation();
     const formRef = useRef(null);
     const [sending, setSending] = useState(false);
     const [noteVisible, setNoteVisible] = useState(false);
+    const [error, setError] = useState("");
 
     const SUPPORT_EMAIL = "support@mrspinny.com";
+    const SERVICE_ID = import.meta.env.VITE_EMAILJS_SERVICE_ID;
+    const TEMPLATE_ID = import.meta.env.VITE_EMAILJS_TEMPLATE_ID;
+    const PUBLIC_KEY = import.meta.env.VITE_EMAILJS_PUBLIC_KEY;
 
-    const onSubmit = (e) => {
+    const onSubmit = async (e) => {
         e.preventDefault();
         const f = formRef.current;
         if (!f.checkValidity()) {
             f.reportValidity();
             return;
         }
+        if (!SERVICE_ID || !TEMPLATE_ID || !PUBLIC_KEY) {
+            setError("Email service is not configured.");
+            setNoteVisible(true);
+            setTimeout(() => setNoteVisible(false), 4000);
+            return;
+        }
+
         setSending(true);
-        setTimeout(() => {
+        setError("");
+
+        try {
+            await emailjs.sendForm(SERVICE_ID, TEMPLATE_ID, f, { publicKey: PUBLIC_KEY });
             setSending(false);
             f.reset();
             setNoteVisible(true);
             setTimeout(() => setNoteVisible(false), 4000);
-        }, 800);
+        } catch (err) {
+            setSending(false);
+            setError("Failed to send. Please try again.");
+            setNoteVisible(true);
+            setTimeout(() => setNoteVisible(false), 4000);
+        }
     };
 
     return (
@@ -139,9 +159,10 @@ export default function Contact() {
                         />
                     </div>
 
+                    <input type="hidden" name="to_email" value={SUPPORT_EMAIL} />
+
                     <label className="consent">
-                        <input type="checkbox" id="agree" required />{" "}
-                        {t("contact.form.consent")}
+                        <input type="checkbox" id="agree" required /> {t("contact.form.consent")}
                     </label>
 
                     <div className="form-actions">
@@ -154,7 +175,7 @@ export default function Contact() {
                             aria-live="polite"
                             hidden={!noteVisible}
                         >
-                            {t("contact.form.note")}
+                            {error ? error : t("contact.form.note")}
                         </p>
                     </div>
 

@@ -1,6 +1,9 @@
 import { useEffect, useCallback } from "react";
 import { useTranslation } from "react-i18next";
 import { Link } from "react-router-dom";
+import { affUrl } from "@/helpers/urls";
+import { logClick } from "@/helpers/logging";
+import { getAffiliateParams } from "@/helpers/storage";
 
 export default function Home() {
     const { t } = useTranslation();
@@ -9,11 +12,7 @@ export default function Home() {
 
     const boot = useCallback(() => {
         if (typeof window.initMrSpinny === "function") {
-            try {
-                window.initMrSpinny();
-            } catch (e) {
-                console.error("initMrSpinny failed:", e);
-            }
+            try { window.initMrSpinny(); } catch (e) { console.error("initMrSpinny failed:", e); }
         }
     }, []);
 
@@ -40,22 +39,26 @@ export default function Home() {
 
         return () => {
             if (typeof window.destroyMrSpinny === "function") {
-                try {
-                    window.destroyMrSpinny();
-                } catch (e) {
-                    console.warn("destroyMrSpinny failed:", e);
-                }
+                try { window.destroyMrSpinny(); } catch (e) { console.warn("destroyMrSpinny failed:", e); }
             }
             if (removeOnLoad) removeOnLoad();
         };
     }, [boot]);
 
+    const trackClick = useCallback((linkId) => {
+        try {
+            const aff = getAffiliateParams();
+            if (aff && aff.aff) logClick({ affParams: aff, linkId });
+        } catch { }
+    }, []);
+
     const handleSpinClick = useCallback((e) => {
+        trackClick("home_spin");
         if (typeof window.initMrSpinny !== "function") {
             e.preventDefault();
-            window.location.assign(`${domain}/promotions`);
+            window.location.assign(affUrl(`${domain}/promotions`));
         }
-    }, []);
+    }, [domain, trackClick]);
 
     return (
         <main>
@@ -76,10 +79,16 @@ export default function Home() {
                             className="btn btn-primary"
                             aria-controls="welcomeModal"
                             onClick={handleSpinClick}
+                            data-link-id="home_spin"
                         >
                             {t("home.hero.cta.spin")}
                         </a>
-                        <a href={domain} className="btn btn-outline">
+                        <a
+                            href={affUrl(domain)}
+                            className="btn btn-outline"
+                            onClick={() => trackClick("home_play_now")}
+                            data-link-id="home_play_now"
+                        >
                             {t("header.cta.playNow")}
                         </a>
                     </div>
@@ -136,25 +145,18 @@ export default function Home() {
                     <h2 className="section-title">{t("home.about.title")}</h2>
                     <p>{t("home.about.body")}</p>
                     <ul className="about-points">
-                        <li>
-                            <span className="ico-dot" />
-                            {t("home.about.points.p1")}
-                        </li>
-                        <li>
-                            <span className="ico-dot" />
-                            {t("home.about.points.p2")}
-                        </li>
-                        <li>
-                            <span className="ico-dot" />
-                            {t("home.about.points.p3")}
-                        </li>
-                        <li>
-                            <span className="ico-dot" />
-                            {t("home.about.points.p4")}
-                        </li>
+                        <li><span className="ico-dot" />{t("home.about.points.p1")}</li>
+                        <li><span className="ico-dot" />{t("home.about.points.p2")}</li>
+                        <li><span className="ico-dot" />{t("home.about.points.p3")}</li>
+                        <li><span className="ico-dot" />{t("home.about.points.p4")}</li>
                     </ul>
                     <div className="about-actions">
-                        <a href={domain} className="btn btn-primary">
+                        <a
+                            href={affUrl(domain)}
+                            className="btn btn-primary"
+                            onClick={() => trackClick("home_about_play")}
+                            data-link-id="home_about_play"
+                        >
                             {t("header.cta.playNow")}
                         </a>
                         <a href="#how" className="btn btn-outline">
@@ -168,50 +170,22 @@ export default function Home() {
                 <h2 className="section-title">{t("home.why.title")}</h2>
                 <div className="why-cards">
                     <div className="why-card">
-                        <img
-                            src="/assets/images/icon-fast-payouts.png"
-                            alt=""
-                            width="64"
-                            height="64"
-                            loading="lazy"
-                            decoding="async"
-                        />
+                        <img src="/assets/images/icon-fast-payouts.png" alt="" width="64" height="64" loading="lazy" decoding="async" />
                         <h3>{t("home.why.items.fast.title")}</h3>
                         <p>{t("home.why.items.fast.desc")}</p>
                     </div>
                     <div className="why-card">
-                        <img
-                            src="/assets/images/icon-fair-secure.png"
-                            alt=""
-                            width="64"
-                            height="64"
-                            loading="lazy"
-                            decoding="async"
-                        />
+                        <img src="/assets/images/icon-fair-secure.png" alt="" width="64" height="64" loading="lazy" decoding="async" />
                         <h3>{t("home.why.items.secure.title")}</h3>
                         <p>{t("home.why.items.secure.desc")}</p>
                     </div>
                     <div className="why-card">
-                        <img
-                            src="/assets/images/icon-huge-selection.png"
-                            alt=""
-                            width="64"
-                            height="64"
-                            loading="lazy"
-                            decoding="async"
-                        />
+                        <img src="/assets/images/icon-huge-selection.png" alt="" width="64" height="64" loading="lazy" decoding="async" />
                         <h3>{t("home.why.items.selection.title")}</h3>
                         <p>{t("home.why.items.selection.desc")}</p>
                     </div>
                     <div className="why-card">
-                        <img
-                            src="/assets/images/icon-247-support.png"
-                            alt=""
-                            width="64"
-                            height="64"
-                            loading="lazy"
-                            decoding="async"
-                        />
+                        <img src="/assets/images/icon-247-support.png" alt="" width="64" height="64" loading="lazy" decoding="async" />
                         <h3>{t("home.why.items.support.title")}</h3>
                         <p>{t("home.why.items.support.desc")}</p>
                     </div>
@@ -222,45 +196,25 @@ export default function Home() {
                 <h2 className="section-title">{t("home.how.title")}</h2>
                 <div className="steps-grid">
                     <div className="step-card">
-                        <img
-                            src="/assets/images/how-create.png"
-                            alt={t("home.how.steps.create.alt")}
-                            loading="lazy"
-                            decoding="async"
-                        />
+                        <img src="/assets/images/how-create.png" alt={t("home.how.steps.create.alt")} loading="lazy" decoding="async" />
                         <div className="step-num">1</div>
                         <h3>{t("home.how.steps.create.title")}</h3>
                         <p>{t("home.how.steps.create.desc")}</p>
                     </div>
                     <div className="step-card">
-                        <img
-                            src="/assets/images/how-deposit.png"
-                            alt={t("home.how.steps.deposit.alt")}
-                            loading="lazy"
-                            decoding="async"
-                        />
+                        <img src="/assets/images/how-deposit.png" alt={t("home.how.steps.deposit.alt")} loading="lazy" decoding="async" />
                         <div className="step-num">2</div>
                         <h3>{t("home.how.steps.deposit.title")}</h3>
                         <p>{t("home.how.steps.deposit.desc")}</p>
                     </div>
                     <div className="step-card">
-                        <img
-                            src="/assets/images/how-play.png"
-                            alt={t("home.how.steps.play.alt")}
-                            loading="lazy"
-                            decoding="async"
-                        />
+                        <img src="/assets/images/how-play.png" alt={t("home.how.steps.play.alt")} loading="lazy" decoding="async" />
                         <div className="step-num">3</div>
                         <h3>{t("home.how.steps.play.title")}</h3>
                         <p>{t("home.how.steps.play.desc")}</p>
                     </div>
                     <div className="step-card">
-                        <img
-                            src="/assets/images/how-withdraw.png"
-                            alt={t("home.how.steps.withdraw.alt")}
-                            loading="lazy"
-                            decoding="async"
-                        />
+                        <img src="/assets/images/how-withdraw.png" alt={t("home.how.steps.withdraw.alt")} loading="lazy" decoding="async" />
                         <div className="step-num">4</div>
                         <h3>{t("home.how.steps.withdraw.title")}</h3>
                         <p>{t("home.how.steps.withdraw.desc")}</p>
@@ -269,28 +223,16 @@ export default function Home() {
             </section>
 
             <section className="container gallery">
-                <div
-                    className="gal-card"
-                    style={{ backgroundImage: "url('/assets/images/gal-1.jpg')" }}
-                >
+                <div className="gal-card" style={{ backgroundImage: "url('/assets/images/gal-1.jpg')" }}>
                     <span>{t("home.gallery.roulette")}</span>
                 </div>
-                <div
-                    className="gal-card"
-                    style={{ backgroundImage: "url('/assets/images/gal-2.jpg')" }}
-                >
+                <div className="gal-card" style={{ backgroundImage: "url('/assets/images/gal-2.jpg')" }}>
                     <span>{t("home.gallery.blackjack")}</span>
                 </div>
-                <div
-                    className="gal-card"
-                    style={{ backgroundImage: "url('/assets/images/gal-3.jpg')" }}
-                >
+                <div className="gal-card" style={{ backgroundImage: "url('/assets/images/gal-3.jpg')" }}>
                     <span>{t("home.gallery.slots")}</span>
                 </div>
-                <div
-                    className="gal-card"
-                    style={{ backgroundImage: "url('/assets/images/gal-4.jpg')" }}
-                >
+                <div className="gal-card" style={{ backgroundImage: "url('/assets/images/gal-4.jpg')" }}>
                     <span>{t("home.gallery.liveTables")}</span>
                 </div>
             </section>
@@ -299,30 +241,21 @@ export default function Home() {
                 <h2 className="section-title">{t("home.faq.title")}</h2>
                 <div className="bank-card" style={{ maxWidth: "980px", margin: "auto" }}>
                     <details open>
-                        <summary>
-                            <b>{t("home.faq.q1.q")}</b>
-                        </summary>
+                        <summary><b>{t("home.faq.q1.q")}</b></summary>
                         <p className="bank-note">
-                            {t("home.faq.q1.a", { domain: plainDomain })}{" "}
-                            <a href={domain}>mrspinny.com</a>
+                            {t("home.faq.q1.a", { domain: plainDomain })} <a href={affUrl(domain)} onClick={() => trackClick("home_faq_link")}>mrspinny.com</a>
                         </p>
                     </details>
                     <details>
-                        <summary>
-                            <b>{t("home.faq.q2.q")}</b>
-                        </summary>
+                        <summary><b>{t("home.faq.q2.q")}</b></summary>
                         <p className="bank-note">{t("home.faq.q2.a")}</p>
                     </details>
                     <details>
-                        <summary>
-                            <b>{t("home.faq.q3.q")}</b>
-                        </summary>
+                        <summary><b>{t("home.faq.q3.q")}</b></summary>
                         <p className="bank-note">{t("home.faq.q3.a")}</p>
                     </details>
                     <details>
-                        <summary>
-                            <b>{t("home.faq.q4.q")}</b>
-                        </summary>
+                        <summary><b>{t("home.faq.q4.q")}</b></summary>
                         <p className="bank-note">{t("home.faq.q4.a")}</p>
                     </details>
                 </div>
@@ -330,20 +263,12 @@ export default function Home() {
 
             <div id="welcomeModal" className="modal" hidden>
                 <div className="modal-backdrop" data-close />
-                <div
-                    className="modal-panel"
-                    role="dialog"
-                    aria-modal="true"
-                    aria-labelledby="wmTitle"
-                >
-                    <button className="modal-close" aria-label="Close" data-close>
-                        ×
-                    </button>
+                <div className="modal-panel" role="dialog" aria-modal="true" aria-labelledby="wmTitle">
+                    <button className="modal-close" aria-label="Close" data-close>×</button>
                     <header className="modal-head">
                         <h2 id="wmTitle">{t("home.modal.title")}</h2>
                         <p className="modal-sub">
-                            {t("home.modal.sub", { domain: plainDomain })}{" "}
-                            <a href={domain}>mrspinny.com</a>.
+                            {t("home.modal.sub", { domain: plainDomain })} <a href={affUrl(domain)} onClick={() => trackClick("home_modal_link")}>mrspinny.com</a>.
                         </p>
                     </header>
                     <div className="wheel-wrap" id="wheelWrap">
@@ -357,15 +282,15 @@ export default function Home() {
                         <div id="flameRing" className="flame-ring" aria-hidden="true" />
                         <div className="wheel-pointer" aria-hidden="true" />
                         <div id="wheel-svg" className="wheel" aria-live="polite" />
-                        <button id="spinBtn" className="btn btn-primary wheel-btn">
-                            {t("home.modal.spin")}
-                        </button>
+                        <button id="spinBtn" className="btn btn-primary wheel-btn">{t("home.modal.spin")}</button>
                         <a
                             id="claimBtn"
                             className="btn btn-claim"
-                            href={`${domain}/promotions`}
+                            href={affUrl(`${domain}/promotions`)}
                             hidden
                             aria-live="polite"
+                            onClick={() => trackClick("home_modal_claim")}
+                            data-link-id="home_modal_claim"
                         >
                             {t("home.modal.claim")}
                         </a>

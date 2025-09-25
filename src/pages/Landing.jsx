@@ -1,13 +1,11 @@
+// src/pages/Landing.jsx
 import { useEffect, useCallback } from "react";
+import { affUrl } from "@/helpers/urls";
 
 export default function Landing() {
     const boot = useCallback(() => {
         if (typeof window.initMrSpinny === "function") {
-            try {
-                window.initMrSpinny();
-            } catch (e) {
-                console.error("initMrSpinny failed:", e);
-            }
+            try { window.initMrSpinny(); } catch (e) { console.error("initMrSpinny failed:", e); }
         }
     }, []);
 
@@ -34,11 +32,7 @@ export default function Landing() {
 
         return () => {
             if (typeof window.destroyMrSpinny === "function") {
-                try {
-                    window.destroyMrSpinny();
-                } catch (e) {
-                    console.warn("destroyMrSpinny failed:", e);
-                }
+                try { window.destroyMrSpinny(); } catch (e) { console.warn("destroyMrSpinny failed:", e); }
             }
             if (removeOnLoad) removeOnLoad();
         };
@@ -47,7 +41,7 @@ export default function Landing() {
     const handleSpinClick = useCallback((e) => {
         if (typeof window.initMrSpinny !== "function") {
             e.preventDefault();
-            window.location.assign("https://mrspinny.com/promotions");
+            window.location.assign(affUrl("https://mrspinny.com/promotions"));
         }
     }, []);
 
@@ -58,9 +52,7 @@ export default function Landing() {
                 style={{ backgroundImage: "url('/assets/images/banner-2.png')" }}
             >
                 <div className="container">
-                    <h1>
-                        Spin to Unlock Your <span>Welcome Bonus</span>
-                    </h1>
+                    <h1>Spin to Unlock Your <span>Welcome Bonus</span></h1>
                     <p>New players only. Reveal your offer, register, and deposit to claim.</p>
                     <div className="promo-cta">
                         <a
@@ -68,11 +60,16 @@ export default function Landing() {
                             href="#welcome"
                             className="btn btn-primary"
                             aria-controls="welcomeModal"
+                            data-link-id="landing_spin"
                             onClick={handleSpinClick}
                         >
                             Spin the Wheel
                         </a>
-                        <a href="https://mrspinny.com/" className="btn btn-outline">
+                        <a
+                            href={affUrl("https://mrspinny.com/")}
+                            className="btn btn-outline"
+                            data-link-id="landing_play"
+                        >
                             Play Now
                         </a>
                     </div>

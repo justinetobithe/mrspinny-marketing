@@ -637,7 +637,7 @@
         ensurePageFX();
         buildWheelSVG();
 
-        if (wheelWrap) { wheelWrap.style.marginBottom = "64px"; wheelWrap.style.willChange = "transform"; wheelWrap.style.contain = "layout paint size style"; }
+        if (wheelWrap) { wheelWrap.style.marginBottom = "64px"; wheelWrap.style.willChange = "transform"; }
         if (wheelEl) { wheelEl.style.willChange = "transform"; wheelEl.style.contain = "layout paint size style"; wheelEl.style.transform = "rotate(0deg)"; }
         if (fireworkLayer) { fireworkLayer.style.willChange = "transform, opacity"; fireworkLayer.style.contain = "layout paint size style"; }
         if (claimBtn) { claimBtn.style.zIndex = "10"; claimBtn.style.pointerEvents = "auto"; const panel = claimBtn.closest(".modal-panel"); if (panel) panel.style.overflow = "visible"; }

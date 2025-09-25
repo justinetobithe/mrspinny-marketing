@@ -198,10 +198,8 @@
         if (claimBtn) { claimBtn.hidden = true; claimBtn.classList.remove("show"); }
         wheelWrap.classList.add("spinning");
         wheelEl.classList.add("is-spinning");
-
         wheelEl.style.transition = "transform 3200ms cubic-bezier(0.19, 1, 0.22, 1)";
         void wheelEl.offsetWidth;
-
         pulseRingsBurst(isIOS ? 2 : Math.max(2, Math.round(4 * perfProfile.fxScale)), 130);
         playSpinSound();
 
@@ -260,7 +258,7 @@
 
         const rewardParam = chosen.value ? `${chosen.value}FS` : encodeURIComponent(chosen.label);
         if (claimBtn) {
-            claimBtn.href = `${PROMO_URL}?reward=${rewardParam}`;
+            claimBtn.href = `${PROMO_URL}/?reward=${rewardParam}`;
             claimBtn.hidden = false;
             claimBtn.style.zIndex = "10";
             claimBtn.style.pointerEvents = "auto";

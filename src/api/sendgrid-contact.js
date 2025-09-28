@@ -14,7 +14,7 @@ export default async function handler(req, res) {
         const msg = {
             to: process.env.SENDGRID_TO || 'support@mrspinny.com',
             from: process.env.SENDGRID_FROM || 'noreply@mrspinny.win', // must be on your authenticated domain
-            replyTo: { email, name }, // so support can reply directly to the user
+            replyTo: { email, name }, // so support can reply directly to13 the user
             templateId: process.env.SENDGRID_TEMPLATE_ID, // d-xxxx
             dynamicTemplateData: { name, email, topic, message },
             // Recommend disabling tracking for transactional contact messages

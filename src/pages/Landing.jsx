@@ -1,48 +1,14 @@
-import { useEffect, useCallback } from "react";
+import { useCallback } from "react";
 import { affUrl } from "@/helpers/urls";
+import { useModal } from "@/context/ModalContext.jsx";
 
 export default function Landing() {
-    const boot = useCallback(() => {
-        if (typeof window.initMrSpinny === "function") {
-            try { window.initMrSpinny(); } catch (e) { console.error("initMrSpinny failed:", e); }
-        }
-    }, []);
-
-    useEffect(() => {
-        let removeOnLoad;
-        const existing = document.querySelector('script[data-mrspinny="1"]');
-        const hasInit = typeof window.initMrSpinny === "function";
-
-        if (!hasInit && !existing) {
-            const s = document.createElement("script");
-            s.src = "/js/script.js";
-            s.defer = true;
-            s.dataset.mrspinny = "1";
-            s.onload = boot;
-            s.onerror = () => console.error("Failed to load /js/script.js");
-            document.body.appendChild(s);
-        } else if (!hasInit && existing) {
-            const onLoad = () => boot();
-            existing.addEventListener("load", onLoad, { once: true });
-            removeOnLoad = () => existing.removeEventListener("load", onLoad);
-        } else {
-            boot();
-        }
-
-        return () => {
-            if (typeof window.destroyMrSpinny === "function") {
-                try { window.destroyMrSpinny(); } catch (e) { console.warn("destroyMrSpinny failed:", e); }
-            }
-            if (removeOnLoad) removeOnLoad();
-        };
-    }, [boot]);
+    const { open } = useModal();
 
     const handleSpinClick = useCallback((e) => {
-        if (typeof window.initMrSpinny !== "function") {
-            e.preventDefault();
-            window.location.assign(affUrl("https://mrspinny.world/promotions"));
-        }
-    }, []);
+        e.preventDefault();
+        open("welcome");
+    }, [open]);
 
     return (
         <main>
@@ -58,7 +24,6 @@ export default function Landing() {
                             id="openWelcome"
                             href="#welcome"
                             className="btn btn-primary"
-                            aria-controls="welcomeModal"
                             data-link-id="landing_spin"
                             onClick={handleSpinClick}
                         >
@@ -172,36 +137,6 @@ export default function Landing() {
                     </details>
                 </div>
             </section>
-
-            <div id="welcomeModal" className="modal" hidden>
-                <div className="modal-backdrop" data-close />
-                <div className="modal-panel" role="dialog" aria-modal="true" aria-labelledby="wmTitle">
-                    <button className="modal-close" aria-label="Close" data-close>×</button>
-                    <header className="modal-head">
-                        <h2 id="wmTitle">Spin for a Welcome Bonus</h2>
-                        <p className="modal-sub">
-                            This is a marketing preview (IP). Real play happens at <a href="https://mrspinny.world/">mrspinny.world</a>. 18+ only.
-                        </p>
-                    </header>
-                    <div className="wheel-wrap" id="wheelWrap">
-                        <div className="wheel-bg" aria-hidden="true">
-                            <div className="bg-aura" />
-                            <div className="bg-aurora" />
-                            <div className="bg-stars" />
-                            <div className="bg-spot" />
-                        </div>
-                        <div className="wheel-lights" aria-hidden="true" />
-                        <div id="flameRing" className="flame-ring" aria-hidden="true" />
-                        <div className="wheel-pointer" aria-hidden="true" />
-                        <div id="wheel-svg" className="wheel" aria-live="polite" />
-                        <button id="spinBtn" className="btn btn-primary wheel-btn">Spin Now</button>
-                        <a id="claimBtn" className="btn btn-claim" href={affUrl("https://mrspinny.world/promotions")} hidden aria-live="polite">Claim Your Bonus</a>
-                        <div id="confettiLayer" aria-hidden="true" />
-                        <div id="coinLayer" aria-hidden="true" />
-                        <div id="fireworkLayer" aria-hidden="true" />
-                    </div>
-                </div>
-            </div>
 
             <noscript>
                 <p style={{ textAlign: "center", margin: "16px 0" }}>

@@ -1,4 +1,3 @@
-// src/pages/Banking.jsx
 import { useTranslation } from "react-i18next";
 
 export default function Banking() {
@@ -166,6 +165,12 @@ export default function Banking() {
                         <a href="mailto:support@mrspinny.com" className="btn btn-primary">{t("banking.help.email")}</a>
                     </div>
                 </div>
+            </section>
+
+            <section className="container bank-terms">
+                <p className="bank-terms-note">
+                    {t("banking.terms.wagering", { times: 50 })}
+                </p>
             </section>
         </>
     );

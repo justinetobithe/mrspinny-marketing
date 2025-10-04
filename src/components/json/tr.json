@@ -333,6 +333,9 @@
             },
             "note": "Süre ve uygunluk sağlayıcıya, para birimine ve doğrulamaya göre değişir. Limitler geçerlidir."
         },
+        "terms": {
+            "wagering": "Çevrim şartı: Para çekme talebinde bulunmadan önce yatırdığınız tutarı {{times}}× çevirmeniz gerekir."
+        },
         "steps": {
             "deposit": {
                 "title": "Yatırım Adımları",

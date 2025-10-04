@@ -333,6 +333,9 @@
             },
             "note": "Times and availability vary by provider, currency, and verification status. Limits apply."
         },
+        "terms": {
+            "wagering": "Wagering requirement: you must play through your deposited amount {{times}}× before requesting a withdrawal."
+        },
         "steps": {
             "deposit": {
                 "title": "Deposit Steps",

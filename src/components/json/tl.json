@@ -333,6 +333,9 @@
             },
             "note": "Ang oras at availability ay depende sa provider, currency, at verification status. May mga limitasyon."
         },
+        "terms": {
+            "wagering": "Pangangailangan sa pagtaya: kailangan mong laruin ang iyong naidepositong halaga nang {{times}}× bago humiling ng pag-withdraw."
+        },
         "steps": {
             "deposit": {
                 "title": "Mga Hakbang sa Deposito",

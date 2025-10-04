@@ -333,6 +333,9 @@
             },
             "note": "Os tempos e a disponibilidade variam conforme o provedor, moeda e status de verificação. Limites se aplicam."
         },
+        "terms": {
+            "wagering": "Requisito de aposta: você deve apostar o valor depositado {{times}}× antes de solicitar um saque."
+        },
         "steps": {
             "deposit": {
                 "title": "Etapas de Depósito",

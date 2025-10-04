@@ -10,6 +10,8 @@ import Landing from "./pages/Landing.jsx";
 import CloakRoute from "./components/CloakRoute.jsx";
 import useAffiliateTracking from "@/hooks/useAffiliateTracking";
 import { LanguageProvider } from "./context/LanguageContext.jsx";
+import { ModalProvider } from "@/context/ModalContext.jsx";
+import WelcomeModal from "./modals/WelcomeModal.jsx";
 
 function Blocked() {
   return (
@@ -26,27 +28,30 @@ export default function App() {
   return (
     <Router>
       <LanguageProvider>
-        <Header />
-        <Routes>
-          <Route
-            path="/"
-            element={
-              <CloakRoute
-                landing={<Landing />}
-                site={<Home />}
-                blocked={<Blocked />}
-                blockedCountries={["US", "IR"]}
-                showDebug
-              />
-            }
-          />
-          <Route path="/landing" element={<Landing />} />
-          <Route path="/slots" element={<Slots />} />
-          <Route path="/live-casino" element={<LiveCasino />} />
-          <Route path="/banking" element={<Banking />} />
-          <Route path="/contact" element={<Contact />} />
-        </Routes>
-        <Footer />
+        <ModalProvider>
+          <Header />
+          <Routes>
+            <Route
+              path="/"
+              element={
+                <CloakRoute
+                  landing={<Landing />}
+                  site={<Home />}
+                  blocked={<Blocked />}
+                  blockedCountries={["US", "IR"]}
+                  showDebug
+                />
+              }
+            />
+            <Route path="/landing" element={<Landing />} />
+            <Route path="/slots" element={<Slots />} />
+            <Route path="/live-casino" element={<LiveCasino />} />
+            <Route path="/banking" element={<Banking />} />
+            <Route path="/contact" element={<Contact />} />
+          </Routes>
+          <Footer />
+          <WelcomeModal />
+        </ModalProvider>
       </LanguageProvider>
     </Router>
   );

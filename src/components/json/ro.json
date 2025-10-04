@@ -8,7 +8,7 @@
         },
         "nav": {
             "home": "Acasă",
-            "slots": "Păcănele",
+            "slots": "Sloturi",
             "liveCasino": "Cazinou Live",
             "banking": "Plăți",
             "contact": "Contact"
@@ -39,7 +39,7 @@
             "info": "Informații"
         },
         "links": {
-            "slots": "Păcănele",
+            "slots": "Sloturi",
             "liveCasino": "Cazinou Live",
             "poker": "Poker",
             "lottery": "Loterie",
@@ -54,30 +54,30 @@
             "responsibleGaming": "Joc responsabil"
         },
         "legal": {
-            "operatorLine": "MrSpinny.com este operat de Decordetails OÜ, Harju maakond, Tallinn, Kesklinna linnaosa, Tornimäe tn 5, 10145, nr. înreg. 17011692. Jocurile sunt oferite conform legislației și restricțiilor de vârstă aplicabile. Pentru ajutor, contactați {{email}}.",
+            "operatorLine": "MrSpinny.com este operat de Decordetails OÜ, Harju maakond, Tallinn, Kesklinna linnaosa, Tornimäe tn 5, 10145, nr. înreg. 17011692. Jocurile sunt oferite în conformitate cu legile aplicabile și restricțiile de vârstă. Pentru ajutor, contactează {{email}}.",
             "copyright": "© MrSpinny. Toate drepturile rezervate | {{year}}."
         }
     },
     "home": {
         "hero": {
             "titleA": "Descoperă-ți",
-            "titleB": "Bonusul de bun venit",
-            "subtitle": "Învarte roata pentru a-ți vedea recompensa. Creează un cont și depune pentru a o revendica.",
+            "titleB": "bonusul de bun venit",
+            "subtitle": "Învârte pentru a-ți vedea recompensa. Creează un account și depune pentru a o revendica.",
             "cta": {
-                "spin": "Învarte roata"
+                "spin": "Învârte roata"
             }
         },
         "cards": {
             "slots": {
-                "badge": "Fierbinte",
-                "title": "Top Păcănele",
-                "desc": "Învarte rolele populare cu bonusuri zilnice.",
+                "badge": "Top",
+                "title": "Sloturi de top",
+                "desc": "Învârte role populare cu boosturi zilnice.",
                 "cta": "Explorează"
             },
             "live": {
                 "badge": "Live",
                 "title": "Cazinou Live",
-                "desc": "Dealeri reali, emoții instantanee, oricând.",
+                "desc": "Croupieri reali, adrenalină instant, oricând.",
                 "cta": "Intră"
             },
             "promos": {
@@ -90,10 +90,10 @@
         "about": {
             "title": "Despre MrSpinny",
             "alt": "Jucători care se bucură de jocurile MrSpinny",
-            "body": "MrSpinny combină jocul corect, plățile rapide și recompensele generoase într-o experiență de cazinou lină. Bucură-te de sute de jocuri premium, limite transparente și suport prietenos 24/7.",
+            "body": "MrSpinny combină joc corect, plăți rapide și recompense generoase într-o experiență de cazinou fluidă. Bucură-te de sute de jocuri premium, limite transparente și suport prietenos 24/7.",
             "points": {
-                "p1": "Plăți ultra-rapide pe card, bancă și cripto.",
-                "p2": "Instrumente responsabile: limite, pauze și memento-uri.",
+                "p1": "Plăți ultra-rapide către carduri, bancă și crypto.",
+                "p2": "Instrumente de joc responsabil: limite, pauze și verificări periodice.",
                 "p3": "Promoții zilnice cu rotiri gratuite și reîncărcări.",
                 "p4": "Platformă sigură cu criptare modernă."
             },
@@ -106,7 +106,7 @@
             "items": {
                 "fast": {
                     "title": "Plăți rapide",
-                    "desc": "Retrage rapid pe metoda ta preferată."
+                    "desc": "Retrage rapid pe metoda preferată."
                 },
                 "secure": {
                     "title": "Corect și sigur",
@@ -114,11 +114,11 @@
                 },
                 "selection": {
                     "title": "Selecție uriașă",
-                    "desc": "Păcănele, mese și jocuri live de la studiouri de top."
+                    "desc": "Sloturi, mese și titluri live de la studiouri de top."
                 },
                 "support": {
                     "title": "Asistență 24/7",
-                    "desc": "Oameni reali gata să te ajute, oricând."
+                    "desc": "Oameni reali gata să te ajute, zi și noapte."
                 }
             }
         },
@@ -128,17 +128,17 @@
                 "create": {
                     "title": "Creează",
                     "desc": "Deschide-ți contul gratuit în mai puțin de un minut.",
-                    "alt": "Creează contul tău MrSpinny"
+                    "alt": "Creează-ți contul MrSpinny"
                 },
                 "deposit": {
                     "title": "Depune",
-                    "desc": "Alege carduri, bancă sau cripto și alimentează-ți soldul.",
-                    "alt": "Depune cu carduri, bancă sau cripto"
+                    "desc": "Alege carduri, bancă sau crypto și alimentează portofelul.",
+                    "alt": "Depune cu card, bancă sau crypto"
                 },
                 "play": {
                     "title": "Joacă",
-                    "desc": "Explorează păcănele, mese și cazinou live cu promoții.",
-                    "alt": "Joacă păcănele, mese și cazinou live"
+                    "desc": "Explorează sloturi, mese și live casino cu promoții.",
+                    "alt": "Joacă sloturi, mese și cazinou live"
                 },
                 "withdraw": {
                     "title": "Retrage",
@@ -150,37 +150,300 @@
         "gallery": {
             "roulette": "Ruletă",
             "blackjack": "Blackjack",
-            "slots": "Păcănele",
+            "slots": "Sloturi",
             "liveTables": "Mese live"
         },
         "faq": {
             "title": "Întrebări frecvente",
             "q1": {
                 "q": "Este joc pe bani reali?",
-                "a": "Aceasta este o previzualizare de marketing. Jocul real are loc pe {{domain}} și este doar pentru 18+, sub rezerva legilor locale."
+                "a": "Această pagină este o previzualizare de marketing. Jocul real are loc la {{domain}} și este doar pentru 18+, în conformitate cu legile locale."
             },
             "q2": {
                 "q": "Cum îmi revendic bonusul?",
-                "a": "Învarte roata, creează un cont, fă primul depozit și urmează instrucțiunile de pe pagina promoțiilor."
+                "a": "Învârte roata, creează un cont, fă primul depozit și urmează instrucțiunile din pagina de promoții."
             },
             "q3": {
                 "q": "Ce metode de plată sunt acceptate?",
-                "a": "Carduri, transfer bancar și principalele criptomonede precum BTC, ETH, USDT și altele. Vezi pagina Plăți pentru detalii."
+                "a": "Carduri, transfer bancar și principalele opțiuni crypto precum BTC, ETH, USDT și altele. Vezi pagina Plăți pentru detalii."
             },
             "q4": {
                 "q": "Oferiți asistență?",
-                "a": "Da. Echipa noastră este disponibilă 24/7 prin email și chat live."
+                "a": "Da. Echipa noastră este disponibilă 24/7 prin e-mail și chat live."
             }
         },
         "modal": {
-            "title": "Învarte pentru un bonus de bun venit",
-            "sub": "Aceasta este o previzualizare de marketing (IP). Jocul real are loc pe {{domain}}. Doar 18+.",
-            "spin": "Învarte acum",
+            "title": "Învârte pentru un bonus de bun venit",
+            "sub": "Aceasta este o previzualizare de marketing (IP). Jocul real are loc la {{domain}}. Doar 18+.",
+            "spin": "Învârte acum",
             "claim": "Revendică bonusul"
         },
         "noscript": {
             "text": "JavaScript este necesar pentru a învârti roata. Poți totuși",
-            "link": "vedea promoțiile aici"
+            "link": "să vezi promoțiile aici"
+        }
+    },
+    "slots": {
+        "hero": {
+            "titleA": "Învârte și câștigă la",
+            "titleB": "jocurile de slot",
+            "subtitle": "Explorează titluri populare cu bonusuri, Megaways și premii zilnice."
+        },
+        "toolbar": {
+            "ariaLabel": "Filtre sloturi",
+            "searchPlaceholder": "Caută sloturi…",
+            "searchAria": "Caută sloturi",
+            "sortLabel": "Sortează",
+            "sortAria": "Sortează sloturile",
+            "sortOptions": {
+                "az": "A → Z",
+                "za": "Z → A",
+                "vol": "Volatilitate"
+            },
+            "categoriesAria": "Categorii"
+        },
+        "pills": {
+            "all": "Toate",
+            "megaways": "Megaways",
+            "classic": "Clasice",
+            "jackpot": "Jackpoturi",
+            "new": "Noi",
+            "popular": "Populare",
+            "fave": "★ Favorite"
+        },
+        "sectionTitle": "🎰 Sloturi recomandate",
+        "cta": {
+            "play": "Joacă",
+            "demo": "Demo"
+        },
+        "empty": "Niciun joc de slot nu corespunde filtrelor.",
+        "alt": {
+            "game": "Joc"
+        },
+        "aria": {
+            "playGame": "Joacă {{title}}",
+            "addFav": "Adaugă la favorite",
+            "removeFav": "Elimină din favorite"
+        },
+        "hints": {
+            "toggleFav": "Apasă F pentru a adăuga la favorite"
+        },
+        "vol": {
+            "labelShort": "Vol",
+            "labelFull": "Volatilitate"
+        },
+        "tags": {
+            "popular": "Popular",
+            "classic": "Clasic",
+            "megaways": "Megaways",
+            "new": "Nou",
+            "jackpot": "Jackpot"
+        },
+        "ribbon": {
+            "dailyDrops": "Premii zilnice",
+            "hot": "Fierbinte"
+        }
+    },
+    "live": {
+        "hero": {
+            "titleA": "Premium",
+            "titleB": "Cazinou Live",
+            "titleC": "Mese",
+            "subtitle": "Blackjack, Ruletă, Baccarat, Poker și Game Shows în HD.",
+            "cta": "Intră în Cazinoul Live"
+        },
+        "toolbar": {
+            "ariaLabel": "Filtre cazinou live",
+            "searchPlaceholder": "Caută mese live…",
+            "searchAria": "Caută mese live",
+            "categoriesAria": "Categorii"
+        },
+        "cats": {
+            "all": "Toate",
+            "blackjack": "Blackjack",
+            "roulette": "Ruletă",
+            "baccarat": "Baccarat",
+            "poker": "Poker",
+            "game-show": "Game Shows"
+        },
+        "sectionTitle": "🎥 Mese live populare",
+        "badge": {
+            "blackjack": "Blackjack",
+            "roulette": "Ruletă",
+            "baccarat": "Baccarat",
+            "poker": "Poker",
+            "game-show": "Game Show"
+        },
+        "empty": "Nu s-au găsit mese. Încearcă o altă căutare."
+    },
+    "banking": {
+        "hero": {
+            "titleA": "Rapid și sigur",
+            "titleB": "Plăți",
+            "subtitle": "Depozite instant, retrageri rapide și metode de plată de încredere.",
+            "cta": "Creează cont"
+        },
+        "usp": {
+            "instant": {
+                "title": "Depozite instantanee",
+                "desc": "Alimentează instant cu carduri, e-walleturi și crypto."
+            },
+            "secure": {
+                "title": "Securizat",
+                "desc": "Plăți criptate și protecții la nivel de cont."
+            },
+            "payouts": {
+                "title": "Retrageri rapide",
+                "desc": "Procesare în aceeași zi pe metodele suportate."
+            }
+        },
+        "methods": {
+            "title": "Metode de plată",
+            "names": {
+                "bankTransfer": "Transfer bancar"
+            },
+            "table": {
+                "headers": {
+                    "method": "Metodă",
+                    "type": "Tip",
+                    "deposit": "Depozit",
+                    "withdrawal": "Retragere",
+                    "processing": "Procesare"
+                },
+                "types": {
+                    "card": "Card",
+                    "ewallet": "Portofel electronic",
+                    "bank": "Bancă",
+                    "crypto": "Crypto"
+                },
+                "speed": {
+                    "instant": "Instant",
+                    "h24": "Până la 24 de ore",
+                    "d1_2_business_days": "1–2 zile lucrătoare",
+                    "d2_4_business_days": "2–4 zile lucrătoare",
+                    "d1_3_business_days": "1–3 zile lucrătoare",
+                    "m10_20": "~10–20 min",
+                    "m10_60": "~10–60 min"
+                },
+                "fees": {
+                    "noFees": "Fără comisioane din partea noastră",
+                    "bankFees": "Se pot aplica comisioane bancare",
+                    "networkFees": "Se aplică comisioane de rețea"
+                }
+            },
+            "note": "Timpul și disponibilitatea variază în funcție de furnizor, monedă și statutul de verificare. Se aplică limite."
+        },
+        "terms": {
+            "wagering": "Cerință de rulaj: trebuie să rulați (pariați) suma depusă de {{times}}× înainte de a solicita o retragere."
+        },
+        "steps": {
+            "deposit": {
+                "title": "Pași pentru depozit",
+                "items": [
+                    "Autentifică-te în cont.",
+                    "Deschide Casierie → Depozit.",
+                    "Selectează metoda și suma.",
+                    "Confirmă și finalizează plata."
+                ]
+            },
+            "withdrawal": {
+                "title": "Pași pentru retragere",
+                "items": [
+                    "Verifică profilul dacă ți se solicită.",
+                    "Deschide Casierie → Retragere.",
+                    "Alege metoda de plată.",
+                    "Trimite cererea și urmărește statusul."
+                ]
+            }
+        },
+        "limits": {
+            "title": "Limite",
+            "minDeposit": "Depozit minim:",
+            "minWithdrawal": "Retragere minimă:",
+            "dailyCap": "Plafon zilnic de retragere:",
+            "vip": "Limite mai mari disponibile pentru VIP"
+        },
+        "help": {
+            "title": "Ai nevoie de ajutor cu o plată?",
+            "desc": "Echipa noastră este disponibilă 24/7 pentru a te ajuta cu depuneri, retrageri sau verificare.",
+            "chat": "Chat live",
+            "email": "Asistență e-mail"
+        }
+    },
+    "contact": {
+        "hero": {
+            "titleA": "Contactează",
+            "titleB": "Asistența",
+            "subtitle": "Suntem aici 24/7. Scrie-ne și îți vom răspunde rapid."
+        },
+        "cards": {
+            "email": {
+                "title": "Asistență e-mail",
+                "desc": "Pentru întrebări despre cont, plăți sau tehnice.",
+                "cta": "{{email}}"
+            },
+            "chat": {
+                "title": "Chat live",
+                "desc": "Primește ajutor în timp real de la echipa noastră.",
+                "cta": "Deschide chatul"
+            },
+            "rg": {
+                "title": "Joc responsabil",
+                "desc": "Ai nevoie de o pauză, limite sau sfaturi? Te putem ajuta.",
+                "cta": "Află mai multe"
+            }
+        },
+        "form": {
+            "title": "📨 Trimite-ne un mesaj",
+            "name": {
+                "label": "Nume complet",
+                "ph": "Ion Popescu"
+            },
+            "email": {
+                "label": "E-mail",
+                "ph": "tu@email.com"
+            },
+            "topic": {
+                "label": "Subiect",
+                "options": {
+                    "general": "General",
+                    "payments": "Plăți",
+                    "account": "Cont și verificare",
+                    "technical": "Tehnic"
+                }
+            },
+            "message": {
+                "label": "Mesaj",
+                "ph": "Cu ce te putem ajuta?"
+            },
+            "consent": "Sunt de acord cu prelucrarea mesajului meu în scopuri de asistență.",
+            "send": "Trimite mesajul",
+            "sending": "Se trimite…",
+            "note": "Mulțumim! Mesajul tău a fost trimis.",
+            "securityNote": "Nu îți vom cere niciodată parola sau coduri 2FA."
+        },
+        "aside": {
+            "company": {
+                "title": "Detalii companie",
+                "operator": "Operator:",
+                "operatorName": "Decordetails OÜ",
+                "reg": "Nr. înreg.:",
+                "regNo": "17011692",
+                "addressLabel": "Adresă:",
+                "address": "Tornimäe tn 5, Kesklinna linnaosa, Tallinn, 10145, Harju maakond",
+                "emailLabel": "E-mail:",
+                "hours": "Program:",
+                "hoursValue": "24/7"
+            },
+            "response": {
+                "title": "Timpuri de răspuns",
+                "email": "E-mail: în 6–12 ore",
+                "chat": "Chat: instant (în funcție de coadă)",
+                "payments": "Plăți: în aceeași zi pe metodele acceptate"
+            },
+            "links": {
+                "title": "Linkuri rapide"
+            }
         }
     }
 }

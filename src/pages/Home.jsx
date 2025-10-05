@@ -19,10 +19,10 @@ export default function Home() {
         };
     }, [open]);
 
-    const trackClick = useCallback((linkId) => {
+    const trackClick = useCallback((linkId, extra = {}) => {
         try {
             const aff = getAffiliateParams();
-            if (aff && aff.aff) logClick({ affParams: aff, linkId });
+            logClick({ affParams: aff || {}, linkId, ...extra });
         } catch { }
     }, []);
 
@@ -74,6 +74,8 @@ export default function Home() {
                     to="/slots"
                     className="feat-card"
                     style={{ "--img": "url('/assets/images/feat-slots.jpg')" }}
+                    onClick={() => trackClick("home_feat_slots")}
+                    data-link-id="home_feat_slots"
                 >
                     <div className="feat-badge">{t("home.cards.slots.badge")}</div>
                     <h3>{t("home.cards.slots.title")}</h3>
@@ -85,6 +87,8 @@ export default function Home() {
                     to="/live-casino"
                     className="feat-card"
                     style={{ "--img": "url('/assets/images/feat-live.jpg')" }}
+                    onClick={() => trackClick("home_feat_live")}
+                    data-link-id="home_feat_live"
                 >
                     <div className="feat-badge">{t("home.cards.live.badge")}</div>
                     <h3>{t("home.cards.live.title")}</h3>
@@ -96,6 +100,8 @@ export default function Home() {
                     to="/promotions"
                     className="feat-card"
                     style={{ "--img": "url('/assets/images/feat-bonus.jpg')" }}
+                    onClick={() => trackClick("home_feat_promos")}
+                    data-link-id="home_feat_promos"
                 >
                     <div className="feat-badge">{t("home.cards.promos.badge")}</div>
                     <h3>{t("home.cards.promos.title")}</h3>
@@ -145,7 +151,12 @@ export default function Home() {
                         >
                             {t("header.cta.playNow")}
                         </a>
-                        <a href="#how" className="btn btn-outline">
+                        <a
+                            href="#how"
+                            className="btn btn-outline"
+                            onClick={() => trackClick("home_about_how")}
+                            data-link-id="home_about_how"
+                        >
                             {t("home.about.cta.how")}
                         </a>
                     </div>
@@ -295,6 +306,7 @@ export default function Home() {
                             <a
                                 href={affUrl(domain)}
                                 onClick={() => trackClick("home_faq_link")}
+                                data-link-id="home_faq_link"
                             >
                                 mrspinny.com
                             </a>

@@ -1,14 +1,27 @@
 import { useCallback } from "react";
 import { affUrl } from "@/helpers/urls";
 import { useModal } from "@/context/ModalContext.jsx";
+import { logClick } from "@/helpers/logging";
+import { getAffiliateParams } from "@/helpers/storage";
 
 export default function Landing() {
     const { open } = useModal();
 
-    const handleSpinClick = useCallback((e) => {
-        e.preventDefault();
-        open("welcome");
-    }, [open]);
+    const trackClick = useCallback((linkId, extra = {}) => {
+        try {
+            const aff = getAffiliateParams();
+            logClick({ affParams: aff, linkId, ...extra });
+        } catch { }
+    }, []);
+
+    const handleSpinClick = useCallback(
+        (e) => {
+            e.preventDefault();
+            trackClick("landing_spin");
+            open("welcome");
+        },
+        [open, trackClick]
+    );
 
     return (
         <main>
@@ -17,7 +30,9 @@ export default function Landing() {
                 style={{ backgroundImage: "url('/assets/images/banner-2.png')" }}
             >
                 <div className="container">
-                    <h1>Spin to Unlock Your <span>Welcome Bonus</span></h1>
+                    <h1>
+                        Spin to Unlock Your <span>Welcome Bonus</span>
+                    </h1>
                     <p>New players only. Reveal your offer, register, and deposit to claim.</p>
                     <div className="promo-cta">
                         <a
@@ -33,6 +48,7 @@ export default function Landing() {
                             href={affUrl("https://mrspinny.world/")}
                             className="btn btn-outline"
                             data-link-id="landing_play"
+                            onClick={() => trackClick("landing_play")}
                         >
                             Play Now
                         </a>
@@ -44,22 +60,50 @@ export default function Landing() {
                 <h2 className="section-title">Why MrSpinny</h2>
                 <div className="why-cards">
                     <div className="why-card">
-                        <img src="/assets/images/icon-fast-payouts.png" alt="" width="64" height="64" loading="lazy" decoding="async" />
+                        <img
+                            src="/assets/images/icon-fast-payouts.png"
+                            alt=""
+                            width="64"
+                            height="64"
+                            loading="lazy"
+                            decoding="async"
+                        />
                         <h3>Fast Payouts</h3>
                         <p>Quick withdrawals to cards, bank, and crypto.</p>
                     </div>
                     <div className="why-card">
-                        <img src="/assets/images/icon-fair-secure.png" alt="" width="64" height="64" loading="lazy" decoding="async" />
+                        <img
+                            src="/assets/images/icon-fair-secure.png"
+                            alt=""
+                            width="64"
+                            height="64"
+                            loading="lazy"
+                            decoding="async"
+                        />
                         <h3>Fair &amp; Secure</h3>
                         <p>Modern security and responsible tools.</p>
                     </div>
                     <div className="why-card">
-                        <img src="/assets/images/icon-huge-selection.png" alt="" width="64" height="64" loading="lazy" decoding="async" />
+                        <img
+                            src="/assets/images/icon-huge-selection.png"
+                            alt=""
+                            width="64"
+                            height="64"
+                            loading="lazy"
+                            decoding="async"
+                        />
                         <h3>Hundreds of Games</h3>
                         <p>Top slots, tables, and live titles.</p>
                     </div>
                     <div className="why-card">
-                        <img src="/assets/images/icon-247-support.png" alt="" width="64" height="64" loading="lazy" decoding="async" />
+                        <img
+                            src="/assets/images/icon-247-support.png"
+                            alt=""
+                            width="64"
+                            height="64"
+                            loading="lazy"
+                            decoding="async"
+                        />
                         <h3>24/7 Support</h3>
                         <p>Real people, always on.</p>
                     </div>
@@ -122,17 +166,24 @@ export default function Landing() {
                 <h2 className="section-title">FAQ</h2>
                 <div className="bank-card" style={{ maxWidth: 980, margin: "auto" }}>
                     <details open>
-                        <summary><b>Is this real money?</b></summary>
+                        <summary>
+                            <b>Is this real money?</b>
+                        </summary>
                         <p className="bank-note">
-                            This page is a marketing preview. Real play is at <a href="https://mrspinny.world/">mrspinny.world</a> for 18+ only.
+                            This page is a marketing preview. Real play is at{" "}
+                            <a href="https://mrspinny.world/">mrspinny.world</a> for 18+ only.
                         </p>
                     </details>
                     <details>
-                        <summary><b>How do I claim?</b></summary>
+                        <summary>
+                            <b>How do I claim?</b>
+                        </summary>
                         <p className="bank-note">Spin, register, deposit, then follow the Promotions page instructions.</p>
                     </details>
                     <details>
-                        <summary><b>Any restrictions?</b></summary>
+                        <summary>
+                            <b>Any restrictions?</b>
+                        </summary>
                         <p className="bank-note">Offers are subject to local laws and T&amp;Cs. See details on the promos page.</p>
                     </details>
                 </div>

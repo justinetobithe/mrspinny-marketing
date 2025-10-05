@@ -1,5 +1,8 @@
-import { useMemo, useState } from "react";
+import { useMemo, useState, useCallback } from "react";
 import { useTranslation } from "react-i18next";
+import { affUrl } from "@/helpers/urls";
+import { logClick } from "@/helpers/logging";
+import { getAffiliateParams } from "@/helpers/storage";
 
 const LIVE_GAMES = [
     { title: "Live Blackjack A", type: "blackjack", imgVar: "/assets/images/gallery/live_blackjack.png", href: "#" },
@@ -14,6 +17,14 @@ export default function LiveCasino() {
     const { t } = useTranslation();
     const [query, setQuery] = useState("");
     const [cat, setCat] = useState("all");
+    const domain = "https://mrspinny.world";
+
+    const trackClick = useCallback((linkId, extra = {}) => {
+        try {
+            const aff = getAffiliateParams();
+            logClick({ affParams: aff, linkId, ...extra });
+        } catch { }
+    }, []);
 
     const filtered = useMemo(() => {
         const q = query.trim().toLowerCase();
@@ -38,7 +49,12 @@ export default function LiveCasino() {
                         {t("live.hero.titleA")} <span>{t("live.hero.titleB")}</span> {t("live.hero.titleC")}
                     </h1>
                     <p>{t("live.hero.subtitle")}</p>
-                    <a href="#" className="btn btn-primary">
+                    <a
+                        href={affUrl(domain)}
+                        className="btn btn-primary"
+                        data-link-id="live_hero_play"
+                        onClick={() => trackClick("live_hero_play")}
+                    >
                         {t("live.hero.cta")}
                     </a>
                 </div>
@@ -67,7 +83,10 @@ export default function LiveCasino() {
                             data-filter={value}
                             role="tab"
                             aria-selected={cat === value}
-                            onClick={() => setCat(value)}
+                            onClick={() => {
+                                setCat(value);
+                                trackClick("live_filter", { value });
+                            }}
                         >
                             {t(`live.cats.${value}`)}
                         </button>
@@ -89,6 +108,8 @@ export default function LiveCasino() {
                                 data-title={g.title}
                                 aria-label={g.title}
                                 style={{ "--img": `url('${g.imgVar}')` }}
+                                data-link-id="live_card"
+                                onClick={() => trackClick("live_card", { title: g.title, type: g.type })}
                             >
                                 <span className="live-badge">{t(`live.badge.${g.type}`)}</span>
                                 <span className="live-title">{g.title}</span>

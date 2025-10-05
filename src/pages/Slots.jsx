@@ -1,302 +1,265 @@
-import { useEffect, useMemo, useState, useCallback } from "react";
+import { useEffect, useCallback } from "react";
 import { useTranslation } from "react-i18next";
+import { Link } from "react-router-dom";
+import { affUrl } from "@/helpers/urls";
+import { logClick } from "@/helpers/logging";
+import { getAffiliateParams } from "@/helpers/storage";
+import { useModal } from "@/context/ModalContext.jsx";
 
-const FAV_KEY = "mrspinny_faves";
-
-const SLOT_DATA = [
-    {
-        title: "Sweet Bonanza",
-        tags: ["popular", "classic"],
-        vol: 2,
-        img: "/assets/images/games/sweet-bonanza.jpg",
-        href: "https://mrspinny.com/games",
-        ribbonKey: "dailyDrops",
-        ribbonAlt: false
-    },
-    {
-        title: "Gates of Olympus",
-        tags: ["popular", "megaways"],
-        vol: 3,
-        img: "/assets/images/games/gates-of-olympus.jpg",
-        href: "https://mrspinny.com/games"
-    },
-    {
-        title: "5 Lions Megaways",
-        tags: ["megaways", "new"],
-        vol: 3,
-        img: "/assets/images/games/5-lions-of-megaways.jpg",
-        href: "https://mrspinny.com/games",
-        ribbonKey: "hot",
-        ribbonAlt: true
-    },
-    {
-        title: "Zeus the Thunderer",
-        tags: ["jackpot", "popular"],
-        vol: 2,
-        img: "/assets/images/games/thunder-olympus.jpg",
-        href: "https://mrspinny.com/games"
-    },
-    {
-        title: "Big Bass Bonanza",
-        tags: ["classic", "popular"],
-        vol: 1,
-        img: "/assets/images/games/big-bass-bonanza.jpg",
-        href: "https://mrspinny.com/games"
-    },
-    {
-        title: "Book of Gold",
-        tags: ["classic", "new"],
-        vol: 1,
-        img: "/assets/images/games/book-of-gold.jpg",
-        href: "https://mrspinny.com/games"
-    }
-];
-
-export default function Slots() {
+export default function Home() {
     const { t } = useTranslation();
-
-    const [query, setQuery] = useState("");
-    const [sort, setSort] = useState("az");
-    const [filter, setFilter] = useState("all");
-    const [faves, setFaves] = useState(() => {
-        try {
-            return new Set(JSON.parse(localStorage.getItem(FAV_KEY) || "[]"));
-        } catch {
-            return new Set();
-        }
-    });
+    const { open } = useModal();
+    const domain = "https://mrspinny.world";
+    const plainDomain = "mrspinny.world";
 
     useEffect(() => {
-        try {
-            localStorage.setItem(FAV_KEY, JSON.stringify([...faves]));
-        } catch { }
-    }, [faves]);
+        window.openSpinModal = () => open("welcome");
+        return () => {
+            if (window.openSpinModal) delete window.openSpinModal;
+        };
+    }, [open]);
 
-    const toggleFav = useCallback((title) => {
-        setFaves((prev) => {
-            const next = new Set(prev);
-            if (next.has(title)) next.delete(title);
-            else next.add(title);
-            return next;
-        });
+    const trackClick = useCallback((linkId) => {
+        try {
+            const aff = getAffiliateParams();
+            if (aff && aff.aff) logClick({ affParams: aff, linkId });
+        } catch { }
     }, []);
 
-    const filteredSorted = useMemo(() => {
-        const q = query.trim().toLowerCase();
-
-        let list = SLOT_DATA.filter((s) => {
-            const matchText = !q || s.title.toLowerCase().includes(q);
-            const matchCat =
-                filter === "all"
-                    ? true
-                    : filter === "fave"
-                        ? faves.has(s.title)
-                        : s.tags.includes(filter);
-            return matchText && matchCat;
-        });
-
-        if (sort === "vol") {
-            list = list.slice().sort((a, b) => b.vol - a.vol);
-        } else if (sort === "za") {
-            list = list.slice().sort((a, b) => b.title.localeCompare(a.title));
-        } else {
-            list = list.slice().sort((a, b) => a.title.localeCompare(b.title));
-        }
-
-        return list;
-    }, [query, sort, filter, faves]);
-
-    const onImgError = (e) => {
-        const el = e.currentTarget;
-        el.alt = el.alt || t("slots.alt.game");
-        el.style.background =
-            "radial-gradient(ellipse at center,#182743 0%,#0e1730 70%)";
-    };
-
-    const onCardKeyDown = (title) => (e) => {
-        if (e.key.toLowerCase() === "f") {
+    const handleSpinClick = useCallback(
+        (e) => {
             e.preventDefault();
-            toggleFav(title);
-        }
-    };
-
-    const pills = [
-        ["all", t("slots.pills.all")],
-        ["megaways", t("slots.pills.megaways")],
-        ["classic", t("slots.pills.classic")],
-        ["jackpot", t("slots.pills.jackpot")],
-        ["new", t("slots.pills.new")],
-        ["popular", t("slots.pills.popular")],
-        ["fave", t("slots.pills.fave")]
-    ];
+            trackClick("home_spin");
+            open("welcome");
+        },
+        [open, trackClick]
+    );
 
     return (
-        <>
-            <section
-                className="hero"
-                style={{ backgroundImage: "url('/assets/images/slots-banner.png')" }}
-            >
+        <main>
+            <section className="hero" style={{ backgroundImage: "url('/assets/images/banner-5.png')" }}>
                 <div className="hero-blur" aria-hidden="true" />
                 <div className="hero-content">
                     <h1>
-                        {t("slots.hero.titleA")} <span>{t("slots.hero.titleB")}</span>
+                        {t("home.hero.titleA")} <span>{t("home.hero.titleB")}</span>
                     </h1>
-                    <p>{t("slots.hero.subtitle")}</p>
-                    <a href="https://mrspinny.com/games" className="btn btn-primary">
-                        {t("header.cta.playNow")}
-                    </a>
-                </div>
-            </section>
-
-            <section
-                className="container slots-toolbar"
-                aria-label={t("slots.toolbar.ariaLabel")}
-            >
-                <div className="slots-search">
-                    <input
-                        id="slotSearch"
-                        type="search"
-                        placeholder={t("slots.toolbar.searchPlaceholder")}
-                        aria-label={t("slots.toolbar.searchAria")}
-                        value={query}
-                        onChange={(e) => setQuery(e.target.value)}
-                    />
-                    <svg viewBox="0 0 24 24" aria-hidden="true">
-                        <path d="M15.5 14h-.79l-.28-.27a6.471 6.471 0 0 0 1.57-4.23 6.5 6.5 0 1 0-6.5 6.5c1.61 0 3.09-.59 4.23-1.57l.27.28v.79L20 20.49 21.49 19 15.5 14zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z" />
-                    </svg>
-                </div>
-
-                <div className="slots-sort">
-                    <label htmlFor="slotSort">{t("slots.toolbar.sortLabel")}</label>
-                    <select
-                        id="slotSort"
-                        aria-label={t("slots.toolbar.sortAria")}
-                        value={sort}
-                        onChange={(e) => setSort(e.target.value)}
-                    >
-                        <option value="az">{t("slots.toolbar.sortOptions.az")}</option>
-                        <option value="za">{t("slots.toolbar.sortOptions.za")}</option>
-                        <option value="vol">{t("slots.toolbar.sortOptions.vol")}</option>
-                    </select>
-                </div>
-
-                <div
-                    className="slots-pillbar"
-                    role="tablist"
-                    aria-label={t("slots.toolbar.categoriesAria")}
-                >
-                    {pills.map(([val, label]) => (
+                    <p>{t("home.hero.subtitle")}</p>
+                    <div className="hero-cta">
                         <button
-                            key={val}
-                            className={`pill${filter === val ? " is-active" : ""}`}
-                            data-filter={val}
-                            role="tab"
-                            aria-selected={filter === val}
-                            onClick={() => setFilter(val)}
+                            id="openWelcome"
+                            type="button"
+                            className="btn btn-primary"
+                            onClick={handleSpinClick}
+                            data-link-id="home_spin"
                         >
-                            {label}
+                            {t("home.hero.cta.spin")}
                         </button>
-                    ))}
-                </div>
-            </section>
-
-            <section className="slots container">
-                <h2 className="section-title">{t("slots.sectionTitle")}</h2>
-
-                <div className="slots-grid-wrap">
-                    <div id="slotsGrid" className="slots-grid">
-                        {filteredSorted.map((s) => {
-                            const isFav = faves.has(s.title);
-                            return (
-                                <article
-                                    key={s.title}
-                                    className="slot-card"
-                                    data-title={s.title}
-                                    data-tags={s.tags.join(" ")}
-                                    data-vol={s.vol}
-                                    tabIndex={0}
-                                    onKeyDown={onCardKeyDown(s.title)}
-                                >
-                                    <button
-                                        className={`slot-fav${isFav ? " is-fav" : ""}`}
-                                        aria-label={
-                                            isFav ? t("slots.aria.removeFav") : t("slots.aria.addFav")
-                                        }
-                                        onClick={(e) => {
-                                            e.preventDefault();
-                                            e.stopPropagation();
-                                            toggleFav(s.title);
-                                        }}
-                                        title={t("slots.hints.toggleFav")}
-                                    >
-                                        ★
-                                    </button>
-
-                                    {s.ribbonKey && (
-                                        <span
-                                            className={`slot-ribbon${s.ribbonAlt ? " alt" : ""}`}
-                                        >
-                                            {t(`slots.ribbon.${s.ribbonKey}`)}
-                                        </span>
-                                    )}
-
-                                    <a
-                                        className="slot-link"
-                                        href={s.href}
-                                        aria-label={t("slots.aria.playGame", { title: s.title })}
-                                    >
-                                        <figure className="slot-media">
-                                            <img
-                                                src={s.img}
-                                                alt={s.title}
-                                                loading="lazy"
-                                                onError={onImgError}
-                                            />
-                                            <span className="slot-sheen" aria-hidden="true" />
-                                        </figure>
-
-                                        <div className="slot-info">
-                                            <h3 className="slot-title">{s.title}</h3>
-                                            <div className="slot-meta">
-                                                <div className="slot-tags" aria-hidden="true">
-                                                    {s.tags.map((tag) => (
-                                                        <span key={tag} className="slot-tag">
-                                                            {t(`slots.tags.${tag}`)}
-                                                        </span>
-                                                    ))}
-                                                </div>
-                                                <div className="slot-vol">
-                                                    <span className="vol-label">
-                                                        {t("slots.vol.labelShort")}
-                                                    </span>
-                                                    <span className="vol-dots" data-lev={s.vol} />
-                                                </div>
-                                            </div>
-                                        </div>
-
-                                        <div className="slot-cta rail">
-                                            <span className="btn btn-primary">
-                                                {t("slots.cta.play")}
-                                            </span>
-                                            <span className="btn btn-outline">
-                                                {t("slots.cta.demo")}
-                                            </span>
-                                        </div>
-                                    </a>
-                                </article>
-                            );
-                        })}
+                        <a
+                            href={affUrl(domain)}
+                            className="btn btn-outline"
+                            onClick={() => trackClick("home_play_now")}
+                            data-link-id="home_play_now"
+                        >
+                            {t("header.cta.playNow")}
+                        </a>
                     </div>
-
-                    <p
-                        id="slotsEmpty"
-                        className="live-empty"
-                        hidden={filteredSorted.length !== 0}
-                    >
-                        {t("slots.empty")}
-                    </p>
                 </div>
             </section>
-        </>
+
+            <section className="container visual-grid">
+                <Link
+                    to="/slots"
+                    className="feat-card"
+                    style={{ "--img": "url('/assets/images/feat-slots.jpg')" }}
+                >
+                    <div className="feat-badge">{t("home.cards.slots.badge")}</div>
+                    <h3>{t("home.cards.slots.title")}</h3>
+                    <p>{t("home.cards.slots.desc")}</p>
+                    <span className="feat-cta">{t("home.cards.slots.cta")}</span>
+                </Link>
+
+                <Link
+                    to="/live-casino"
+                    className="feat-card"
+                    style={{ "--img": "url('/assets/images/feat-live.jpg')" }}
+                >
+                    <div className="feat-badge">{t("home.cards.live.badge")}</div>
+                    <h3>{t("home.cards.live.title")}</h3>
+                    <p>{t("home.cards.live.desc")}</p>
+                    <span className="feat-cta">{t("home.cards.live.cta")}</span>
+                </Link>
+
+                <Link
+                    to="/promotions"
+                    className="feat-card"
+                    style={{ "--img": "url('/assets/images/feat-bonus.jpg')" }}
+                >
+                    <div className="feat-badge">{t("home.cards.promos.badge")}</div>
+                    <h3>{t("home.cards.promos.title")}</h3>
+                    <p>{t("home.cards.promos.desc")}</p>
+                    <span className="feat-cta">{t("home.cards.promos.cta")}</span>
+                </Link>
+            </section>
+
+            <section id="about" className="container about-wrap">
+                <div className="about-media">
+                    <img
+                        src="/assets/images/about-us.png"
+                        alt={t("home.about.alt")}
+                        loading="lazy"
+                        decoding="async"
+                        width="640"
+                        height="420"
+                    />
+                </div>
+                <div className="about-copy">
+                    <h2 className="section-title">{t("home.about.title")}</h2>
+                    <p>{t("home.about.body")}</p>
+                    <ul className="about-points">
+                        <li>
+                            <span className="ico-dot" />
+                            {t("home.about.points.p1")}
+                        </li>
+                        <li>
+                            <span className="ico-dot" />
+                            {t("home.about.points.p2")}
+                        </li>
+                        <li>
+                            <span className="ico-dot" />
+                            {t("home.about.points.p3")}
+                        </li>
+                        <li>
+                            <span className="ico-dot" />
+                            {t("home.about.points.p4")}
+                        </li>
+                    </ul>
+                    <div className="about-actions">
+                        <a
+                            href={affUrl(domain)}
+                            className="btn btn-primary"
+                            onClick={() => trackClick("home_about_play")}
+                            data-link-id="home_about_play"
+                        >
+                            {t("header.cta.playNow")}
+                        </a>
+                        <a href="#how" className="btn btn-outline">
+                            {t("home.about.cta.how")}
+                        </a>
+                    </div>
+                </div>
+            </section>
+
+            <section id="why" className="container why-grid">
+                <h2 className="section-title">{t("home.why.title")}</h2>
+                <div className="why-cards">
+                    <div className="why-card">
+                        <img src="/assets/images/icon-fast-payouts.png" alt="" width="64" height="64" loading="lazy" decoding="async" />
+                        <h3>{t("home.why.items.fast.title")}</h3>
+                        <p>{t("home.why.items.fast.desc")}</p>
+                    </div>
+                    <div className="why-card">
+                        <img src="/assets/images/icon-fair-secure.png" alt="" width="64" height="64" loading="lazy" decoding="async" />
+                        <h3>{t("home.why.items.secure.title")}</h3>
+                        <p>{t("home.why.items.secure.desc")}</p>
+                    </div>
+                    <div className="why-card">
+                        <img src="/assets/images/icon-huge-selection.png" alt="" width="64" height="64" loading="lazy" decoding="async" />
+                        <h3>{t("home.why.items.selection.title")}</h3>
+                        <p>{t("home.why.items.selection.desc")}</p>
+                    </div>
+                    <div className="why-card">
+                        <img src="/assets/images/icon-247-support.png" alt="" width="64" height="64" loading="lazy" decoding="async" />
+                        <h3>{t("home.why.items.support.title")}</h3>
+                        <p>{t("home.why.items.support.desc")}</p>
+                    </div>
+                </div>
+            </section>
+
+            <section id="how" className="container play-steps">
+                <h2 className="section-title">{t("home.how.title")}</h2>
+                <div className="steps-grid">
+                    <div className="step-card">
+                        <img src="/assets/images/how-create.png" alt={t("home.how.steps.create.alt")} loading="lazy" decoding="async" />
+                        <div className="step-num">1</div>
+                        <h3>{t("home.how.steps.create.title")}</h3>
+                        <p>{t("home.how.steps.create.desc")}</p>
+                    </div>
+                    <div className="step-card">
+                        <img src="/assets/images/how-deposit.png" alt={t("home.how.steps.deposit.alt")} loading="lazy" decoding="async" />
+                        <div className="step-num">2</div>
+                        <h3>{t("home.how.steps.deposit.title")}</h3>
+                        <p>{t("home.how.steps.deposit.desc")}</p>
+                    </div>
+                    <div className="step-card">
+                        <img src="/assets/images/how-play.png" alt={t("home.how.steps.play.alt")} loading="lazy" decoding="async" />
+                        <div className="step-num">3</div>
+                        <h3>{t("home.how.steps.play.title")}</h3>
+                        <p>{t("home.how.steps.play.desc")}</p>
+                    </div>
+                    <div className="step-card">
+                        <img src="/assets/images/how-withdraw.png" alt={t("home.how.steps.withdraw.alt")} loading="lazy" decoding="async" />
+                        <div className="step-num">4</div>
+                        <h3>{t("home.how.steps.withdraw.title")}</h3>
+                        <p>{t("home.how.steps.withdraw.desc")}</p>
+                    </div>
+                </div>
+            </section>
+
+            <section className="container gallery">
+                <div className="gal-card" style={{ backgroundImage: "url('/assets/images/gal-1.jpg')" }}>
+                    <span>{t("home.gallery.roulette")}</span>
+                </div>
+                <div className="gal-card" style={{ backgroundImage: "url('/assets/images/gal-2.jpg')" }}>
+                    <span>{t("home.gallery.blackjack")}</span>
+                </div>
+                <div className="gal-card" style={{ backgroundImage: "url('/assets/images/gal-3.jpg')" }}>
+                    <span>{t("home.gallery.slots")}</span>
+                </div>
+                <div className="gal-card" style={{ backgroundImage: "url('/assets/images/gal-4.jpg')" }}>
+                    <span>{t("home.gallery.liveTables")}</span>
+                </div>
+            </section>
+
+            <section id="faq" className="faq container">
+                <h2 className="section-title">{t("home.faq.title")}</h2>
+                <div className="bank-card" style={{ maxWidth: "980px", margin: "auto" }}>
+                    <details open>
+                        <summary>
+                            <b>{t("home.faq.q1.q")}</b>
+                        </summary>
+                        <p className="bank-note">
+                            {t("home.faq.q1.a", { domain: plainDomain })}{" "}
+                            <a href={affUrl(domain)} onClick={() => trackClick("home_faq_link")}>
+                                mrspinny.com
+                            </a>
+                        </p>
+                    </details>
+                    <details>
+                        <summary>
+                            <b>{t("home.faq.q2.q")}</b>
+                        </summary>
+                        <p className="bank-note">{t("home.faq.q2.a")}</p>
+                    </details>
+                    <details>
+                        <summary>
+                            <b>{t("home.faq.q3.q")}</b>
+                        </summary>
+                        <p className="bank-note">{t("home.faq.q3.a")}</p>
+                    </details>
+                    <details>
+                        <summary>
+                            <b>{t("home.faq.q4.q")}</b>
+                        </summary>
+                        <p className="bank-note">{t("home.faq.q4.a")}</p>
+                    </details>
+                </div>
+            </section>
+
+            <noscript>
+                <p style={{ textAlign: "center", margin: "16px 0" }}>
+                    {t("home.noscript.text")} <a href={`${domain}/promotions`}>{t("home.noscript.link")}</a>.
+                </p>
+            </noscript>
+        </main>
     );
 }

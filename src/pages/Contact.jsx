@@ -1,8 +1,9 @@
 // src/pages/Contact.jsx
-import { useRef, useState } from "react";
+import { useRef, useState, useCallback } from "react";
 import { useTranslation } from "react-i18next";
 import emailjs from "@emailjs/browser";
-import { logLead } from "@/helpers/logging";
+import { logLead, logClick } from "@/helpers/logging";
+import { getAffiliateParams } from "@/helpers/storage";
 
 export default function Contact() {
     const { t } = useTranslation();
@@ -15,6 +16,13 @@ export default function Contact() {
     const SERVICE_ID = import.meta.env.VITE_EMAILJS_SERVICE_ID;
     const TEMPLATE_ID = import.meta.env.VITE_EMAILJS_TEMPLATE_ID;
     const PUBLIC_KEY = import.meta.env.VITE_EMAILJS_PUBLIC_KEY;
+
+    const trackClick = useCallback((linkId, extra = {}) => {
+        try {
+            const aff = getAffiliateParams();
+            logClick({ affParams: aff, linkId, ...extra });
+        } catch { }
+    }, []);
 
     const onSubmit = async (e) => {
         e.preventDefault();
@@ -35,7 +43,6 @@ export default function Contact() {
 
         try {
             await emailjs.sendForm(SERVICE_ID, TEMPLATE_ID, f, { publicKey: PUBLIC_KEY });
-
             const data = new FormData(f);
             await logLead({
                 status: "contact",
@@ -46,7 +53,6 @@ export default function Contact() {
                     topic: data.get("topic") || ""
                 }
             });
-
             setSending(false);
             f.reset();
             setNoteVisible(true);
@@ -74,7 +80,12 @@ export default function Contact() {
                     <div>
                         <h3>{t("contact.cards.email.title")}</h3>
                         <p>{t("contact.cards.email.desc")}</p>
-                        <a className="btn btn-primary" href={`mailto:${SUPPORT_EMAIL}`}>
+                        <a
+                            className="btn btn-primary"
+                            href={`mailto:${SUPPORT_EMAIL}`}
+                            data-link-id="contact_email_cta"
+                            onClick={() => trackClick("contact_email_cta")}
+                        >
                             {t("contact.cards.email.cta", { email: SUPPORT_EMAIL })}
                         </a>
                     </div>
@@ -85,7 +96,12 @@ export default function Contact() {
                     <div>
                         <h3>{t("contact.cards.chat.title")}</h3>
                         <p>{t("contact.cards.chat.desc")}</p>
-                        <a className="btn btn-outline" href="#">
+                        <a
+                            className="btn btn-outline"
+                            href="#"
+                            data-link-id="contact_chat_cta"
+                            onClick={() => trackClick("contact_chat_cta")}
+                        >
                             {t("contact.cards.chat.cta")}
                         </a>
                     </div>
@@ -96,7 +112,12 @@ export default function Contact() {
                     <div>
                         <h3>{t("contact.cards.rg.title")}</h3>
                         <p>{t("contact.cards.rg.desc")}</p>
-                        <a className="btn btn-outline" href="#">
+                        <a
+                            className="btn btn-outline"
+                            href="#"
+                            data-link-id="contact_rg_cta"
+                            onClick={() => trackClick("contact_rg_cta")}
+                        >
                             {t("contact.cards.rg.cta")}
                         </a>
                     </div>
@@ -104,13 +125,7 @@ export default function Contact() {
             </section>
 
             <section className="container contact-grid">
-                <form
-                    id="contactForm"
-                    className="contact-form"
-                    ref={formRef}
-                    noValidate
-                    onSubmit={onSubmit}
-                >
+                <form id="contactForm" className="contact-form" ref={formRef} noValidate onSubmit={onSubmit}>
                     <h2 className="section-title">{t("contact.form.title")}</h2>
 
                     <div className="form-field">
@@ -181,16 +196,28 @@ export default function Contact() {
                 <aside className="contact-aside">
                     <h3>{t("contact.aside.company.title")}</h3>
                     <ul className="contact-list">
-                        <li><b>{t("contact.aside.company.operator")}</b> {t("contact.aside.company.operatorName")}</li>
-                        <li><b>{t("contact.aside.company.reg")}</b> {t("contact.aside.company.regNo")}</li>
-                        <li><b>{t("contact.aside.company.addressLabel")}</b> {t("contact.aside.company.address")}</li>
+                        <li>
+                            <b>{t("contact.aside.company.operator")}</b> {t("contact.aside.company.operatorName")}
+                        </li>
+                        <li>
+                            <b>{t("contact.aside.company.reg")}</b> {t("contact.aside.company.regNo")}
+                        </li>
+                        <li>
+                            <b>{t("contact.aside.company.addressLabel")}</b> {t("contact.aside.company.address")}
+                        </li>
                         <li>
                             <b>{t("contact.aside.company.emailLabel")}</b>{" "}
-                            <a href={`mailto:${SUPPORT_EMAIL}`}>
+                            <a
+                                href={`mailto:${SUPPORT_EMAIL}`}
+                                data-link-id="contact_aside_email"
+                                onClick={() => trackClick("contact_aside_email")}
+                            >
                                 {t("contact.cards.email.cta", { email: SUPPORT_EMAIL })}
                             </a>
                         </li>
-                        <li><b>{t("contact.aside.company.hours")}</b> {t("contact.aside.company.hoursValue")}</li>
+                        <li>
+                            <b>{t("contact.aside.company.hours")}</b> {t("contact.aside.company.hoursValue")}
+                        </li>
                     </ul>
 
                     <h3>{t("contact.aside.response.title")}</h3>
@@ -202,9 +229,30 @@ export default function Contact() {
 
                     <h3>{t("contact.aside.links.title")}</h3>
                     <div className="contact-links">
-                        <a className="pill" href="/banking">{t("header.nav.banking")}</a>
-                        <a className="pill" href="/live-casino">{t("header.nav.liveCasino")}</a>
-                        <a className="pill" href="/slots">{t("header.nav.slots")}</a>
+                        <a
+                            className="pill"
+                            href="/banking"
+                            data-link-id="contact_link_banking"
+                            onClick={() => trackClick("contact_link_banking")}
+                        >
+                            {t("header.nav.banking")}
+                        </a>
+                        <a
+                            className="pill"
+                            href="/live-casino"
+                            data-link-id="contact_link_live"
+                            onClick={() => trackClick("contact_link_live")}
+                        >
+                            {t("header.nav.liveCasino")}
+                        </a>
+                        <a
+                            className="pill"
+                            href="/slots"
+                            data-link-id="contact_link_slots"
+                            onClick={() => trackClick("contact_link_slots")}
+                        >
+                            {t("header.nav.slots")}
+                        </a>
                     </div>
                 </aside>
             </section>

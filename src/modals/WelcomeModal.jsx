@@ -33,7 +33,6 @@ const Z = {
     FX_OVER_MODAL: 2147483646,
     FX_TOP: 2147483647
 };
-
 function createAudio(src, vol = 1) {
     const a = new Audio(src);
     a.preload = "auto";
@@ -71,11 +70,12 @@ export default function WelcomeModal() {
     const winSndRef = useRef(null);
     const spinningRef = useRef(false);
     const rotationRef = useRef(0);
+    const openedOnceRef = useRef(false);
 
-    const trackClick = (linkId) => {
+    const trackClick = (linkId, extra = {}) => {
         try {
             const aff = getAffiliateParams();
-            if (aff && aff.aff) logClick({ affParams: aff, linkId });
+            logClick({ affParams: aff || {}, linkId, ...extra });
         } catch { }
     };
 
@@ -85,6 +85,10 @@ export default function WelcomeModal() {
         if (!winSndRef.current) winSndRef.current = createAudio(WIN_SOUND, 1.0);
         ensureGlobalLayer("spinny-confetti-root", Z.FX_OVER_MODAL);
         ensureGlobalLayer("spinny-fireworks-root", Z.FX_TOP);
+        if (!openedOnceRef.current) {
+            trackClick("welcome_modal_open");
+            openedOnceRef.current = true;
+        }
     }, [open]);
 
     useLayoutEffect(() => {
@@ -230,16 +234,11 @@ export default function WelcomeModal() {
                 const forceBreakLongWord = (word) => {
                     let w = word;
                     while (w && lines.length < maxLines) {
-                        let lo = 1,
-                            hi = w.length,
-                            cut = 1;
+                        let lo = 1, hi = w.length, cut = 1;
                         while (lo <= hi) {
                             const mid = Math.max(1, Math.floor((lo + hi) / 2));
                             const candidate = ((lines.at(-1) ? lines.at(-1) + " " : "") + w.slice(0, mid) + "-").trim();
-                            if (measureWidth(candidate, font) <= arcLen) {
-                                cut = mid;
-                                lo = mid + 1;
-                            } else hi = mid - 1;
+                            if (measureWidth(candidate, font) <= arcLen) { cut = mid; lo = mid + 1; } else hi = mid - 1;
                         }
                         const head = w.slice(0, cut) + (w.length > cut ? "-" : "");
                         lines[lines.length - 1] = (lines.at(-1) + " " + head).trim();
@@ -261,7 +260,7 @@ export default function WelcomeModal() {
                 const wheelPx = container.getBoundingClientRect().width || 520;
                 const mobileBoost = wheelPx <= 360 ? 1.45 : wheelPx <= 420 ? 1.35 : wheelPx <= 480 ? 1.2 : 1;
                 let font = Math.max(MIN_FONT, Math.round(baseFont * mobileBoost));
-                const spread = angle * (wheelPx <= 480 ? 0.8 : 0.74);
+                const spread = (2 * Math.PI / N) * (wheelPx <= 480 ? 0.8 : 0.74);
                 const arcLen = (radius - 156) * spread;
                 let lines = wrapToLines(label, font, arcLen, grand ? 3 : 2);
                 const fits = () => Math.max(...lines.map((l) => measureWidth(l, font))) <= arcLen;
@@ -309,8 +308,8 @@ export default function WelcomeModal() {
             };
 
             for (let i = 0; i < N; i++) {
-                const start = i * angle - Math.PI / 2;
-                const mid = start + angle / 2;
+                const start = i * (2 * Math.PI / N) - Math.PI / 2;
+                const mid = start + (2 * Math.PI / N) / 2;
                 addCurvedLabel(i, SEGMENTS[i].label, mid, SEGMENTS[i].grand ? 42 : 38, !!SEGMENTS[i].grand);
             }
 
@@ -458,12 +457,8 @@ export default function WelcomeModal() {
                     el.style.transform = "scale(1.12)";
                     el.style.opacity = "1";
                 });
-                setTimeout(() => {
-                    el.style.opacity = "0";
-                }, 240);
-                setTimeout(() => {
-                    el.remove();
-                }, 1200);
+                setTimeout(() => { el.style.opacity = "0"; }, 240);
+                setTimeout(() => { el.remove(); }, 1200);
             };
 
             const triggerCelebration = (reward) => {
@@ -474,13 +469,15 @@ export default function WelcomeModal() {
             };
 
             const onSpin = async () => {
-                if (spinningRef.current) return;
+                if (spinningRef.current) {
+                    trackClick("welcome_spin_blocked");
+                    return;
+                }
+                trackClick("welcome_spin_start");
                 spinningRef.current = true;
                 claimBtn.hidden = true;
 
-                try {
-                    await spinSndRef.current.play();
-                } catch { }
+                try { await spinSndRef.current.play(); } catch { }
 
                 const idx = pickWeighted();
                 const per = 360 / N;
@@ -510,20 +507,22 @@ export default function WelcomeModal() {
                     if (finished) return;
                     finished = true;
                     spinningRef.current = false;
-                    try {
-                        spinSndRef.current.pause();
-                        spinSndRef.current.currentTime = 0;
-                    } catch { }
+                    try { spinSndRef.current.pause(); spinSndRef.current.currentTime = 0; } catch { }
                     const reward = SEGMENTS[idx];
                     localStorage.setItem(REWARD_KEY, JSON.stringify({ ...reward, ts: Date.now() }));
                     claimBtn.hidden = false;
                     claimBtn.href = PROMO_URL;
                     flashFlames();
                     triggerCelebration(reward);
-                    try {
-                        winSndRef.current.currentTime = 0;
-                        winSndRef.current.play().catch(() => { });
-                    } catch { }
+                    try { winSndRef.current.currentTime = 0; winSndRef.current.play().catch(() => { }); } catch { }
+                    trackClick("welcome_spin_result", {
+                        idx,
+                        label: reward.label,
+                        value: reward.value ?? null,
+                        grand: !!reward.grand,
+                        key: reward.key ?? null,
+                        durationMs: durMs
+                    });
                 };
 
                 if (rotor.animate) {
@@ -536,14 +535,10 @@ export default function WelcomeModal() {
                         ],
                         { duration: durMs, fill: "forwards" }
                     );
-                    animation.addEventListener(
-                        "finish",
-                        () => {
-                            rotor.style.transform = `rotate(${final}deg)`;
-                            finish();
-                        },
-                        { once: true }
-                    );
+                    animation.addEventListener("finish", () => {
+                        rotor.style.transform = `rotate(${final}deg)`;
+                        finish();
+                    }, { once: true });
                 } else {
                     rotor.style.transition = `transform ${durMs}ms cubic-bezier(.16,1,.3,1)`;
                     requestAnimationFrame(() => (rotor.style.transform = `rotate(${final}deg)`));
@@ -578,7 +573,7 @@ export default function WelcomeModal() {
     return (
         <AppModal
             open={open}
-            onClose={() => close("welcome")}
+            onClose={() => { trackClick("welcome_modal_close"); openedOnceRef.current = false; close("welcome"); }}
             title={t("home.modal.title")}
             subtitle={
                 <>
@@ -596,27 +591,13 @@ export default function WelcomeModal() {
             zIndex={Z.MODAL}
         >
             <style>{`
-        @keyframes spinny-coin {
-          0% { opacity: 0; transform: translate(-50%, -50%) translate(0, 0) rotate(0deg) scale(var(--scale)); }
-          5% { opacity: 1; }
-          100% { opacity: 0; transform: translate(-50%, -50%) translate(var(--dx), var(--dy)) rotate(var(--rot)) scale(calc(var(--scale) * 0.9)); }
-        }
-        @keyframes spinny-fade-in-out {
-          0% { opacity: 0; }
-          12% { opacity: 1; }
-          85% { opacity: 1; }
-          100% { opacity: 0; }
-        }
-        @keyframes spinny-burst {
-          0% { opacity: 0; transform: translate(-50%, -50%) scale(0.55); }
-          18% { opacity: 1; transform: translate(-50%, -50%) scale(1.12); }
-          65% { opacity: 1; transform: translate(-50%, -50%) scale(1.00); }
-          100% { opacity: 0; transform: translate(-50%, -50%) scale(0.9); }
-        }
+        @keyframes spinny-coin{0%{opacity:0;transform:translate(-50%,-50%) translate(0,0) rotate(0deg) scale(var(--scale));}5%{opacity:1;}100%{opacity:0;transform:translate(-50%,-50%) translate(var(--dx),var(--dy)) rotate(var(--rot)) scale(calc(var(--scale)*0.9));}}
+        @keyframes spinny-fade-in-out{0%{opacity:0;}12%{opacity:1;}85%{opacity:1;}100%{opacity:0;}}
+        @keyframes spinny-burst{0%{opacity:0;transform:translate(-50%,-50%) scale(0.55);}18%{opacity:1;transform:translate(-50%,-50%) scale(1.12);}65%{opacity:1;transform:translate(-50%,-50%) scale(1);}100%{opacity:0;transform:translate(-50%,-50%) scale(0.9);}}
       `}</style>
 
             <div className="mt-6" id="wheelWrap">
-                <div className="mx-auto w-full max-w-xl">
+                <div className="mx-auto w/full max-w-xl">
                     <div className="relative mx-auto aspect-square w-full">
                         <div className="pointer-events-none absolute -inset-6 rounded-full bg-amber-400/20 blur-2xl" />
                         <div className="pointer-events-none absolute inset-0 rounded-full ring-8 ring-black/10 shadow-[0_0_0_1px_rgba(255,255,255,0.08)_inset,0_8px_30px_rgba(0,0,0,0.55)]" />
@@ -636,6 +617,7 @@ export default function WelcomeModal() {
                             ref={spinRef}
                             type="button"
                             className="inline-flex items-center justify-center rounded-xl bg-gradient-to-b from-amber-300 to-amber-500 px-6 py-3 text-sm font-extrabold text-black shadow-[0_10px_30px_rgba(255,193,7,0.35)] ring-1 ring-amber-300/60 transition active:translate-y-[1px] hover:brightness-105"
+                            data-link-id="welcome_spin_start"
                         >
                             {t("home.modal.spin")}
                         </button>

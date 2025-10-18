@@ -1,4 +1,4 @@
-import { useCallback } from "react";
+import { useEffect, useCallback } from "react";
 import { affUrl } from "@/helpers/urls";
 import { useModal } from "@/context/ModalContext.jsx";
 import { logClick } from "@/helpers/logging";
@@ -6,6 +6,10 @@ import { getAffiliateParams } from "@/helpers/storage";
 
 export default function Landing() {
     const { open } = useModal();
+
+    useEffect(() => {
+        window.scrollTo({ top: 0, left: 0, behavior: "auto" });
+    }, []);
 
     const trackClick = useCallback((linkId, extra = {}) => {
         try {
@@ -25,10 +29,7 @@ export default function Landing() {
 
     return (
         <main>
-            <section
-                className="promo-hero"
-                style={{ backgroundImage: "url('/assets/images/banner-2.png')" }}
-            >
+            <section className="promo-hero" style={{ backgroundImage: "url('/assets/images/banner-2.png')" }}>
                 <div className="container">
                     <h1>
                         Spin to Unlock Your <span>Welcome Bonus</span>
@@ -60,50 +61,22 @@ export default function Landing() {
                 <h2 className="section-title">Why MrSpinny</h2>
                 <div className="why-cards">
                     <div className="why-card">
-                        <img
-                            src="/assets/images/icon-fast-payouts.png"
-                            alt=""
-                            width="64"
-                            height="64"
-                            loading="lazy"
-                            decoding="async"
-                        />
+                        <img src="/assets/images/icon-fast-payouts.png" alt="" width="64" height="64" loading="lazy" decoding="async" />
                         <h3>Fast Payouts</h3>
                         <p>Quick withdrawals to cards, bank, and crypto.</p>
                     </div>
                     <div className="why-card">
-                        <img
-                            src="/assets/images/icon-fair-secure.png"
-                            alt=""
-                            width="64"
-                            height="64"
-                            loading="lazy"
-                            decoding="async"
-                        />
+                        <img src="/assets/images/icon-fair-secure.png" alt="" width="64" height="64" loading="lazy" decoding="async" />
                         <h3>Fair &amp; Secure</h3>
                         <p>Modern security and responsible tools.</p>
                     </div>
                     <div className="why-card">
-                        <img
-                            src="/assets/images/icon-huge-selection.png"
-                            alt=""
-                            width="64"
-                            height="64"
-                            loading="lazy"
-                            decoding="async"
-                        />
+                        <img src="/assets/images/icon-huge-selection.png" alt="" width="64" height="64" loading="lazy" decoding="async" />
                         <h3>Hundreds of Games</h3>
                         <p>Top slots, tables, and live titles.</p>
                     </div>
                     <div className="why-card">
-                        <img
-                            src="/assets/images/icon-247-support.png"
-                            alt=""
-                            width="64"
-                            height="64"
-                            loading="lazy"
-                            decoding="async"
-                        />
+                        <img src="/assets/images/icon-247-support.png" alt="" width="64" height="64" loading="lazy" decoding="async" />
                         <h3>24/7 Support</h3>
                         <p>Real people, always on.</p>
                     </div>
@@ -170,8 +143,7 @@ export default function Landing() {
                             <b>Is this real money?</b>
                         </summary>
                         <p className="bank-note">
-                            This page is a marketing preview. Real play is at{" "}
-                            <a href="https://mrspinny.world/">mrspinny.world</a> for 18+ only.
+                            This page is a marketing preview. Real play is at <a href="https://mrspinny.world/">mrspinny.world</a> for 18+ only.
                         </p>
                     </details>
                     <details>
@@ -191,8 +163,7 @@ export default function Landing() {
 
             <noscript>
                 <p style={{ textAlign: "center", margin: "16px 0" }}>
-                    JavaScript is required to spin the wheel. You can still{" "}
-                    <a href="https://mrspinny.world/promotions">view promotions here</a>.
+                    JavaScript is required to spin the wheel. You can still <a href="https://mrspinny.world/promotions">view promotions here</a>.
                 </p>
             </noscript>
         </main>

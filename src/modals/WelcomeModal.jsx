@@ -1,60 +1,47 @@
-import { useEffect, useLayoutEffect, useRef } from "react";
+import { useEffect, useLayoutEffect, useRef, useState, useCallback } from "react";
 import AppModal from "@/components/AppModal.jsx";
 import { useTranslation } from "react-i18next";
 import { useModal } from "@/context/ModalContext.jsx";
 import { affUrl } from "@/helpers/urls";
 import { getAffiliateParams } from "@/helpers/storage";
 import { logClick } from "@/helpers/logging";
+import { db } from "@/firebase";
+import { collection, doc, getDocs, setDoc, query, where, serverTimestamp, limit } from "firebase/firestore";
 
 const domain = "https://mrspinny.world";
-const SEGMENTS = [
-    { label: "200% Bonus + 100 Free Spins", key: "grand", grand: true, weight: 1 },
-    { label: "100 Free Spins", value: 100, weight: 2 },
-    { label: "75 Free Spins", value: 75, weight: 5 },
-    { label: "50 Free Spins", value: 50, weight: 12 },
-    { label: "25 Free Spins", value: 25, weight: 20 },
-    { label: "10 Free Spins", value: 10, weight: 28 }
-];
-
+const SEGMENTS = [{ label: "$5" }, { label: "$10" }, { label: "$15" }, { label: "$20" }, { label: "$25" }];
 const PROMO_URL = "https://mrspinny.com";
 const REWARD_KEY = "mrspinny_wheel_reward";
 const SPIN_SOUND = "/assets/sounds/wheel-spin.mp3";
 const WIN_SOUND = "/assets/sounds/magical-coin-win.wav";
 const SPIN_TURNS = 10;
+const GIFS = { coin: "/assets/gifs/coins.gif", confetti: "/assets/gifs/confetti.gif", fireworks: "/assets/gifs/fireworks.gif" };
+const Z = { MODAL: 2147483600, FX_OVER_MODAL: 2147483646, FX_TOP: 2147483647 };
 
-const GIFS = {
-    coin: "/assets/gifs/coins.gif",
-    confetti: "/assets/gifs/confetti.gif",
-    fireworks: "/assets/gifs/fireworks.gif"
-};
+function createAudio(src, vol = 1) { const a = new Audio(src); a.preload = "auto"; a.crossOrigin = "anonymous"; a.volume = vol; return a; }
+function ensureGlobalLayer(id, z) { let el = document.getElementById(id); if (!el) { el = document.createElement("div"); el.id = id; el.style.position = "fixed"; el.style.inset = "0"; el.style.pointerEvents = "none"; el.style.zIndex = String(z); document.body.appendChild(el); } else el.style.zIndex = String(z); return el; }
+function uid() { return Math.random().toString(36).slice(2) + Date.now().toString(36); }
+function weekKeyFor(ts = Date.now()) { const d = new Date(ts); const day = d.getUTCDay() || 7; if (day !== 1) d.setUTCDate(d.getUTCDate() - day + 1); d.setUTCHours(0, 0, 0, 0); return d.toISOString().slice(0, 10); }
+async function getPublicIP() { try { const r = await fetch("https://api.ipify.org?format=json", { cache: "no-store" }); const j = await r.json(); return String(j?.ip || ""); } catch { return ""; } }
+function pickWeightedPrize() { const labels = ["$5", "$10", "$15", "$20", "$25"]; const weights = [55, 30, 8, 5, 2]; const total = weights.reduce((a, b) => a + b, 0); let r = Math.random() * total; for (let i = 0; i < labels.length; i++) { r -= weights[i]; if (r <= 0) return labels[i]; } return "$5"; }
 
-const Z = {
-    MODAL: 2147483600,
-    FX_OVER_MODAL: 2147483646,
-    FX_TOP: 2147483647
-};
-function createAudio(src, vol = 1) {
-    const a = new Audio(src);
-    a.preload = "auto";
-    a.crossOrigin = "anonymous";
-    a.volume = vol;
-    return a;
-}
-
-function ensureGlobalLayer(id, z = Z.FX_OVER_MODAL) {
-    let el = document.getElementById(id);
-    if (!el) {
-        el = document.createElement("div");
-        el.id = id;
-        el.style.position = "fixed";
-        el.style.inset = "0";
-        el.style.pointerEvents = "none";
-        el.style.zIndex = String(z);
-        document.body.appendChild(el);
-    } else {
-        el.style.zIndex = String(z);
-    }
-    return el;
+export async function linkPrizeOnRegister({ uid = "", email = "" } = {}) {
+    try {
+        const deviceId = localStorage.getItem("spin_device_id") || "";
+        const cookieId = (document.cookie.split(";").map(s => s.trim()).find(s => s.startsWith("spin_cookie_id=")) || "").split("=")[1] || "";
+        const wk = weekKeyFor();
+        const spins = collection(db, "spins");
+        const qs = await Promise.all([
+            getDocs(query(spins, where("weekKey", "==", wk), where("deviceId", "==", deviceId), limit(1))),
+            getDocs(query(spins, where("weekKey", "==", wk), where("cookieId", "==", cookieId), limit(1)))
+        ]);
+        let snap = null;
+        for (const qres of qs) { if (!qres.empty) { snap = qres.docs[0]; break; } }
+        if (!snap) return { ok: false, code: "no_spin_found" };
+        const prize = snap.get("prize") || null;
+        await setDoc(snap.ref, { redeemed: true, user: { uid: uid || null, email: email || null }, redeemedAt: serverTimestamp() }, { merge: true });
+        return { ok: true, prize };
+    } catch { return { ok: false, code: "error" }; }
 }
 
 export default function WelcomeModal() {
@@ -72,12 +59,10 @@ export default function WelcomeModal() {
     const rotationRef = useRef(0);
     const openedOnceRef = useRef(false);
 
-    const trackClick = (linkId, extra = {}) => {
-        try {
-            const aff = getAffiliateParams();
-            logClick({ affParams: aff || {}, linkId, ...extra });
-        } catch { }
-    };
+    const [ip, setIp] = useState("");
+    const ipRef = useRef("");
+
+    const trackClick = useCallback((linkId, extra = {}) => { try { const aff = getAffiliateParams(); logClick({ affParams: aff || {}, linkId, ...extra }); } catch { } }, []);
 
     useEffect(() => {
         if (!open) return;
@@ -89,7 +74,10 @@ export default function WelcomeModal() {
             trackClick("welcome_modal_open");
             openedOnceRef.current = true;
         }
+        getPublicIP().then(setIp);
     }, [open]);
+
+    useEffect(() => { ipRef.current = ip; }, [ip]);
 
     useLayoutEffect(() => {
         if (!open) return;
@@ -468,6 +456,14 @@ export default function WelcomeModal() {
                 fx.fireworksPop(reward?.grand ? 14 : 10, 2200);
             };
 
+            const saveIPPrize = async (ipValue, prize) => {
+                try {
+                    const wk = weekKeyFor();
+                    const id = `${wk}_${(ipValue || "x")}`.replace(/[^\w\-\.]/g, "_").slice(0, 300);
+                    await setDoc(doc(collection(db, "spins"), id), { ip: ipValue || null, prize, weekKey: wk, createdAt: serverTimestamp(), redeemed: false }, { merge: true });
+                } catch { }
+            };
+
             const onSpin = async () => {
                 if (spinningRef.current) {
                     trackClick("welcome_spin_blocked");
@@ -515,14 +511,8 @@ export default function WelcomeModal() {
                     flashFlames();
                     triggerCelebration(reward);
                     try { winSndRef.current.currentTime = 0; winSndRef.current.play().catch(() => { }); } catch { }
-                    trackClick("welcome_spin_result", {
-                        idx,
-                        label: reward.label,
-                        value: reward.value ?? null,
-                        grand: !!reward.grand,
-                        key: reward.key ?? null,
-                        durationMs: durMs
-                    });
+                    trackClick("welcome_spin_result", { idx, label: reward.label, value: reward.value ?? null, grand: !!reward.grand, key: reward.key ?? null, durationMs: durMs });
+                    saveIPPrize(ipRef.current, reward.label);
                 };
 
                 if (rotor.animate) {
@@ -598,7 +588,7 @@ export default function WelcomeModal() {
 
             <div className="mt-6" id="wheelWrap">
                 <div className="mx-auto w/full max-w-xl">
-                    <div className="relative mx-auto aspect-square w-full">
+                    <div className="relative mx-auto aspect-square w/full">
                         <div className="pointer-events-none absolute -inset-6 rounded-full bg-amber-400/20 blur-2xl" />
                         <div className="pointer-events-none absolute inset-0 rounded-full ring-8 ring-black/10 shadow-[0_0_0_1px_rgba(255,255,255,0.08)_inset,0_8px_30px_rgba(0,0,0,0.55)]" />
                         <svg className="pointer-events-none absolute left-1/2 top-0 z-[84] -translate-x-1/2 -translate-y-[6px]" width="28" height="22" viewBox="0 0 28 22" aria-hidden="true">

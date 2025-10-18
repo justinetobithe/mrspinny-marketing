@@ -13,6 +13,10 @@ export default function Home() {
     const plainDomain = "mrspinny.world";
 
     useEffect(() => {
+        window.scrollTo({ top: 0, left: 0, behavior: "auto" });
+    }, []);
+
+    useEffect(() => {
         window.openSpinModal = () => open("welcome");
         return () => {
             if (window.openSpinModal) delete window.openSpinModal;
@@ -37,10 +41,7 @@ export default function Home() {
 
     return (
         <main>
-            <section
-                className="hero"
-                style={{ backgroundImage: "url('/assets/images/banner-5.png')" }}
-            >
+            <section className="hero" style={{ backgroundImage: "url('/assets/images/banner-5.png')" }}>
                 <div className="hero-blur" aria-hidden="true" />
                 <div className="hero-content">
                     <h1>
@@ -268,28 +269,16 @@ export default function Home() {
             </section>
 
             <section className="container gallery">
-                <div
-                    className="gal-card"
-                    style={{ backgroundImage: "url('/assets/images/gal-1.jpg')" }}
-                >
+                <div className="gal-card" style={{ backgroundImage: "url('/assets/images/gal-1.jpg')" }}>
                     <span>{t("home.gallery.roulette")}</span>
                 </div>
-                <div
-                    className="gal-card"
-                    style={{ backgroundImage: "url('/assets/images/gal-2.jpg')" }}
-                >
+                <div className="gal-card" style={{ backgroundImage: "url('/assets/images/gal-2.jpg')" }}>
                     <span>{t("home.gallery.blackjack")}</span>
                 </div>
-                <div
-                    className="gal-card"
-                    style={{ backgroundImage: "url('/assets/images/gal-3.jpg')" }}
-                >
+                <div className="gal-card" style={{ backgroundImage: "url('/assets/images/gal-3.jpg')" }}>
                     <span>{t("home.gallery.slots")}</span>
                 </div>
-                <div
-                    className="gal-card"
-                    style={{ backgroundImage: "url('/assets/images/gal-4.jpg')" }}
-                >
+                <div className="gal-card" style={{ backgroundImage: "url('/assets/images/gal-4.jpg')" }}>
                     <span>{t("home.gallery.liveTables")}</span>
                 </div>
             </section>
@@ -303,11 +292,7 @@ export default function Home() {
                         </summary>
                         <p className="bank-note">
                             {t("home.faq.q1.a", { domain: plainDomain })}{" "}
-                            <a
-                                href={affUrl(domain)}
-                                onClick={() => trackClick("home_faq_link")}
-                                data-link-id="home_faq_link"
-                            >
+                            <a href={affUrl(domain)} onClick={() => trackClick("home_faq_link")} data-link-id="home_faq_link">
                                 mrspinny.com
                             </a>
                         </p>
@@ -335,8 +320,7 @@ export default function Home() {
 
             <noscript>
                 <p style={{ textAlign: "center", margin: "16px 0" }}>
-                    {t("home.noscript.text")}{" "}
-                    <a href={`${domain}/promotions`}>{t("home.noscript.link")}</a>.
+                    {t("home.noscript.text")} <a href={`${domain}/promotions`}>{t("home.noscript.link")}</a>.
                 </p>
             </noscript>
         </main>

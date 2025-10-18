@@ -1,5 +1,5 @@
 // src/pages/Banking.jsx
-import { useCallback } from "react";
+import { useCallback, useEffect } from "react";
 import { useTranslation } from "react-i18next";
 import { affUrl } from "@/helpers/urls";
 import { logClick } from "@/helpers/logging";
@@ -8,6 +8,10 @@ import { getAffiliateParams } from "@/helpers/storage";
 export default function Banking() {
     const { t } = useTranslation();
     const domain = "https://mrspinny.world";
+
+    useEffect(() => {
+        window.scrollTo({ top: 0, left: 0, behavior: "auto" });
+    }, []);
 
     const trackClick = useCallback((linkId, extra = {}) => {
         try {
@@ -18,10 +22,7 @@ export default function Banking() {
 
     return (
         <>
-            <section
-                className="hero"
-                style={{ backgroundImage: "url('/assets/images/banner-4.png')" }}
-            >
+            <section className="hero" style={{ backgroundImage: "url('/assets/images/banner-4.png')" }}>
                 <div className="hero-blur" aria-hidden="true" />
                 <div className="hero-content">
                     <h1>
@@ -178,24 +179,24 @@ export default function Banking() {
                         <h3>{t("banking.help.title")}</h3>
                         <p>{t("banking.help.desc")}</p>
                     </div>
-                    <div className="bank-help-actions">
-                        <a
-                            href="#"
-                            className="btn btn-outline"
-                            data-link-id="banking_help_chat"
-                            onClick={() => trackClick("banking_help_chat")}
-                        >
-                            {t("banking.help.chat")}
-                        </a>
-                        <a
-                            href="mailto:support@mrspinny.com"
-                            className="btn btn-primary"
-                            data-link-id="banking_help_email"
-                            onClick={() => trackClick("banking_help_email")}
-                        >
-                            {t("banking.help.email")}
-                        </a>
-                    </div>
+                </div>
+                <div className="bank-help-actions">
+                    <a
+                        href="#"
+                        className="btn btn-outline"
+                        data-link-id="banking_help_chat"
+                        onClick={() => trackClick("banking_help_chat")}
+                    >
+                        {t("banking.help.chat")}
+                    </a>
+                    <a
+                        href="mailto:support@mrspinny.com"
+                        className="btn btn-primary"
+                        data-link-id="banking_help_email"
+                        onClick={() => trackClick("banking_help_email")}
+                    >
+                        {t("banking.help.email")}
+                    </a>
                 </div>
             </section>
 

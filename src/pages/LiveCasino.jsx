@@ -1,4 +1,4 @@
-import { useMemo, useState, useCallback } from "react";
+import { useMemo, useState, useCallback, useEffect } from "react";
 import { useTranslation } from "react-i18next";
 import { affUrl } from "@/helpers/urls";
 import { logClick } from "@/helpers/logging";
@@ -18,6 +18,10 @@ export default function LiveCasino() {
     const [query, setQuery] = useState("");
     const [cat, setCat] = useState("all");
     const domain = "https://mrspinny.world";
+
+    useEffect(() => {
+        window.scrollTo({ top: 0, left: 0, behavior: "auto" });
+    }, []);
 
     const trackClick = useCallback((linkId, extra = {}) => {
         try {
@@ -39,10 +43,7 @@ export default function LiveCasino() {
 
     return (
         <>
-            <section
-                className="hero"
-                style={{ backgroundImage: "url('/assets/images/banner-3.png')", backgroundPosition: "top" }}
-            >
+            <section className="hero" style={{ backgroundImage: "url('/assets/images/banner-3.png')", backgroundPosition: "top" }}>
                 <div className="hero-blur" aria-hidden="true" />
                 <div className="hero-content">
                     <h1>
